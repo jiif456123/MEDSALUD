@@ -1,8 +1,9 @@
-const userController = require('../components/User/controller/user.controller');
-const caterogiaController = require('../components/Categoria/controller/categoria.controller');
+const citasController = require('../modules/citas/controller/citas.controller');
+const citasController = require('../modules/citas/controller/citas.controller');
+
 const rutas = function(app) {
-    app.use('/user', userController)
-    app.use('/categoria', caterogiaController)
+    app.use('/citas', citasController)
+    app.use('/farmacia', citasController)
 }
 
 module.exports = rutas;

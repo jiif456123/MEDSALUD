@@ -12,13 +12,19 @@ import { CategoriaComponent } from '../../categoria/categoria.component';
 
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: HomeComponent },
-    { path: 'user',           component: UserComponent },
-    { path: 'table',          component: TablesComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
-    { path: 'categoria',      component: CategoriaComponent},
+    { path: 'dashboard', component: HomeComponent },
+    { path: 'user', component: UserComponent },
+    { path: 'table', component: TablesComponent },
+    { path: 'typography', component: TypographyComponent },
+    { path: 'icons', component: IconsComponent },
+    { path: 'maps', component: MapsComponent },
+    { path: 'notifications', component: NotificationsComponent },
+    { path: 'upgrade', component: UpgradeComponent },
+    { path: 'categoria', component: CategoriaComponent },
+    {
+        path: 'citas', loadChildren: () => import('../../citas/citas.module').then(m => m.CitasModule)
+    },
+    {
+        path: 'farmacia', loadChildren: () => import('../../farmacia/farmacia.module').then(m => m.FarmaciaModule)
+    }
 ];

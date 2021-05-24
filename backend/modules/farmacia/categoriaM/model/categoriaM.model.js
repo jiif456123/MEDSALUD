@@ -12,3 +12,14 @@ var categoriaM = new Schema({
 
 var model = mongoose.model('CategoriaM', categoriaM);
 module.exports = model;
+
+/*
+const mongoose = require('mongoose');
+var Schema = new mongoose.Schema({
+    nombre:  String ,
+    email:String,
+    estado: String,
+    telefono:Number
+}, {
+    versionKey: false
+});*/

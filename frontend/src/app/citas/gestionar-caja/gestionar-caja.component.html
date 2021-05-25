@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-8 d-flex justify-content-end" style="margin-bottom: 10px">
+        <input type="text" class="form-control" placeholder="Buscar" />
+    </div>
+    <!--Button zona-->
+    <div class="col-md-4 d-flex justify-content-end" style="margin-bottom: 10px">
+        <button type="button" (click)="abrirModal()" class="btn btn-primary">
+            Agregar
+        </button>
+        <input data-toggle="modal" data-target="#modalOperacion" #modalOperacion type="hidden" name="button">
+    </div>
+</div>
+<div class="row">
+    <!--Tabla-->
+    <div class="table-responsive">
+        <table style="width: 100%" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Motivo</th>
+                    <th scope="col">Fecha y Hora</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Total Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mov of movimientos">
+                    <td>{{ mov.motivo.descripcion }}</td>
+                    <td>{{ mov.fechaHora | date: "medium" }}</td>
+                    <td>{{ mov.paciente.descripcion }}</td>
+                    <td>{{ mov.paciente.descripcion }}</td>
+                    <td>
+                        {{ mov.precio }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Modal para añadir y modificar-->
+<div class="modal fade  bd-example-modal-xl" id="modalOperacion" style="background-color: rgba(0, 0, 0, 0.5);"
+    data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalOperacion"
+    aria-hidden="true">
+
+    <div class="modal-dialog  modal-lg modal-dialog-centered modal-example">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar movimiento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

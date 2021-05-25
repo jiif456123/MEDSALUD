@@ -16,7 +16,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let categoriaMx of categoriaMService.categoriaM">
+            <tr *ngFor="let categoriaMx of gestionarCategoriaService.categorias">
                 <td>{{ categoriaMx.nombre }}</td>
                 <td>
                     <button class="btn btn-secondary "> <i class="pe-7s-more"></i></button>
@@ -56,10 +56,10 @@
                 <div class="modal-body">
                     <form #categoriasRForm="ngForm" (ngSubmit)="addCategoriaM(categoriasRForm)">
                         <div class="form-group">
-                            <input type="text" name="nombre" [(ngModel)]="categoriaMService.selectedCategoriaM.nombre" class="form-control" placeholder="Nombre">
+                            <input type="text" name="nombre" [(ngModel)]="gestionarCategoriaService.selectedCategoria.nombre" class="form-control" placeholder="Nombre">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control descripcion-input" name="descripcion" [(ngModel)]="categoriaMService.selectedCategoriaM.descripcion" rows="5" placeholder="Descripcion"></textarea>
+                            <textarea class="form-control descripcion-input" name="descripcion" [(ngModel)]="gestionarCategoriaService.selectedCategoria.descripcion" rows="5" placeholder="Descripcion"></textarea>
                         </div>
                         <div class="modal-footer">
                             <div class="btn-group">

@@ -16,7 +16,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { CategoriaMComponent } from '../../farmacia/categoriaM/categoriaM.component';
+import { GestionarCategoriaComponent } from '../../farmacia/categoriaM/gestionarCategorias.component';
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import { CategoriaMComponent } from '../../farmacia/categoriaM/categoriaM.compon
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    CategoriaMComponent
+    GestionarCategoriaComponent
   ]
 })
 

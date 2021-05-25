@@ -9,7 +9,7 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { CategoriaComponent } from '../../categoria/categoria.component';
-import { CategoriaMComponent } from '../../farmacia/categoriaM/categoriaM.component';
+import { GestionarCategoriaComponent } from '../../farmacia/categoriaM/gestionarCategorias.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -22,7 +22,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'categoria', component: CategoriaComponent },
-    { path: 'categoriaM',     component: CategoriaMComponent},
+    { path: 'categoriaM',     component: GestionarCategoriaComponent},
     {
         path: 'citas', loadChildren: () => import('../../citas/citas.module').then(m => m.CitasModule)
     },

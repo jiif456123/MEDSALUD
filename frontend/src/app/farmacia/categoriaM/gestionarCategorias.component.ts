@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaMService } from 'Services/categoriaM.service';
+import { GestionarCategoriaService } from 'Services/gestionarCategoria.service';
 import { NgForm } from "@angular/forms"; //para add
 
 /*
@@ -8,12 +8,12 @@ import { Categoria } from '../../models/categoria.model';*/
 
 @Component({
   selector: 'app-categoriaM',
-  templateUrl: './categoriaM.component.html',
-  styleUrls: ['./categoriaM.component.css'],
-  providers: [CategoriaMService]
+  templateUrl: './gestionarCategorias.component.html',
+  styleUrls: [ './gestionarCategorias.component.css'],
+  providers: [GestionarCategoriaService]
 })
 
-export class CategoriaMComponent implements OnInit {
+export class GestionarCategoriaComponent implements OnInit {
 
   /*
   PRUEBA
@@ -26,7 +26,7 @@ export class CategoriaMComponent implements OnInit {
   estado:number;
 */
 
-  constructor(public categoriaMService: CategoriaMService) { }
+  constructor(public gestionarCategoriaService: GestionarCategoriaService) { }
   
   ngOnInit(): void{//  NEW 
     this.getCategoriaM();
@@ -34,16 +34,16 @@ export class CategoriaMComponent implements OnInit {
   }
 
   getCategoriaM() {
-    this.categoriaMService.getCategoriasM().subscribe(
+    this.gestionarCategoriaService.getCategoriasM().subscribe(
       res =>{
-        this.categoriaMService.categoriaM= res;
+        this.gestionarCategoriaService.categorias= res;
       },
       err => console.error(err)
     )
   }
 
   addCategoriaM(form: NgForm){
-    this.categoriaMService.createCategoriaM(form.value).subscribe(
+    this.gestionarCategoriaService.createCategoriaM(form.value).subscribe(
       (res)=> {
       this.getCategoriaM();
       },

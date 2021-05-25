@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var categoriaM = new Schema({
+var categoriaSchema = new Schema({
 
     nombre: { type: String },
     descripcion: { type: String },
@@ -10,7 +10,7 @@ var categoriaM = new Schema({
     versionKey: false
 });
 
-var model = mongoose.model('CategoriaM', categoriaM);
+var model = mongoose.model('GestionarCategorias', categoriaSchema);
 module.exports = model;
 
 /*

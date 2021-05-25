@@ -68,7 +68,7 @@ var movimientoCaja = new Schema({
 }, {
     versionKey: false
 });
-var modelMovimiento = mongoose.model('MovimientoCaja', caja);
+var modelMovimiento = mongoose.model('MovimientoCaja', movimientoCaja);
 
 
 module.exports ={

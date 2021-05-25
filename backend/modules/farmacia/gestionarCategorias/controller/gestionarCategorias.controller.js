@@ -8,4 +8,4 @@ router.get('/', gestionarCategoriaService.getCategorias);
 router.post('/', gestionarCategoriaService.createCategoria);
 
 module.exports = router;
-//gestionarCategorias
+//gestionarCategoriass

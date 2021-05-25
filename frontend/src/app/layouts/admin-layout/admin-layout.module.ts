@@ -16,7 +16,6 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import {GestionarProveedorComponent} from '../../farmacia/gestionar-proveedor/gestionarp.component';
 
 
 @NgModule({
@@ -35,8 +34,7 @@ import {GestionarProveedorComponent} from '../../farmacia/gestionar-proveedor/ge
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent,
-    GestionarProveedorComponent
+    UpgradeComponent
   ]
 })
 

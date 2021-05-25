@@ -13,7 +13,6 @@ db(mongo.url, mongo.options)
     }).catch((reason) => {
         console.log(color.red, `[ERRO-DATABASE]=${reason}`);
     });
-    
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

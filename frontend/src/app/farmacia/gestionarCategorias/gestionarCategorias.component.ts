@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GestionarCategoriaService } from 'Services/gestionarCategoria.service';
 import { NgForm } from "@angular/forms"; //para add
 
-/*
-import {CategoriaM} from 'models/categoriaM.model';
-import { Categoria } from '../../models/categoria.model';*/
-
 @Component({
   selector: 'app-categoriaM',
   templateUrl: './gestionarCategorias.component.html',
@@ -14,18 +10,7 @@ import { Categoria } from '../../models/categoria.model';*/
 })
 
 export class GestionarCategoriaComponent implements OnInit {
-
-  /*
-  PRUEBA
-  */
- /*
-  categoriasM: CategoriaM[];  
-  categoriaM: CategoriaM;
-  nombre:string;
-  descripcion:string;
-  estado:number;
-*/
-
+  //creamos instancia gestionarCategoriaService para usar los metodos que usamos en la clase GESTIONARCATEGORIASSERVICE
   constructor(public gestionarCategoriaService: GestionarCategoriaService) { }
   
   ngOnInit(): void{//  NEW 
@@ -33,7 +18,11 @@ export class GestionarCategoriaComponent implements OnInit {
 
   }
 
-  getCategoriaM() {
+  getCategoriaM() { //vamos a llenar el arreglo del service
+    /*
+    Eso significa que se suscribirá al observable de interés (que es getTasks () en su caso) y 
+    esperará hasta que tenga éxito y luego ejecutará la primera función de devolución de llamada pasada, que en su caso es:
+    */
     this.gestionarCategoriaService.getCategoriasM().subscribe(
       res =>{
         this.gestionarCategoriaService.categorias= res;
@@ -53,30 +42,4 @@ export class GestionarCategoriaComponent implements OnInit {
     //console.log(form.value);
   }
  
-
-
-  /*
-  deleteCategoriasM(_id: string, form: NgForm) {
-    if (confirm("Are you sure you want to delete it?")) {
-      this.categoriaMService.deleteCategoriasM(_id).subscribe((res) => {
-        this.getCategoriaM();
-        //this.resetForm(form);
-      });
-    }
-  }*/
-  /*
-  resetForm(form?: NgForm) {
-    if (form) {
-      form.reset();
-      this.categoriaMService.selectedEmployee = new Employee();
-    }*/
-/*
-  ngOnInit() {
-
-    this.categoriaMService.getCategoriasM()
-    .subscribe( categoriasM =>
-    this.categoriasM = categoriasM);
-  
-  }
-*/
 }

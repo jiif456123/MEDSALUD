@@ -1,14 +1,21 @@
+//requerimos el esquema qu model de la BD mongo
 var gestionarCategoriaModel = require('../model/gestionarCategorias.model');
-const gestionarCategoriaController = {};
 
-gestionarCategoriaController.getCategorias = async(req, res) => {
+const gestionarCategoriaService = {};
+
+gestionarCategoriaService.getCategorias = async(req, res) => {
     //req=request
     //res= response
+    /*gestionarCategoriaModel.find() devuelve un arreglo de todo las categorias que estan en la base de datos 
+    la cual guardamos en gestionarcategoria
+    */
+
     const gestionarCategoria = await gestionarCategoriaModel.find();
-    res.json(gestionarCategoria);
+    res.json(gestionarCategoria); //devolvemos los datos en formato json
+    //probamos con el POSTMAN
 };
 
-gestionarCategoriaController.createCategoria = async(req, res) => {
+gestionarCategoriaService.createCategoria = async(req, res) => {
     const categoria = new gestionarCategoriaModel({
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
@@ -19,4 +26,4 @@ gestionarCategoriaController.createCategoria = async(req, res) => {
 };
 
 
-module.exports = gestionarCategoriaController;
+module.exports = gestionarCategoriaService;

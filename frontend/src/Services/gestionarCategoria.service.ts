@@ -11,9 +11,8 @@ export class GestionarCategoriaService{
      descripcion: '', 
      estado: 0,
   };
-    //form
-//categoriaM: CategoriaM[]; //guardamos las categorias en un arreglo
-  categorias: Categoria[];
+
+  categorias: Categoria[]; //importamos desde el modelo tene objetos tipo Categoria
   readonly URL_API= "http://localhost:3000/farmacia/gestionarCategorias/";
   constructor(private http: HttpClient){}
     
@@ -22,7 +21,6 @@ export class GestionarCategoriaService{
       
         return this.http.get<Categoria[]>(this.URL_API);
     }
-    //categoriaMService.createCategoriaM
     createCategoriaM(categoriaM:Categoria){
   return this.http.post(this.URL_API,categoriaM);
   }

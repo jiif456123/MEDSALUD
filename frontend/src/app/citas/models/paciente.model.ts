@@ -1,4 +1,5 @@
-export interface Paciente{
+export interface Paciente {
+    _id: string
     nombre: string
     apellidoPaterno: string
     apellidoMaterno: string

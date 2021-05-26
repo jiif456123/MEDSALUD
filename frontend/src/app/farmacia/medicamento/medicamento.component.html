@@ -1,0 +1,120 @@
+<div class="col-md-11">
+<br>
+    <button type="button" class="btn btn-primary boton-registrar" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
+        Registrar Medicamento
+      </button>
+      <br>
+      <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Dosis</th>
+                <th>Presentación</th>
+                <th>Precio Unitario</th>
+                <th>Ubicación</th>
+                <th>Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- -->
+            <tr *ngFor="let medicamento of medicamentoService.medicamento">
+                <td>{{ medicamento.codigo }}</td>
+            
+                <td>{{ medicamento.nombre }}</td>
+
+                <td>{{ medicamento.categoria }}</td>
+
+                <td>{{ medicamento.stock }}</td>
+
+                <td>{{ medicamento.dosis }}</td>
+
+                <td>{{ medicamento.presentacion }}</td>
+
+                <td>{{ medicamento.precioUnitario}}</td>
+
+                <td>{{ medicamento.ubicacion}}</td>
+                
+                <td>
+                    <button class="btn btn-secondary ">Ver</button>
+                </td>
+
+                <!--     <td>
+                        <a (click)="deleteEmployee(categoriaMx._id)" class="btn btn-danger btn-sm">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </td>-->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- <form #medicamentoForm="ngForm" (ngSubmit)="addMedicamento(medicamentoForm)">
+    <div class="form-group">
+        <input type="text" name="Nombre" [(ngModel)]="medicamentoService.selectedMedicamento.nombre" class="form-control" placeholder="Nombre">
+    </div>
+
+    <div class="form-group">
+        <input type="radio" name="Disponibilidad" [(ngModel)]="medicamentoService.selectedMedicamento.disponibilidad" class="form-control" placeholder="Disponible">
+        <input type="radio" name="Disponibilidad" [(ngModel)]="medicamentoService.selectedMedicamento.disponibilidad" class="form-control" placeholder="No disponible">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="Dosis" [(ngModel)]="medicamentoService.selectedMedicamento.dosis" class="form-control" placeholder="Dosis">
+    </div>
+
+    <div class="form-group">
+        <select name="Presentacion">
+            <option value="Tabletas">Tabletas</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="Precio Unitario" [(ngModel)]="medicamentoService.selectedMedicamento.precioUnitario" class="form-control" placeholder="Precio Unitario">
+    </div>
+
+    <div class="form-group">
+        <select name="Marca">
+            <option value="FarmaIndustria">Tabletas</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <select name="Categoría">
+            <option value="Oral">Tabletas</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <select name="Ubicación">
+            <option value="Pabellón A">Tabletas</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="Stock Mínimo" [(ngModel)]="medicamentoService.selectedMedicamento.stockMin" class="form-control" placeholder="Stock Mínimo">
+    </div>
+    <div class="form-group">
+        <input type="text" name="Stock Máximo" [(ngModel)]="medicamentoService.selectedMedicamento.stockMax" class="form-control" placeholder="Stock Máximo">
+    </div>
+
+    <div class="form-group">
+        <textarea class="form-control descripcion-input" name="descripcion" [(ngModel)]="gmedicamentoService.selectedMedicamento.descripcion" rows="5" placeholder="Descripcion"></textarea>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-group">
+            <button class="btn btn-primary button-agregar">Agregar</button>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+
+    </div>
+
+     <input type="text" class="form-control descripcion-input" placeholder="Descripcion">
+
+
+</form> -->

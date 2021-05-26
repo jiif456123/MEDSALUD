@@ -16,6 +16,8 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { medicamentoComponent } from '../../farmacia/medicamento/medicamento.component';
+import { CategoriaComponent } from 'app/categoria/categoria.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    CategoriaComponent,
+    medicamentoComponent,
     UpgradeComponent
   ]
 })

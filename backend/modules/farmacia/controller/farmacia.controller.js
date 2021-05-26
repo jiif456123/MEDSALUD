@@ -1,6 +1,6 @@
 const router = require('express').Router();
-//const pacienteController = require('../paciente/paciente.controller')
+const medicamentoController = require('../Medicamento/controller/medicamento.controller')
 
-//router.use('/paciente', pacienteController);
+router.use('/medicamento', medicamentoController);
 
 module.exports = router;

@@ -8,7 +8,7 @@ var medicamento = new Schema({
     disponibilidad: { type: Boolean },
     dosis: { type: String },
     presentacion: { type: String },
-    precioUnitario: { type: Number },
+    precioUnitario: { type: String },
     marca: { type: String },
     categoria: { type: String },
     ubicacion: { type: String },

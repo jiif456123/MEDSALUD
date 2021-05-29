@@ -11,7 +11,6 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -22,6 +21,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     FooterModule,
     SidebarModule,
     AppRoutingModule,
+    NgbModule,
     NgbModule
     
   ],

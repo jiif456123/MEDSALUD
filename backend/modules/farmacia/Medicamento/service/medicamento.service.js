@@ -9,7 +9,6 @@ medicamentoService.getMedicamento = async(req, res) => {
     res.json(medicamento); //devolvemos los datos en formato json
     //probamos con el POSTMAN
 };
-
 //const es un objeto que ayuda a exporta todo las funciones creadas
 var n = 1;
 medicamentoService.createMedicamento = async(req, res) => {
@@ -20,13 +19,13 @@ medicamentoService.createMedicamento = async(req, res) => {
         disponibilidad: req.body.disponibilidad,
         dosis: req.body.dosis,
         presentacion: req.body.presentacion,
-        precioUnitario: req.body.precioUnitario,
+        precioUnitario:req.body.precioUnitario,
         marca: req.body.marca,
         categoria: req.body.categoria,
         ubicacion: req.body.ubicacion,
         stockMin: req.body.stockMin,
         stockMax: req.body.stockMax,
-        stockActual: req.body.stockActual,
+        stockActual: 0,
         detalles: req.body.detalles
     });
     await medicamento.save();

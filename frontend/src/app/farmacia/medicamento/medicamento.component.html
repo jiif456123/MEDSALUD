@@ -1,11 +1,10 @@
-<div class="col-md-11">
-<br>
-    <button type="button" class="btn btn-primary boton-registrar" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
-        Registrar Medicamento
+<div class="container">
+<div class="cont-1">
+<button type="button" class="btn btn-primary boton-registrar" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
+    Registrar Medicamento
       </button>
-      <br>
-      <br>
-    <table class="table table-striped">
+    </div>
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -28,7 +27,7 @@
 
                 <td>{{ medicamento.categoria }}</td>
 
-                <td>{{ medicamento.stock }}</td>
+                <td>{{ medicamento.stockActual }}</td>
 
                 <td>{{ medicamento.dosis }}</td>
 
@@ -41,7 +40,6 @@
                 <td>
                     <button class="btn btn-secondary ">Ver</button>
                 </td>
-
                 <!--     <td>
                         <a (click)="deleteEmployee(categoriaMx._id)" class="btn btn-danger btn-sm">
                             <i class="material-icons">delete</i>
@@ -50,71 +48,150 @@
             </tr>
         </tbody>
     </table>
+    <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [(page)]="page"
+            (pageChange)="loadPage($event)"></ngb-pagination>
+</div>
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-lg" role="document">
+            <div class="modal-content popup-content">
+                <div class="modal-header popup-header">
+                    <h3 class="modal-title text-center text-registrar">Registrar Medicamento</h3>
+                </div>
+                <div class="modal-body">
+                    <form #medicamentoForm="ngForm" (ngSubmit)="addMedicamento(medicamentoForm)">
+                        
+                        <div class="form-group">
+                            <i class="i-font">Nombre</i>
+                            <input type="text" name="nombre" [(ngModel)]="medicamentoService.selectedMedicamento.nombre" class="form-control text-input">
+                        </div>
+
+                        <div class="form-group contenedor-tabla">
+                        <div class="label-radio contenedor-fila">
+                            <div class="contenedor-columna-right">
+                                <input type="radio" name="disponibilidad" value=true
+                                (change)="radioChangeHandler($event)" [(ngModel)]="medicamentoService.selectedMedicamento.disponibilidad">
+                                <label class="label-text">Disponible</label>
+                            </div>
+                            <div class="contenedor-columna-left">
+                                <input type="radio" name="disponibilidad" value=false
+                                (change)="radioChangeHandler($event)" [(ngModel)]="medicamentoService.selectedMedicamento.disponibilidad">
+                                <label class="label-text">No disponible</label>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="contenedor-tabla">
+                            <div class="contenedor-fila">
+                                <div class="contenedor-columna-right">
+                                    <i class="i-font">Concentración</i>
+                                    <div class="contenedor-fila">
+                                    <div class="form-group contenedor-columna-right">
+                                     <input type="number" name="dosis" [(ngModel)]="medicamentoService.selectedMedicamento.dosis" class="form-control text-input">
+                                    </div>
+                                    <div class="content-select select contenedor-columna-left">
+                                        <select name="unidades" [(ngModel)]="medicamentoService.selectedMedicamento.unidades">
+                                        <option [value]="item" *ngFor="let item of unidadlist">{{item}}</option>
+                                        </select>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="contenedor-columna-left">
+                                    <div class="form-group">
+                                        <i class="i-font">Presentación</i>
+                                        <div class="content-select select">
+                                            <select name="presentacion" [(ngModel)]="medicamentoService.selectedMedicamento.presentacion">
+                                            <option [value]="item" *ngFor="let item of presentacionlist">{{item}}</option>
+                                            </select>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contenedor-tabla">
+                            <div class="contenedor-fila">
+                                <div class="contenedor-columna-right">
+                                    <div class="form-group">
+                                        <i class="i-font">Precio Unitario</i>
+                                        <input type="number" name="precioUnitario" [(ngModel)]="medicamentoService.selectedMedicamento.precioUnitario" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="contenedor-columna-left">
+                                    <div class="form-group">
+                                        <i class="i-font">Marca</i>
+                                        <div class="content-select select">
+                                            <select name="marca" [(ngModel)]="medicamentoService.selectedMedicamento.marca">
+                                                <option [value]="item" *ngFor="let item of marcalist">{{item}}</option>
+                                                </select>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contenedor-tabla">
+                            <div class="contenedor-fila">
+                                <div class="contenedor-columna-right">
+                                    <div class="form-group">
+                                        <i class="i-font">Categoría</i>
+                                        <div class="content-select select">
+                                        <select name="categoria" [(ngModel)]="medicamentoService.selectedMedicamento.categoria">
+                                             <option [value]="item" *ngFor="let item of categorialist">{{item}}</option>
+                                         </select>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="contenedor-columna-left">
+                                    <div class="form-group">
+                                        <i class="i-font">Ubicación</i>
+                                        <div class="content-select select">
+                                            <select name="ubicacion" [(ngModel)]="medicamentoService.selectedMedicamento.ubicacion">
+                                                <option [value]="item" *ngFor="let item of ubicacionlist">{{item}}</option>
+                                            </select>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contenedor-tabla">
+                            <div class="contenedor-fila">
+                                <div class="contenedor-columna-right">
+                                    <div class="form-group">
+                                        <i class="i-font">Stock Mínimo</i>
+                                        <input type="number" name="stockMin" [(ngModel)]="medicamentoService.selectedMedicamento.stockMin" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="contenedor-columna-left">
+                                    <div class="form-group">
+                                        <i class="i-font">Stock Máximo</i>
+                                        <input type="number" name="stockMax" [(ngModel)]="medicamentoService.selectedMedicamento.stockMax" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Detalles</i>
+                            <textarea class="form-control descripcion-input text-input" name="detalles" [(ngModel)]="medicamentoService.selectedMedicamento.detalles"></textarea>
+                        </div>
+
+                        <div class="modal-footer popup-footer">
+                            <div class="btn-group">
+                                <button class="btn btn-primary button-agregar">Agregar</button>
+                            </div>
+                            <div class="btn-left">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- <form #medicamentoForm="ngForm" (ngSubmit)="addMedicamento(medicamentoForm)">
-    <div class="form-group">
-        <input type="text" name="Nombre" [(ngModel)]="medicamentoService.selectedMedicamento.nombre" class="form-control" placeholder="Nombre">
-    </div>
-
-    <div class="form-group">
-        <input type="radio" name="Disponibilidad" [(ngModel)]="medicamentoService.selectedMedicamento.disponibilidad" class="form-control" placeholder="Disponible">
-        <input type="radio" name="Disponibilidad" [(ngModel)]="medicamentoService.selectedMedicamento.disponibilidad" class="form-control" placeholder="No disponible">
-    </div>
-
-    <div class="form-group">
-        <input type="text" name="Dosis" [(ngModel)]="medicamentoService.selectedMedicamento.dosis" class="form-control" placeholder="Dosis">
-    </div>
-
-    <div class="form-group">
-        <select name="Presentacion">
-            <option value="Tabletas">Tabletas</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <input type="text" name="Precio Unitario" [(ngModel)]="medicamentoService.selectedMedicamento.precioUnitario" class="form-control" placeholder="Precio Unitario">
-    </div>
-
-    <div class="form-group">
-        <select name="Marca">
-            <option value="FarmaIndustria">Tabletas</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <select name="Categoría">
-            <option value="Oral">Tabletas</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <select name="Ubicación">
-            <option value="Pabellón A">Tabletas</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <input type="text" name="Stock Mínimo" [(ngModel)]="medicamentoService.selectedMedicamento.stockMin" class="form-control" placeholder="Stock Mínimo">
-    </div>
-    <div class="form-group">
-        <input type="text" name="Stock Máximo" [(ngModel)]="medicamentoService.selectedMedicamento.stockMax" class="form-control" placeholder="Stock Máximo">
-    </div>
-
-    <div class="form-group">
-        <textarea class="form-control descripcion-input" name="descripcion" [(ngModel)]="gmedicamentoService.selectedMedicamento.descripcion" rows="5" placeholder="Descripcion"></textarea>
-    </div>
-    <div class="modal-footer">
-        <div class="btn-group">
-            <button class="btn btn-primary button-agregar">Agregar</button>
-        </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        </div>
-
-    </div>
-
-     <input type="text" class="form-control descripcion-input" placeholder="Descripcion">
 
 
-</form> -->

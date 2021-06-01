@@ -1,8 +1,8 @@
 const citasModel = require('../../../models/citas.model')
-const motivoModel = citasModel.modelMotivo;
+const movimientoModel = citasModel.modelMovimiento;
 
 let crear = (movimiento) => {
-    let nuevoMovimiento = new motivoModel({
+    let nuevoMovimiento = new movimientoModel({
         paciente: movimiento.nIdPaciente,
         motivo: movimiento.nIdMotivo,
         precio: movimiento.precio,
@@ -19,10 +19,11 @@ let crear = (movimiento) => {
 
 let listar = () => {
     return new Promise((resolve, reject) => {
-        motivoModel.find({}).exec((err, data) => {
-            if (err) reject(err);
-            resolve(data);
-        })
+        movimientoModel.find({}).populate('paciente motivo')
+            .exec((err, data) => {
+                if (err) reject(err);
+                resolve(data);
+            })
     })
 }
 

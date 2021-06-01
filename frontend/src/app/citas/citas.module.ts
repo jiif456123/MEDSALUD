@@ -6,7 +6,7 @@ import { GestionarCitasComponent } from './gestionar-citas/gestionar-citas.compo
 import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-paciente.component';
 import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 @NgModule({
   declarations: [GestionarCitasComponent, GestionarCajaComponent, GestionarPacienteComponent],
@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CitasRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    Ng2SearchPipeModule
   ]
 })
 export class CitasModule { }

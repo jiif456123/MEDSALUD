@@ -8,6 +8,7 @@ import { CajaService } from '../services/caja.service';
 import { MotivoService } from '../services/motivo.service';
 import { MovimientoCajaService } from '../services/movimiento-caja.service';
 import { PacienteService } from '../services/paciente.service';
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-gestionar-caja',
   templateUrl: './gestionar-caja.component.html',
@@ -54,7 +55,7 @@ export class GestionarCajaComponent implements OnInit {
       nombrePaciente: [''],
       precio: [0, [Validators.min(0), Validators.required]],
       montoRecibido: [0, [Validators.min(0), Validators.required]],
-      montoDevolver: [0]
+      montoDevolver: [0, Validators.min(0)]
     })
 
   }
@@ -68,10 +69,12 @@ export class GestionarCajaComponent implements OnInit {
   async registrar() {
     if (this.formMovimiento.invalid) {
       this.formMovimiento.markAllAsTouched();
+      Swal.fire('Advertencia', 'Revise los campos.', 'warning')
       return;
     }
 
     if (this.idPaciente == '') {
+      Swal.fire('Advertencia', 'Seleccione un paciente', 'warning')
       return;
     }
 
@@ -87,6 +90,8 @@ export class GestionarCajaComponent implements OnInit {
 
       let response = await this.movCajaService.registrar(query).toPromise();
       this.formMovimiento.reset();
+      Swal.fire('Correcto', 'Se registro correctamente', 'success')
+
       var dataMovimientoCaja = await this.movCajaService.listar().toPromise();
       this.movimientos = dataMovimientoCaja.data;
       this.operacionesDia();

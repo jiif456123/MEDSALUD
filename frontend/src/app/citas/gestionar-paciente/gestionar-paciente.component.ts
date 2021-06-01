@@ -17,6 +17,8 @@ export class GestionarPacienteComponent implements OnInit {
   formPaciente: FormGroup;
   formPacienteModificar: FormGroup;
 
+  filtro = "";
+
   pacientes: Paciente[] = []
   pacienteSeleccionado: Paciente;
   constructor(
@@ -32,9 +34,9 @@ export class GestionarPacienteComponent implements OnInit {
       nombre: ['', [Validators.required]],
       apellidoMaterno: ['', [Validators.required]],
       apellidoPaterno: ['', [Validators.required]],
-      dni: ['', [Validators.required]],
-      celular: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      dni: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      celular: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      email: ['', [Validators.required, Validators.email]],
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
 
@@ -44,9 +46,9 @@ export class GestionarPacienteComponent implements OnInit {
       nombre: ['', [Validators.required]],
       apellidoMaterno: ['', [Validators.required]],
       apellidoPaterno: ['', [Validators.required]],
-      dni: ['', [Validators.required]],
-      celular: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      dni: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      celular: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      email: ['', [Validators.required, Validators.email]],
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
     })
@@ -77,6 +79,9 @@ export class GestionarPacienteComponent implements OnInit {
 
   async registrar() {
 
+    if (this.formPaciente.invalid) {
+      return;
+    }
     let datos = this.formPaciente.value
     let query = {
       nombre: datos.nombre,
@@ -103,6 +108,9 @@ export class GestionarPacienteComponent implements OnInit {
   }
 
   async modificar() {
+    if (this.formPacienteModificar.invalid) {
+      return;
+    }
     let datos = this.formPacienteModificar.value
     let query = {
       nombre: datos.nombre,
@@ -127,7 +135,7 @@ export class GestionarPacienteComponent implements OnInit {
     }
   }
 
-  async cambiarEstado(estado: number, id: string){
+  async cambiarEstado(estado: number, id: string) {
     let query = {
       estado: estado
     }

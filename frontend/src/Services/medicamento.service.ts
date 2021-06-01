@@ -10,18 +10,35 @@ export class MedicamentoService{
      _id:'',
      codigo:'',
      nombre: '',
-     disponibilidad:false,
+     disponibilidad:null,
      dosis:'',
      presentacion:'',
-     precioUnitario:0.0,
+     precioUnitario:null,
      marca:'',
      categoria:'',
      ubicacion:'',
-     stockMin:0,
-     stockMax:0,
-     stockActual:0,
+     stockMin:null,
+     stockMax:null,
+     stockActual:null,
      detalles:''
   };
+  selectedMedicamento1: Medicamento={
+    _id:'',
+    codigo:'',
+    nombre: '',
+    disponibilidad:null,
+    dosis:'',
+    presentacion:'',
+    precioUnitario:null,
+    marca:'',
+    categoria:'',
+    ubicacion:'',
+    stockMin:null,
+    stockMax:null,
+    stockActual:null,
+    detalles:''
+ };
+ 
 
   medicamento: Medicamento[]; //importamos desde el modelo tene objetos tipo medicamento
   readonly URL_API= "http://localhost:3000/farmacia/medicamento/";
@@ -29,13 +46,15 @@ export class MedicamentoService{
 
 
     getMedicamento(){
-
-        return this.http.get<Medicamento[]>(this.URL_API);
+      return this.http.get<any>(this.URL_API);
     }
 
     createMedicamento(Medicamento:Medicamento){
-  return this.http.post(this.URL_API,Medicamento);
-  }
+      return this.http.post(this.URL_API,Medicamento);
+   }
+    updateMedicamento(Medicamento:Medicamento){
+      return this.http.put(this.URL_API + `/${Medicamento._id}`, Medicamento);
+    }
 }
 
 /*

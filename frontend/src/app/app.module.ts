@@ -10,7 +10,7 @@ import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -21,13 +21,13 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     FooterModule,
     SidebarModule,
     AppRoutingModule,
-    NgbModule,
     NgbModule
     
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

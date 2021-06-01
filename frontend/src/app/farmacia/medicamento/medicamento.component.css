@@ -1,3 +1,58 @@
+h1{
+    border-color: #529ABA;
+    color: #529ABA;
+    font-size: 36px;
+}
+
+.cont{
+    background: white;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+   
+}
+.styled-table {
+    border-collapse: collapse;
+    margin: 0px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #5782b6f1;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th{
+    color: #FFFF;
+    padding: 12px 15px;
+    text-align: center;
+}
+.styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #5781B6;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #5781B6;
+}
 .popup {
     background: rgba(0, 0, 0, 0.6);
     width: 100%;
@@ -15,8 +70,12 @@
 .popup-header{
     padding-bottom: 15px;
     padding-top: 8px;
+    border-bottom: 1px solid #529ABA;
 }
-
+.btn-primary {
+    border-color: #529ABA;
+    color: #529ABA;
+}
 .popup-content {
     
     background: #fff;
@@ -55,7 +114,7 @@
     font-size: 13px;
 }
 .text-registrar {
-    color: #3498db;
+    color: #529ABA;
     line-height: 1.2;
 }
 .text-input{
@@ -73,6 +132,12 @@
 
 .boton-registrar {
     float: right;
+    border-color: #529ABA;
+    color:#529ABA;
+}
+.boton-table{
+    padding: 0px 10px 0px 10px;
+    border: none;
 }
 
 .content-select select {
@@ -83,7 +148,7 @@
     height: 30px;
     outline: 0;
     background: #FFFF;
-    color: rgb(0, 0, 0),#3498db;
+    color: rgb(0, 0, 0);
     font-size: 1em;
     border: 1px solid #E3E3E3;
     border-radius: 4px;
@@ -124,27 +189,6 @@
 .label-text{
     font-weight:350;
     margin-left: 15px;}
-.cont-1{
-    padding-top: 15px;
-    padding-bottom: 15px;
-    width: 100%;
-}
 
-.content-input input[type=radio] + i:before{
-	content: '';
-	display: block;
-	height: 18px;
-	width: 18px;
-	background: red;
-	border-radius: 100%;
-	position: absolute;
-	z-index: 1;
-	top: 4px;
-	left: 4px;
-	background:#2AC176;
-	transition: all 0.25s ease; /* Todas las propiedades | tiempo | tipo movimiento */
-	transform: scale(0) /* Lo reducimos a 0*/ ;
-	opacity: 0; /* Lo ocultamos*/
-}
 
     

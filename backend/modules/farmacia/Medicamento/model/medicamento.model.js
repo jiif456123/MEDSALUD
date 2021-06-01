@@ -10,7 +10,7 @@ var medicamento = new Schema({
     presentacion: { type: String },
     precioUnitario: { type: String },
     marca: { type: String },
-    categoria: { type: String },
+    categoria: { type: String }, //Schema.ObjectId, ref: 'categoria'
     ubicacion: { type: String },
     stockMin: { type: Number },
     stockMax: { type: Number },
@@ -20,5 +20,5 @@ var medicamento = new Schema({
     versionKey: false
 });
 
-var model = mongoose.model('Medicamento', medicamento);
+var model = mongoose.model('medicamento', medicamento);
 module.exports = model;

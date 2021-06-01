@@ -8,7 +8,6 @@ import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 
-
 @NgModule({
   declarations: [GestionarCitasComponent, GestionarCajaComponent, GestionarPacienteComponent],
   imports: [

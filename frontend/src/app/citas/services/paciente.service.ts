@@ -14,4 +14,11 @@ export class PacienteService {
     return this.http.get<any>(this.urlEndPoint);
   }
   
+  registrar(query: any) {
+    return this.http.post<any>(this.urlEndPoint, query);
+  }
+
+  actualizar(id: string, query: any) {
+    return this.http.put<any>(`${this.urlEndPoint}/${id}`, query);
+  }
 }

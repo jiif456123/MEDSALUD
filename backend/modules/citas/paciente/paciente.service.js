@@ -1,6 +1,7 @@
 const citasmodel = require("../../../models/citas.model");
 const pacientemodel = citasmodel.modelPaciente
 let crear = (paciente) => {
+    let fechaNacimiento = new Date(paciente.fechaNaciemineto)
     let newpaciente = new pacientemodel({
         nombre: paciente.nombre,
         apellidoPaterno: paciente.apellidoPaterno,
@@ -8,11 +9,12 @@ let crear = (paciente) => {
         dni: paciente.dni,
         celular: paciente.celular,
         email: paciente.email,
-        fechadeNacimineto: paciente.fechadeNacimineto,
+        fechaNaciemineto: fechaNacimiento,
         direccion: paciente.direccion,
         estado: paciente.estado,
 
     })
+
     return new Promise((resolve, reject) => {
         newpaciente.save(newpaciente, (err, data) => {
             if (err) reject(err)
@@ -45,12 +47,15 @@ var listarpaciente = (id) => {
 };
 var modificarpaciente = (id, newpaciente) => {
 
-    console.log(newpaciente, ' [newpaciente]');
+    if (newpaciente.fechaNaciemineto) {
+        newpaciente.fechaNaciemineto = new Date(newpaciente.fechaNaciemineto);
+    }
 
     return new Promise((resolve, reject) => {
-        Visita.findByIdAndUpdate(id, newpaciente, (err, pacientes) => {
+        pacientemodel.findByIdAndUpdate(id, newpaciente, (err, pacientes) => {
 
             if (err) {
+                console.log
                 reject(err);
             }
             resolve(pacientes);

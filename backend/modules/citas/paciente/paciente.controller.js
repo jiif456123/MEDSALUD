@@ -18,16 +18,6 @@ router.get('/', (req, res) => {
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
 })
 
-router.get('/:id', (req, res) => {
-
-    let id = req.params.id;
-
-    visitaService.listarpaciente(id).then((data) => {
-        http.ok(req, res, code.status.Ok.code, data);
-    }).catch((error) => {
-        http.err(req, res, code.status.Internal_Server_Error.code, error, error)
-    });
-});
 
 router.put('/:id', (req, res) => {
 
@@ -36,7 +26,7 @@ router.put('/:id', (req, res) => {
 
     console.log(id);
 
-    visitaService.modificarpaciente(id, paciente).then((data) => {
+    pacienteService.modificarpaciente(id, paciente).then((data) => {
         http.ok(req, res, code.status.Ok.code, data);
     }).catch((error) => {
         http.err(req, res, code.status.Internal_Server_Error.code, error, error)

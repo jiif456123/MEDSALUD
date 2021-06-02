@@ -62,6 +62,7 @@ export class medicamentoComponent implements OnInit {
               this.getMedicamento();
           },
           err => console.error(err)
-        )
-        }
+        )}
+        
+        onKey(event) {const inputValue = event.target.value;}
 }

@@ -24,10 +24,10 @@ var modelPaciente = mongoose.model('Paciente', paciente);
     Espcialidad Model
 */
 var especialidad = new Schema({
-    descripcion: { type: String},
+    descripcion: { type: String },
     doctor: { type: Schema.Types.ObjectId, ref: 'Doctor' },
-    estado: {type: Number},
-    fechaHora: {type: Date},
+    estado: { type: Number },
+    fechaHora: { type: Date },
 }, {
     versionKey: false
 });
@@ -62,19 +62,34 @@ var modelCaja = mongoose.model('Caja', caja);
 var movimientoCaja = new Schema({
     paciente: { type: Schema.Types.ObjectId, ref: 'Paciente' },
     motivo: { type: Schema.Types.ObjectId, ref: 'Motivo' },
-    precio: {type: Number},
-    montoRecibido: {type: Number},
-    fechaHora: {type: Date},
+    precio: { type: Number },
+    montoRecibido: { type: Number },
+    fechaHora: { type: Date },
 }, {
     versionKey: false
 });
 var modelMovimiento = mongoose.model('MovimientoCaja', movimientoCaja);
 
+/*
+    Cita Model
+*/
+var cita = new Schema({
+    paciente: { type: Schema.Types.ObjectId, ref: 'Paciente' },
+    motivo: { type: Schema.Types.ObjectId, ref: 'Motivo' },
+    doctor: { type: String },
+    especialidad: { type: String },
+    fechaHora: { type: Date },
+    estado: { type: Number }
+}, {
+    versionKey: false
+});
+var modelCita = mongoose.model('Cita', cita);
 
-module.exports ={
+module.exports = {
     modelPaciente: modelPaciente,
     modelEspecialidad: modelEspecialidad,
     modelMotivo: modelMotivo,
     modelCaja: modelCaja,
-    modelMovimiento: modelMovimiento
+    modelMovimiento: modelMovimiento,
+    modelCita: modelCita
 }

@@ -54,7 +54,7 @@ export class MedicamentoService{
    }
     updateMedicamento(Medicamento:Medicamento){
       return this.http.put(this.URL_API + `/${Medicamento._id}`, Medicamento);
-    }
+    }  
 }
 
 /*

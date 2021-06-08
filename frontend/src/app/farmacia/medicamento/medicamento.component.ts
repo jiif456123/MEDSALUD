@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MedicamentoService } from 'Services/medicamento.service';
 import { NgForm } from "@angular/forms"; //para add
 import { Medicamento} from 'models/medicamento.model';
@@ -10,12 +10,12 @@ import { Medicamento} from 'models/medicamento.model';
   providers: [MedicamentoService]
 })
 
-export class medicamentoComponent implements OnInit {
+export class medicamentoComponent implements OnInit{
 
   public pageSize = 7;
   public page;
 
-  presentacionlist:string[]=["Tabletas","Inyectables","Jarabes", "Elixir", "Gotas", "Capsulas"];
+  presentacionlist:string[]=["Tabletas","Inyectables","Jarabes", "Elixir", "Gotas", "Capsulas", "Pastillas", "Cajas", "Tubos"];
   ubicacionlist:string[]=["Pabellon A","Pabellon B","Pabellon C", "Pabellon D", "Pabellon E", "Pabellon F"];
   marcalist:string[]=["FarmaIndustria","johnson & johnson","Pfizer"];
   categorialist:string[]=["Oral","Inyectables","Liquidos"];
@@ -23,12 +23,12 @@ export class medicamentoComponent implements OnInit {
   selectDispo='';
 
   constructor(public medicamentoService: MedicamentoService) { }
-  medicamentos = []
+  medicamentos = [];
 
  ngOnInit(): void {
     this.getMedicamento();
-  }
-
+    
+    }
   getMedicamento(){
     this.medicamentoService.getMedicamento().subscribe(
       response =>{
@@ -50,9 +50,9 @@ export class medicamentoComponent implements OnInit {
       (err) => console.error(err)
       
       );}
+
       getMedicamento1(medicamento:Medicamento) {
-        console.log(medicamento._id);
-        console.log(this.medicamentoService.selectedMedicamento1);
+        
         this.medicamentoService.selectedMedicamento1 = medicamento;
       }
       
@@ -63,6 +63,8 @@ export class medicamentoComponent implements OnInit {
           },
           err => console.error(err)
         )}
-        
-        onKey(event) {const inputValue = event.target.value;}
+        resetForm(form:NgForm){
+          form.reset();
+          }
+          
 }

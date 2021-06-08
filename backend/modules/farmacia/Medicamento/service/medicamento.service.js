@@ -12,7 +12,7 @@ var getMedicamento = () => {
     });
 };
 //const es un objeto que ayuda a exporta todo las funciones creadas
-var n = 1;
+var n = 5;
 
 var createMedicamento = (medicamento) => {
 

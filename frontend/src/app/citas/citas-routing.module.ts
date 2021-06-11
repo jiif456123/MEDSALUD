@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.component';
 import { GestionarCitasComponent } from './gestionar-citas/gestionar-citas.component';
+import { GestionarPerfilComponent } from '../farmacia/Gestionar Perfiles/gestionar-perfiles.component';
 import { GestionarHistoriaComponent } from './gestionar-Historial Clinica/gestionar-historia.component';
 import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-paciente.component';
 
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: "gestionar-caja", component: GestionarCajaComponent, data: { title: 'Gestionar Caja' }
+  },
+  {
+    path: "gestionar-perfil", component: GestionarPerfilComponent, data: { title: 'Gestionar Historia' }
   },
 ];
 

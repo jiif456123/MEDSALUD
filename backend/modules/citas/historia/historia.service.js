@@ -1,5 +1,6 @@
 const citasmodel = require("../../../models/citas.model");
 const historiamodel = citasmodel.modelHistoria
+
 let crear = (historia) => {
     let fecha = new Date(historia.fecha)
     let newhistoria = new historiamodel({

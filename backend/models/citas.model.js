@@ -108,6 +108,26 @@ var cita = new Schema({
     versionKey: false
 });
 var modelCita = mongoose.model('Cita', cita);
+//User
+
+var user = new Schema({
+
+    nombre: { type: String },
+    rol: { type: String },
+    apellidoPaterno: { type: String },
+    apellidoMaterno: { type: String },
+    dni: { type: String },
+    celular: { type: Number },
+    email: { type: String },
+    fechaNacimiento: { type: Date },
+    direccion: { type: String },
+    especialidad: { type: String },
+}, {
+    versionKey: false
+});
+
+var modelUser = mongoose.model('User', user);
+
 
 module.exports = {
     modelPaciente: modelPaciente,
@@ -116,6 +136,6 @@ module.exports = {
     modelCaja: modelCaja,
     modelMovimiento: modelMovimiento,
     modelHistoria: modelHistoria,
-    modelCita: modelCita
+    modelCita: modelCita,
+    modelUser: modelUser,
 }
-

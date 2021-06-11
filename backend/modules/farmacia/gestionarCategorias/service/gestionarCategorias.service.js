@@ -25,5 +25,9 @@ gestionarCategoriaService.createCategoria = async(req, res) => {
     res.json({ status: "Categoria agregada" });
 };
 
+gestionarCategoriaService.getCategoria = async(req, res) => {
+    const categoria = await gestionarCategoriaModel.findById(req.params.id);
+    res.send(categoria);
+};
 
 module.exports = gestionarCategoriaService;

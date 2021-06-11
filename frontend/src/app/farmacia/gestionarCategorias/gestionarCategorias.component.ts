@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GestionarCategoriaService } from 'Services/gestionarCategoria.service';
 import { NgForm } from "@angular/forms"; //para add
+import {Categoria} from '../../../models/gestionarCategoria.model';
 
 @Component({
   selector: 'app-categoriaM',
@@ -14,16 +15,16 @@ export class GestionarCategoriaComponent implements OnInit {
   constructor(public gestionarCategoriaService: GestionarCategoriaService) { }
   
   ngOnInit(): void{//  NEW 
-    this.getCategoriaM();
-
+    this.getCategorias();
+   
   }
 
-  getCategoriaM() { //vamos a llenar el arreglo del service
+  getCategorias() { //vamos a llenar el arreglo del service
     /*
     Eso significa que se suscribirá al observable de interés (que es getTasks () en su caso) y 
     esperará hasta que tenga éxito y luego ejecutará la primera función de devolución de llamada pasada, que en su caso es:
     */
-    this.gestionarCategoriaService.getCategoriasM().subscribe(
+    this.gestionarCategoriaService.getCategorias().subscribe(
       res =>{
         this.gestionarCategoriaService.categorias= res;
       },
@@ -32,14 +33,21 @@ export class GestionarCategoriaComponent implements OnInit {
   }
 
   addCategoriaM(form: NgForm){
-    this.gestionarCategoriaService.createCategoriaM(form.value).subscribe(
+    this.gestionarCategoriaService.createCategoria(form.value).subscribe(
       (res)=> {
-      this.getCategoriaM();
+      this.getCategorias();
       },
       (err) => console.error(err)
 
     );
     //console.log(form.value);
   }
+
+  getCategoria(categoria: Categoria ){
+    this.gestionarCategoriaService.selectedCategoria2=categoria;
+    //console.log(categoria);
+  }
+
+ 
  
 }

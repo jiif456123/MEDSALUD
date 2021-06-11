@@ -7,6 +7,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Estado</th>
@@ -17,25 +18,41 @@
 
         <tbody>
             <!-- -->
-            <tr *ngFor="let categoriaMx of gestionarCategoriaService.categorias">
-                <td>{{ categoriaMx.nombre }}</td>
-                <td>
-                    <button class="btn btn-secondary "> <i class="pe-7s-more"></i></button>
-                </td>
-                <td>{{ categoriaMx.estado }}</td>
-                <td>
-                    <button class="btn btn-secondary"> <i class="pe-7s-ticket"></i></button>
-                </td>
-                <td>
 
-                </td>
+            <ng-container *ngFor="let categoria of gestionarCategoriaService.categorias">
+                <tr>
+                    <td class="count"></td>
+                    <td>{{ categoria.nombre }}</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary " data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" (click)="getCategoria(categoria)"> <i class="pe-7s-more"></i></button>
+                    </td>
+                    <ng-container *ngIf="categoria.estado==1">
+                        <td><i class="pe-7s-check"></i></td>
 
-                <!--     <td>
+                        <!--<td>{{ categoria.estado }}-->
+                    </ng-container>
+                    <ng-container *ngIf="categoria.estado==0">
+                        <td><i class="pe-7s-close-circle"></i></td>
+                        <!--<td>{{ categoria.estado }}-->
+                    </ng-container>
+                    <td>
+                        <button class="btn btn-secondary"> <i class="pe-7s-ticket"></i></button>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </ng-container>
+
+
+
+            <!--     <td>
                         <a (click)="deleteEmployee(categoriaMx._id)" class="btn btn-danger btn-sm">
                             <i class="material-icons">delete</i>
                         </a>
                     </td>-->
-            </tr>
+
+
         </tbody>
     </table>
 </div>
@@ -44,7 +61,7 @@
 <!-- Button trigger modal -->
 
 
-<!-- Modal -->
+<!-- Modal REGISTRAR-->
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-backdrop display-none">
@@ -69,12 +86,8 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
-
                         </div>
-
                         <!--  <input type="text" class="form-control descripcion-input" placeholder="Descripcion">-->
-
-
                     </form>
 
                 </div>
@@ -84,6 +97,42 @@
     </div>
 </div>
 
+
+<!-- Modal DETALLES-->
+<div class="modal fade" id="detallesModalCenter" tabindex="-1" role="dialog" aria-labelledby="detallesModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Detalles</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="nombre2" [(ngModel)]="gestionarCategoriaService.selectedCategoria2.nombre" class="form-control" placeholder="Nombre" readonly>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control descripcion-input" name="descripcion2" [(ngModel)]="gestionarCategoriaService.selectedCategoria2.descripcion" rows="5" placeholder="Descripcion" readonly></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group">
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </div>
+
+                    <!--  <input type="text" class="form-control descripcion-input" placeholder="Descripcion">-->
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--

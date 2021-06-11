@@ -38,3 +38,12 @@
 .boton-registrar {
     float: right;
 }
+
+.count:before {
+    counter-increment: section;
+    content: counter(section);
+}
+
+table {
+    counter-reset: section;
+}

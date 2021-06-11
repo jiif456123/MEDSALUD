@@ -38,35 +38,39 @@
         <tbody>
             <!-- -->
 
-            <ng-container *ngFor="let categoria of gestionarCategoriaService.categorias">
-                <tr>
-                    <td class="count"></td>
-                    <td>{{ categoria.nombre }}</td>
-                    <td>
-                        <button type="button" class="btn btn-secondary btn-descripcion" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" (click)="getCategoria(categoria)"> <i class="pe-7s-more btn-descripcion"></i></button>
-                    </td>
-                    <ng-container *ngIf="categoria.estado==1">
-                        <td>
-                            <div class="cir1"></div>
-                        </td>
+            <tr *ngFor="let categoria of gestionarCategoriaService.categorias| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;">
 
-                        <!--<td>{{ categoria.estado }}-->
-                    </ng-container>
-                    <ng-container *ngIf="categoria.estado==0">
-                        <td>
-                            <div class="cir0"></div>
-                        </td>
-                        <!--<td>{{ categoria.estado }}-->
-                    </ng-container>
+
+                <td class="count"></td>
+                <td>{{ categoria.nombre }}</td>
+                <td>
+                    <button type="button" class="btn btn-secondary btn-descripcion" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" (click)="getCategoria(categoria)"> <i class="pe-7s-more btn-descripcion"></i></button>
+                </td>
+                <ng-container *ngIf="categoria.estado==1">
                     <td>
-                        <button type="button" class="btn btn-secondary btn-actualizar" data-backdrop="false" data-toggle="modal" data-target="#actualizarModalCenter" (click)="getCategoria(categoria)"> <i class="pe-7s-ticket btn-actualizar"></i></button>
+                        <div class="cir1"></div>
                     </td>
 
+                    <!--<td>{{ categoria.estado }}-->
+                </ng-container>
+                <ng-container *ngIf="categoria.estado==0">
+                    <td>
+                        <div class="cir0"></div>
+                    </td>
+                    <!--<td>{{ categoria.estado }}-->
+                </ng-container>
+                <td>
+                    <button type="button" class="btn btn-secondary btn-actualizar" data-backdrop="false" data-toggle="modal" data-target="#actualizarModalCenter" (click)="getCategoria(categoria)"> <i class="pe-7s-ticket btn-actualizar"></i></button>
+                </td>
 
-                    <!-- <button type="button" class="btn btn-secondary btn-actualizar" (click)="deleteCategoria(categoria._id)"> <i class="pe-7s-trash"></i></button>-->
 
-                </tr>
-            </ng-container>
+                <!-- <button type="button" class="btn btn-secondary btn-actualizar" (click)="deleteCategoria(categoria._id)"> <i class="pe-7s-trash"></i></button>-->
+
+
+
+            </tr>
+
+
 
 
 
@@ -75,7 +79,17 @@
 
         </tbody>
     </table>
+
+    <div style="float: right;">
+        <ngb-pagination [pageSize]="pageSize" [collectionSize]="gestionarCategoriaService.categorias.length" [(page)]="page">
+        </ngb-pagination>
+    </div>
+
+
+
+
 </div>
+
 <!--JavaScript-->
 
 <!-- Button trigger modal -->

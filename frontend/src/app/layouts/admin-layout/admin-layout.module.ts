@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+
 
 import { LbdModule } from '../../lbd/lbd.module';
 import { NguiMapModule} from '@ngui/map';
@@ -26,6 +30,8 @@ import { GestionarCategoriaComponent } from '../../farmacia/gestionarCategorias/
     FormsModule,
     ReactiveFormsModule,
     LbdModule,
+    NgbPaginationModule,
+    NgbAlertModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
   declarations: [

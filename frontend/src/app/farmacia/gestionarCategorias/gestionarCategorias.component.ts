@@ -3,7 +3,7 @@ import { GestionarCategoriaService } from 'Services/gestionarCategoria.service';
 import { NgForm, FormGroup,FormControl, Validators } from '@angular/forms'; //para add
 import {Categoria} from '../../../models/gestionarCategoria.model';
 import { element } from 'protractor';
-
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -17,7 +17,8 @@ import { element } from 'protractor';
 export class GestionarCategoriaComponent implements OnInit {
   
 
-
+public page;
+public pageSize=7;
   //creamos instancia gestionarCategoriaService para usar los metodos que usamos en la clase GESTIONARCATEGORIASSERVICE
   constructor(public gestionarCategoriaService: GestionarCategoriaService) { }
   
@@ -48,6 +49,7 @@ export class GestionarCategoriaComponent implements OnInit {
       res =>{
      
         this.gestionarCategoriaService.categorias= res;
+        this.page=1;
       },
       err => console.error(err)
     )

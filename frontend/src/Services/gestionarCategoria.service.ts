@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {Categoria} from '../models/gestionarCategoria.model';
-import {Errores} from '../models/errores.model';
+
 
 @Injectable()
 
@@ -28,14 +28,11 @@ selectedCategoria4: Categoria={
   estado: 0,
 };
 
-selectedError: Errores={
-  error: 'ERRORRRR',
 
-};
 
 
   categorias: Categoria[]; //importamos desde el modelo tene objetos tipo Categoria
-  errores1: Errores[];
+
   readonly URL_API= "http://localhost:3000/farmacia/gestionarCategorias/";
   readonly URL_APIget= "http://localhost:3000/farmacia/gestionarCategorias/getNombre";
   readonly URL_APIgetA= "http://localhost:3000/farmacia/gestionarCategorias/getNombreA";

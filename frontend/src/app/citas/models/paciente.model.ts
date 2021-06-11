@@ -9,4 +9,8 @@ export interface Paciente {
     fechaNaciemineto: Date
     direccion: string
     estado: number
+    nombreFamiliar: string
+    dniFamiliar: string
+    parentesco: string
+    celularFamiliar: string
 }

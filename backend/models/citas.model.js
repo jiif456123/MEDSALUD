@@ -13,7 +13,11 @@ var paciente = new Schema({
     email: { type: String },
     fechaNaciemineto: { type: Date },
     direccion: { type: String },
-    estado: { type: Number }
+    estado: { type: Number },
+    nombreFamiliar: { type: String },
+    dniFamiliar: { type: String },
+    parentesco: { type: String },
+    celularFamiliar: { type: String },
 }, {
     versionKey: false
 });
@@ -114,3 +118,4 @@ module.exports = {
     modelHistoria: modelHistoria,
     modelCita: modelCita
 }
+

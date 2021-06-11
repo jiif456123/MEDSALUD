@@ -12,7 +12,10 @@ let crear = (paciente) => {
         fechaNaciemineto: fechaNacimiento,
         direccion: paciente.direccion,
         estado: paciente.estado,
-
+        nombreFamiliar: paciente.nombreFamiliar,
+        dniFamiliar: paciente.dniFamiliar,
+        parentesco: paciente.parentesco,
+        celularFamiliar: paciente.celularFamiliar,
     })
 
     return new Promise((resolve, reject) => {

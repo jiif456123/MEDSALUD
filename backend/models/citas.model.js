@@ -90,6 +90,27 @@ var historia = new Schema({
 
 var modelHistoria = mongoose.model('Historia', historia);
 
+//User
+
+var user = new Schema({
+
+    nombre: { type: String },
+    rol: { type: String },
+    apellidoPaterno: { type: String },
+    apellidoMaterno: { type: String },
+    dni: { type: String },
+    celular: { type: Number },
+    email: { type: String },
+    fechaNacimiento: { type: Date },
+    direccion: { type: String },
+    especialidad: { type: String },
+}, {
+    versionKey: false
+});
+
+var modelUser = mongoose.model('User', user);
+
+
 module.exports = {
     modelPaciente: modelPaciente,
     modelEspecialidad: modelEspecialidad,
@@ -97,4 +118,5 @@ module.exports = {
     modelCaja: modelCaja,
     modelMovimiento: modelMovimiento,
     modelHistoria: modelHistoria,
+    modelUser: modelUser,
 }

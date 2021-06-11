@@ -6,10 +6,11 @@ import { GestionarCitasComponent } from './gestionar-citas/gestionar-citas.compo
 import { GestionarHistoriaComponent } from './gestionar-Historial Clinica/gestionar-historia.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { GestionarPerfilComponent } from 'app/farmacia/Gestionar Perfiles/gestionar-perfiles.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from 'ngx-filter-pipe';
 @NgModule({
-  declarations: [GestionarCitasComponent,GestionarHistoriaComponent],
+  declarations: [GestionarCitasComponent,GestionarHistoriaComponent, GestionarPerfilComponent],
   imports: [
     CommonModule,
     CitasRoutingModule,

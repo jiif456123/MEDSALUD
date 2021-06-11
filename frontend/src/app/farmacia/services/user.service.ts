@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class HistoriaService {
-  urlEndPoint: string = environment.endpoint.concat('/citas/historia');
+export class UserService {
+  urlEndPoint: string = environment.endpoint.concat('/citas/user');
 
   constructor(private http: HttpClient) { }
 

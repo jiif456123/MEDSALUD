@@ -68,7 +68,7 @@ var movimientoCaja = new Schema({
 }, {
     versionKey: false
 });
-var modelMovimiento = mongoose.model('MovimientoCaja', caja);
+var modelMovimiento = mongoose.model('MovimientoCaja', movimientoCaja);
 /*
     Historia Clinica
 */
@@ -90,6 +90,21 @@ var historia = new Schema({
 
 var modelHistoria = mongoose.model('Historia', historia);
 
+/*
+    Cita Model
+*/
+var cita = new Schema({
+    paciente: { type: Schema.Types.ObjectId, ref: 'Paciente' },
+    motivo: { type: Schema.Types.ObjectId, ref: 'Motivo' },
+    doctor: { type: String },
+    especialidad: { type: String },
+    fechaHora: { type: Date },
+    estado: { type: Number }
+}, {
+    versionKey: false
+});
+var modelCita = mongoose.model('Cita', cita);
+
 module.exports = {
     modelPaciente: modelPaciente,
     modelEspecialidad: modelEspecialidad,
@@ -97,4 +112,5 @@ module.exports = {
     modelCaja: modelCaja,
     modelMovimiento: modelMovimiento,
     modelHistoria: modelHistoria,
+    modelCita: modelCita
 }

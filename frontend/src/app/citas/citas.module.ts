@@ -8,8 +8,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from 'ngx-filter-pipe';
+import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-paciente.component';
+import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.component';
+
+
 @NgModule({
-  declarations: [GestionarCitasComponent,GestionarHistoriaComponent],
+  declarations: [
+    GestionarCitasComponent,
+    GestionarCajaComponent,
+    GestionarPacienteComponent,
+    GestionarHistoriaComponent,
+  ],
   imports: [
     CommonModule,
     CitasRoutingModule,

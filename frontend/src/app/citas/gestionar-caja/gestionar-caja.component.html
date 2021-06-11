@@ -1,0 +1,119 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-6 d-flex justify-content-end" style="margin-bottom: 10px">
+            <input type="text" [(ngModel)]="filtro" class="form-control" placeholder="Buscar" />
+        </div>
+        <!--Button zona-->
+        <div class="col-md-2 d-flex justify-content-end" style="margin-bottom: 10px">
+            <button type="button" (click)="estadoCaja(1)" [disabled]="caja?.abierto==1" class="btn btn-success">
+                Abrir
+            </button>
+        </div>
+
+        <div class="col-md-2 d-flex justify-content-end" style="margin-bottom: 10px">
+            <button type="button" (click)="estadoCaja(0)" [disabled]="caja?.abierto==0" class="btn btn-danger">
+                Cerrar
+            </button>
+        </div>
+
+        <div class="col-md-2 d-flex justify-content-end" style="margin-bottom: 10px">
+            <button type="button" [disabled]="caja?.abierto==0" (click)="abrirModal()" class="btn btn-primary">
+                Agregar
+            </button>
+            <input data-toggle="modal" data-target="#modalOperacion" #modalOperacion type="hidden" name="button">
+        </div>
+    </div>
+    <div class="row">
+        <!--Tabla-->
+        <div class="table-responsive">
+            <table style="width: 100%" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Motivo</th>
+                        <th scope="col">Fecha y Hora</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Paciente</th>
+                        <th scope="col">Total Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let mov of movimientos | filter: filtro">
+                        <td>{{ mov.motivo.descripcion }}</td>
+                        <td>{{ mov.fechaHora | date: "medium" }}</td>
+                        <td>{{ mov.paciente.dni }}</td>
+                        <td>{{ mov.paciente.nombre }} {{mov.paciente.apellidoPaterno}}</td>
+                        <td>
+                            {{ mov.precio | number:'1.2-2'}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<!--Modal para añadir-->
+<div class="modal fade" id="modalOperacion" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false"
+    data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalOperacion" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar movimiento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="formMovimiento" class="modal-body">
+                <form [formGroup]="formMovimiento" class="row">
+
+                    <div class="form-group col-md-6">
+                        <label for="dni">DNI Paciente</label>
+                        <input formControlName="dni" type="text" (input)="buscarPaciente()" class="form-control"
+                            id="dni" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="nombrePaciente">Paciente</label>
+                        <input readonly formControlName="nombrePaciente" type="text" (input)="buscarPaciente()"
+                            class="form-control" id="nombrePaciente" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="motivo1">Motivo</label>
+                        <select formControlName="motivo" class="form-control" id="motivo1">
+                            <option *ngFor="let mot of motivos" [value]="mot._id">
+                                {{ mot.descripcion }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="precio1">Precio</label>
+                        <input formControlName="precio" type="number" (input)="generarMontoDevuelto()"
+                            class="form-control" id="precio1" placeholder="00.00" />
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="montoRecibido1">Monto recibido</label>
+                        <input formControlName="montoRecibido" type="number" (input)="generarMontoDevuelto()"
+                            class="form-control" id="montoRecibido1" placeholder="00.00" />
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="montoDevolver1">Monto por devolver</label>
+                        <input readonly formControlName="montoDevolver" type="number" class="form-control"
+                            id="montoDevolver1" placeholder="00.00" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="registrar()" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

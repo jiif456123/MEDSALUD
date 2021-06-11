@@ -30,4 +30,35 @@ gestionarCategoriaService.getCategoria = async(req, res) => {
     res.send(categoria);
 };
 
+gestionarCategoriaService.editCategoria = async(req, res) => {
+    await gestionarCategoriaModel.findByIdAndUpdate(req.params.id, req.body)
+    res.json({ status: 'Categoira Actualizada' })
+};
+
+gestionarCategoriaService.deleteCategoria = async(req, res) => {
+    await gestionarCategoriaModel.findByIdAndDelete(req.params.id);
+    res.json({ status: 'Categoria Eliminada' });
+};
+
+gestionarCategoriaService.getCategoriaByNombre = async(req, res) => {
+    /* if ({ nombre: req.params.nombre } == null) {
+         const gestionarCategoria = await gestionarCategoriaModel.find();
+         res.send(gestionarCategoria);
+     } else {*/
+    const categoria = await gestionarCategoriaModel.find({ nombre: { $regex: req.params.nombre } });
+
+    res.json(categoria);
+    /*  }*/
+
+
+};
+
+gestionarCategoriaService.getCategoriaByNombreA = async(req, res) => {
+
+    const categoria = await gestionarCategoriaModel.find({ nombre: req.params.nombreA });
+
+    res.json(categoria);
+
+};
+
 module.exports = gestionarCategoriaService;

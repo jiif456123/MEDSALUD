@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {Categoria} from '../models/gestionarCategoria.model';
+import {Errores} from '../models/errores.model';
 
 @Injectable()
 
@@ -16,11 +17,31 @@ export class GestionarCategoriaService{
     descripcion: '', 
     estado: 0,
  };
+ selectedCategoria3: Categoria={
+  nombre: '',
+  descripcion: '', 
+  estado: 0,
+};
+selectedCategoria4: Categoria={
+  nombre: '',
+  descripcion: '', 
+  estado: 0,
+};
+
+selectedError: Errores={
+  error: 'ERRORRRR',
+
+};
+
 
   categorias: Categoria[]; //importamos desde el modelo tene objetos tipo Categoria
+  errores1: Errores[];
   readonly URL_API= "http://localhost:3000/farmacia/gestionarCategorias/";
+  readonly URL_APIget= "http://localhost:3000/farmacia/gestionarCategorias/getNombre";
+  readonly URL_APIgetA= "http://localhost:3000/farmacia/gestionarCategorias/getNombreA";
   constructor(private http: HttpClient){}
-    
+
+  //let categoria of gestionarCategoriaService.categorias
 
     getCategorias(){
       
@@ -28,13 +49,36 @@ export class GestionarCategoriaService{
     }
 
     createCategoria(categoria:Categoria){
-  return this.http.post(this.URL_API,categoria);
-  }
+    return this.http.post(this.URL_API,categoria);
+    }
 
     deleteCategoriasM(_id: string) {
       return this.http.delete(this.URL_API + `/${_id}`);
     }
-
+    putCategoria(categoria: Categoria){
+      return this.http.put(this.URL_API + `/${categoria._id}`, categoria);
+    }
+    // return this.http.put(`${this.URL_API}/${categoria._id}`, categoria);
+  ///getNombre/:nombre
+  
+    getCategoriaByNombre(nombre: string) {
+      if(nombre!=''){
+        return this.http.get<Categoria[]>(this.URL_APIget + `/${nombre}`);
+      }else{
+        return this.http.get<Categoria[]>(this.URL_API);
+      }
+   
+    }
+  
+    getCategoriaByNombreA(nombre: string) {
+      if(nombre!=''){
+        return this.http.get<Categoria[]>(this.URL_APIgetA + `/${nombre}`);
+      }else{
+        return this.http.get<Categoria[]>(this.URL_API);
+      }
+   
+    }
+ 
     
 }
 

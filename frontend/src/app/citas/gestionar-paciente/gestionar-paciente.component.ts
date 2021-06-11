@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { Paciente } from '../models/paciente.model';
 import { PacienteService } from '../services/paciente.service';
 
@@ -13,6 +14,7 @@ import { PacienteService } from '../services/paciente.service';
 export class GestionarPacienteComponent implements OnInit {
   @ViewChild('modalRegistrar') modalRegistrar: ElementRef;
   @ViewChild('modalModificar') modalModificar: ElementRef;
+  @ViewChild('modalDetalle') modalDetalle: ElementRef;
 
   formPaciente: FormGroup;
   formPacienteModificar: FormGroup;
@@ -31,32 +33,44 @@ export class GestionarPacienteComponent implements OnInit {
     var data = await this.pacienteService.listar().toPromise();
     this.pacientes = data.data
     this.formPaciente = this.fb.group({
-      nombre: ['', [Validators.required]],
-      apellidoMaterno: ['', [Validators.required]],
-      apellidoPaterno: ['', [Validators.required]],
-      dni: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      apellidoMaterno: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      apellidoPaterno: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      dni: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/), Validators.minLength(8), Validators.maxLength(8)]],
       celular: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
       email: ['', [Validators.required, Validators.email]],
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
-
+      nombreFamiliar: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      dniFamiliar: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/), Validators.minLength(8), Validators.maxLength(8)]],
+      parentesco: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      celularFamiliar: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
     })
 
     this.formPacienteModificar = this.fb.group({
-      nombre: ['', [Validators.required]],
-      apellidoMaterno: ['', [Validators.required]],
-      apellidoPaterno: ['', [Validators.required]],
-      dni: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      apellidoMaterno: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      apellidoPaterno: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      dni: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/), Validators.minLength(8), Validators.maxLength(8)]],
       celular: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
       email: ['', [Validators.required, Validators.email]],
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
+      nombreFamiliar: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      dniFamiliar: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/), Validators.minLength(8), Validators.maxLength(8)]],
+      parentesco: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]],
+      celularFamiliar: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
     })
 
   }
 
   abrirModal() {
     this.modalRegistrar.nativeElement.click();
+  }
+
+  abrirModalDetalle(row: Paciente) {
+    this.modalDetalle.nativeElement.click();
+    this.pacienteSeleccionado = row;
   }
 
   abrirModalModificar(row: Paciente) {
@@ -70,7 +84,10 @@ export class GestionarPacienteComponent implements OnInit {
     this.formPacienteModificar.controls.email.setValue(row.email);
     this.formPacienteModificar.controls.fechaNacimiento.setValue(this.datePipe.transform(row.fechaNaciemineto, 'yyyy-MM-dd'));
     this.formPacienteModificar.controls.direccion.setValue(row.direccion);
-
+    this.formPacienteModificar.controls.nombreFamiliar.setValue(row.nombreFamiliar);
+    this.formPacienteModificar.controls.dniFamiliar.setValue(row.dniFamiliar);
+    this.formPacienteModificar.controls.parentesco.setValue(row.parentesco);
+    this.formPacienteModificar.controls.celularFamiliar.setValue(row.celularFamiliar);
   }
 
   transformarFecha(fecha: Date) {
@@ -80,9 +97,19 @@ export class GestionarPacienteComponent implements OnInit {
   async registrar() {
 
     if (this.formPaciente.invalid) {
+      Swal.fire('Advertencia', 'Revise los campos.', 'warning')
       return;
     }
     let datos = this.formPaciente.value
+    
+    let fechaNac= new Date(datos.fechaNacimiento)
+    let fechaHoy = new Date()
+
+    if(fechaNac>fechaHoy){
+      Swal.fire('Advertencia', 'La fecha Nacimiento no puede ser mayor que la fecha actual.', 'warning')
+      return;
+    }
+    
     let query = {
       nombre: datos.nombre,
       apellidoPaterno: datos.apellidoPaterno,
@@ -92,12 +119,18 @@ export class GestionarPacienteComponent implements OnInit {
       email: datos.email,
       fechaNaciemineto: datos.fechaNacimiento,
       direccion: datos.direccion,
-      estado: 1
+      estado: 1,
+      nombreFamiliar: datos.nombreFamiliar,
+      dniFamiliar: datos.dniFamiliar,
+      parentesco: datos.parentesco,
+      celularFamiliar: datos.celularFamiliar,
     }
 
     try {
 
       let response = await this.pacienteService.registrar(query).toPromise();
+      Swal.fire('Correcto', 'Se registro correctamente', 'success')
+
       this.formPaciente.reset();
       var dataMovimientoCaja = await this.pacienteService.listar().toPromise();
       this.pacientes = dataMovimientoCaja.data;
@@ -109,9 +142,19 @@ export class GestionarPacienteComponent implements OnInit {
 
   async modificar() {
     if (this.formPacienteModificar.invalid) {
+      Swal.fire('Advertencia', 'Revise los campos.', 'warning')
       return;
     }
     let datos = this.formPacienteModificar.value
+
+    let fechaNac= new Date(datos.fechaNacimiento)
+    let fechaHoy = new Date()
+
+    if(fechaNac>fechaHoy){
+      Swal.fire('Advertencia', 'La fecha Nacimiento no puede ser mayor que la fecha actual.', 'warning')
+      return;
+    }
+
     let query = {
       nombre: datos.nombre,
       apellidoPaterno: datos.apellidoPaterno,
@@ -121,12 +164,16 @@ export class GestionarPacienteComponent implements OnInit {
       email: datos.email,
       fechaNaciemineto: datos.fechaNacimiento,
       direccion: datos.direccion,
+      nombreFamiliar: datos.nombreFamiliar,
+      dniFamiliar: datos.dniFamiliar,
+      parentesco: datos.parentesco,
+      celularFamiliar: datos.celularFamiliar,
     }
 
     try {
 
       let response = await this.pacienteService.actualizar(this.pacienteSeleccionado._id, query).toPromise();
-      this.formPaciente.reset();
+      Swal.fire('Correcto', 'Se actualizo correctamente', 'success')
       var dataMovimientoCaja = await this.pacienteService.listar().toPromise();
       this.pacientes = dataMovimientoCaja.data;
 

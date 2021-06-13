@@ -5,11 +5,14 @@ import { FarmaciaRoutingModule } from './farmacia-routing.module';
 import { GestionarProveedorComponent } from './gestionar-proveedor/gestionarp.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { GestionarCategoriaComponent } from '../farmacia/gestionarCategorias/gestionarCategorias.component';
+
 
 @NgModule({
   declarations: [
     medicamentoComponent,
-    GestionarProveedorComponent
+    GestionarProveedorComponent,
+    GestionarCategoriaComponent
   ],
   imports: [
     FormsModule,

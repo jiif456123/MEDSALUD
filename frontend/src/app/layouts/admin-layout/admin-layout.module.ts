@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+
 
 
 import { LbdModule } from '../../lbd/lbd.module';
@@ -26,8 +30,11 @@ import { CategoriaComponent } from 'app/categoria/categoria.component';
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     LbdModule,
-    NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE' })
+    NgbPaginationModule,
+    NgbAlertModule,
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
   declarations: [
     HomeComponent,

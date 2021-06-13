@@ -21,6 +21,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps', component: MapsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
+    
     { path: 'categoria', component: CategoriaComponent },
     { path: 'proveedor', component: GestionarProveedorComponent },
     {

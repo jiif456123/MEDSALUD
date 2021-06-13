@@ -56,7 +56,7 @@ public pageSize=7;
   }
 
 
-
+//xd
   addCategoriaM(form: NgForm){
     if(form.value._id){
     this.gestionarCategoriaService.putCategoria(form.value).subscribe(

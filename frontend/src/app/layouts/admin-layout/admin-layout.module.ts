@@ -19,6 +19,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import {GestionarProveedorComponent} from '../../farmacia/gestionar-proveedor/gestionarp.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +37,6 @@ import {GestionarProveedorComponent} from '../../farmacia/gestionar-proveedor/ge
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    GestionarProveedorComponent
   ]
 })
 

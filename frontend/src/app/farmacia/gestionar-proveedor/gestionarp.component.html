@@ -234,7 +234,7 @@
       <div class="modal-content popup-content">
         <div class="modal-header">
           <h3 class="modal-title text-center text-registrar">
-            Registrar Medicamento
+            Registrar Proveedor
           </h3>
         </div>
 
@@ -317,15 +317,18 @@
             <!--Telefono-->
             <div class="form-group">
               <input
-                ngModel
-                required
                 type="text"
                 name="telefono"
-                [(ngModel)]="gestionarpservice.selectProveedor.telefono"
+                ngModel
+                maxlength="9"
+                required
+                [(ngModel)]="
+                  gestionarpservice.selectProveedor.telefono
+                "
                 class="form-control"
                 placeholder="Telefono"
-                required
               />
+
             </div>
 
             <!-- Aletar Excepcion-->

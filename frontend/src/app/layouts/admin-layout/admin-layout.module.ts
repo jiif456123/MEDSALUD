@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { LbdModule } from '../../lbd/lbd.module';
 import { NguiMapModule} from '@ngui/map';
 
@@ -17,7 +17,6 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { medicamentoComponent } from '../../farmacia/medicamento/medicamento.component';
 import { CategoriaComponent } from 'app/categoria/categoria.component';
 
 
@@ -27,8 +26,6 @@ import { CategoriaComponent } from 'app/categoria/categoria.component';
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     LbdModule,
-    NgbPaginationModule,
-    NgbAlertModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
   declarations: [
@@ -40,7 +37,6 @@ import { CategoriaComponent } from 'app/categoria/categoria.component';
     MapsComponent,
     NotificationsComponent,
     CategoriaComponent,
-    medicamentoComponent,
     UpgradeComponent
   ]
 })

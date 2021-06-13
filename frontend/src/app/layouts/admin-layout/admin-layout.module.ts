@@ -16,14 +16,24 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import{CitasModule} from '../../../app/citas/citas.module';
+import { FormGroup, FormControl, Validators  } from '@angular/forms';
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
-
+import { FilterPipeModule } from 'ngx-filter-pipe';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
-    LbdModule,
+    LbdModule,Ng2FilterPipeModule,
+    Ng2SearchPipeModule,
+    
+    ReactiveFormsModule,
+    
+     
+
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
   declarations: [
@@ -34,7 +44,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    
   ]
 })
 

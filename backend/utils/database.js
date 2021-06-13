@@ -4,7 +4,7 @@ module.exports.database = {
     options: {
         user: 'jiif123',
         pass: '123',
-        db: 'medsalud',
+        db: 'myFirstDatabase',
         useCreateIndex: true,
         useNewUrlParser: true,
         useFindAndModify: false,

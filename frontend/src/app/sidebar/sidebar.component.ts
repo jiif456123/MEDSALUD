@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 
 declare const $: any;
 declare interface RouteInfo {
-    path: string;
-    title: string;
-    icon: string;
-    class: string;
+  path: string;
+  title: string;
+  icon: string;
+  class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/categoria', title: 'Categorias',  icon:'pe-7s-news-paper', class: '' },
-    { path: '/citas/gestionar-historia', title: 'Gestionar Historia Clinica',  icon:'pe-7s-news-paper', class: '' },
-    { path: '/citas/gestionar-citas', title: 'Gestionar Citas',  icon:'pe-7s-news-paper', class: '' },
-    { path: '/citas/gestionar-caja', title: 'Gestionar Caja',  icon:'pe-7s-news-paper', class: '' },
-    { path: '/citas/gestionar-perfil', title: 'Gestionar Perfil',  icon:'pe-7s-news-paper', class: '' },
-  ];
+  { path: '/categoria', title: 'Categorias', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/gestionar-historia', title: 'Gestionar Historia Clinica', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/gestionar-citas', title: 'Gestionar Citas', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/gestionar-caja', title: 'Gestionar Caja', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/gestionar-perfil', title: 'Gestionar Perfil', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/gestionar-especialidad', title: 'GestionarEspecialidad', icon: 'pe-7s-news-paper', class: '' },
+];
 
 @Component({
   selector: 'app-sidebar',
@@ -29,9 +30,9 @@ export class SidebarComponent implements OnInit {
     this.menuItems.push()
   }
   isMobileMenu() {
-      if ($(window).width() > 991) {
-          return false;
-      }
-      return true;
+    if ($(window).width() > 991) {
+      return false;
+    }
+    return true;
   };
 }

@@ -6,14 +6,15 @@ const cajaController = require('../caja/caja.controller')
 const movimientoController = require('../movimientoCaja/movimientoCaja.controller')
 const citaController = require('../cita/cita.controller');
 const userController = require('../user/user.controller')
+const especialidadController = require('../../citas/Especialidad/gestespecialidad.controller');
 
 router.use('/paciente', pacienteController);
 router.use('/motivo', motivoController);
 router.use('/caja', cajaController);
 router.use('/movimientoCaja', movimientoController);
-router.use('/movimientoCaja', movimientoController);
 router.use('/cita', citaController);
 router.use('/historia', historiaController);
 router.use('/user', userController);
+router.use('/gestionar-especialidad', especialidadController);
 
 module.exports = router;

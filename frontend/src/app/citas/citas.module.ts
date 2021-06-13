@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { CitasRoutingModule } from './citas-routing.module';
 import { GestionarCitasComponent } from './gestionar-citas/gestionar-citas.component';
 import { GestionarHistoriaComponent } from './gestionar-Historial Clinica/gestionar-historia.component';
@@ -11,8 +10,11 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from 'ngx-filter-pipe';
 import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-paciente.component';
 import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.component';
-
-
+import { EspecialidadRegistradoComponent } from '../../app/citas/GestEspecialidad/reg-especialidad/gest-especialidad.component';
+import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especialidad.component';
+import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     GestionarCitasComponent,
@@ -20,6 +22,9 @@ import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.componen
     GestionarPacienteComponent,
     GestionarHistoriaComponent,
     GestionarPerfilComponent,
+    EspecialidadComponent,
+    EspecialidadRegistradoComponent,
+    EspecialidadActualizadoComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +32,9 @@ import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.componen
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
-    FilterPipeModule
-  ]
+    FilterPipeModule,
+    Ng2FilterPipeModule
+  ],
+  providers: [FilterPipe]
 })
 export class CitasModule { }

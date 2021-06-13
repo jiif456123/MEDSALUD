@@ -26,16 +26,18 @@ var modelPaciente = mongoose.model('Paciente', paciente);
 
 /*
     Espcialidad Model
+   
 */
-var especialidad = new Schema({
+var especial = new Schema({
     descripcion: { type: String },
-    doctor: { type: Schema.Types.ObjectId, ref: 'Doctor' },
-    estado: { type: Number },
+    doctor: { type: String },
+    estado: { type: String },
     fechaHora: { type: Date },
+    fechaFin: { type: Date },
 }, {
     versionKey: false
 });
-var modelEspecialidad = mongoose.model('Especialidad', especialidad);
+var modelEspecialidad = mongoose.model('Especial', especial);
 
 
 /*

@@ -10,10 +10,6 @@ import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-<<<<<<< HEAD
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-=======
->>>>>>> 6639117f549a24249cf9d84a1db5a66f839d7d14
 
 @NgModule({
   imports: [

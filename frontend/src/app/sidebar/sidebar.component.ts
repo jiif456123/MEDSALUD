@@ -8,16 +8,12 @@ declare interface RouteInfo {
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
-<<<<<<< HEAD
-    { path: '/categoria', title: 'Categorias',  icon:'pe-7s-news-paper', class: '' },
-    { path: '/farmacia/gestionarMedicamentos', title: 'Gestionar Medicamento',  icon:'pe-7s-news-paper', class: '' },
-    { path: '/farmacia/consultarMovimientos', title: 'Consultar Movimientos',  icon:'pe-7s-news-paper', class: '' },
-=======
-  { path: '/categoria', title: 'Categorias', icon: 'pe-7s-news-paper', class: '' },
+
   { path: "/farmacia/gestionar-proveedor", title: 'Gestionar Proveedor', icon: 'pe-7s-news-paper', class: '' },
-  { path: '/farmacia/gestionar-medicamentos', title: 'Gestionar Medicamento', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/farmacia/gestionarMedicamentos', title: 'Gestionar Medicamento', icon: 'pe-7s-news-paper', class: '' },
   { path: '/farmacia/gestionar-categoriaM', title: 'Gestionar Categorias', icon: 'pe-7s-notebook', class: '' },
->>>>>>> 6639117f549a24249cf9d84a1db5a66f839d7d14
+  { path: '/farmacia/consultarMovimientos', title: 'Consultar Movimientos',  icon:'pe-7s-news-paper', class: '' },
+
 ];
 
 @Component({

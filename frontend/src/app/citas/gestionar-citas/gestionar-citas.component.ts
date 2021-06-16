@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -15,7 +16,8 @@ import { PacienteService } from '../services/paciente.service';
 @Component({
   selector: 'app-gestionar-citas',
   templateUrl: './gestionar-citas.component.html',
-  styleUrls: ['./gestionar-citas.component.css']
+  styleUrls: ['./gestionar-citas.component.css'],
+  providers: [DatePipe]
 })
 export class GestionarCitasComponent implements OnInit {
 
@@ -62,7 +64,8 @@ export class GestionarCitasComponent implements OnInit {
     private pacienteService: PacienteService,
     private motivoService: MotivoService,
     private citaService: CitaService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private datePipe: DatePipe
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -108,8 +111,12 @@ export class GestionarCitasComponent implements OnInit {
     this.formCitaAct.controls.nombrePaciente.setValue(row.paciente.nombre + ' ' + row.paciente.apellidoPaterno);
     this.formCitaAct.controls.especialidad.setValue(row.especialidad);
     this.formCitaAct.controls.doctor.setValue(row.doctor);
-    let fechaHora = row.fechaHora as any;
-    this.formCitaAct.controls.fechaHora.setValue(fechaHora.substring(0, fechaHora.length - 1));
+    let fechaDate = new Date(row.fechaHora)
+    let anioMes = this.datePipe.transform(fechaDate, 'yyyy-MM-dd')
+    let horaMM = this.datePipe.transform(fechaDate, 'HH:mm')
+    let fecha = anioMes + 'T' + horaMM;
+
+    this.formCitaAct.controls.fechaHora.setValue(fecha);
     this.formCitaAct.controls.estado.setValue(row.estado);
 
     this.modalCitaAct.nativeElement.click();
@@ -144,8 +151,15 @@ export class GestionarCitasComponent implements OnInit {
       Swal.fire('Advertencia', 'Seleccione un paciente', 'warning')
       return;
     }
-
     let datos = this.formCita.value;
+
+    let fecha = new Date(datos.fechaHora)
+    let fechaActual = new Date()
+
+    if (fechaActual > fecha) {
+      Swal.fire('Advertencia', 'La fecha y hora de la cita no puede ser menor que la fecha actual.', 'warning')
+      return;
+    }
 
     let query = {
       nIdPaciente: this.idPaciente,

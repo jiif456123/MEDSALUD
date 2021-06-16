@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { medicamentoComponent } from './medicamento/medicamento.component';
+import { MovimientosComponent } from './Consultar Movimientos/movimientos.component';
+import { medicamentoComponent } from './Gestionar medicamento/medicamento.component';
 
 const routes: Routes = [
   {
-    path: "gestionar-medicamentos", component: medicamentoComponent, data: { title: 'Gestionar Medicamentos' }
+    path: "gestionarMedicamentos", component: medicamentoComponent, data: { title: 'Gestionar Medicamentos' }
+   
+  },
+  {
+    path: "consultarMovimientos", component: MovimientosComponent, data: { title: 'Consultar Movimientos' }
   },
 
 ];

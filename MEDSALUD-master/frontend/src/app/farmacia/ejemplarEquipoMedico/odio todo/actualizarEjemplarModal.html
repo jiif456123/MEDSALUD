@@ -1,0 +1,174 @@
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-lg" role="document">
+            <div class="modal-content popup-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Registrar Medicamento</h3>
+                </div>
+                <div class="modal-body">
+                    <form #equipoMedicoEjemplarForm="ngForm" (ngSubmit)="addMedicamento(medicamentoForm)">
+
+                        <div class="form-group">
+                            <input type="text" name="nombre" [(ngModel)]="medicamentoService.selectedMedicamento.nombre" class="form-control" placeholder="Nombre">
+                        </div>
+
+                        <div class="form-group wrap">
+                            <form action="" class="formulario">
+                                <div class="radio">
+                                    <input type="radio" name="Disponibilidad" [(ngModel)]="medicamentoService.selectedMedicamento.nombre" id="Disponible">
+                                    <label for="Disponible">Disponible</label>
+
+                                    <input type="radio" name="Disponibilidad" id="No disponible">
+                                    <label for="No disponible">No disponible</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="contenedor-tabla">
+                            <div class="contenedor-fila">
+                                <div class="contenedor-columna">
+                                    <div class="form-group">
+                                        <input type="text" name="dosis" [(ngModel)]="medicamentoService.selectedMedicamento.dosis" class="form-control" placeholder="Dosis">
+                                    </div>
+                                </div>
+                                <div class="contenedor-columna">
+                                    <div class="form-group">
+                                        <div class="content-select select">
+                                            <select name="Presentacion">
+                                            <option value="Tabletas">Tabletas</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contenedor-tabla">
+                            <div class="contenedor-fila">
+                                <div class="contenedor-columna">
+                                    <div class="form-group">
+                                        <input type="text" name="Precio Unitario" [(ngModel)]="medicamentoService.selectedMedicamento.precioUnitario" class="form-control" placeholder="Precio Unitario">
+                                    </div>
+                                </div>
+                                <div class="contenedor-columna">
+                                    <div class="form-group">
+                                        <div class="content-select select">
+                                            <select name="Presentacion">
+                                                <option value="Tabletas">Tabletas</option>
+                                                <option value="Inyectables">Inyectables</option>
+                                                <option value="Tabletas">Tabletas</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contenedor-tabla">
+                            <div class="contenedor-fila">
+                                <div class="contenedor-columna">
+                                    <div class="form-group">
+                                        <div class="content-select select">
+                                            <select name="Categoria">
+                                                <option value="Oral">Oral</option>
+                                                <option value="Oral">Jarabe</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contenedor-columna">
+                                    <div class="form-group">
+                                        <div class="content-select select">
+                                            <select name="Ubicacion">
+                                                <option value="Pabellon A">Pabellon A</option>
+                                                <option value="Pabellon B">Pabellon B</option>
+                                                <option value="Pabellon C">Pabellon C</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contenedor-tabla">
+                            <div class="contenedor-fila">
+                                <div class="contenedor-columna">
+                                    <div class="form-group">
+                                        <input type="text" name="Stock Mínimo" [(ngModel)]="medicamentoService.selectedMedicamento.stockMin" class="form-control" placeholder="Stock Mínimo">
+                                    </div>
+                                </div>
+                                <div class="contenedor-columna">
+                                    <div class="form-group">
+                                        <input type="text" name="Stock Máximo" [(ngModel)]="medicamentoService.selectedMedicamento.stockMax" class="form-control" placeholder="Stock Máximo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control descripcion-input" name="descripcion" [(ngModel)]="medicamentoService.selectedMedicamento.descripcion" rows="5" placeholder="Descripcion"></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="btn-group">
+                                <button class="btn btn-primary button-agregar">Agregar</button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" append-to-body="true" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalModificar" aria-hidden="true" id="modalActualizar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modificar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formEjemplarActualizar" class="row">
+                    <div class="form-group">
+                        <label>Codigo</label>
+                        <input type="text" formControlName="idEquipo" class="form-control text-input">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Ubicacion</label>
+                        <input type="text" formControlName="ubicacion" class="form-control text-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <input type="text" formControlName="estado" class="form-control text-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Solicitante</label>
+                        <input type="text" formControlName="solicitante" class="form-control text-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Entrega</label>
+                        <input type="date" formControlName="fechaEntrega" class="form-control text-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Devolucion</label>
+                        <input type="date" formControlName="fechaDevolucion" class="form-control text-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">
+                    Modificar
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

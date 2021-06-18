@@ -53,10 +53,20 @@ var updateMedicamento = (id, medicamento) => {
         });
     });
 };
+
+var getByNombre = async(req, res) => {
+    
+    const medicamentos = await Medicamento.find({ nombre: { $regex: req.params.nombre } });
+
+    res.json(medicamentos);
+
+};
+
 module.exports = {
     getMedicamento,
     createMedicamento,
-    updateMedicamento
+    updateMedicamento,
+    getByNombre
 };
 
 

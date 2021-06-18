@@ -3,14 +3,17 @@
     <div class="row" style="margin: 30px 0px;">  
 
         <div class="col-md-8" >
-            <div class="row" style="display: none;">
+            <div class="row">
+               
                 <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">
-                    <input type="text" class="form-control text-input" style="box-shadow:0 1px 0 rgba(0, 0, 0, 0.15);">
-                
+                    <input type="text" name="nombre" class="form-control text-input" style="box-shadow:0 1px 0 rgba(0, 0, 0, 0.15);"
+                    #nombreControl="ngModel" [(ngModel)]="medicamentoService.selectedMedicamento1.nombre"
+                    [(ngModel)]="nombre">
                 </div>
                 <div class="col-md-4" style="padding-left: 0px; padding-top: 5px;">
-                    <button type="button" class="btn boton-table" (click)="getBusqueda(filtro)"
+                    <button type="button" class="btn boton-table" (click)="searchByNombre(nombre)"
                     ><img src="\assets\img\icons8-search-25.png" alt="x"/></button>
+               
                 </div>
             </div>
             

@@ -9,16 +9,23 @@
                     <tr>
                        
                         <th>ID</th>
+                        <th>Codigo</th>
+                        <th>Medicamento</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Motivo</th>
                         
                     </tr>
                 </thead>
                 <tbody>
                     <!-- -->
-                    <tr *ngFor="">
-                        <td style="display: none;">{{ medicamento._id }}</td>
+                    <tr *ngFor="let m of medicamentos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                         <td>1</td>
-                    
-                        
+                        <td>codigo</td>
+                        <td></td>
+                        <td>{{m.tipo}}</td>
+                        <td>{{m.fecha}}</td>
+                        <td>{{m.motivo}}</td>
                     </tr>
                 </tbody>
             </table>

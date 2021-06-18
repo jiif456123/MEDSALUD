@@ -55,6 +55,15 @@ export class MedicamentoService{
     updateMedicamento(Medicamento:Medicamento){
       return this.http.put(this.URL_API + `/${Medicamento._id}`, Medicamento);
     }  
+
+    getByNombre(nombre: string) {
+      if(nombre!=''){
+        return this.http.get<any>(this.URL_API + `/${nombre}`);
+      }else{
+        return this.http.get<any>(this.URL_API);
+      }
+   
+    }
 }
 
 /*

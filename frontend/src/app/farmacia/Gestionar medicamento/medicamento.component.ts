@@ -6,7 +6,7 @@ import { Medicamento} from 'models/medicamento.model';
 @Component({
   selector: 'app-medicamento',
   templateUrl: './medicamento.component.html',
-  styleUrls: [ './medicamento.component.css'],
+  styleUrls: [ './medicamento.component.css', '../farmacia.css'],
   providers: [MedicamentoService]
 })
 
@@ -66,5 +66,17 @@ export class medicamentoComponent implements OnInit{
         resetForm(form:NgForm){
           form.reset();
           }
+          searchByNombre(nombre :string){
+            if (nombre != "") {
+              this.medicamentoService.getByNombre(nombre).subscribe(
+                res =>{
+                  this.medicamentos= res;
+                },
+                err => {console.error(err)}
+              )
+            } else {
+              this.getMedicamento();
+            }
+          };
           
 }

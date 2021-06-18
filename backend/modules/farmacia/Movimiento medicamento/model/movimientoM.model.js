@@ -3,15 +3,10 @@ var Schema = mongoose.Schema;
 
 var movimientoMedicamento = new Schema({
     id:{type: String},
-    tipoMovimiento:{type: String},
+    tipo:{type: String},
     fecha:{type: Date},
     motivo:{type: String},
-    idMedicamento: [{
-        id: {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Medicamento'
-        }
-    }]
+    Medicamento: { type: Schema.Types.ObjectId, ref: 'Medicamento' },
 
 }, {
     versionKey: false

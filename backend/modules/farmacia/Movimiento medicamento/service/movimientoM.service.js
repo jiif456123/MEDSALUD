@@ -10,6 +10,25 @@ var getMovimientoM = () => {
         });
     });
 };
+
+var createMovimientoM = (movimientoM) => {
+
+    let objMedicamento = new movimientoMedicamento({
+        tipo: movimientoM.tipo,
+        fecha: movimientoM.fecha,
+        motivo: movimientoM.motivo,
+        Medicamento: movimientoM.Medicamento
+    });
+
+    return new Promise((resolve, reject) => {
+        objMedicamento.save((err, medicamentos) => {
+            if (err) reject(err);
+            resolve(medicamentos);
+        });
+    });
+};
+
 module.exports = {
-    getMovimientoM
+    getMovimientoM,
+    createMovimientoM
 };

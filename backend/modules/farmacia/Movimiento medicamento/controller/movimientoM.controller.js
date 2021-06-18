@@ -11,4 +11,13 @@ router.get('/', (req,res)=>{
     })
 });
 
+router.post('/', (req,res)=>{
+    let medicamento = req.body;
+    movimientoMService.createMovimientoM(medicamento).then((data)=>{
+        http.ok(req, res, code.status.Ok.code, data);
+    }).catch((error)=>{
+        http.err(req, res, code.status.Internal_Server_Error.code, error, error);
+    })
+});
+
 module.exports = router;

@@ -3,6 +3,7 @@ h1{
     color: #529ABA;
     font-size: 36px;
     font-weight: inherit;
+    margin-top: 15px;
   }
 
 .cont{
@@ -122,6 +123,7 @@ h1{
 .text-input{
     padding: 4px 12px;
     height: 30px;
+    box-shadow:0 1px 0 rgba(0, 0, 0, 0.15);
 }
 
 .modal-backdrop {
@@ -154,14 +156,6 @@ h1{
     position: relative;
     transition: all 0.25s ease;
 }
-  
-.lablel-radio{
-    position: relative;
-    margin-bottom: 30px;
-    padding: 5px 0 5px 60px;
-    display: block;
-}
-
 .label-text{
     font-weight:350;
     margin-left: 15px;}

@@ -6,7 +6,7 @@ import { MovimientoM} from 'models/movimientoM.model';
 @Component({
   selector: 'app-movimientos',
   templateUrl: './movimientos.component.html',
-  styleUrls: ['./movimientos.component.css'],
+  styleUrls: ['./movimientos.component.css' ,'../farmacia.css'],
   providers: [movimientoMService]
 })
 export class MovimientosComponent implements OnInit {

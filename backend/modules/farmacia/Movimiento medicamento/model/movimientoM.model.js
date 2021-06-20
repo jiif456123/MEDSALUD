@@ -6,7 +6,7 @@ var movimientoMedicamento = new Schema({
     tipo:{type: String},
     fecha:{type: Date},
     motivo:{type: String},
-    Medicamento: { type: Schema.Types.ObjectId, ref: 'Medicamento' },
+    Medicamento: { type: Schema.ObjectId, ref: "medicamento" },
 
 }, {
     versionKey: false

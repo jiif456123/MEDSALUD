@@ -4,8 +4,8 @@ var movimientoMedicamento = require('../model/movimientoM.model');
 var getMovimientoM = () => {
 
     return new Promise((resolve, reject) => {
-        movimientoMedicamento.find().exec((err, listaMovimientoMedicamento) => {
-            if (err) reject(err);
+        movimientoMedicamento.find().populate("Medicamento").exec((err, listaMovimientoMedicamento) => {
+            if (err) reject(err); 
             resolve(listaMovimientoMedicamento);
         });
     });

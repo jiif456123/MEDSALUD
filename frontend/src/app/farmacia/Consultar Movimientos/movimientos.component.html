@@ -3,18 +3,37 @@
     <div class="row" style="margin: 30px 0px;"> 
         <mat-tab-group>
             <mat-tab label="Medicamentos"> 
-               <div> 
+               <div class="container"> 
+                <div class="row" style="margin: 30px 0px;">  
+                    <div class="col-md-8" >
+                        <div class="row">
+                            <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">
+                                <input type="text"  class="form-control text-input">
+                            </div>
+                            <div class="col-md-4" style="padding-left: 0px; padding-top: 5px;">
+                                <button type="button" class="btn boton-table"
+                                ><img src="\assets\img\icons8-search-25.png" alt="x"/></button>
+                           
+                            </div>
+                        </div>
+                        
+                    </div>
+            
+                    <div class="col-md-4" style="padding-right: 0px;">
+                        <button type="button" class="btn btn-primary boton-registrar">
+                            Descargar Excel
+                              </button>
+                              </div>
+                </div>
                    <table class="table styled-table" style="text-align: center;">
                 <thead >
                     <tr>
-                       
                         <th>ID</th>
                         <th>Codigo</th>
                         <th>Medicamento</th>
                         <th>Tipo</th>
                         <th>Fecha</th>
                         <th>Motivo</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
@@ -22,23 +41,63 @@
                     <tr *ngFor="let m of medicamentos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                         <td>1</td>
                         <td>codigo</td>
-                        <td></td>
+                        <td> {{m.Medicamento.nombre}}</td>
                         <td>{{m.tipo}}</td>
                         <td>{{m.fecha}}</td>
                         <td>{{m.motivo}}</td>
                     </tr>
                 </tbody>
-            </table>
-        </div>
-                    
-              
-                     
+                   </table>
+               </div>
 
             </mat-tab>
             <mat-tab label="Equipos médicos"> 
-                <div class="">
+                <div class="container"> 
+                    <div class="row" style="margin: 30px 0px;">  
+                        <div class="col-md-8" >
+                            <div class="row">
+                                <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">
+                                    <input type="text"  class="form-control text-input">
+                                </div>
+                                <div class="col-md-4" style="padding-left: 0px; padding-top: 5px;">
+                                    <button type="button" class="btn boton-table"
+                                    ><img src="\assets\img\icons8-search-25.png" alt="x"/></button>
+                               
+                                </div>
+                            </div>
+                            
+                        </div>
                 
-                </div>
+                        <div class="col-md-4" style="padding-right: 0px;">
+                            <button type="button" class="btn btn-primary boton-registrar">
+                                Descargar Excel
+                                  </button>
+                                  </div>
+                    </div>
+                       <table class="table styled-table" style="text-align: center;">
+                    <thead >
+                        <tr>
+                            <th>ID</th>
+                            <th>Codigo</th>
+                            <th>Equipo Médico</th>
+                            <th>Tipo</th>
+                            <th>Fecha</th>
+                            <th>Motivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- -->
+                        <tr *ngFor=" ">
+                            <td>1</td>
+                            <td>codigo</td>
+                            <td> </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                       </table>
+                   </div>
             </mat-tab>
           </mat-tab-group> 
     </div>

@@ -12,7 +12,8 @@ export class GestionarPservice{
      contacto:null,
      email: null, 
      estado: null,
-     telefono: null
+     telefono: null,
+     laboratorio:null
   };
 
   selectProveedor2: Gestionarp={
@@ -20,8 +21,11 @@ export class GestionarPservice{
     contacto:null,
     email: null, 
     estado: null,
-    telefono: null
+    telefono: null,
+    laboratorio:null
  };
+
+
     //form
 //categoriaM: CategoriaM[]; //guardamos las categorias en un arreglo
   proveedor: Gestionarp[];

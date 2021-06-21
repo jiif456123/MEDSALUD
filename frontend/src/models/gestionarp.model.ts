@@ -4,9 +4,14 @@ export class Gestionarp{
     contacto : string;
     email:string;
     estado: string;
-    telefono:number;
+    telefono:string;
+    laboratorio:string;
 }
 
 export class Estado{
     estado:string;
+}
+
+export class Laboratorio{
+    nombreLab : string;
 }

@@ -1,5 +1,5 @@
-const proveedor = require("../proveedor/proveedor.model");
 var Proveedor = require("../proveedor/proveedor.model");
+var Laboratorio = require("../proveedor/laboratorio.model")
 const proveedorService = {};
 
 proveedorService.listarProveedores = async (req, res) => {
@@ -16,9 +16,11 @@ proveedorService.registrarProveedores = async (req, res) => {
     telefono: req.body.telefono,
     laboratorio: req.body.laboratorio,
   });
+
   await proveedor.save();
   res.json({ status: "Proveedor agregado" });
 };
+
 
 proveedorService.actualizarProveedor = async (req,res) =>{
     var _id = req.params.id;

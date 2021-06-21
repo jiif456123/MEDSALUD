@@ -9,7 +9,7 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { CategoriaComponent } from '../../categoria/categoria.component';
-import {GestionarProveedorComponent} from '../../farmacia/gestionar-proveedor/gestionarp.component';
+import { GestionarProveedorComponent } from '../../farmacia/gestionar-proveedor/gestionarp.component';
 
 
 export const AdminLayoutRoutes: Routes = [

@@ -4,6 +4,7 @@ const farmaciaController = require('../modules/farmacia/controller/farmacia.cont
 const rutas = function(app) {
     app.use('/citas', citasController)
     app.use('/farmacia', farmaciaController)
+    
 }
 
 module.exports = rutas;

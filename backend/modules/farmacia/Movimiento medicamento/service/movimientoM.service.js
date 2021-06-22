@@ -14,6 +14,7 @@ var getMovimientoM = () => {
 var createMovimientoM = (movimientoM) => {
 
     let objMedicamento = new movimientoMedicamento({
+        cantidad: movimientoM.cantidad,
         tipo: movimientoM.tipo,
         fecha: movimientoM.fecha,
         motivo: movimientoM.motivo,

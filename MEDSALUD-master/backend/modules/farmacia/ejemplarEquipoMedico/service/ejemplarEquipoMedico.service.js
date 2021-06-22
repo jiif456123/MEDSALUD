@@ -1,5 +1,5 @@
 var ejemplarEquipoMedicoModel = require('../model/ejemplarEquipoMedico.model');
-var equiposMedicosModel = require('../../equiposMedicos/model/equiposMedicos.model');
+
 //Objeto
 const ejemplarEquipoMedicoService = {};
 
@@ -39,5 +39,4 @@ ejemplarEquipoMedicoService.updateEjemplarEquipoMedico = (id, ejemplar) => {
     });
 
 };
-
 module.exports = ejemplarEquipoMedicoService;

@@ -62,6 +62,8 @@ export class RegistrarMedicoComponent implements OnInit {
         this.equiposMedicosService.mensajeCambio.next('Equipo registrado correctamente');
       });
   }
-
+  registrarEjemplares(){
+    
+  }
 
 }

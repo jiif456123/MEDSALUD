@@ -59,10 +59,10 @@
                             <label class="col-sm-4 control-label">Ubicacion</label>
                             <input type="text" formControlName="ubicacion" class="form-control text-input">
                         </div>
-                        <label class="col-sm-4 control-label">Estado</label>
-                        <div class="form-group col-sm-6">
-                            <label class="radio-inline"> <input type="radio" name="rdbEstado" value="Disponible" formControl="estado"> Disponible </label>
-                            <label class="radio-inline"> <input type="radio" name="rdbEstado"  value="NoDisponible" formControl="estado" > No Disponible </label>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Estado</label>
+                            <label>Disponible <input type="radio" name="estado" value="Disponible" formControlName="estado" checked="{{estadoD}}"></label>
+                            <label>Ocupado <input type="radio" name="estado" value="Ocupado" formControlName="estado" checked="{{estadoO}}"> </label>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Solicitante</label>

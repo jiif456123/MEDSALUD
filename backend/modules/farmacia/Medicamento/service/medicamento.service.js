@@ -11,7 +11,6 @@ var getMedicamento = () => {
         });
     });
 };
-//const es un objeto que ayuda a exporta todo las funciones creadas
 var n = 10;
 
 var createMedicamento = (medicamento) => {
@@ -28,7 +27,6 @@ var createMedicamento = (medicamento) => {
         ubicacion: medicamento.ubicacion,
         stockMin: medicamento.stockMin,
         stockMax: medicamento.stockMax,
-        stockActual: 0,
         detalles: medicamento.detalles
     });
 

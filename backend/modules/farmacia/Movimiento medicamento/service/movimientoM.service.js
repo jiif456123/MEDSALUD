@@ -10,10 +10,11 @@ var getMovimientoM = () => {
         });
     });
 };
-
+var n = 0;
 var createMovimientoM = (movimientoM) => {
 
     let objMedicamento = new movimientoMedicamento({
+        codigo: "M-0" + n++,
         cantidad: movimientoM.cantidad,
         tipo: movimientoM.tipo,
         fecha: movimientoM.fecha,

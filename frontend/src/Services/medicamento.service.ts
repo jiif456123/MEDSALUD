@@ -19,7 +19,6 @@ export class MedicamentoService{
      ubicacion:'',
      stockMin:null,
      stockMax:null,
-     stockActual:null,
      detalles:''
   };
   selectedMedicamento1: Medicamento={
@@ -35,7 +34,6 @@ export class MedicamentoService{
     ubicacion:'',
     stockMin:null,
     stockMax:null,
-    stockActual:null,
     detalles:''
  };
  

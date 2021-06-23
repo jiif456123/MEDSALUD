@@ -24,7 +24,7 @@ export class medicamentoComponent implements OnInit{
 
   constructor(public medicamentoService: MedicamentoService) { }
   medicamentos = [];
-
+  
  ngOnInit(): void {
     this.getMedicamento();
     
@@ -49,24 +49,25 @@ export class medicamentoComponent implements OnInit{
       },
       (err) => console.error(err)
       
-      );}
+  );}
 
-      getMedicamento1(medicamento:Medicamento) {
+  getMedicamento1(medicamento:Medicamento) {
         
         this.medicamentoService.selectedMedicamento1 = medicamento;
-      }
+  }
       
-      updateMedicamento(form:NgForm){
-        this.medicamentoService.updateMedicamento(form.value).subscribe(
+  updateMedicamento(form:NgForm){
+      this.medicamentoService.updateMedicamento(form.value).subscribe(
           res =>{
               this.getMedicamento();
           },
           err => console.error(err)
-        )}
-        resetForm(form:NgForm){
+  )}
+  resetForm(form:NgForm){
           form.reset();
-          }
-          searchByNombre(nombre :string){
+  }
+  
+  searchByNombre(nombre :string){
             if (nombre != "") {
               this.medicamentoService.getByNombre(nombre).subscribe(
                 res =>{
@@ -77,6 +78,5 @@ export class medicamentoComponent implements OnInit{
             } else {
               this.getMedicamento();
             }
-          };
-          
+  };       
 }

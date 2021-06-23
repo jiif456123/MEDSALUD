@@ -106,4 +106,5 @@ EjemplaEquipoMedicoComponent implements OnInit {
       this.ejemplarSeleccionado.idEquipoMedico.noDisponible += 1;   
     } 
   }
+  
 }

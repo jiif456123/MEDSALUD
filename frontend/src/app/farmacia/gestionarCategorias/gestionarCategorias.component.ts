@@ -5,17 +5,14 @@ import {Categoria} from '../../../models/gestionarCategoria.model';
 import { element } from 'protractor';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 @Component({
   selector: 'app-categoriaM',
   templateUrl: './gestionarCategorias.component.html',
-  styleUrls: [ './gestionarCategorias.component.css'],
+  styleUrls: [ './gestionarCategorias.component.css', '../farmacia.css'],
   providers: [GestionarCategoriaService]
 })
 
-
 export class GestionarCategoriaComponent implements OnInit {
-  
 
 public page;
 public pageSize=7;

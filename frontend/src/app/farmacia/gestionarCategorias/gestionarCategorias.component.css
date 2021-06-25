@@ -53,6 +53,8 @@ table {
     width: 15px;
     height: 15px;
     border-radius: 15px;
+    align-content: center;
+
 }
 
 .cir0 {
@@ -60,6 +62,7 @@ table {
     width: 15px;
     height: 15px;
     border-radius: 15px;
+    align-content: center;
 }
 
 .estados-centrados {

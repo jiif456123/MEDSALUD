@@ -1,132 +1,133 @@
-<h1>Gestionar Proveedores</h1>
-
-<div class="container-fluid top-bar">
-  <button type="button" class="btn boton-registrar" data-backdrop="false" data-toggle="modal"
-    data-target="#exampleModalCenter">
-    Registrar Proveedor <i class="fa fa-plus-square fa-2x"></i>
-  </button>
+<div class="container cont">
+  <h1>Gestionar Proveedores</h1>
+  <div class="container-fluid top-bar">
+    <button type="button" class="btn btn-primary" data-backdrop="false" data-toggle="modal"
+      data-target="#exampleModalCenter">Registrar Proveedor</button>
+  </div>
+  
+  <div class="table styled-table" style="text-align: center;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Contacto</th>
+          <th>Email</th>
+          <th>Telefono</th>
+          <th>Estado</th>
+           <th>Laboratorio</th>
+          <th>Editar</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor="let proveedor of gestionarpservice.proveedor | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;">
+          <td>{{ proveedor.nombre }}</td>
+          <td>{{proveedor.contacto}}</td>
+          <td>{{ proveedor.email }}</td>
+          <td>{{ proveedor.telefono }}</td>
+          <td>{{ proveedor.estado }}</td>
+          <td>{{proveedor.laboratorio}}        </td>
+  
+          <td>
+            <button class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#actualizar"
+              (click)="getProveedo(proveedor)"><img src="\assets\img\icons8-update-left-rotation-30.png" alt="x"/>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="float: right;">
+    <ngb-pagination  [pageSize]="pageSize" [collectionSize]="(gestionarpservice.proveedor).length" [(page)]="page">
+    </ngb-pagination>
+</div>
 </div>
 
-<div class="container-fluid contenido m-0">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Contacto</th>
-        <th>Email</th>
-        <th>Telefono</th>
-        <th>Estado</th>
-         <th>Laboratorio</th>
-        <th>Editar</th>
-      </tr>
-    </thead>
+<!-- MODAL ACTUALIZAR -->
+  
+<div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+aria-hidden="true">
+<div class="modal-backdrop display-none">
+  <div class="modal-dialog vertical-align-center modal-lg" role="document">
+    <div class="modal-content popup-content">
+      <div class="modal-header">
+        <h3 class="modal-title text-center text-registrar">
+          Actualizar Proveedor
+        </h3>
+      </div>
+      <div class="modal-body">
+        <form autocomplete="off" #proveedorForm="ngForm" id="form-proveedor" name="form-proveedor">
+          <input autocomplete="false" name="hidden" type="text" style="display: none" />
 
-    <tbody>
-      <tr *ngFor="let proveedor of gestionarpservice.proveedor">
-        <td>{{ proveedor.nombre }}</td>
-        <td>{{proveedor.contacto}}</td>
-        <td>{{ proveedor.email }}</td>
-        <td>{{ proveedor.telefono }}</td>
-        <td>{{ proveedor.estado }}</td>
-        <td>{{proveedor.laboratorio}}        </td>
+          <input name="_id" type="hidden" [(ngModel)]="gestionarpservice.selectProveedor2._id" />
 
-        
-        <td>
-          <button class="btn btn-info" data-backdrop="false" data-toggle="modal" data-target="#actualizar"
-            (click)="getProveedo(proveedor)">
-            <i class="fa fa-edit fa-2x"></i>
-          </button>
-          <!-- MODAL ACTUALIZAR -->
+          <div class="form-group">
+            <label> Nombre</label>
+            <input class="input-text" type="text" id="nombre" name="nombre" ngModel required [(ngModel)]="
+                gestionarpservice.selectProveedor2.nombre
+              " class="form-control" placeholder="Nombre" />
 
-          <div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-            aria-hidden="true">
-            <div class="modal-backdrop display-none">
-              <div class="modal-dialog vertical-align-center modal-lg" role="document">
-                <div class="modal-content popup-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title text-center text-registrar">
-                      Actualizar Proveedor
-                    </h3>
-                  </div>
-                  <div class="modal-body">
-                    <form autocomplete="off" #proveedorForm="ngForm" id="form-proveedor" name="form-proveedor">
-                      <input autocomplete="false" name="hidden" type="text" style="display: none" />
+          </div>
+          <div class="form-group">
+            <label> Contacto</label>
+            <input class="input-text" type="text" id="contacto" name="contacto" ngModel required
+              [(ngModel)]="
+                gestionarpservice.selectProveedor2.contacto
+              " class="form-control" placeholder="Contacto" />
 
-                      <input name="_id" type="hidden" [(ngModel)]="gestionarpservice.selectProveedor2._id" />
+          </div>
+          <div class="form-group">
+            <label> Email</label>
+            <input class="input-text" type="email" name="email" ngModel required email="true"
+              [(ngModel)]="gestionarpservice.selectProveedor2.email" class="form-control"
+              placeholder="E-mail" required />
+          </div>
 
-                      <div class="form-group">
-                        <label> Nombre</label>
-                        <input class="input-text" type="text" id="nombre" name="nombre" ngModel required [(ngModel)]="
-                            gestionarpservice.selectProveedor2.nombre
-                          " class="form-control" placeholder="Nombre" />
+          <div class="form-group">
+            <select name="estado" ngModel required [(ngModel)]="
+                gestionarpservice.selectProveedor2.estado
+              ">
+              <option *ngFor="let estado of estados" [value]="estado.estado" [selected]="estado">
+                {{ estado.estado }}
+              </option>
+            </select>
+          </div>
 
-                      </div>
-                      <div class="form-group">
-                        <label> Contacto</label>
-                        <input class="input-text" type="text" id="contacto" name="contacto" ngModel required
-                          [(ngModel)]="
-                            gestionarpservice.selectProveedor2.contacto
-                          " class="form-control" placeholder="Contacto" />
+          <div class="form-group">
+            <label> Telefono</label>
+            <input type="text" name="telefono" ngModel maxlength="9" required [(ngModel)]="
+                gestionarpservice.selectProveedor2.telefono
+              " class="form-control" placeholder="Telefono" />
 
-                      </div>
-                      <div class="form-group">
-                        <label> Email</label>
-                        <input class="input-text" type="email" name="email" ngModel required email="true"
-                          [(ngModel)]="gestionarpservice.selectProveedor2.email" class="form-control"
-                          placeholder="E-mail" required />
-                      </div>
-
-                      <div class="form-group">
-                        <select name="estado" ngModel required [(ngModel)]="
-                            gestionarpservice.selectProveedor2.estado
-                          ">
-                          <option *ngFor="let estado of estados" [value]="estado.estado" [selected]="estado">
-                            {{ estado.estado }}
-                          </option>
-                        </select>
-                      </div>
-
-                      <div class="form-group">
-                        <label> Telefono</label>
-                        <input type="text" name="telefono" ngModel maxlength="9" required [(ngModel)]="
-                            gestionarpservice.selectProveedor2.telefono
-                          " class="form-control" placeholder="Telefono" />
-
-                      </div>
-                      <div class="contenedor">
-                        <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="error2 == true">
-                          <p class="alertFont">¡Existen campos incorrectos!</p>
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"
-                            (click)="cerrarAlerta()">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                      </div>
-
-                      <div class="modal-footer">
-                        <div class="btn-group agregar">
-                          <button class="btn btn-success button agregar" (click)="validar2(proveedorForm)">
-                            Aceptar
-                          </button>
-                        </div>
-                        <div class="btn-group cancelar">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetForm()">
-                            Cancelar
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
+          </div>
+          <div class="contenedor">
+            <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="error2 == true">
+              <p class="alertFont">¡Existen campos incorrectos!</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                (click)="cerrarAlerta()">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
+          <div class="modal-footer">
+            <div class="btn-group agregar">
+              <button class="btn btn-success button agregar" (click)="validar2(proveedorForm)">
+                Aceptar
+              </button>
+            </div>
+            <div class="btn-group cancelar">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetForm()">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 <!-- Modal Registrar -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">

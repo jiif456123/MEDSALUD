@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import {GestionarPservice } from 'Services/gestionarp.service';
-import { NgbDate, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {Gestionarp,Estado} from '../../../models/gestionarp.model';
 
 @Component({
   selector: 'app-gestionar-citas',
   templateUrl: './gestionarp.component.html',
-  styleUrls: ['./gestionarp.component.css'],
+  styleUrls: ['./gestionarp.component.css','../farmacia.css'],
   providers: [GestionarPservice]
 })
 
-
-
 export class GestionarProveedorComponent implements OnInit {
+
+  public pageSize = 7;
+  public page;
   estados : Estado[]=[
     {
       estado:'Disponible' 
@@ -36,22 +36,23 @@ export class GestionarProveedorComponent implements OnInit {
  telefono_final = "";
  telefono_auxi = "";
 
-
   log(x){console.log(x)}
 
   ngOnInit(): void {
     this.getProveedor();
   }
 
- 
   getProveedor() {
     this.gestionarpservice.getProveedor().subscribe(
       res =>{
         this.gestionarpservice.proveedor= res;
+        this.page=1;
       },
       err => console.error(err)
     )
+    
   }
+ 
 
   radioChangeHandler(event: any){
     this.selectDispo = event.target.value;
@@ -72,7 +73,7 @@ export class GestionarProveedorComponent implements OnInit {
           this.getProveedor();
       },
       err => console.error(err)
-    )
+      )
     }
 
     selectChangeHandler(event:any){
@@ -80,7 +81,6 @@ export class GestionarProveedorComponent implements OnInit {
       console.log( this.codigo_ciudad );
       this.valorCiudad = this.codigo_ciudad;
     }
-
 
     getTelefono(event:any){
       this.telefono_auxi = event.target.value;
@@ -92,8 +92,6 @@ export class GestionarProveedorComponent implements OnInit {
       this.gestionarpservice.selectProveedor.telefono = this.telefono_final;
 
     }
-    
-    
 
     getProveedo(proveedor:Gestionarp) {
       this.gestionarpservice.selectProveedor2 = proveedor;

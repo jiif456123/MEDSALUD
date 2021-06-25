@@ -13,7 +13,8 @@ export const ROUTES: RouteInfo[] = [
   { path: '/farmacia/gestionarMedicamentos', title: 'Gestionar Medicamento', icon: 'pe-7s-news-paper', class: '' },
   { path: '/farmacia/gestionar-categoriaM', title: 'Gestionar Categorias', icon: 'pe-7s-notebook', class: '' },
   { path: '/farmacia/consultarMovimientos', title: 'Consultar Movimientos',  icon:'pe-7s-news-paper', class: '' },
-
+  { path: '/farmacia/gestionar-categoriaM', title: 'Gestionar Categorias',  icon:'pe-7s-notebook', class: '' },
+  { path: '/farmacia/gestionar-ordenCompra', title: 'Gestionar Orden De Compra',  icon:'pe-7s-notebook', class: '' },
 ];
 
 @Component({

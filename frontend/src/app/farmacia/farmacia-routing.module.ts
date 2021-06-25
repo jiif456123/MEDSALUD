@@ -4,6 +4,8 @@ import { MovimientosComponent } from './Consultar Movimientos/movimientos.compon
 import { medicamentoComponent } from './Gestionar medicamento/medicamento.component';
 import { GestionarProveedorComponent } from './gestionar-proveedor/gestionarp.component';
 import { GestionarCategoriaComponent } from '../farmacia/gestionarCategorias/gestionarCategorias.component';
+import { GestionarOrdenCompraComponent } from '../farmacia/gestionarOrdenCompra/gestionarOrdencompra.component';
+
 
 const routes: Routes = [
   {
@@ -21,6 +23,9 @@ const routes: Routes = [
   },
   {
     path: "gestionar-categoriaM", component: GestionarCategoriaComponent, data: { title: 'Gestionar Categoria' }
+  },
+  {
+    path: "gestionar-ordenCompra", component: GestionarOrdenCompraComponent, data: { title: 'Gestionar OrdenCompra' }
   }
 ];
 

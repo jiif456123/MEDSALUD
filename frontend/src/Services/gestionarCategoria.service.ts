@@ -36,7 +36,10 @@ selectedCategoria4: Categoria={
   readonly URL_API= "http://localhost:3000/farmacia/gestionarCategorias/";
   readonly URL_APIget= "http://localhost:3000/farmacia/gestionarCategorias/getNombre";
   readonly URL_APIgetA= "http://localhost:3000/farmacia/gestionarCategorias/getNombreA";
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient){
+
+
+  }
 
   //let categoria of gestionarCategoriaService.categorias
 

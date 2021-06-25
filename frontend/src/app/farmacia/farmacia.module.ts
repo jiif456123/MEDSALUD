@@ -8,14 +8,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MovimientosComponent } from './Consultar Movimientos/movimientos.component';
 import { GestionarCategoriaComponent } from '../farmacia/gestionarCategorias/gestionarCategorias.component';
 import { GestionarProveedorComponent } from './gestionar-proveedor/gestionarp.component';
+import { GestionarOrdenCompraComponent } from '../farmacia/gestionarOrdenCompra/gestionarOrdencompra.component';
 
 @NgModule({
   declarations: [
     medicamentoComponent,
     MovimientosComponent,
     GestionarProveedorComponent,
-    GestionarCategoriaComponent
-  ],
+    GestionarCategoriaComponent,
+    GestionarCategoriaComponent,
+    GestionarOrdenCompraComponent],
+
   imports: [
     FormsModule,
     CommonModule,
@@ -28,6 +31,8 @@ import { GestionarProveedorComponent } from './gestionar-proveedor/gestionarp.co
     ReactiveFormsModule,
     MatTabsModule,
     ReactiveFormsModule
-  ]
+
+  ],
+
 })
 export class FarmaciaModule { }

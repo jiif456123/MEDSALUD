@@ -7,6 +7,8 @@ const proveedorController = require('../proveedor/proveedor.controller')
 const medicamentoController = require('../medicamento/controller/medicamento.controller')
 
 
+router.use('/medicamento', medicamentoController);
+router.use('/proveedor', proveedorController);
 router.use('/gestionarCategorias', gestionarCategoriasController);
 router.use('/gestionarOrdenCompra', gestionarOrdenCompraController);
 router.use('/proveedor', proveedorController);

@@ -14,8 +14,11 @@ import { GestionarOrdenCompraComponent } from '../farmacia/gestionarOrdenCompra/
     
   ],
   imports: [
+    FormsModule,
     CommonModule,
     FarmaciaRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgbPaginationModule,
     NgbAlertModule,
     FormsModule,

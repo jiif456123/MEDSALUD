@@ -16,5 +16,8 @@ router.put('/:id', gestionarCategoriaService.editCategoria);
 
 router.delete('/:id', gestionarCategoriaService.deleteCategoria);
 
+router.delete('/:id', gestionarCategoriaService.deleteCategoria);
+
+
 module.exports = router;
 //gestionarCategoriass

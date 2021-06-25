@@ -22,20 +22,28 @@ export class GestionarProveedorComponent implements OnInit {
     }
   ]
 
-  constructor(public gestionarpservice:GestionarPservice) {
+  filter : 'all'|'active'|'donde'='all';
 
+  constructor(public gestionarpservice:GestionarPservice) {
    }
   selectDispo='';
   public error = false;
   public error2 = false;
   public estado ="No Disponible";
   public estado2 ="Disponible";
+  codigo_ciudad = '';
+ public valorCiudad = '';
+ telefono_final = "";
+ telefono_auxi = "";
+
 
   log(x){console.log(x)}
 
   ngOnInit(): void {
     this.getProveedor();
   }
+
+ 
   getProveedor() {
     this.gestionarpservice.getProveedor().subscribe(
       res =>{
@@ -66,6 +74,26 @@ export class GestionarProveedorComponent implements OnInit {
       err => console.error(err)
     )
     }
+
+    selectChangeHandler(event:any){
+      this.codigo_ciudad = event.target.value;
+      console.log( this.codigo_ciudad );
+      this.valorCiudad = this.codigo_ciudad;
+    }
+
+
+    getTelefono(event:any){
+      this.telefono_auxi = event.target.value;
+    }
+
+    selectChangeHandler2(event:any){
+      this.telefono_final = this.codigo_ciudad + this.telefono_auxi;
+      console.log(  this.telefono_final );
+      this.gestionarpservice.selectProveedor.telefono = this.telefono_final;
+
+    }
+    
+    
 
     getProveedo(proveedor:Gestionarp) {
       this.gestionarpservice.selectProveedor2 = proveedor;

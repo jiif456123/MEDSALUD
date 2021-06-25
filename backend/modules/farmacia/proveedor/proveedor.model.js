@@ -4,8 +4,8 @@ var Schema = new mongoose.Schema({
     contacto: String,
     email:String,
     estado: String,
-    telefono:Number,
-    laboratorio:String,
+    laboratorio : String,
+    telefono:String,
 }, {
     versionKey: false
 });

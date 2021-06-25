@@ -169,7 +169,7 @@ h1 {
 .formulario > div {
   padding: 20px 0;
 }
-#exampleModalCenter , #laboratorios ,#actualizar {
+#exampleModalCenter , #laboratorios ,#actualizar,#laboratorio {
   display: none;
 }
 

@@ -21,8 +21,8 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { GestionarProveedorComponent } from '../../farmacia/gestionar-proveedor/gestionarp.component';
-import { CategoriaComponent } from 'app/categoria/categoria.component';
+//import { GestionarProveedorComponent } from '../../farmacia/gestionar-proveedor/gestionarp.component';
+//import { CategoriaComponent } from 'app/categoria/categoria.component';
 
 
 @NgModule({
@@ -44,8 +44,8 @@ import { CategoriaComponent } from 'app/categoria/categoria.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent,
-    CategoriaComponent,
+    UpgradeComponent
+    //CategoriaComponent,
   ]
 })
 

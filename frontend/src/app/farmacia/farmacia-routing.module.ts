@@ -5,9 +5,25 @@ import { medicamentoComponent } from './Gestionar medicamento/medicamento.compon
 import { GestionarProveedorComponent } from './gestionar-proveedor/gestionarp.component';
 import { GestionarCategoriaComponent } from '../farmacia/gestionarCategorias/gestionarCategorias.component';
 import { GestionarOrdenCompraComponent } from '../farmacia/gestionarOrdenCompra/gestionarOrdencompra.component';
+import {RegistrarMedicoComponent} from '../farmacia/equiposMedicos/registrarEquipoMedico/registrarEquipoMedico';
+import {EquiposMedicosComponent} from './equiposMedicos/ListarEquipoMedico/equiposMedicos.component';
+import {ActualizarEMComponent} from '../farmacia/equiposMedicos/actualizarEquipoMedico/actualizarEquipoMedico';
+import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoMedico/ejemplaresEquipoMedico';
 
 
 const routes: Routes = [
+  {
+    path: 'EquipoMedico', component: EquiposMedicosComponent,data: {title: 'Gestionar Equipo Medico'}
+  },
+  {
+    path:'RegistrarEquipoMedico',component: RegistrarMedicoComponent
+  },
+  {
+    path:'ActualizarEquipoMedico/:id',component: ActualizarEMComponent
+  },
+  {
+    path:'EjemplaresEquipoMedico/:id',component: EjemplaEquipoMedicoComponent
+  },
   {
     path: "gestionarMedicamentos", component: medicamentoComponent, data: { title: 'Gestionar Medicamentos' }
    

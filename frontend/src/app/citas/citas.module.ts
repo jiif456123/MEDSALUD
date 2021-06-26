@@ -9,6 +9,7 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { GestionarPerfilComponent } from 'app/farmacia/Gestionar Perfiles/gestionar-perfiles.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from 'ngx-filter-pipe';
+
 @NgModule({
   declarations: [GestionarCitasComponent,GestionarHistoriaComponent, GestionarPerfilComponent],
   imports: [

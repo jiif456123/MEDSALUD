@@ -1,0 +1,112 @@
+<div class=" container cont">
+    <h1>Consultar Movimientos</h1>
+    <div class="row" style="margin: 30px 0px;"> 
+        <mat-tab-group>
+            <mat-tab label="Medicamentos"> 
+               <div class="container"> 
+                <div class="row" style="margin: 30px 0px;">  
+                    <div class="col-md-8" style="padding-left: 0px;">
+                        <div class="col-5" style="padding-left: 0px;">
+                            <div class="input-group">
+                                <input type="text" name="nombre" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary">Buscar</button>
+                                    </span>
+                                </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-4" style="padding-right: 0px;">
+                        <button type="button" class="btn btn-primary boton-registrar">
+                            Descargar Excel
+                              </button>
+                              </div>
+                </div>
+                   <table class="table styled-table" style="text-align: center;">
+                <thead >
+                    <tr>
+                        <th>ID</th>
+                        <th>Codigo</th>
+                        <th>Medicamento</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Motivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- -->
+                    <tr *ngFor="let m of medicamentos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                        <td>1</td>
+                        <td>codigo</td>
+                        <td> {{m.Medicamento.nombre}}</td>
+                        <td>{{m.tipo}}</td>
+                        <td>{{m.fecha}}</td>
+                        <td>{{m.motivo}}</td>
+                    </tr>
+                </tbody>
+                   </table>
+                   <div style="float: right;">
+                    <ngb-pagination  [pageSize]="pageSize" [collectionSize]="medicamentos.length" [(page)]="page">
+                    </ngb-pagination>
+                </div>
+               </div>
+
+            </mat-tab>
+            <mat-tab label="Equipos médicos"> 
+                <div class="container"> 
+                    <div class="row" style="margin: 30px 0px;">  
+                        <div class="col-md-8" style="padding-left: 0px;">
+                            <div class="col-5" style="padding-left: 0px;">
+                                <div class="input-group">
+                                    <input type="text" name="nombre" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary">Buscar</button>
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="padding-right: 0px;">
+                            <button type="button" class="btn btn-primary boton-registrar">
+                                Descargar Excel
+                                  </button>
+                                  </div>
+                    </div>
+                       <table class="table styled-table" style="text-align: center;">
+                    <thead >
+                        <tr>
+                            <th>ID</th>
+                            <th>Codigo</th>
+                            <th>Equipo Médico</th>
+                            <th>Ubicacion</th>
+                            <th>Estado</th>
+                            <th>Fecha entrega</th>
+                            <th>Fecha devolucion</th>
+                            <th>Solicitante</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- -->
+                        <tr *ngFor="let e of equiposM | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <td>1</td>
+                            <td>codigo</td>
+                            <td>{{e.idEquipoMedico.nombre}}</td>
+                            <td>{{e.ubicacion}}</td>
+                            <td>{{e.estado}}</td>
+                            <td>{{e.fechaEntrega}}</td>
+                            <td>{{e.fechaDevolucion}}</td>
+                            <td>{{e.solicitante}}</td>
+                        </tr>
+                    </tbody>
+                       </table>
+                       <div style="float: right;">
+                        <ngb-pagination  [pageSize]="pageSize" [collectionSize]="medicamentos.length" [(page)]="page">
+                        </ngb-pagination>
+                    </div>
+                   </div>
+            </mat-tab>
+          </mat-tab-group> 
+    </div>
+    
+</div>
+
+

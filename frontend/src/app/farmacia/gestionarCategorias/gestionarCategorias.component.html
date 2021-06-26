@@ -1,0 +1,363 @@
+<!-- TABLE -->
+<div class="container cont">
+    <h1> Gestionar Categorias</h1>
+    <div class="row" style="margin: 40px 0px;">
+        <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">                    
+            <form #categoriasFormBuscar="ngForm" (ngSubmit)="searchByNombre(categoriasFormBuscar)">
+            <!--Obtengo del input de  la paginda el valor-->
+            <div class="col-5" style="padding-left: 0px;">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar por Nombre" name="nombre" #nombreControl="ngModel" [(ngModel)]="gestionarCategoriaService.selectedCategoria3.nombre">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary " (click)="searchByNombre(categoriasFormBuscar)">Buscar</button>
+                    </span>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="col-md-4" style="padding-left: 0px; padding-top: 5px;">
+            <button type="button" class="btn btn-primary boton-registrar" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
+                Registrar Categoria
+            </button>
+        </div>
+    </div>
+    
+    <table class="table styled-table" style="text-align: center;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let categoria of gestionarCategoriaService.categorias| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;">
+
+                <td class="count"></td>
+                <td style="text-align: center;">{{ categoria.nombre }}</td>
+                <ng-container *ngIf="categoria.estado==1">
+                    <td>
+                        <button type="button" class="btn boton-table">
+                            <img src="\assets\img\icons8-xbox-x-30.png" alt="x"/></button>
+                    </td>
+                    <!--<td>{{ categoria.estado }}-->
+                </ng-container>
+                <ng-container *ngIf="categoria.estado==0">
+                    <td>
+                        <button type="button" class="btn boton-table">
+                            <img src="\assets\img\icons8-de-acuerdo-30.png" alt="x"/></button>
+                    </td>
+                    <!--<td>{{ categoria.estado }}-->
+                </ng-container>
+                <td>
+                    <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" (click)="getCategoria(categoria)">
+                        <img src="\assets\img\icons8-eye-30.png" alt="x"/></button>
+                
+                    <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#actualizarModalCenter" (click)="getCategoria(categoria)">
+                        <img src="\assets\img\icons8-update-left-rotation-30.png" alt="x"/></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="float: right;">
+        <ngb-pagination [pageSize]="pageSize" [collectionSize]="gestionarCategoriaService.categorias.length" [(page)]="page">
+        </ngb-pagination>
+    </div>
+</div>
+
+<!--JavaScript-->
+<!-- Button trigger modal -->
+<!-- Modal REGISTRAR-->
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Registrar Categorias</h3>
+                </div>
+                <!-- Modal body Registrar-->
+                <div class="modal-body">
+                    <form #categoriasRForm="ngForm">
+                        <div class="form-group">
+                            <input type="text" name="nombre" [(ngModel)]="gestionarCategoriaService.selectedCategoria.nombre" class="form-control" placeholder="Nombre" ngModel #nombre="ngModel" (ngModelChange)="onNombreChange($event)" required pattern="[a-zA-Z ]*" minlength="4"
+                                maxlength="35">
+
+                            <div *ngIf="nombre.hasError('pattern')">
+                                <p style="color: red;">*El nombre de la categoria solo son letras</p>
+                            </div>
+                            <div *ngIf="nombre.hasError('required')">
+                                <p style="color: red;">*Campo Requerido</p>
+                            </div>
+                            <div *ngIf="nombre.hasError('minlength')">
+                                <p style="color: red;">*Tamaño minimo 4</p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="form-control descripcion-input" name="descripcion" [(ngModel)]="gestionarCategoriaService.selectedCategoria.descripcion" rows="5" placeholder="Descripcion" #descripcion="ngModel" #titleRef required minlength="4" maxlength="350"></textarea>
+                            <span style="float: right; margin-bottom: -10px;">{{titleRef.value.length}}/350</span>
+
+                            <div *ngIf="descripcion.hasError('required')">
+                                <p style="color: red;">*Campo Requerido</p>
+                            </div>
+                            <div *ngIf="descripcion.hasError('minlength')">
+                                <p style="color: red;">*Tamaño minimo 4</p>
+                            </div>
+                            <div *ngIf="descripcion.hasError('maxlength')">
+                                <p style="color: red;">*Tamaño minimo 4</p>
+                            </div>
+                        </div>
+
+                        <!-- Aletar Excepcion-->
+                        <div class="contenedor">
+                            <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="isError==true ">
+
+                                <p class="alertFont">¡Hay un error con el formato del formulario!</p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onCloseAlert()">
+                                    <span aria-hidden="true">&times;</span>
+                                   </button>
+                            </div>
+                        </div>
+
+                        <!-- Aletar Excepcion-->
+                        <div class="contenedor">
+                            <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="isError2==true">
+
+                                <p class="alertFont">¡Ya hay una categoria con ese nombre!</p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onCloseAlert()">
+                                    <span aria-hidden="true">&times;</span>
+                                   </button>
+                            </div>
+                        </div>
+                        <!-- Footer Modal Registrar-->
+                        <div class="modal-footer">
+
+                            <div class="btn-group">
+                                <div *ngIf="isError==false && isError2==false">
+                                    <button class="btn btn-primary button-agregar" (click)="searchByNombreA(categoriasRForm)" (click)="getCategorias()" (click)="onCloseAlert()">Agregar</button>
+
+                                </div>
+
+
+                                <button class="btn btn-danger button-agregar2" id='agregarBoton' (click)="addCategoriaM(categoriasRForm)" (click)="resetForm(categoriasRForm)" (click)="getCategorias()" data-dismiss="modal">Agregar</button>
+
+
+
+                            </div>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary" (click)="getCategorias()" (click)="onCloseAlert() " data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                        <!--  <input type="text" class="form-control descripcion-input" placeholder="Descripcion">-->
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal DETALLES-->
+<div class="modal fade" id="detallesModalCenter" tabindex="-1" role="dialog" aria-labelledby="detallesModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Detalles</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="nombre2" [(ngModel)]="gestionarCategoriaService.selectedCategoria2.nombre" class="form-control" placeholder="Nombre" readonly>
+                    </div>
+
+                    <div class="estados-centrados">
+                        Estado:
+                        <ng-container *ngIf="gestionarCategoriaService.selectedCategoria2.estado==1">
+                            <div class="cir1D"> </div>
+                        </ng-container>
+                        <ng-container *ngIf="gestionarCategoriaService.selectedCategoria2.estado==0">
+                            <div class="cir0D"></div>
+                        </ng-container>
+                    </div>
+
+
+                    <div class="form-group">
+                        <textarea class="form-control descripcion-input" name="descripcion2" [(ngModel)]="gestionarCategoriaService.selectedCategoria2.descripcion" rows="5" placeholder="Descripcion" readonly></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group">
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                    </div>
+
+                    <!--  <input type="text" class="form-control descripcion-input" placeholder="Descripcion">-->
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Modal Actualizar-->
+<div class="modal fade" id="actualizarModalCenter" tabindex="-1" role="dialog" aria-labelledby="actualizarCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Actualizar</h3>
+                </div>
+                <div class="modal-body">
+                    <form #categoriasRFormA="ngForm">
+                        <input type="hidden" name="_id" [(ngModel)]="gestionarCategoriaService.selectedCategoria2._id">
+                        <input type="hidden" name="nombreE" [(ngModel)]="gestionarCategoriaService.selectedCategoria4.nombre" class="form-control">
+
+                        <input type="hidden" name="estado2" [(ngModel)]="gestionarCategoriaService.selectedCategoria2.estado" class="form-control">
+                        <div class="form-group">
+                            <input type="text" name="nombre" [(ngModel)]="gestionarCategoriaService.selectedCategoria2.nombre" class="form-control" placeholder="Nombre" #nombreA="ngModel" required pattern="[a-zA-Z ]*" minlength="4" maxlength="35">
+                            <div *ngIf="nombreA.hasError('pattern')">
+                                <p style="color: red;">*El nombre de la categoria solo son letras</p>
+                            </div>
+                            <div *ngIf="nombreA.hasError('required')">
+                                <p style="color: red;">*Campo Requerido</p>
+                            </div>
+                            <div *ngIf="nombreA.hasError('minlength')">
+                                <p style="color: red;">*Tamaño minimo 4</p>
+                            </div>
+                        </div>
+
+                        <div class="estados-centrados">
+
+
+
+                            <ng-container *ngIf="gestionarCategoriaService.selectedCategoria2.estado==0">
+
+
+                                <button id="boton-verde" style="border:none;  background-color: transparent;" (click)=" cambiarEstado(categoriasRFormA) "><div class="cirEmpty "></div></button>Disponible
+                                <button id="boton-rojo" style="border:none; background-color: transparent" (click)="cambiarEstado2(categoriasRFormA)"><div class="cir0D"></div></button> No disponible
+
+                            </ng-container>
+                            <ng-container *ngIf="gestionarCategoriaService.selectedCategoria2.estado==1">
+
+                                <button id="boton-verde" style="border:none;  background-color: transparent;" (click)=" cambiarEstado(categoriasRFormA) "><div class="cir1D "></div></button> Disponible
+
+                                <button id="boton-rojo" style="border:none; background-color: transparent" (click)="cambiarEstado2(categoriasRFormA)"><div class="cirEmpty"></div></button> No disponible
+
+                            </ng-container>
+                            <input type="hidden" name="estado" [(ngModel)]="gestionarCategoriaService.selectedCategoria2.estado" class="form-control">
+
+
+
+                        </div>
+
+
+
+
+
+
+                        <div class="form-group ">
+                            <textarea class="form-control descripcion-input " name="descripcion" [(ngModel)]="gestionarCategoriaService.selectedCategoria2.descripcion" rows="5 " placeholder="Descripcion " #descripcionA="ngModel" #titleRefA required minlength="4" maxlength="350"></textarea>
+                            <span style="float: right; margin-bottom: -10px;">{{titleRefA.value.length}}/350</span>
+                            <div *ngIf="descripcionA.hasError('required')">
+                                <p style="color: red;">*Campo Requerido</p>
+                            </div>
+                            <div *ngIf="descripcionA.hasError('minlength')">
+                                <p style="color: red;">*Tamaño minimo 4</p>
+                            </div>
+                            <div *ngIf="descripcionA.hasError('maxlength')">
+                                <p style="color: red;">*Tamaño minimo 4</p>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Aletar Excepcion-->
+                        <div class="contenedor ">
+                            <div class="alert alert-danger alert-dismissible " role="alert " *ngIf="isError==true ">
+
+                                <p class="alertFont ">¡Debes completar todos los campos!</p>
+                                <button type="button " class="close " data-dismiss="alert " aria-label="Close " (click)="onCloseAlert() " (click)="getCategorias() ">
+                                    <span aria-hidden="true ">&times;</span>
+                                   </button>
+                            </div>
+                        </div>
+                        <!-- Aletar Excepcion-->
+                        <div class="contenedor ">
+                            <div class="alert alert-danger alert-dismissible " role="alert " *ngIf="isError2==true ">
+
+                                <p class="alertFont ">¡Ya hay una categoria con ese nombre!</p>
+                                <button type="button " class="close " data-dismiss="alert " aria-label="Close " (click)="onCloseAlert() " (click)="getCategorias()">
+                                    <span aria-hidden="true ">&times;</span>
+                                   </button>
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+
+                            <div class="btn-group ">
+                                <div *ngIf="isError==false && isError2==false ">
+                                    <button class="btn btn-primary button-agregar " (click)="searchByNombreU(categoriasRFormA) " (click)="getCategorias()" (click)="onCloseAlert() ">Actualizar</button>
+
+                                </div>
+
+
+                                <button class="btn btn-danger button-agregar2 " id='actualizarBoton' (click)="updateCategoriaM(categoriasRFormA) " (click)="resetForm(categoriasRForm) " (click)="getCategorias()" data-dismiss="modal">Agregar</button>
+                            </div>
+
+                            <div class="btn-group ">
+                                <button type="button " class="btn btn-secondary " (click)="getCategorias() " (click)="onCloseAlert() " data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </div>
+                        <!--  <input type="text " class="form-control descripcion-input " placeholder="Descripcion ">-->
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+                            document.getElementById("button-registrar ").addEventListener("click ", function() {
+                                document.querySelector(".popup ").style.display = "flex ";
+                            })
+ -->
+
+<!--
+<nav class="main-nav ">
+
+    <span class="icon-menu btn-lg " id="btn-menu "><i class="pe-7s-leaf "></i></span>
+
+    <ul class="menu " id="menu ">
+        <form>
+            <input type="text " class="form-control " placeholder="Nombre ">
+        </form>
+    </ul>
+
+
+</nav>-->
+<!-- TABLE -->

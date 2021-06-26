@@ -7,7 +7,7 @@ ejemplarEquipoMedicoService.getEjemplarEquipoMedico = async(req, res) => {
     let id = req.params.id;
     ejemplarEquipoMedicoModel
         .find({ idEquipoMedico: id })
-        .populate("idEquipoMedico")
+        //.populate("idEquipoMedico")
         .then(equipoMedico => {
             res.json(equipoMedico)
         })

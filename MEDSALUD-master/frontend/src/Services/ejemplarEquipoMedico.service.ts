@@ -9,16 +9,7 @@ import { EquiposMedicos } from 'models/equiposMedicos.model';
 
 export class EjemplarEquipoMedicoService{
     selectedEjemplarEquipoMedico: EjemplarEquipoMedico = {     
-        idEquipoMedico: {
-            _id:'',
-            nombre: '',
-            fabricante:'',
-            especialidad:'',
-            caracteristicas:'',
-            cantidad: 0,
-            disponible:0,
-            noDisponible:0
-        },   
+        idEquipoMedico:'',   
         _id: '',
         ubicacion:'',
         estado:'',

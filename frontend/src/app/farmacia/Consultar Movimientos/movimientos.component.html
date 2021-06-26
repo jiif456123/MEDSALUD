@@ -5,18 +5,15 @@
             <mat-tab label="Medicamentos"> 
                <div class="container"> 
                 <div class="row" style="margin: 30px 0px;">  
-                    <div class="col-md-8" >
-                        <div class="row">
-                            <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">
-                                <input type="text"  class="form-control text-input">
-                            </div>
-                            <div class="col-md-4" style="padding-left: 0px; padding-top: 5px;">
-                                <button type="button" class="btn boton-table"
-                                ><img src="\assets\img\icons8-search-25.png" alt="x"/></button>
-                           
-                            </div>
+                    <div class="col-md-8" style="padding-left: 0px;">
+                        <div class="col-5" style="padding-left: 0px;">
+                            <div class="input-group">
+                                <input type="text" name="nombre" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary">Buscar</button>
+                                    </span>
+                                </div>
                         </div>
-                        
                     </div>
             
                     <div class="col-md-4" style="padding-right: 0px;">
@@ -48,26 +45,26 @@
                     </tr>
                 </tbody>
                    </table>
+                   <div style="float: right;">
+                    <ngb-pagination  [pageSize]="pageSize" [collectionSize]="medicamentos.length" [(page)]="page">
+                    </ngb-pagination>
+                </div>
                </div>
 
             </mat-tab>
             <mat-tab label="Equipos médicos"> 
                 <div class="container"> 
                     <div class="row" style="margin: 30px 0px;">  
-                        <div class="col-md-8" >
-                            <div class="row">
-                                <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">
-                                    <input type="text"  class="form-control text-input">
-                                </div>
-                                <div class="col-md-4" style="padding-left: 0px; padding-top: 5px;">
-                                    <button type="button" class="btn boton-table"
-                                    ><img src="\assets\img\icons8-search-25.png" alt="x"/></button>
-                               
-                                </div>
+                        <div class="col-md-8" style="padding-left: 0px;">
+                            <div class="col-5" style="padding-left: 0px;">
+                                <div class="input-group">
+                                    <input type="text" name="nombre" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary">Buscar</button>
+                                        </span>
+                                    </div>
                             </div>
-                            
                         </div>
-                
                         <div class="col-md-4" style="padding-right: 0px;">
                             <button type="button" class="btn btn-primary boton-registrar">
                                 Descargar Excel
@@ -80,23 +77,31 @@
                             <th>ID</th>
                             <th>Codigo</th>
                             <th>Equipo Médico</th>
-                            <th>Tipo</th>
-                            <th>Fecha</th>
-                            <th>Motivo</th>
+                            <th>Ubicacion</th>
+                            <th>Estado</th>
+                            <th>Fecha entrega</th>
+                            <th>Fecha devolucion</th>
+                            <th>Solicitante</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- -->
-                        <tr *ngFor=" ">
+                        <tr *ngFor="let e of equiposM | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                             <td>1</td>
                             <td>codigo</td>
-                            <td> </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{e.idEquipoMedico.nombre}}</td>
+                            <td>{{e.ubicacion}}</td>
+                            <td>{{e.estado}}</td>
+                            <td>{{e.fechaEntrega}}</td>
+                            <td>{{e.fechaDevolucion}}</td>
+                            <td>{{e.solicitante}}</td>
                         </tr>
                     </tbody>
                        </table>
+                       <div style="float: right;">
+                        <ngb-pagination  [pageSize]="pageSize" [collectionSize]="medicamentos.length" [(page)]="page">
+                        </ngb-pagination>
+                    </div>
                    </div>
             </mat-tab>
           </mat-tab-group> 

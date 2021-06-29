@@ -14,8 +14,6 @@ import { EspecialidadRegistradoComponent } from '../../app/citas/GestEspecialida
 import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especialidad.component';
 import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
@@ -37,7 +35,6 @@ FullCalendarModule.registerPlugins([
     EspecialidadComponent,
     EspecialidadRegistradoComponent,
     EspecialidadActualizadoComponent,
-    ChatBotComponent,
     ConsultarHorarioComponent,
     ConsultarAgendaComponent,
   ],
@@ -54,6 +51,5 @@ FullCalendarModule.registerPlugins([
   providers: [
     FilterPipe
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CitasModule { }

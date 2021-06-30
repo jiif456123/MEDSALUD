@@ -12,8 +12,7 @@ import * as XLSX from 'xlsx';
 })
 export class MovimientosComponent implements OnInit {
   public pageSize = 6;
-  public page;
-  fileName= 'MedSalud_Farmacia_Movimientos_Medicamentos.xlsx'; 
+  public page; 
   public range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
@@ -21,6 +20,10 @@ export class MovimientosComponent implements OnInit {
   public range1 = new FormGroup({
     start1: new FormControl(),
     end1: new FormControl()
+  });
+  public range2 = new FormGroup({
+    start2: new FormControl(),
+    end2: new FormControl()
   });
 
   constructor(private movimientoMService: movimientoMService, public ejemplarEquipoMedicoService : EjemplarEquipoMedicoService) { }
@@ -100,7 +103,7 @@ export class MovimientosComponent implements OnInit {
         else{
           this.getMovimientoE();
         }
-        }else if(Modo=='fecha'&& fechaInicial!=null && fechaFinal!=null)
+        }else if(Modo=='fechaE'&& fechaInicial!=null && fechaFinal!=null)
           {
             console.log(fechaInicial);
             console.log(fechaFinal);
@@ -111,7 +114,19 @@ export class MovimientosComponent implements OnInit {
               },
               err => console.error(err)
             )
-          }else{
+          }else if(Modo=='fechaD'&& fechaInicial!=null && fechaFinal!=null)
+          {
+            console.log(fechaInicial);
+            console.log(fechaFinal);
+            this.ejemplarEquipoMedicoService.getfiltrar(Modo,Tipo,fechaInicial.toString(),fechaFinal.toString()).subscribe(
+              res =>{
+                this.equiposM = res;
+                console.log(res);
+              },
+              err => console.error(err)
+            )
+          }
+          else{
             this.getMovimientoE();
           }
   }   
@@ -126,6 +141,18 @@ export class MovimientosComponent implements OnInit {
      XLSX.utils.book_append_sheet(wb, ws, 'Medicamentos');
 
      /* save to file */
-     XLSX.writeFile(wb, this.fileName);
+     XLSX.writeFile(wb, 'MedSalud_Farmacia_Movimientos_Medicamentos.xlsx');
   };
+  excelEquipos(){
+    /* table id is passed over here */   
+    let element = document.getElementById('excel-table1'); 
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+   
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Equipos Medicos');
+
+    /* save to file */
+    XLSX.writeFile(wb,'MedSalud_Farmacia_Movimientos_Equipos.xlsx');
+ };
 }

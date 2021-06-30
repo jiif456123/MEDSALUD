@@ -52,21 +52,25 @@ ejemplarEquipoMedicoService.Filtro = async(req, res, next) => {
     //const Fecha = req.params.Fecha;
     const fechaInicial = req.params.fechaInicial;
     const fechaFinal = req.params.fechaFinal;
+    const fechaE = {
+        $gte: fechaInicial,
+        $lt: fechaFinal
+    }
+    const fechaD = {
+        $gte: fechaInicial,
+        $lt: fechaFinal
+    }
     
     if(Modo=='tipo' && fechaInicial=='null' && fechaFinal=='null'){
         const equipos = await ejemplarEquipoMedicoModel.find({estado:Tipo}).populate("idEquipoMedico");
 
     res.json(equipos);
     }
-    else if(Modo=='fecha')
+    else if(Modo=='fechaE')
     {
             try {
                const reg = await ejemplarEquipoMedicoModel.find({
-                  fecha: {
-                     $gte: fechaInicial,
-                     $lt: fechaFinal
-                  }
-               }).populate('idEquipoMedico');
+                  fechaEntrega: fechaE}).populate('idEquipoMedico');
          
                if (!reg) {
                   res.status(404).send({
@@ -82,6 +86,24 @@ ejemplarEquipoMedicoService.Filtro = async(req, res, next) => {
                next(e);
             }
          
+    } else if(Modo=='fechaD'){
+        try {
+            const reg = await ejemplarEquipoMedicoModel.find({
+               fechaDevolucion: fechaD}).populate('idEquipoMedico');
+      
+            if (!reg) {
+               res.status(404).send({
+                  message: 'El registro no existe'
+               });
+            } else {
+               res.status(200).json(reg);
+            }
+         } catch (e) {
+            res.status(500).send({
+               message: 'Ocurrio un error'
+            });
+            next(e);
+         }
     }
 
 };

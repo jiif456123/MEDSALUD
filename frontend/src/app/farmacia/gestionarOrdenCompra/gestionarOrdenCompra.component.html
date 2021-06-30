@@ -1,29 +1,28 @@
-<!-- TABLE -->
-<div class="col-md-11">
-    <div class="head-div">
-        <h1 class="head-text"> Gestionar Orden De Compra</h1>
 
-    </div>
+<div class="container cont">
+    <h1 class="head-text"> Gestionar Orden De Compra</h1>
 
-    <form #ordenCompraFormBuscar="ngForm" (ngSubmit)="searchByNombreProveedor(ordenCompraFormBuscar)">
-        <!--Obtengo del input de  la paginda el valor-->
-        <div class="col-lg-5">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar por Nombre Proveedor" name="proveedor" #nombreControl="ngModel" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra.proveedor">
-                <span class="input-group-btn">
-            <button type="button" class="btn btn-primary " (click)="searchByNombreProveedor(ordenCompraFormBuscar)">Buscar</button>
-        </span>
+    <div class="row" style="margin: 40px 0px;">
+        <div class="col-md-8" style="padding-left: 0px;">
+            <div class="col-5" style="padding-left: 0px;">
+                <form #ordenCompraFormBuscar="ngForm" (ngSubmit)="searchByNombreProveedor(ordenCompraFormBuscar)">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar por Nombre Proveedor" name="proveedor" #nombreControl="ngModel" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra.proveedor">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary " (click)="searchByNombreProveedor(ordenCompraFormBuscar)">Buscar</button>
+                        </span>
+                    </div>
+                </form>
             </div>
         </div>
-
-    </form>
-
-    <button type="button" class="btn btn-primary boton-registrar" (click)="getOrdenCompraCodigoUltimo()" (click)="clickMostrar()" (click)="cleanFormRegistrar()" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
-        Registrar
-      </button>
-
-
-    <table class="table table-striped">
+        <div class="col-md-4" style="padding-right: 0px;">
+           <button type="button" class="btn btn-primary" (click)="getOrdenCompraCodigoUltimo()" (click)="clickMostrar()" (click)="cleanFormRegistrar()" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
+                Registrar OC
+            </button>
+        </div> 
+    </div>
+    
+    <table class="table styled-table" style="text-align: center;">
         <thead>
             <tr>
                 <th>Codigo</th>
@@ -32,18 +31,11 @@
                 <th>Forma Pago</th>
                 <th>Total</th>
                 <th>Estado</th>
-                <th>Ver</th>
-                <th>Editar</th>
-
+                <th>Opciones</th>
             </tr>
-
         </thead>
-
         <tbody>
-            <!-- -->
-
             <tr *ngFor="let ordenCompraL of gestionarOrdenCompraService.ordenCompras | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;">
-
 
                 <td>{{ ordenCompraL.codigo }}</td>
                 <td>{{ ordenCompraL.proveedor }}</td>
@@ -52,17 +44,18 @@
                 <td>{{ ordenCompraL.totalD }}</td>
                 <td>{{ ordenCompraL.estado }}</td>
 
-
                 <td>
-                    <button type="button" class="btn btn-secondary btn-descripcion" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" (click)="getOrdenCompraDetail(ordenCompraL)"> <i class="pe-7s-more btn-descripcion"></i></button>
+                    <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#actualizarModalCenter" 
+                    (click)="getCategoria(ordenCompraL)" (click)="cleanFormActualizar()"> 
+                        <img src="\assets\img\icons8-update-left-rotation-30.png" alt="x"/>
+                    </button>
+                    <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" 
+                    (click)="getOrdenCompraDetail(ordenCompraL)">
+                        <img src="\assets\img\icons8-eye-30.png" alt="x"/>
+                    </button>
+                    
                 </td>
-
-                <td>
-                    <button type="button" class="btn btn-secondary btn-actualizar" data-backdrop="false" data-toggle="modal" data-target="#actualizarModalCenter" (click)="getCategoria(ordenCompraL)" (click)="cleanFormActualizar()"> <i class="pe-7s-ticket btn-actualizar"></i></button>
-                </td>
-
             </tr>
-
         </tbody>
     </table>
     <div style="float: right;">

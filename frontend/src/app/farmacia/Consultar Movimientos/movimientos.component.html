@@ -70,11 +70,11 @@
                         <div class="col-md-8" style="padding-left: 0px;">
                             <div class="col-md-4" style="padding-left: 0px;">
                                 <mat-form-field appearance="fill">
-                                    <mat-label>Tipo de movimiento</mat-label>
+                                    <mat-label>Estado</mat-label>
                                     <mat-select [(value)]="selected" (selectionChange)="FiltroE('tipo',selected,'null','null')">
                                       <mat-option value="">Todo</mat-option>
-                                      <mat-option value="Ingreso">Ingreso</mat-option>
-                                      <mat-option value="Egreso">Egreso</mat-option>
+                                      <mat-option value="Disponible">Disponible</mat-option>
+                                      <mat-option value="Ocupado">Ocupado</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                             </div>

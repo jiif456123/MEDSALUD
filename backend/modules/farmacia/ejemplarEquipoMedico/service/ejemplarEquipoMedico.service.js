@@ -54,7 +54,7 @@ ejemplarEquipoMedicoService.Filtro = async(req, res, next) => {
     const fechaFinal = req.params.fechaFinal;
     
     if(Modo=='tipo' && fechaInicial=='null' && fechaFinal=='null'){
-        const equipos = await ejemplarEquipoMedicoModel.find({tipo:Tipo}).populate("idEquipoMedico");
+        const equipos = await ejemplarEquipoMedicoModel.find({estado:Tipo}).populate("idEquipoMedico");
 
     res.json(equipos);
     }

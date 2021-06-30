@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import esLocale from '@fullcalendar/core/locales/es';
+import { Cita } from '../models/cita.model';
+import { Paciente } from '../models/paciente.model';
+import { CitaService } from '../services/cita.service';
 
 @Component({
   selector: 'app-consultar-horario',
@@ -9,26 +12,46 @@ import esLocale from '@fullcalendar/core/locales/es';
 })
 export class ConsultarHorarioComponent implements OnInit {
 
-  calendarOptions:CalendarOptions
+  calendarOptions: CalendarOptions
 
-  constructor() { }
+  cita: Cita[] = [];
+  citaSeleccionada: Cita;
 
-  ngOnInit(): void {
+  @ViewChild('modalDetalle') modalDetalle: ElementRef;
+
+  constructor(
+    private citaService: CitaService,
+  ) { }
+
+  async ngOnInit(): Promise<void> {
     this.calendarOptions = {
       initialView: 'dayGridMonth',
       locale: esLocale,
       events: [],
-      headerToolbar:{
+      headerToolbar: {
         start: 'title',
-        center:'',
-        end:'today prev,next dayGridMonth dayGridWeek'
+        center: '',
+        end: 'today prev,next dayGridMonth dayGridWeek'
       },
-      eventClick:(e)=>{
-        // this.sreserva= e.event._def.extendedProps.data
+      eventClick: (e) => {
+        this.citaSeleccionada = e.event._def.extendedProps.data
 
-        // this.modalService.open(this.modal);
+        this.modalDetalle.nativeElement.click();
       }
     };
+
+    var dataCita = await this.citaService.listar().toPromise();
+
+    this.cita = dataCita.data;
+    var datos = [];
+    this.cita.forEach(item => {
+      datos.push({ title: item.especialidad, date: item.fechaHora, data: item })
+    })
+
+    this.calendarOptions.events = datos;
   }
 
+  ngAfterViewInit(){
+    
+  }
 }

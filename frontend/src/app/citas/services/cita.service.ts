@@ -8,6 +8,7 @@ import { environment } from 'environments/environment';
 export class CitaService {
   urlEndPoint: string = environment.endpoint.concat('/citas/cita');
 
+  //localhost:3000/citas/cita
   constructor(private http: HttpClient) { }
 
   listar() {

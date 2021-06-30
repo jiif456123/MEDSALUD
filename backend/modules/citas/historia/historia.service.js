@@ -14,6 +14,7 @@ let crear = (historia) => {
         antecedentes: historia.antecedentes,
         historia: historia.historia,
         diagnostico: historia.diagnostico,
+        paciente: historia.paciente,
     })
 
     console.log(newhistoria);

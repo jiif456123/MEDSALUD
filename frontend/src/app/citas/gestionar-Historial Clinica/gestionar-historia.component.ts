@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Historia } from '../models/historia.model';
 import { HistoriaService } from '../services/historia.service';
 import { FilterPipe } from 'ngx-filter-pipe';
+import { Paciente } from '../models/paciente.model';
+import { PacienteService } from '../services/paciente.service';
 @Component({
   selector: 'app-gestionar-historia',
   templateUrl: './gestionar-historia.component.html',
@@ -11,6 +13,23 @@ import { FilterPipe } from 'ngx-filter-pipe';
   providers: [DatePipe]
 })
 export class GestionarHistoriaComponent implements OnInit {
+
+  especialidad = [{
+    des: 'Dermatología',
+  }, {
+    des: 'Oftalmología',
+  }, {
+    des: 'Pediatría',
+  }, {
+    des: 'Medicina General',
+  },
+  {
+    des: 'Cardiología',
+  }, {
+    des: 'Gastroenterología',
+  }
+  ]
+
   @ViewChild('modalRegistrar') modalRegistrar: ElementRef;
   @ViewChild('modalModificar') modalModificar: ElementRef;
 
@@ -18,7 +37,9 @@ export class GestionarHistoriaComponent implements OnInit {
   formHistoriaModificar: FormGroup;
 
   filtro = "";
+  pacientes: Paciente[] = [];
 
+  idPaciente: string = '';
   historias: Historia[] = []
   historiaSeleccionada: Historia;
   public historia: Historia = new Historia();
@@ -26,7 +47,9 @@ export class GestionarHistoriaComponent implements OnInit {
     private historiaService: HistoriaService,
     private pipe: FilterPipe,
     private fb: FormBuilder,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private pacienteService: PacienteService,
+
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -43,6 +66,8 @@ export class GestionarHistoriaComponent implements OnInit {
       antecedentes: ['', [Validators.required]],
       historia: ['', [Validators.required]],
       diagnostico: ['', [Validators.required]],
+      dni: ['', [Validators.required]],
+      nombrePaciente: [''],
     })
 
     this.formHistoriaModificar = this.fb.group({
@@ -57,13 +82,30 @@ export class GestionarHistoriaComponent implements OnInit {
         historia: ['', [Validators.required]],
         diagnostico: ['', [Validators.required]],
     })
-
+    var data = await this.pacienteService.listar().toPromise();
+    this.pacientes = data.data
   }
 
   abrirModal() {
     this.modalRegistrar.nativeElement.click();
   }
+  buscarPaciente() {
+    var dni = this.formHistoria.controls.dni.value;
+    if (dni == null || dni == '') {
+      this.idPaciente = '';
+      return;
+    }
 
+    var paciente = this.pacientes.find(item => item.dni?.trim() == dni.trim());
+
+    if (paciente) {
+      this.idPaciente = paciente._id;
+      this.formHistoria.controls.nombrePaciente.setValue(paciente.nombre + ' ' + paciente.apellidoPaterno);
+    } else {
+      this.idPaciente = '';
+
+    }
+  }
   abrirModalModificar(row: Historia) {
     this.modalModificar.nativeElement.click();
     this.historiaSeleccionada = row;
@@ -100,7 +142,8 @@ export class GestionarHistoriaComponent implements OnInit {
       alergias: datos.alergias,
       antecedentes: datos.antecedentes,
       historia: datos.historia,
-      diagnostico: datos.diagnostico
+      diagnostico: datos.diagnostico,
+      paciente: this.idPaciente
     }
 
     debugger;

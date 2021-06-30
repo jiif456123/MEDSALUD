@@ -26,6 +26,7 @@
                             <th class="text-center">Codigo</th>
                             <th class="text-center">Medico</th>
                             <th class="text-center">Especialidad</th>
+                            <!--  <th scope="col">Paciente</th> -->
                             <th class="text-center">Fecha</th>
                             <th class="text-center" colspan="2">Opciones</th>
                         </tr>
@@ -34,6 +35,7 @@
                         <td class="text-center">{{ h._id }}</td>
                         <td class="text-center">{{ h.medico }}</td>
                         <td class="text-center">{{ h.especialidad }}</td>
+                        <!--<td class="text-center">{{ h.paciente.nombre }} {{h.paciente.apellidoPate -->
                         <td class="text-center">{{ h.fecha | date: "dd/MM/yyyy" }}</td>
                         <td class="text-center"></td>
                         <td class="text-center">
@@ -67,19 +69,34 @@
                         <input formControlName="medico" type="text" class="form-control" id="medicos" placeholder="" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="especialidad">Especialidad</label>
-                        <input formControlName="especialidad" type="text" class="form-control" id="especialidads" placeholder="" />
+                        <label for="dni">DNI Paciente</label>
+                        <input formControlName="dni" type="text" (input)="buscarPaciente()" class="form-control" id="dni" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="nombrePaciente">Paciente</label>
+                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente" placeholder="..." />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="peso">Peso</label>
+                        <label for="especialidad">Especialidad</label>
+
+                        <select formControlName="especialidad" type="text" class="form-control" id="especialidads" placeholder="">
+                            <option value="Medicina General">Medicina General</option>
+                            <option value="Dental">Dental</option>
+                            <option value="Obtetricia">Obtetricia</option>
+                            <option value="Pediatria">Pediatria</option>
+                          </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="peso">Peso(Kilogramos)</label>
                         <input formControlName="peso" type="text" class="form-control" id="pesos" placeholder="" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="altura">Altura</label>
+                        <label for="altura">Altura(metros)</label>
                         <input formControlName="altura" type="text" class="form-control" id="alturas" placeholder="" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="tension">Tension</label>
+                        <label for="tension">Presión</label>
                         <input formControlName="tension" type="text" class="form-control" id="tensions" placeholder="" />
                     </div>
                     <div class="form-group col-md-12">
@@ -91,7 +108,7 @@
                         <input formControlName="fecha" type="date" class="form-control" id="fechas" placeholder="" />
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="antecedentes">Antecedentes</label>
+                        <label for="antecedentes">Evolución del paciente</label>
                         <textarea formControlName="antecedentes" type="text" class="form-control" id="antecedentess" placeholder=""></textarea>
                     </div>
                     <div class="form-group col-md-12">
@@ -135,18 +152,33 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="especialidad">Especialidad</label>
-                        <input formControlName="especialidad" type="text" class="form-control" id="especialidad" placeholder="" />
+                        <select formControlName="especialidad" type="text" class="form-control" id="especialidads" placeholder="">
+                            <option value="Medicina General">Medicina General</option>
+                            <option value="Dental">Dental</option>
+                            <option value="Obtetricia">Obtetricia</option>
+                            <option value="Pediatria">Pediatria</option>
+                          </select>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="peso">Peso</label>
+                        <label for="dni">DNI Paciente</label>
+                        <input formControlName="dni" type="text" readonly class="form-control" id="dni1" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="nombrePaciente1">Paciente</label>
+                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente1" placeholder="..." />
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="peso">Peso(Kilogramos)</label>
                         <input formControlName="peso" type="text" class="form-control" id="peso" placeholder="" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="altura">Altura</label>
+                        <label for="altura">Altura(metros)</label>
                         <input formControlName="altura" type="text" class="form-control" id="altura" placeholder="" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="tension">Tension</label>
+                        <label for="tension">Presión</label>
                         <input formControlName="tension" type="text" class="form-control" id="tension" placeholder="" />
                     </div>
                     <div class="form-group col-md-12">
@@ -158,7 +190,7 @@
                         <input formControlName="fecha" type="date" class="form-control" id="fecha" placeholder="" />
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="antecedentes">Antecedentes</label>
+                        <label for="antecedentes">Evolución del paciente</label>
                         <textarea formControlName="antecedentes" type="text" class="form-control" id="antecedentes" placeholder=""></textarea>
                     </div>
                     <div class="form-group col-md-12">

@@ -81,6 +81,7 @@ var modelMovimiento = mongoose.model('MovimientoCaja', movimientoCaja);
 var historia = new Schema({
 
     medico: { type: String },
+    paciente: { type: Schema.Types.ObjectId, ref: 'Paciente' },
     especialidad: { type: String },
     fecha: { type: Date },
     peso: { type: Number },

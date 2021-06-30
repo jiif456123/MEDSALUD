@@ -1,14 +1,13 @@
 <html lang="es">
 
 <head>
-    <link href="ejemplaresEquipoMedico.css" rel="stylesheet" type="text/css">
 </head>
 <!--Listar-->
 
 <body>
     <div>
-        <h2>Visualizar Ejemplares</h2>
-        <table class="table table-striped" style="text-align: center;">
+        <h2>Ejemplares</h2>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Codigo</th>
@@ -33,10 +32,6 @@
                                 <i class="pe-7s-pen"></i>     
                                 <input data-toggle="modal" data-target="#modalActualizar" #modalActualizar type="hidden">        
                         </button>
-
-                        <a href="#" (click)="openModal(ejemplarEquipoMedico)" class="btn btn-success" data-toggle="modal" data-target="#modalActualizar">
-                            <i class="pe-7s-pen"></i>
-                        </a>
                     </td>
                 </tr>
             </tbody>
@@ -56,20 +51,33 @@
                             <label class="col-sm-4 control-label">Codigo</label>
                             <input type="text" formControlName="idEquipo" class="form-control" readonly="true">
                         </div>
+
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Ubicacion</label>
                             <input type="text" formControlName="ubicacion" class="form-control text-input" required>
-                            <div *ngIf="formEjemplarActualizar.controls['ubicacion'].invalid" class="alert alert-danger">
+                            <div class="alert alert-info" *ngIf="ubicacion.invalid && (ubicacion.dirty)">
+                                <div class="container-error-message">
+                                    <div *ngIf="ubicacion.errors.required">Se requiere ubicacion!</div>
+                                </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Estado</label>
-                            <label>Disponible <input type="radio" name="estado" value="Disponible" formControlName="estado" checked="{{estadoD}}"></label>
-                            <label>Ocupado <input type="radio" name="estado" value="Ocupado" formControlName="estado" checked="{{estadoO}}"> </label>
+                            <select formControlName="estado" class="form-control">
+                                <option value="Disponible">Disponible</option>
+                                <option value="Ocupado">Ocupado</option>
+                            </select>
                         </div>
+
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Solicitante</label>
                             <input type="text" formControlName="solicitante" class="form-control text-input" required>
+                            <div class="alert alert-info" *ngIf="solicitante.invalid && (solicitante.dirty)">
+                                <div class="container-error-message">
+                                    <div *ngIf="solicitante.errors.required">Se requiere ubicacion!</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Fecha Entrega</label>
@@ -83,7 +91,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" (click)="update()" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary" (click)="update()">Guardar</button>
                 </div>
             </div>
         </div>

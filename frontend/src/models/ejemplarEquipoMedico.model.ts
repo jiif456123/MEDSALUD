@@ -1,8 +1,7 @@
-import { EquiposMedicos } from './equiposMedicos.model';
 export class EjemplarEquipoMedico{
     
     _id:string;
-    idEquipoMedico: EquiposMedicos;
+    idEquipoMedico: string;
     ubicacion: string;
     estado :string;
     solicitante: string;

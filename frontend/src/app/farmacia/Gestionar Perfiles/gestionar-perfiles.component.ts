@@ -7,7 +7,7 @@ import { FilterPipe } from 'ngx-filter-pipe';
 @Component({
   selector: 'app-gestionar-perfiles',
   templateUrl: './gestionar-perfiles.component.html',
-  styleUrls: ['./gestionar-perfiles.component.css' ,'../farmacia.css'],
+  styleUrls: ['./gestionar-perfiles.component.css'],
   providers: [DatePipe]
 })
 export class GestionarPerfilComponent implements OnInit {

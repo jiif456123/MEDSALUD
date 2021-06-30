@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { FarmaciaRoutingModule } from './farmacia-routing.module';
-import { GestionarCategoriaComponent } from '../farmacia/gestionarCategorias/gestionarCategorias.component';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FarmaciaRoutingModule } from './farmacia-routing.module';
+import { GestionarCategoriaComponent } from '../farmacia/gestionarCategorias/gestionarCategorias.component';
+import { GestionarOrdenCompraComponent } from '../farmacia/gestionarOrdenCompra/gestionarOrdencompra.component';
+
 
 @NgModule({
   declarations: [
-    GestionarCategoriaComponent
+    GestionarCategoriaComponent,
+    GestionarOrdenCompraComponent
+    
   ],
   imports: [
     CommonModule,
@@ -16,8 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbPaginationModule,
     NgbAlertModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
 
-  ]
+  ],
+
 })
 export class FarmaciaModule { }

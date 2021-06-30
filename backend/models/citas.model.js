@@ -116,6 +116,7 @@ var user = new Schema({
 
     nombre: { type: String },
     rol: { type: String },
+    fechaActual: { type: Date },
     apellidoPaterno: { type: String },
     apellidoMaterno: { type: String },
     dni: { type: String },
@@ -124,6 +125,8 @@ var user = new Schema({
     fechaNacimiento: { type: Date },
     direccion: { type: String },
     especialidad: { type: String },
+    contraseña: { type: String },
+    user: { type: String }
 }, {
     versionKey: false
 });

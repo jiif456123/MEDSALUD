@@ -9,5 +9,8 @@ export class User {
     email: string
     fechaNacimiento: Date
     direccion: string
+    fechaActual: Date
     especialidad: string
+    contraseña: string
+    user:string
 }

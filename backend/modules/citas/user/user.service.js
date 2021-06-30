@@ -14,6 +14,9 @@ let crear = (user) => {
         fechaNacimiento: fechaNacimiento,
         direccion: user.direccion,
         especialidad: user.especialidad,
+        contraseña: user.contraseña,
+        fechaActual: new Date(),
+        user: user.user
     })
 
     console.log(newuser);
@@ -53,7 +56,7 @@ var modificarhistoria = (id, newuser) => {
     if (newuser.fecha) {
         newuser.fecha = new Date(newuser.fecha);
     }
-
+    newuser.fechaActual = new Date();
     return new Promise((resolve, reject) => {
         usermodel.findByIdAndUpdate(id, newuser, (err, users) => {
 

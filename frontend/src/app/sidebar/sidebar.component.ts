@@ -12,8 +12,9 @@ export const ROUTES: RouteInfo[] = [
   { path: '/citas/gestionar-historia', title: 'Gestionar Historia Clinica', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/gestionar-citas', title: 'Gestionar Citas', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/gestionar-caja', title: 'Gestionar Caja', icon: 'pe-7s-news-paper', class: '' },
-  { path: '/citas/gestionar-perfil', title: 'Gestionar Perfil', icon: 'pe-7s-news-paper', class: '' },
-  { path: '/citas/gestionar-especialidad', title: 'GestionarEspecialidad', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/gestionar-perfil', title: 'Gestionar Perfiles', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/gestionar-especialidad', title: 'Gestionar Especialidad', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/cambiar-contra', title: 'Cambiar Contraseña', icon: 'pe-7s-news-paper', class: '' },
 ];
 
 @Component({

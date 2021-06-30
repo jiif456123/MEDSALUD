@@ -8,6 +8,7 @@ import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-pacie
 import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especialidad.component';
 import { EspecialidadRegistradoComponent } from '../../app/citas/GestEspecialidad/reg-especialidad/gest-especialidad.component';
 import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
+import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.component';
 
 const routes: Routes = [
 
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: "gestionar-perfil", component: GestionarPerfilComponent, data: { title: 'Gestionar Historia' }
   },
+  {
+    path: "cambiar-contra", component: CambiarContraComponent, data: { title: 'Cambiar Contraseña' }
+  },
+ 
 
 ];
 

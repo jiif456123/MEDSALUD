@@ -1,24 +1,27 @@
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../models/user.model';
-import { UserService } from '../services/user.service';
+import { User } from '../../farmacia/models/user.model';
+import { UserService } from '../../farmacia/services/user.service';
 import { FilterPipe } from 'ngx-filter-pipe';
+import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-gestionar-perfiles',
-  templateUrl: './gestionar-perfiles.component.html',
-  styleUrls: ['./gestionar-perfiles.component.css'],
+  selector: 'app-cambiar-contraseña',
+  templateUrl: './cambiarContra.component.html',
+  styleUrls: ['./cambiarContra.component.css'],
   providers: [DatePipe]
 })
-export class GestionarPerfilComponent implements OnInit {
-  @ViewChild('modalRegistrar') modalRegistrar: ElementRef;
+export class CambiarContraComponent implements OnInit {
+
   @ViewChild('modalModificar') modalModificar: ElementRef;
   @ViewChild('modalVer') modalVer: ElementRef;
   formUser: FormGroup;
   formUserModificar: FormGroup;
   formUserVer: FormGroup;
-
+  tipo = "password";
   filtro = "";
+  contradmin ="admin123";
 
   users: User[] = []
   userSeleccionada: User;
@@ -29,6 +32,7 @@ export class GestionarPerfilComponent implements OnInit {
     private fb: FormBuilder,
     private datePipe: DatePipe
   ) { }
+  
 
   async ngOnInit(): Promise<void> {
     var data = await this.userService.listar().toPromise();
@@ -46,6 +50,7 @@ export class GestionarPerfilComponent implements OnInit {
       especialidad: ['', [Validators.required]],
       contraseña: ['', [Validators.required]],
       user: ['', [Validators.required]],
+     
     })
 
     this.formUserModificar = this.fb.group({
@@ -61,6 +66,7 @@ export class GestionarPerfilComponent implements OnInit {
         especialidad: ['', [Validators.required]],
         contraseña: ['', [Validators.required]],
         user: ['', [Validators.required]],
+        confirmar : ['',[Validators.required]]
     })
 
     this.formUserVer = this.fb.group({
@@ -77,11 +83,8 @@ export class GestionarPerfilComponent implements OnInit {
       contraseña: ['', [Validators.required]],
       user: ['', [Validators.required]],
   })
-
-  }
-
-  abrirModal() {
-    this.modalRegistrar.nativeElement.click();
+  
+  
   }
 
   abrirModalModificar(row: User) {
@@ -120,49 +123,21 @@ export class GestionarPerfilComponent implements OnInit {
 
   }
 
+  
   transformarFecha(fechaNacimiento: Date) {
     return `${fechaNacimiento.getFullYear()}-${fechaNacimiento.getMonth() + 1}-${fechaNacimiento.getDate()}`
   }
 
-  async registrar() {
-
-    if (this.formUser.invalid) {
-      return;
-    }
-    let datos = this.formUser.value
-    let query = {
-      nombre: datos.nombre,
-      rol: datos.rol,
-      apellidoPaterno: datos.apellidoPaterno,
-      apellidoMaterno: datos.apellidoMaterno,
-      dni: datos.dni,
-      celular: datos.celular,
-      email: datos.email,
-      fechaNacimiento: datos.fechaNacimiento,
-      direccion: datos.direccion,
-      especialidad: datos.especialidad,
-      contraseña: datos.contraseña,
-      user:datos.user
-    }
-
-    debugger;
-    try {
-
-      let response = await this.userService.registrar(query).toPromise();
-      this.formUser.reset();
-      var dataMovimientoCaja = await this.userService.listar().toPromise();
-      this.users = dataMovimientoCaja.data;
-
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async modificar() {
+   async modificar() {
     if (this.formUserModificar.invalid) {
       return;
     }
+
     let datos = this.formUserModificar.value
+    if(datos.confirmar != this.contradmin){
+      Swal.fire('Advertencia', 'La contraseña no coincide', 'warning')
+      return;
+    }
     let query = {
         nombre: datos.nombre,
         rol: datos.rol,
@@ -177,7 +152,7 @@ export class GestionarPerfilComponent implements OnInit {
         contraseña: datos.contraseña,
       user:datos.user
     }
-
+  
     try {
 
       let response = await this.userService.actualizar(this.userSeleccionada._id, query).toPromise();
@@ -188,5 +163,14 @@ export class GestionarPerfilComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
+
   }
+  mostrarContrasena() {
+    
+    if (this.tipo == "password") {
+        this.tipo = "text";
+    } else {
+        this.tipo = "password";
+    }
+}
 }

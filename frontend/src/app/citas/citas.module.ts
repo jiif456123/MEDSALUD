@@ -15,6 +15,9 @@ import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especial
 import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.component';
+
+
 @NgModule({
   declarations: [
     GestionarCitasComponent,
@@ -24,11 +27,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GestionarPerfilComponent,
     EspecialidadComponent,
     EspecialidadRegistradoComponent,
-    EspecialidadActualizadoComponent
+    EspecialidadActualizadoComponent,
+    CambiarContraComponent
+    
   ],
   imports: [
     CommonModule,
     CitasRoutingModule,
+    
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,

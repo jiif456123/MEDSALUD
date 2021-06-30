@@ -41,8 +41,9 @@ ejemplarEquipoMedicoService.updateEjemplarEquipoMedico = (id, ejemplar) => {
 };
 ejemplarEquipoMedicoService.getMovimientoE = async(req, res) => {
     ejemplarEquipoMedicoModel.find().populate("idEquipoMedico")
-    .then(equipoMedico => {
+        .then(equipoMedico => {
             res.json(equipoMedico)
         })
 };
+
 module.exports = ejemplarEquipoMedicoService;

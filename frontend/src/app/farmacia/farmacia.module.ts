@@ -15,6 +15,8 @@ import {ActualizarEMComponent} from '../farmacia/equiposMedicos/actualizarEquipo
 import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoMedico/ejemplaresEquipoMedico';
 
 
+
+
 @NgModule({
   declarations: [
     medicamentoComponent,
@@ -26,7 +28,7 @@ import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoM
     RegistrarMedicoComponent,
     EquiposMedicosComponent,
     ActualizarEMComponent,
-    EjemplaEquipoMedicoComponent
+    EjemplaEquipoMedicoComponent,    
   ],
 
   imports: [

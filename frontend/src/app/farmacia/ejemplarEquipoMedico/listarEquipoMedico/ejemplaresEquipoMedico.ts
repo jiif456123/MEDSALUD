@@ -66,11 +66,12 @@ EjemplaEquipoMedicoComponent implements OnInit {
     this.ejemplarSeleccionado = row;    
     this.formEjemplarActualizar.controls.idEquipo.setValue(row._id);
     this.formEjemplarActualizar.controls.ubicacion.setValue(row.ubicacion); 
+    this.formEjemplarActualizar.controls.estado.setValue(row.estado);
     this.formEjemplarActualizar.controls.solicitante.setValue(row.solicitante);
     this.formEjemplarActualizar.controls.fechaEntrega.setValue(row.fechaEntrega);
     this.formEjemplarActualizar.controls.fechaDevolucion.setValue(row.fechaDevolucion); 
     this.checkedEstado();    
-    this.getEquipoMedico(this.id);           
+    this.getEquipoMedico(this.id);          
   }  
   update(){
   
@@ -87,10 +88,12 @@ EjemplaEquipoMedicoComponent implements OnInit {
       .subscribe( data => {
         console.log(data);     
       },error => console.error(error)); 
-      this.updateEquipoMedico();         
+      this.updateEquipoMedico(); 
+      this.updateCantidad();
   }
   updateEquipoMedico()
   {      
+    if(this.formEjemplarActualizar.valid){
       this.updateCantidad();
       let query = {
           disponible: this.equipoMedico.disponible,
@@ -101,20 +104,27 @@ EjemplaEquipoMedicoComponent implements OnInit {
         console.log(data);
         return this.equiposMedicosService.getEquiposMedicos();         
       }, error => console.log(error));
+    }  
+
   }  
   checkedEstado(){        
      if(this.ejemplarSeleccionado.estado == 'Disponible')  this.estadoD = true;
      else if (this.ejemplarSeleccionado.estado == 'Ocupado') this.estadoO = true;
   }
   updateCantidad(){
-    if($("input[name='estado'][value='Disponible']").is(':checked')){
+    let est = this.formEjemplarActualizar.controls.estado.value;
+    if(est == 'Disponible'){
       this.equipoMedico.disponible+= 1;  
-      this.equipoMedico.noDisponible-=1;  
-    }  else if($("input[name='estado'][value='Ocupado']").is(':checked')){
+      this.equipoMedico.noDisponible-=1; 
+    }else if(est == 'Ocupado'){
       this.equipoMedico.noDisponible+= 1; 
       this.equipoMedico.disponible-= 1;    
-    } 
-    console.log(this.equipoMedico.disponible);
+    }
+    console.log(est);
   }
+
+  get ubicacion(){return this.formEjemplarActualizar.get('ubicacion');}
+  get solicitante(){return this.formEjemplarActualizar.get('solicitante');}
+
 }
 

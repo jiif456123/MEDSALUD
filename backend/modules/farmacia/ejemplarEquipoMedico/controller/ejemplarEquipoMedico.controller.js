@@ -6,6 +6,7 @@ const code = require('../../../../utils/status');
 router.get('/:id', ejemplarEquipoMedicoService.getEjemplarEquipoMedico);
 router.get('/', ejemplarEquipoMedicoService.getMovimientoE);
 router.post('/', ejemplarEquipoMedicoService.createEjemplarEquipoMedico);
+router.get('/Filtro/:Modo/:Tipo/:fechaInicial/:fechaFinal', ejemplarEquipoMedicoService.Filtro);
 router.put('/:id', (req, res) => {
     let id = req.params.id;
     let ejemplar = req.body;

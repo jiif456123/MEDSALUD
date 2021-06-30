@@ -45,4 +45,7 @@ export class EjemplarEquipoMedicoService{
     getMovimientoE(){
         return this.http.get<any>(this.urlEndPoint);
     }
+    getfiltrar(Modo,Tipo,fechaInicial,fechaFinal){
+        return this.http.get<any>(this.URL_API+'/Filtro'+ `/${Modo}`+`/${Tipo}`+`/${fechaInicial}`+`/${fechaFinal}`);
+      }
 }

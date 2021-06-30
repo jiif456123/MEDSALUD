@@ -45,4 +45,44 @@ ejemplarEquipoMedicoService.getMovimientoE = async(req, res) => {
             res.json(equipoMedico)
         })
 };
+ejemplarEquipoMedicoService.Filtro = async(req, res, next) => {
+    
+    const Modo = req.params.Modo;
+    const Tipo = req.params.Tipo;
+    //const Fecha = req.params.Fecha;
+    const fechaInicial = req.params.fechaInicial;
+    const fechaFinal = req.params.fechaFinal;
+    
+    if(Modo=='tipo' && fechaInicial=='null' && fechaFinal=='null'){
+        const equipos = await ejemplarEquipoMedicoModel.find({tipo:Tipo}).populate("idEquipoMedico");
+
+    res.json(equipos);
+    }
+    else if(Modo=='fecha')
+    {
+            try {
+               const reg = await ejemplarEquipoMedicoModel.find({
+                  fecha: {
+                     $gte: fechaInicial,
+                     $lt: fechaFinal
+                  }
+               }).populate('idEquipoMedico');
+         
+               if (!reg) {
+                  res.status(404).send({
+                     message: 'El registro no existe'
+                  });
+               } else {
+                  res.status(200).json(reg);
+               }
+            } catch (e) {
+               res.status(500).send({
+                  message: 'Ocurrio un error'
+               });
+               next(e);
+            }
+         
+    }
+
+};
 module.exports = ejemplarEquipoMedicoService;

@@ -16,7 +16,6 @@ import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialid
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.component';
-import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
@@ -42,7 +41,6 @@ FullCalendarModule.registerPlugins([
     EspecialidadRegistradoComponent,
     EspecialidadActualizadoComponent,
     CambiarContraComponent,
-    ChatBotComponent,
     ConsultarHorarioComponent,
     ConsultarAgendaComponent,
     GestionarRecetaMedicaComponent,
@@ -65,6 +63,5 @@ FullCalendarModule.registerPlugins([
   providers: [
     FilterPipe
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CitasModule { }

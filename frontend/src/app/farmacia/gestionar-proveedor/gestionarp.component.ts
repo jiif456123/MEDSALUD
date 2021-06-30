@@ -78,7 +78,6 @@ export class GestionarProveedorComponent implements OnInit {
 
     selectChangeHandler(event:any){
       this.codigo_ciudad = event.target.value;
-      console.log( this.codigo_ciudad );
       this.valorCiudad = this.codigo_ciudad;
     }
 
@@ -88,7 +87,6 @@ export class GestionarProveedorComponent implements OnInit {
 
     selectChangeHandler2(event:any){
       this.telefono_final = this.codigo_ciudad + this.telefono_auxi;
-      console.log(  this.telefono_final );
       this.gestionarpservice.selectProveedor.telefono = this.telefono_final;
 
     }

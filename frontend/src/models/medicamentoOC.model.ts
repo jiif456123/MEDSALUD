@@ -8,4 +8,12 @@ export class MedicamentoOC{ //para describir que va a tener la Categoria el arre
     precio: number;
     total:   number;
     unidad:   string;
+    tipo: string;
+    tipoUnidad: string;
+
 } 
+export class MedicamentoPS{
+
+    precioUnitario: number;
+    stockActual: number;
+  }

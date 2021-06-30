@@ -1,15 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
-import {OrdenCompra, OrdenCompraCodigo} from '../models/gestionarOrdenCompra.model';
-import {OrdenCompra2} from '../models/gestionarOrdenCompra2.model';
+import {OrdenCompra, OrdenCompraCodigo, OrdenCompra2} from '../models/gestionarOrdenCompra.model';
 
-import { ProveedorLab } from '../models/provedorLab.model';
-import { Medicamento } from '../models/medicamentoAux.model';
-import { MedicamentoN } from '../models/medicamentoN.model';
-import { MedicamentoOC } from '../models/medicamentoOC.model';
-import { MedicamentoPS } from '../models/MedicamentoPS.model';
+import { Medicamento, MedicamentoN } from '../models/medicamento.model';
+import { MedicamentoOC,MedicamentoPS } from '../models/medicamentoOC.model';
 
-import {Gestionarp} from '../models/gestionarpAx.model';
+import {Gestionarp, ProveedorLab} from '../models/gestionarp.model';
 import { Categoria } from '../models/categoria.model';
 
 
@@ -80,15 +76,7 @@ export class GestionarOrdenCompraService{
   estado: '',
   totalD: null,
 };
-/*
-   _id?: string;
-    nombre:  string ;
-    contacto : string;
-    email:string;
-    estado: string;
-    telefono:number;
-    laboratorio:string;
-*/
+
  selectedProveedor: Gestionarp={
   nombre: '',
   contacto: '',
@@ -115,23 +103,6 @@ selectedProveedor3: ProveedorLab={
   laboratorio: '',
 };
 
-selectedMedicamento: Medicamento={
-  
-  codigo:'',
-     nombre: '',
-    disponibilidad: null,
-    dosis: '',
-    presentacion:'',
-    precioUnitario: null,
-    marca:  '',
-    categoria: '',
-    ubicacion: '',
-    stockMin: null,
-    stockMax: null,
-    stockActual: null,
-    detalles: '',
-
-};
 
 selectedMedicamentoPS: MedicamentoPS={
   
@@ -150,8 +121,8 @@ selectedMedicamentoPSA: MedicamentoPS={
 };
 selectedMedicamento2: MedicamentoN={
   
-  codigo:'',
-     nombre: '',
+    codigo:'',
+    nombre: '',
     disponibilidad: null,
     dosis: '',
     presentacion:'',
@@ -186,18 +157,23 @@ selectedMedicamentoOC: MedicamentoOC={
     precio: null,
     total:  null,
     unidad: '',
+    tipo: '',
+    tipoUnidad: '',
+
 
 };
 selectedMedicamentoOCA: MedicamentoOC={
 
-  codigo:'',
-     laboratorio: '',
+    codigo:'',
+    laboratorio: '',
     categoria: '',
     medicamento: '',
     cantidad:null,
     precio: null,
     total:  null,
     unidad: '',
+    tipo: '',
+    tipoUnidad: '',
 
 };
   /*

@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { GestionarOrdenCompraService } from 'Services/gestionarOrdenCompra.service';
 import { NgForm, FormGroup,FormControl, Validators } from '@angular/forms'; //para add
-import { OrdenCompra } from '../../../models/gestionarOrdenCompra.model';
-import {OrdenCompra2} from '../../../models/gestionarOrdenCompra2.model';
+import { OrdenCompra,OrdenCompra2 } from '../../../models/gestionarOrdenCompra.model';
 
-import {Gestionarp} from '../../../models/gestionarpAx.model';
-import {ProveedorLab} from '../../../models/provedorLab.model';
+import {Gestionarp} from '../../../models/gestionarp.model';
 
 import { element } from 'protractor';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {DatePipe} from '@angular/common';
+
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+
 
 
 @Component({
@@ -74,6 +76,16 @@ public sumaTotal=0;
 
 
   }
+
+  downloadPDF() {
+
+   
+    const doc = new jsPDF()
+    autoTable(doc, { html: '#my-table2'})
+    autoTable(doc, { html: '#my-table'})
+    doc.save('ordenDeCompra.pdf')
+    }
+
 
   onNombreChange(change){
     if(change==""){
@@ -191,7 +203,7 @@ public sumaTotal=0;
     this.gestionarOrdenCompraService.getMedPriceAStockByNombre(form.value.medicamento).subscribe(
       res =>{
         this.gestionarOrdenCompraService.medicamentosPSs= res;
-       this.gestionarOrdenCompraService.selectedMedicamentoOC.precio = this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario;
+      // this.gestionarOrdenCompraService.selectedMedicamentoOC.precio = this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario;
        this.gestionarOrdenCompraService.selectedMedicamentoPS.stockActual = this.gestionarOrdenCompraService.medicamentosPSs[0].stockActual;
     
        console.log(this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario);
@@ -205,7 +217,7 @@ public sumaTotal=0;
     this.gestionarOrdenCompraService.getMedPriceAStockByNombre(form.value.medicamento).subscribe(
       res =>{
         this.gestionarOrdenCompraService.medicamentosPSs= res;
-       this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio = this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario;
+      // this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio = this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario;
        this.gestionarOrdenCompraService.selectedMedicamentoPSA.stockActual = this.gestionarOrdenCompraService.medicamentosPSs[0].stockActual;
     
        console.log(this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario);
@@ -216,13 +228,13 @@ public sumaTotal=0;
   
   multiplicarPriceAndCantidad(){
 
-    this.gestionarOrdenCompraService.selectedMedicamentoOC.total=this.gestionarOrdenCompraService.selectedMedicamentoOC.precio*this.gestionarOrdenCompraService.selectedMedicamentoOC.cantidad;
+    this.gestionarOrdenCompraService.selectedMedicamentoOC.total=Math.round(this.gestionarOrdenCompraService.selectedMedicamentoOC.precio*this.gestionarOrdenCompraService.selectedMedicamentoOC.cantidad);
     
   }
 
   multiplicarPriceAndCantidadA(){
 
-    this.gestionarOrdenCompraService.selectedMedicamentoOCA.total=this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio*this.gestionarOrdenCompraService.selectedMedicamentoOCA.cantidad;
+    this.gestionarOrdenCompraService.selectedMedicamentoOCA.total=Math.round(this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio*this.gestionarOrdenCompraService.selectedMedicamentoOCA.cantidad);
     
   }
 
@@ -230,7 +242,17 @@ public sumaTotal=0;
 
   //TODO: agregar un medicamento segun el codigo del proveedor
 
+
+  tipoUnidadText(){
+    this.gestionarOrdenCompraService.selectedMedicamentoOC.tipoUnidad=this.gestionarOrdenCompraService.selectedMedicamentoOC.tipo +" x "+this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad;
+
+  }
+  tipoUnidadTextA(){
+    this.gestionarOrdenCompraService.selectedMedicamentoOCA.tipoUnidad=this.gestionarOrdenCompraService.selectedMedicamentoOCA.tipo +" x "+this.gestionarOrdenCompraService.selectedOrdenCompra3A.unidad;
+
+  }
   addMedicamentoOC(form: NgForm){
+    
   if(this.isError==false && this.isError2==false){
     this.gestionarOrdenCompraService.createMedicamentoOC(form.value).subscribe(
       (res)=> {
@@ -245,7 +267,7 @@ public sumaTotal=0;
 
     );
   }
-   
+  
     }
 
     addMedicamentoOCA(form: NgForm){
@@ -604,6 +626,10 @@ getLabByProveedorA(proveedor: string){
       this.gestionarOrdenCompraService.selectedMedicamentoPS.stockActual=null;
       this.gestionarOrdenCompraService.selectedMedicamentoOC.precio=null;
       this.gestionarOrdenCompraService.selectedMedicamentoOC.total=null;
+      this.gestionarOrdenCompraService.selectedMedicamentoOC.tipo=null;
+      this.gestionarOrdenCompraService.selectedMedicamentoOC.tipoUnidad=null;
+
+
     }
 /*
 

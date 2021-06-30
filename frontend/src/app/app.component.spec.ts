@@ -2,20 +2,15 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap' ; 
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent,
-         
+        AppComponent
       ],
-      schemas:[CUSTOM_ELEMENTS_SCHEMA]
     });
     TestBed.compileComponents();
-    
   });
 
   it('should create the app', async(() => {

@@ -1,6 +1,10 @@
-//requerimos el esquema qu model de la BD mongo
+const gestionarMedicamento = require("../model/medicamento.model");
 var Medicamento = require('../model/medicamento.model');
 
+const gestionarMedicamentoService = {};
+
+
+//requerimos el esquema qu model de la BD mongo
 
 var getMedicamento = () => {
 
@@ -12,7 +16,6 @@ var getMedicamento = () => {
     });
 };
 var n = 10;
-
 var createMedicamento = (medicamento) => {
 
     let objMedicamento = new Medicamento({
@@ -21,7 +24,7 @@ var createMedicamento = (medicamento) => {
         disponibilidad: medicamento.disponibilidad,
         dosis: medicamento.dosis,
         presentacion: medicamento.presentacion,
-        precioUnitario:medicamento.precioUnitario,
+        precioUnitario: medicamento.precioUnitario,
         marca: medicamento.marca,
         categoria: medicamento.categoria,
         ubicacion: medicamento.ubicacion,
@@ -39,15 +42,15 @@ var createMedicamento = (medicamento) => {
 };
 var updateMedicamento = (id, medicamento) => {
 
-    console.log( medicamento, ' [medicamento]');
+    console.log(medicamento, ' [medicamento]');
 
     return new Promise((resolve, reject) => {
-        Medicamento.findByIdAndUpdate(id,  medicamento, (err,  medicamentos) => {
+        Medicamento.findByIdAndUpdate(id, medicamento, (err, medicamentos) => {
 
             if (err) {
                 reject(err);
             }
-            resolve( medicamentos);
+            resolve(medicamentos);
         });
     });
 };
@@ -60,11 +63,44 @@ var getByNombre = async(req, res) => {
 
 };
 
+var listarMedicamento = async(req, res) => {
+    const medicamento = await gestionarMedicamento.find();
+    res.json(medicamento);
+};
+
+var listarMedicamentoCategorias = async(req, res) => {
+    const medicamento = await gestionarMedicamento.distinct('categoria');
+    res.json(medicamento);
+};
+
+
+//Todos los medicamentos que pertenezcan a esa categoria
+var getMedicamentosByCategorias = async(req, res) => {
+
+    const medicamento = await gestionarMedicamento.find({ categoria: req.params.categoria }).select({ 'nombre': 1, "_id": 0 });
+
+    res.json(medicamento);
+    /*  }*/
+
+
+};
+
+var getPrecioAndStockByNombre = async(req, res) => {
+    const medicamento = await gestionarMedicamento.find({ nombre: req.params.nombre }).select({ 'precioUnitario': 1, "stockActual": 1, "_id": 0 });
+
+    res.json(medicamento);
+    /*  }*/
+
+
+};
+
 module.exports = {
     getMedicamento,
     createMedicamento,
     updateMedicamento,
+    listarMedicamento,
+    listarMedicamentoCategorias,
+    getMedicamentosByCategorias,
+    getPrecioAndStockByNombre,
     getByNombre
 };
-
-

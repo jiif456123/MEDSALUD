@@ -7,9 +7,8 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
 
 
 
-
 import { LbdModule } from '../../lbd/lbd.module';
-import { NguiMapModule } from '@ngui/map';
+import { NguiMapModule} from '@ngui/map';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
@@ -49,4 +48,4 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
   ]
 })
 
-export class AdminLayoutModule { }
+export class AdminLayoutModule {}

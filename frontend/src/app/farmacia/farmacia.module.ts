@@ -34,11 +34,8 @@ import {MatSelectModule} from '@angular/material/select';
   ],
 
   imports: [
-    FormsModule,
     CommonModule,
     FarmaciaRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     NgbPaginationModule,
     NgbAlertModule, 
     FormsModule, 

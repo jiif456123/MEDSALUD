@@ -146,3 +146,8 @@ hr {
     background-color: #eee;
     /* Modern Browsers */
 }
+
+select[readonly] {
+    pointer-events: none;
+    touch-action: none;
+}

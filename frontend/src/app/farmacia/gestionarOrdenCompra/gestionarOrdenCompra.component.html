@@ -41,7 +41,7 @@
                 <td>{{ ordenCompraL.proveedor }}</td>
                 <td>{{ ordenCompraL.fecha }}</td>
                 <td>{{ ordenCompraL.formaPago }}</td>
-                <td>{{ ordenCompraL.totalD }}</td>
+                <td>S/. {{ ordenCompraL.totalD }}</td>
                 <td>{{ ordenCompraL.estado }}</td>
 
                 <td>
@@ -205,11 +205,11 @@
                                         <div *ngIf="cantidad.hasError('pattern')">
                                             <span style="color: red;">*La cantidad son solo numeros</span>
                                         </div>
-                                        <input type="text" name="cantidad" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOC.cantidad" class="form-control" placeholder="Cantidad" ngModel #cantidad="ngModel" required pattern="[0-9]+">
+                                        <input type="text" name="cantidad" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOC.cantidad" class="form-control" placeholder="Cantidad" ngModel #cantidad="ngModel" required pattern="[0-9]+" minlength="1" maxlength="2">
 
 
                                     </div>
-                                    <input type="hidden" name="unidad" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.unidad" class="form-control" placeholder="Unidad" ngModel #unidad="ngModel" pattern="[a-zA-Z0-9- ]+">
+                                    <input type="hidden" name="unidadList" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.unidad" class="form-control" placeholder="Unidad" ngModel #unidad="ngModel" pattern="[a-zA-Z0-9- ]+">
                                     <div style="display: inline-block; padding-right: 20px;">
 
                                         <div *ngIf="unidad.hasError('pattern')">
@@ -217,26 +217,55 @@
                                         </div>
                                         <!--LISTA MEDICAMENTO-->
                                         <fieldset class="form-group">
-                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.unidad" name="unidad" class="form-control">
+                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.unidad" name="unidadList" class="form-control">
                                         <option disabled>Unidad.</option>
                                         
                                         
-                                            <option value="Caja 25 capsulas">Caja 25 capsulas</option>
-                                            <option value="Caja 50 capsulas" >Caja 50 capsulas</option>
-                                            <option value="Caja 100 capsulas">Caja 100 capsulas</option>
+                                            <option value="25 capsulas">25 capsulas</option>
+                                            <option value="50 capsulas" >50 capsulas</option>
+                                            <option value="100 capsulas">100 capsulas</option>
 
                                         
                                      </select>
                                         </fieldset>
                                     </div>
-                                    <input type="hidden" name="precio" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOC.precio" class="form-control" placeholder="PrecioUnitario" ngModel #precio="ngModel">
+
+
+                                    <div style="display: inline-block; padding-right: 20px; margin-top: 15px;">
+
+                                        <div *ngIf="PrecioPorLote.hasError('required')">
+                                            <span style="color: red;">*El Precio por lote Requerido</span>
+                                        </div>
+                                        <div *ngIf="PrecioPorLote.hasError('pattern')">
+                                            <span style="color: red;">*El Precio por lote son solo numeros</span>
+                                        </div>
+
+                                        <input name="precio" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOC.precio" class="form-control" placeholder="Precio Por Lote" ngModel #PrecioPorLote="ngModel" required pattern="[0-9]+" minlength="1" maxlength="4">
+
+                                    </div>
+
                                     <input type="hidden" name="total" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOC.total" class="form-control" placeholder="Total" ngModel #total="ngModel">
+
+
+                                    <div style="display: inline-block; padding-right: 20px; margin-top: 15px;">
+
+                                        <div *ngIf="tipo.hasError('required')">
+                                            <span style="color: red;">*El Tipo es requerido</span>
+                                        </div>
+
+                                        <input name="tipo" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOC.tipo" class="form-control" placeholder="Tipo" ngModel #tipo="ngModel" required>
+
+
+                                    </div>
+
+
+                                    <input type="hidden" name="unidad" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOC.tipoUnidad" class="form-control" placeholder="TipoUnidad" ngModel #tipoUnidad="ngModel">
 
 
                                     <!--                                <button class="btn btn-primary button-agregar" (click)="addMedicamentoOC(categoriasRForm)" (click)="getCategorias()" (click)="getMedicamentosOCByCodigo(categoriasRForm)" (click)="verificarArregloMedOC()" (click)="onCloseAlert()">Añadir</button>
 -->
 
-                                    <button class="btn btn-primary button-agregar" (click)="formExcepciones(medicamentoROCForm)" (click)="addMedicamentoOC(medicamentoROCForm)">Añadir</button>
+                                    <button class="btn btn-primary button-agregar" (click)="formExcepciones(medicamentoROCForm)" (click)="tipoUnidadText()" (click)="addMedicamentoOC(medicamentoROCForm)">Añadir</button>
 
                                     <button class="btn btn-primary button-agregar2" id='cerrarModalR' (click)="resetForm(medicamentoROCForm)" data-dismiss="modal">CerrarModal</button>
 
@@ -291,8 +320,8 @@
                                             <th>Medicamento</th>
                                             <th>Laboratorio</th>
                                             <th>Unidad</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
+                                            <th>Lote</th>
+                                            <th>PrecioxLote</th>
                                             <th>Total</th>
 
 
@@ -387,7 +416,7 @@
 
 
                         <div class="ordenCompra-div" style="border:1.5px solid rgb(211, 211, 211);">
-                            <h3 style="margin-left: 10px;  color: #3498db; ">Orden Compra</h3>
+                            <h3 style="margin-left: 10px;  color: #3498db; margin-top: 7px;">Orden Compra</h3>
                             <hr>
                             <div class="form-group form-inline" style="text-align: center;">
                                 <input type="hidden" name="_id" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompraA._id">
@@ -458,8 +487,8 @@
                         </div>
                         <form #medicamentosOCForm="ngForm">
 
-                            <div class="ordenCompra-div" style="margin-top: 20px;  border:1.5px solid rgb(211, 211, 211);">
-                                <h3 style="margin-left: 10px;  color: #3498db; ">Medicamentos</h3>
+                            <div class="ordenCompra-div" style="margin-top: 10px;  border:1.5px solid rgb(211, 211, 211);">
+                                <h3 style="margin-left: 10px;  color: #3498db; margin-top: 7px;">Medicamentos</h3>
                                 <hr>
                                 <div class="form-group form-inline" style="text-align: center;">
                                     <input type="hidden" style="width: 80px;" name="codigo" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompraA.codigo" class="form-control" placeholder="Codigo" ngModel #codigo="ngModel" readonly>
@@ -523,11 +552,11 @@
                                         <div *ngIf="cantidadA.hasError('pattern')">
                                             <p style="color: red;">*La cantidad son solo numeros</p>
                                         </div>
-                                        <input type="text" name="cantidad" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOCA.cantidad" class="form-control" placeholder="Cantidad" ngModel #cantidadA="ngModel" required pattern="[0-9]+">
+                                        <input type="text" name="cantidad" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOCA.cantidad" class="form-control" placeholder="Cantidad" ngModel #cantidadA="ngModel" required pattern="[0-9]+" minlength="1" maxlength="2">
 
 
                                     </div>
-                                    <input type="hidden" name="unidad" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.unidad" class="form-control" placeholder="Unidad" ngModel #unidadA="ngModel" pattern="[a-zA-Z0-9- ]+">
+                                    <input type="hidden" name="unidadList" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.unidad" class="form-control" placeholder="Unidad" ngModel #unidadA="ngModel" pattern="[a-zA-Z0-9- ]+">
                                     <div style="display: inline-block; padding-right: 20px;">
 
                                         <div *ngIf="unidadA.hasError('pattern')">
@@ -535,26 +564,52 @@
                                         </div>
                                         <!--LISTA MEDICAMENTO-->
                                         <fieldset class="form-group">
-                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.unidad" name="unidad" class="form-control">
+                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.unidad" name="unidadList" class="form-control">
                                         <option disabled>Unidad.</option>
                                         
                                         
-                                            <option value="Caja 25 capsulas">Caja 25 capsulas</option>
-                                            <option value="Caja 50 capsulas" >Caja 50 capsulas</option>
-                                            <option value="Caja 100 capsulas">Caja 100 capsulas</option>
+                                            <option value="25 capsulas">25 capsulas</option>
+                                            <option value="50 capsulas" >50 capsulas</option>
+                                            <option value="100 capsulas">100 capsulas</option>
 
                                         
                                      </select>
                                         </fieldset>
                                     </div>
-                                    <input type="hidden" name="precio" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOCA.precio" class="form-control" placeholder="PrecioUnitario" ngModel #precio="ngModel">
-                                    <input type="hidden" name="total" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOCA.total" class="form-control" placeholder="Total" ngModel #total="ngModel">
 
+
+                                    <div style="display: inline-block; padding-right: 20px; margin-top: 15px;">
+
+                                        <div *ngIf="PrecioPorLoteA.hasError('required')">
+                                            <span style="color: red;">*El Precio por lote Requerido</span>
+                                        </div>
+                                        <div *ngIf="PrecioPorLoteA.hasError('pattern')">
+                                            <span style="color: red;">*El Precio por lote son solo numeros</span>
+                                        </div>
+
+                                        <input name="precio" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOCA.precio" class="form-control" placeholder="Precio Por Lote" ngModel #PrecioPorLoteA="ngModel" required pattern="[0-9]+" minlength="1" maxlength="4">
+
+                                    </div>
+
+                                    <input type="hidden" name="total" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOCA.total" class="form-control" placeholder="Total" ngModel #totalA="ngModel">
+
+                                    <div style="display: inline-block; padding-right: 20px; margin-top: 15px;">
+
+                                        <div *ngIf="tipoA.hasError('required')">
+                                            <span style="color: red;">*El Tipo es requerido</span>
+                                        </div>
+
+                                        <input name="tipo" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOCA.tipo" class="form-control" placeholder="Tipo" ngModel #tipoA="ngModel" required>
+
+
+                                    </div>
+
+                                    <input type="hidden" name="unidad" [(ngModel)]="gestionarOrdenCompraService.selectedMedicamentoOCA.tipoUnidad" class="form-control" placeholder="TipoUnidad" ngModel #tipoUnidadA="ngModel">
 
                                     <!--                                <button class="btn btn-primary button-agregar" (click)="addMedicamentoOC(categoriasRForm)" (click)="getCategorias()" (click)="getMedicamentosOCByCodigo(categoriasRForm)" (click)="verificarArregloMedOC()" (click)="onCloseAlert()">Añadir</button>
 -->
 
-                                    <button class="btn btn-primary button-agregar" (click)="formExcepcionesA(medicamentosOCForm)" (click)="addMedicamentoOCA(medicamentosOCForm)">Añadir</button>
+                                    <button class="btn btn-primary button-agregar" (click)="formExcepcionesA(medicamentosOCForm)" (click)="tipoUnidadTextA()" (click)="addMedicamentoOCA(medicamentosOCForm)">Añadir</button>
 
 
 
@@ -602,15 +657,15 @@
 
                         <div class="modal-footer" style="text-align: unset;">
 
-                            <div class="lista-medicamanetoOC" style="margin-top: 20px;  border:1.5px solid rgb(211, 211, 211);">
+                            <div class="lista-medicamanetoOC" style="margin-top: 5px;  border:1.5px solid rgb(211, 211, 211);">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>Medicamento</th>
                                             <th>Laboratorio</th>
                                             <th>Unidad</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
+                                            <th>Lote</th>
+                                            <th>PrecioXLote</th>
                                             <th>Total</th>
 
 
@@ -658,7 +713,7 @@
 
 
                         </div>
-                        <div class="ordenCompra-div" style="border:1.5px solid rgb(211, 211, 211); text-align: center;">
+                        <div class="ordenCompra-div" style="text-align: center;">
                             <div style="float: left; margin-top: -21px;">
                                 <ng-container *ngIf="prueba==true">
                                     <ngb-pagination [pageSize]="pageSize2" [collectionSize]="gestionarOrdenCompraService.medicamentoOCs.length" [(page)]="page2">
@@ -703,6 +758,7 @@
                 </div>
 
                 <div class="modal-body" style="padding-right: 60px;padding-left: 60px; padding-bottom: 310px;">
+                    <button class="btn btn-danger" style="margin-left: 1005px;" type="button" (click)="downloadPDF()"> <span> <i class="fa fa-file-pdf-o"></i></span> Descargar PDF</button>
                     <form #actualizarRForm="ngForm">
 
 
@@ -724,9 +780,8 @@
                                     <fieldset class="form-group">
                                         <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompraDetail.proveedor" readonly="readonly" (click)="cleanArregloPA()" (click)="getLabByProveedor(actualizarRForm)" name="proveedor" class="form-control">
                                         <option disabled>Proveedor.</option>
-                                        <ng-container *ngFor="let proveedor of gestionarOrdenCompraService.proveedores" >    
-                                            <option [value]="proveedor.nombre">{{proveedor.nombre}}</option>
-                                        </ng-container>
+                                            <option >{{gestionarOrdenCompraService.selectedOrdenCompraDetail.proveedor}}</option>
+                        
                                      </select>
                                     </fieldset>
                                 </div>
@@ -759,6 +814,8 @@
                                      </select>
                                     </fieldset>
                                 </div>
+                                <label class="labelFromR">Estado</label>
+
                                 <input type="hidden" name="estado" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompraDetail.estado" class="form-control" placeholder="Estado" ngModel #estado="ngModel" pattern="[a-zA-Z0-9- ]+">
 
                                 <fieldset class="form-group">
@@ -787,8 +844,8 @@
                                             <th>Medicamento</th>
                                             <th>Laboratorio</th>
                                             <th>Unidad</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
+                                            <th>Lote</th>
+                                            <th>PrecioXLote</th>
                                             <th>Total</th>
 
 
@@ -825,8 +882,99 @@
 
                             </div>
 
+                            <!--  -----------------------------------------------------------------------------------------------------  -->
+
+                            <div class="lista-medicamanetoOC" style="margin-top: 20px;  border:1.5px solid rgb(211, 211, 211); display: none;">
+                                <table id="my-table" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Medicamento</th>
+                                            <th>Laboratorio</th>
+                                            <th>Unidad</th>
+                                            <th>Lote</th>
+                                            <th>PrecioXLote</th>
+                                            <th>Total</th>
 
 
+                                        </tr>
+
+                                    </thead>
+                                    <ng-container *ngIf="prueba==true">
+
+                                        <tbody>
+                                            <!-- -->
+
+
+
+                                            <tr *ngFor="let medicamentoOC of gestionarOrdenCompraService.medicamentoOCs">
+
+                                                <td>{{ medicamentoOC.medicamento }}</td>
+                                                <td>{{ medicamentoOC.laboratorio }}</td>
+                                                <td>{{ medicamentoOC.unidad }}</td>
+                                                <td>{{ medicamentoOC.cantidad }}</td>
+                                                <td>S/.{{ medicamentoOC.precio }}</td>
+                                                <td>S/.{{ medicamentoOC.total }}</td>
+
+
+
+
+                                            </tr>
+
+                                        </tbody>
+                                    </ng-container>
+                                </table>
+
+
+
+
+                            </div>
+
+                            <!--  -----------------------------------------------------------------------------------------------------  -->
+                            <div class="lista-medicamanetoOC" style="margin-top: 20px;  border:1.5px solid rgb(211, 211, 211); display: none;">
+                                <table id="my-table2" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Proveedor</th>
+                                            <th>Fecha Emision</th>
+                                            <th>Forma Pago</th>
+                                            <th>Estado</th>
+                                            <th>Total de Orden</th>
+
+                                        </tr>
+
+                                    </thead>
+                                    <ng-container *ngIf="prueba==true">
+
+                                        <tbody>
+                                            <!-- -->
+
+                                            <tr>
+
+
+                                                <td>{{ gestionarOrdenCompraService.selectedOrdenCompraDetail.codigo }}</td>
+                                                <td>{{ gestionarOrdenCompraService.selectedOrdenCompraDetail.proveedor }}</td>
+                                                <td>{{ gestionarOrdenCompraService.selectedOrdenCompraDetail.fecha}}</td>
+                                                <td>{{ gestionarOrdenCompraService.selectedOrdenCompraDetail.formaPago }}</td>
+                                                <td>{{ gestionarOrdenCompraService.selectedOrdenCompraDetail.estado }}</td>
+                                                <td>{{ gestionarOrdenCompraService.selectedOrdenCompraDetail.totalD }}</td>
+
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </ng-container>
+                                </table>
+
+
+
+
+                            </div>
+                            <!--  -----------------------------------------------------------------------------------------------------  -->
+                            <!--  -----------------------------------------------------------------------------------------------------  -->
+                            <!--  -----------------------------------------------------------------------------------------------------  -->
+                            <!--  -----------------------------------------------------------------------------------------------------  -->
 
 
 

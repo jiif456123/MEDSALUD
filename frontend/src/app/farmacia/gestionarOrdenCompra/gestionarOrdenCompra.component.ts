@@ -1,19 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { GestionarOrdenCompraService } from 'Services/gestionarOrdenCompra.service';
 import { NgForm, FormGroup,FormControl, Validators } from '@angular/forms'; //para add
+<<<<<<< HEAD
 import { OrdenCompra,OrdenCompra2 } from '../../../models/gestionarOrdenCompra.model';
 
 import {Gestionarp} from '../../../models/gestionarp.model';
+=======
+import { OrdenCompra } from '../../../models/gestionarOrdenCompra.model';
+import {OrdenCompra2} from '../../../models/gestionarOrdenCompra2.model';
+
+import {Gestionarp} from '../../../models/gestionarpAx.model';
+import {ProveedorLab} from '../../../models/provedorLab.model';
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
 
 import { element } from 'protractor';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {DatePipe} from '@angular/common';
 
+<<<<<<< HEAD
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
 
+=======
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
 
 @Component({
   selector: 'app-ordenCompra',
@@ -77,6 +88,7 @@ public sumaTotal=0;
 
   }
 
+<<<<<<< HEAD
   downloadPDF() {
 
    
@@ -87,6 +99,8 @@ public sumaTotal=0;
     }
 
 
+=======
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
   onNombreChange(change){
     if(change==""){
       console.log("es requirido este campo!");
@@ -203,7 +217,11 @@ public sumaTotal=0;
     this.gestionarOrdenCompraService.getMedPriceAStockByNombre(form.value.medicamento).subscribe(
       res =>{
         this.gestionarOrdenCompraService.medicamentosPSs= res;
+<<<<<<< HEAD
       // this.gestionarOrdenCompraService.selectedMedicamentoOC.precio = this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario;
+=======
+       this.gestionarOrdenCompraService.selectedMedicamentoOC.precio = this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario;
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
        this.gestionarOrdenCompraService.selectedMedicamentoPS.stockActual = this.gestionarOrdenCompraService.medicamentosPSs[0].stockActual;
     
        console.log(this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario);
@@ -217,7 +235,11 @@ public sumaTotal=0;
     this.gestionarOrdenCompraService.getMedPriceAStockByNombre(form.value.medicamento).subscribe(
       res =>{
         this.gestionarOrdenCompraService.medicamentosPSs= res;
+<<<<<<< HEAD
       // this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio = this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario;
+=======
+       this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio = this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario;
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
        this.gestionarOrdenCompraService.selectedMedicamentoPSA.stockActual = this.gestionarOrdenCompraService.medicamentosPSs[0].stockActual;
     
        console.log(this.gestionarOrdenCompraService.medicamentosPSs[0].precioUnitario);
@@ -228,13 +250,21 @@ public sumaTotal=0;
   
   multiplicarPriceAndCantidad(){
 
+<<<<<<< HEAD
     this.gestionarOrdenCompraService.selectedMedicamentoOC.total=Math.round(this.gestionarOrdenCompraService.selectedMedicamentoOC.precio*this.gestionarOrdenCompraService.selectedMedicamentoOC.cantidad);
+=======
+    this.gestionarOrdenCompraService.selectedMedicamentoOC.total=this.gestionarOrdenCompraService.selectedMedicamentoOC.precio*this.gestionarOrdenCompraService.selectedMedicamentoOC.cantidad;
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
     
   }
 
   multiplicarPriceAndCantidadA(){
 
+<<<<<<< HEAD
     this.gestionarOrdenCompraService.selectedMedicamentoOCA.total=Math.round(this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio*this.gestionarOrdenCompraService.selectedMedicamentoOCA.cantidad);
+=======
+    this.gestionarOrdenCompraService.selectedMedicamentoOCA.total=this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio*this.gestionarOrdenCompraService.selectedMedicamentoOCA.cantidad;
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
     
   }
 
@@ -242,6 +272,7 @@ public sumaTotal=0;
 
   //TODO: agregar un medicamento segun el codigo del proveedor
 
+<<<<<<< HEAD
 
   tipoUnidadText(){
     this.gestionarOrdenCompraService.selectedMedicamentoOC.tipoUnidad=this.gestionarOrdenCompraService.selectedMedicamentoOC.tipo +" x "+this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad;
@@ -253,6 +284,9 @@ public sumaTotal=0;
   }
   addMedicamentoOC(form: NgForm){
     
+=======
+  addMedicamentoOC(form: NgForm){
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
   if(this.isError==false && this.isError2==false){
     this.gestionarOrdenCompraService.createMedicamentoOC(form.value).subscribe(
       (res)=> {
@@ -267,7 +301,11 @@ public sumaTotal=0;
 
     );
   }
+<<<<<<< HEAD
   
+=======
+   
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
     }
 
     addMedicamentoOCA(form: NgForm){
@@ -626,10 +664,13 @@ getLabByProveedorA(proveedor: string){
       this.gestionarOrdenCompraService.selectedMedicamentoPS.stockActual=null;
       this.gestionarOrdenCompraService.selectedMedicamentoOC.precio=null;
       this.gestionarOrdenCompraService.selectedMedicamentoOC.total=null;
+<<<<<<< HEAD
       this.gestionarOrdenCompraService.selectedMedicamentoOC.tipo=null;
       this.gestionarOrdenCompraService.selectedMedicamentoOC.tipoUnidad=null;
 
 
+=======
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
     }
 /*
 

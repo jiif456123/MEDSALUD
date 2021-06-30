@@ -20,6 +20,7 @@ export class OrdenCompraCodigo{ //para describir que va a tener la Categoria el 
  
     totalD:   number;
     //total: number;
+<<<<<<< HEAD
 } 
 export class OrdenCompra2{ //para describir que va a tener la Categoria el arreglo
     _id?:string;
@@ -37,3 +38,6 @@ export class OrdenCompra2{ //para describir que va a tener la Categoria el arreg
     unidad:   string;
     //total: number;
 } 
+=======
+} 
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6

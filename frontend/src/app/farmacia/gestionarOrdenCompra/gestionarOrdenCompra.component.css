@@ -161,9 +161,12 @@ hr {
     /* old IE */
     background-color: #eee;
     /* Modern Browsers */
+<<<<<<< HEAD
 }
 
 select[readonly] {
     pointer-events: none;
     touch-action: none;
+=======
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
 }

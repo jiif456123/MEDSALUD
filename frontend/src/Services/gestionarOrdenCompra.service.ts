@@ -1,11 +1,24 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
+<<<<<<< HEAD
 import {OrdenCompra, OrdenCompraCodigo, OrdenCompra2} from '../models/gestionarOrdenCompra.model';
 
 import { Medicamento, MedicamentoN } from '../models/medicamento.model';
 import { MedicamentoOC,MedicamentoPS } from '../models/medicamentoOC.model';
 
 import {Gestionarp, ProveedorLab} from '../models/gestionarp.model';
+=======
+import {OrdenCompra, OrdenCompraCodigo} from '../models/gestionarOrdenCompra.model';
+import {OrdenCompra2} from '../models/gestionarOrdenCompra2.model';
+
+import { ProveedorLab } from '../models/provedorLab.model';
+import { Medicamento } from '../models/medicamentoAux.model';
+import { MedicamentoN } from '../models/medicamentoN.model';
+import { MedicamentoOC } from '../models/medicamentoOC.model';
+import { MedicamentoPS } from '../models/MedicamentoPS.model';
+
+import {Gestionarp} from '../models/gestionarpAx.model';
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
 import { Categoria } from '../models/categoria.model';
 
 
@@ -76,7 +89,19 @@ export class GestionarOrdenCompraService{
   estado: '',
   totalD: null,
 };
+<<<<<<< HEAD
 
+=======
+/*
+   _id?: string;
+    nombre:  string ;
+    contacto : string;
+    email:string;
+    estado: string;
+    telefono:number;
+    laboratorio:string;
+*/
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
  selectedProveedor: Gestionarp={
   nombre: '',
   contacto: '',
@@ -103,6 +128,26 @@ selectedProveedor3: ProveedorLab={
   laboratorio: '',
 };
 
+<<<<<<< HEAD
+=======
+selectedMedicamento: Medicamento={
+  
+  codigo:'',
+     nombre: '',
+    disponibilidad: null,
+    dosis: '',
+    presentacion:'',
+    precioUnitario: null,
+    marca:  '',
+    categoria: '',
+    ubicacion: '',
+    stockMin: null,
+    stockMax: null,
+    stockActual: null,
+    detalles: '',
+
+};
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
 
 selectedMedicamentoPS: MedicamentoPS={
   
@@ -121,8 +166,13 @@ selectedMedicamentoPSA: MedicamentoPS={
 };
 selectedMedicamento2: MedicamentoN={
   
+<<<<<<< HEAD
     codigo:'',
     nombre: '',
+=======
+  codigo:'',
+     nombre: '',
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
     disponibilidad: null,
     dosis: '',
     presentacion:'',
@@ -157,23 +207,34 @@ selectedMedicamentoOC: MedicamentoOC={
     precio: null,
     total:  null,
     unidad: '',
+<<<<<<< HEAD
     tipo: '',
     tipoUnidad: '',
 
+=======
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
 
 };
 selectedMedicamentoOCA: MedicamentoOC={
 
+<<<<<<< HEAD
     codigo:'',
     laboratorio: '',
+=======
+  codigo:'',
+     laboratorio: '',
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
     categoria: '',
     medicamento: '',
     cantidad:null,
     precio: null,
     total:  null,
     unidad: '',
+<<<<<<< HEAD
     tipo: '',
     tipoUnidad: '',
+=======
+>>>>>>> 4121220a906438f6c9387faee3613f77afc6e3e6
 
 };
   /*

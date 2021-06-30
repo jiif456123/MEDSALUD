@@ -134,6 +134,34 @@ var user = new Schema({
 
 var modelUser = mongoose.model('User', user);
 
+var recetaMedica = new Schema({
+    paciente: { type: Schema.Types.ObjectId, ref: 'Paciente' },
+    indicacion: { type: String },
+    medicina: [{
+        nombre: { type: String },
+        forma: { type: String },
+        duracion: { type: String },
+        cantidad: { type: Number },
+        dosis: { type: Number },
+        indicacion: { type: String },
+    }],
+    fecha: { type: Date },
+}, {
+    versionKey: false
+});
+var modelRecetaMedica = mongoose.model('RecetaMedica', recetaMedica);
+
+var detalleRecetaMedica = new Schema({
+    recetaMedica: { type: Schema.Types.ObjectId, ref: 'RecetaMedica' },
+    forma: { type: String },
+    duracion: { type: String },
+    cantidad: { type: Number },
+    dosis: { type: Number },
+    indicacion: { type: String },
+}, {
+    versionKey: false
+});
+var modelDetalleRecetaMedica = mongoose.model('DetalleRecetaMedica', detalleRecetaMedica);
 
 module.exports = {
     modelPaciente: modelPaciente,
@@ -144,4 +172,6 @@ module.exports = {
     modelHistoria: modelHistoria,
     modelCita: modelCita,
     modelUser: modelUser,
+    modelRecetaMedica: modelRecetaMedica,
+    modelDetalleRecetaMedica: modelDetalleRecetaMedica
 }

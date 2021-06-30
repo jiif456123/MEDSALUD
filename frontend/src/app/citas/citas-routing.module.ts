@@ -12,6 +12,8 @@ import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.compo
 import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
 import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
+import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
+import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
 
 const routes: Routes = [
 
@@ -51,6 +53,15 @@ const routes: Routes = [
   {
     path: "consultar-horario", component: ConsultarHorarioComponent, data: { title: 'Consultar horario' }
   },
+  {
+    path: "gestionar-receta-medica", component: GestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  },
+  {
+    path: "gestionar-receta-medica/registrar", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  }, 
+  {
+    path: "gestionar-receta-medica/:id", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  }
 ];
 
 @NgModule({

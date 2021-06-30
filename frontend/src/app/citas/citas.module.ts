@@ -16,13 +16,15 @@ import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialid
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.component';
-
 import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/daygrid';
+import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
+import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
+import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
 
 FullCalendarModule.registerPlugins([ 
   dayGridPlugin,
@@ -43,6 +45,11 @@ FullCalendarModule.registerPlugins([
     ChatBotComponent,
     ConsultarHorarioComponent,
     ConsultarAgendaComponent,
+    GestionarRecetaMedicaComponent,
+    RegGestionarRecetaMedicaComponent,
+    DetalleGestionarRecetaMedicaComponent,
+    RegGestionarRecetaMedicaComponent,
+    DetalleGestionarRecetaMedicaComponent
   ],
   imports: [
     CommonModule,

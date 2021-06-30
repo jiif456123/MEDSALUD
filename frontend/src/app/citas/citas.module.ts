@@ -14,7 +14,10 @@ import { EspecialidadRegistradoComponent } from '../../app/citas/GestEspecialida
 import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especialidad.component';
 import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
+import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
+import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
+
 @NgModule({
   declarations: [
     GestionarCitasComponent,
@@ -24,7 +27,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GestionarPerfilComponent,
     EspecialidadComponent,
     EspecialidadRegistradoComponent,
-    EspecialidadActualizadoComponent
+    EspecialidadActualizadoComponent,
+    GestionarRecetaMedicaComponent,
+    RegGestionarRecetaMedicaComponent,
+    DetalleGestionarRecetaMedicaComponent,
+    RegGestionarRecetaMedicaComponent,
+    DetalleGestionarRecetaMedicaComponent
   ],
   imports: [
     CommonModule,

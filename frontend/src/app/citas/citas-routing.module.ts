@@ -8,6 +8,8 @@ import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-pacie
 import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especialidad.component';
 import { EspecialidadRegistradoComponent } from '../../app/citas/GestEspecialidad/reg-especialidad/gest-especialidad.component';
 import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
+import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
+import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
 
 const routes: Routes = [
 
@@ -35,7 +37,15 @@ const routes: Routes = [
   {
     path: "gestionar-perfil", component: GestionarPerfilComponent, data: { title: 'Gestionar Historia' }
   },
-
+  {
+    path: "gestionar-receta-medica", component: GestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  },
+  {
+    path: "gestionar-receta-medica/registrar", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  }, 
+  {
+    path: "gestionar-receta-medica/:id", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+  }
 ];
 
 @NgModule({

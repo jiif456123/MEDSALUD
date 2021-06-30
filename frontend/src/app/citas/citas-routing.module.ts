@@ -9,6 +9,9 @@ import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especial
 import { EspecialidadRegistradoComponent } from '../../app/citas/GestEspecialidad/reg-especialidad/gest-especialidad.component';
 import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
 import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.component';
+import { ChatBotComponent } from './chat-bot/chat-bot.component';
+import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
+import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
 
 const routes: Routes = [
 
@@ -39,8 +42,15 @@ const routes: Routes = [
   {
     path: "cambiar-contra", component: CambiarContraComponent, data: { title: 'Cambiar Contraseña' }
   },
- 
-
+  {
+    path: "chat-bot", component: ChatBotComponent, data: { title: 'ChatBot' }
+  },
+  {
+    path: "consultar-agenda", component: ConsultarAgendaComponent, data: { title: 'Consultar agenda' }
+  },
+  {
+    path: "consultar-horario", component: ConsultarHorarioComponent, data: { title: 'Consultar horario' }
+  },
 ];
 
 @NgModule({

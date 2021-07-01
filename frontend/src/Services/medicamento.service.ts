@@ -56,7 +56,7 @@ export class MedicamentoService{
 
     getByNombre(nombre: string) {
       if(nombre!=''){
-        return this.http.get<any>(this.URL_API + `/${nombre}`);
+        return this.http.get<any>(this.URL_API + `busqueda/${nombre}`);
       }else{
         return this.http.get<any>(this.URL_API);
       }

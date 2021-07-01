@@ -5,7 +5,7 @@ import { EjemplarEquipoMedico } from '../../../../models/ejemplarEquipoMedico.mo
 import { FormGroup,Validators, FormBuilder } from '@angular/forms';
 import { EquiposMedicosService } from 'Services/equiposMedicos.service';
 import { EquiposMedicos } from '../../../../models/equiposMedicos.model';
-import $ = require("jquery");
+import { formatDate} from '@angular/common';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-listarEquipoMedico',

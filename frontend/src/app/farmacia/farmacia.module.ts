@@ -13,6 +13,7 @@ import {RegistrarMedicoComponent} from '../farmacia/equiposMedicos/registrarEqui
 import {EquiposMedicosComponent} from './equiposMedicos/ListarEquipoMedico/equiposMedicos.component';
 import {ActualizarEMComponent} from '../farmacia/equiposMedicos/actualizarEquipoMedico/actualizarEquipoMedico';
 import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoMedico/ejemplaresEquipoMedico';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -43,8 +44,9 @@ import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoM
     ReactiveFormsModule,
     MatTabsModule,
     ReactiveFormsModule
-
   ],
-
+  providers: [
+    DatePipe
+  ],  
 })
 export class FarmaciaModule { }

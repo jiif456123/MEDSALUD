@@ -5,15 +5,7 @@ import { environment } from '../environments/environment';
 import { Subject } from 'rxjs';
 @Injectable()
 export class EjemplarEquipoMedicoService{
-    selectedEjemplarEquipoMedico: EjemplarEquipoMedico = {     
-        idEquipoMedico: '',   
-        _id: '',
-        ubicacion:'',
-        estado:'',
-        solicitante:'',
-        fechaEntrega: '',
-        fechaDevolucion: ''      
-    };
+
     urlEndPoint: string = environment.endpoint.concat('/farmacia/EjemplarEquiposMedicos'); //'http://localhost:3000/productos'
     ejemplarEquipoMedico: EjemplarEquipoMedico[]; 
     readonly URL_API= "http://localhost:3000/farmacia/EjemplarEquiposMedicos";

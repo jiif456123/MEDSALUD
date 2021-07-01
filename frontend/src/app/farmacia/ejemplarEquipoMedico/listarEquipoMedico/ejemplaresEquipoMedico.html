@@ -25,8 +25,8 @@
                     <td>{{ ejemplarEquipoMedico.ubicacion }}</td>
                     <td>{{ ejemplarEquipoMedico.estado }}</td>
                     <td>{{ ejemplarEquipoMedico.solicitante }}</td>
-                    <td>{{ ejemplarEquipoMedico.fechaEntrega }}</td>
-                    <td>{{ ejemplarEquipoMedico.fechaDevolucion }}</td>
+                    <td>{{ ejemplarEquipoMedico.fechaEntrega | date: "MM/dd/yyyy" }}</td>
+                    <td>{{ ejemplarEquipoMedico.fechaDevolucion | date: "MM/dd/yyyy" }}</td>
                     <td>
                         <button (click)="openModal(ejemplarEquipoMedico)" type="button" class="btn btn-success">
                                 <i class="pe-7s-pen"></i>     
@@ -90,7 +90,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-default" (click)="getEjemplarEquipoMedico()" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary" (click)="update()">Guardar</button>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import { FormGroup,Validators, FormBuilder } from '@angular/forms';
 import { EquiposMedicosService } from 'Services/equiposMedicos.service';
 import { EquiposMedicos } from '../../../../models/equiposMedicos.model';
 import $ = require("jquery");
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-listarEquipoMedico',
   templateUrl: './ejemplaresEquipoMedico.html',
@@ -18,13 +19,11 @@ EjemplaEquipoMedicoComponent implements OnInit {
   @ViewChild('modalActualizar') modalActualizar: ElementRef;
   formEquipoMedico: FormGroup;
   id:string;
-  public estadoD:boolean = false;
-  public estadoO:boolean = false;
   formEjemplarActualizar: FormGroup;  
   ejemplarSeleccionado: EjemplarEquipoMedico;
   equipoMedico: EquiposMedicos;
   constructor(
-
+    private datePipe: DatePipe,
     public ejemplarEquipoMedicoService: EjemplarEquipoMedicoService, 
     public equiposMedicosService: EquiposMedicosService,
     private route:ActivatedRoute,
@@ -34,7 +33,7 @@ EjemplaEquipoMedicoComponent implements OnInit {
    ngOnInit(): void {
     this.equipoMedico = new EquiposMedicos();
     this.id = this.route.snapshot.params['id'];
-    this.getEjemplarEquipoMedico(this.id);  
+    this.getEjemplarEquipoMedico();  
     this.formEjemplarActualizar = this.fb.group({
       idEquipo: ['', [Validators.required]],
       ubicacion: ['', [Validators.required]],
@@ -45,8 +44,8 @@ EjemplaEquipoMedicoComponent implements OnInit {
     });    
   }
 
-  getEjemplarEquipoMedico(id) { 
-    this.ejemplarEquipoMedicoService.getEjemplarEquipoMedicoId(id).subscribe(
+  getEjemplarEquipoMedico() { 
+    this.ejemplarEquipoMedicoService.getEjemplarEquipoMedicoId(this.id).subscribe(
       res =>{
         this.ejemplarEquipoMedicoService.ejemplarEquipoMedico= res;
         console.log(res);
@@ -68,9 +67,8 @@ EjemplaEquipoMedicoComponent implements OnInit {
     this.formEjemplarActualizar.controls.ubicacion.setValue(row.ubicacion); 
     this.formEjemplarActualizar.controls.estado.setValue(row.estado);
     this.formEjemplarActualizar.controls.solicitante.setValue(row.solicitante);
-    this.formEjemplarActualizar.controls.fechaEntrega.setValue(row.fechaEntrega);
-    this.formEjemplarActualizar.controls.fechaDevolucion.setValue(row.fechaDevolucion); 
-    this.checkedEstado();    
+    this.formEjemplarActualizar.controls.fechaEntrega.setValue(this.datePipe.transform(row.fechaEntrega,"yyyy-MM-dd")); 
+    this.formEjemplarActualizar.controls.fechaDevolucion.setValue(this.datePipe.transform(row.fechaDevolucion,"yyyy-MM-dd"));   
     this.getEquipoMedico(this.id);          
   }  
   update(){
@@ -107,10 +105,6 @@ EjemplaEquipoMedicoComponent implements OnInit {
     }  
 
   }  
-  checkedEstado(){        
-     if(this.ejemplarSeleccionado.estado == 'Disponible')  this.estadoD = true;
-     else if (this.ejemplarSeleccionado.estado == 'Ocupado') this.estadoO = true;
-  }
   updateCantidad(){
     let est = this.formEjemplarActualizar.controls.estado.value;
     if(est == 'Disponible'){
@@ -122,7 +116,6 @@ EjemplaEquipoMedicoComponent implements OnInit {
     }
     console.log(est);
   }
-
   get ubicacion(){return this.formEjemplarActualizar.get('ubicacion');}
   get solicitante(){return this.formEjemplarActualizar.get('solicitante');}
 

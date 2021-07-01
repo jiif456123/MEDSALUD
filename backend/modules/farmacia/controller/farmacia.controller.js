@@ -11,7 +11,7 @@ const ejemplarEquipoMedicoController = require('../ejemplarEquipoMedico/controll
 
 router.use('/medicamento', medicamentoController);
 router.use('/movimientoM', movimientoMController);
-router.use('/proveedor', proveedorController); 
+router.use('/proveedor', proveedorController);
 router.use('/gestionarCategorias', gestionarCategoriasController);
 router.use('/gestionarOrdenCompra', gestionarOrdenCompraController);
 router.use('/gestionaroMedicamentoOC', gestionarMedicamentoOCController);

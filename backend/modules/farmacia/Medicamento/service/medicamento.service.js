@@ -56,7 +56,7 @@ var updateMedicamento = (id, medicamento) => {
 };
 
 var getByNombre = async(req, res) => {
-    
+
     const medicamentos = await Medicamento.find({ nombre: { $regex: req.params.nombre } });
 
     res.json(medicamentos);
@@ -70,7 +70,7 @@ var listarMedicamento = async(req, res) => {
 
 var listarMedicamentoCategorias = async(req, res) => {
     const medicamento = await gestionarMedicamento.distinct('categoria');
-    res.json(medicamento);
+    res.json(medicamento); //categoria
 };
 
 

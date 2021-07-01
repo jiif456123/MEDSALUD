@@ -1,4 +1,6 @@
 var Proveedor = require("../proveedor/proveedor.model");
+const proveedor = require("../proveedor/proveedor.model");
+
 var Laboratorio = require("../proveedor/laboratorio.model")
 const proveedorService = {};
 
@@ -7,22 +9,22 @@ proveedorService.listarProveedores = async(req, res) => {
     res.json(proveedor);
 };
 
-proveedorService.registrarProveedores = async (req, res) => {
-  const proveedor = new Proveedor({
-    nombre: req.body.nombre,
-    contacto : req.body.contacto,
-    email: req.body.email,
-    estado: req.body.estado,
-    telefono: req.body.telefono,
-    laboratorio: req.body.laboratorio,
-  });
+proveedorService.registrarProveedores = async(req, res) => {
+    const proveedor = new Proveedor({
+        nombre: req.body.nombre,
+        contacto: req.body.contacto,
+        email: req.body.email,
+        estado: req.body.estado,
+        telefono: req.body.telefono,
+        laboratorio: req.body.laboratorio,
+    });
 
-  await proveedor.save();
-  res.json({ status: "Proveedor agregado" });
+    await proveedor.save();
+    res.json({ status: "Proveedor agregado" });
 };
 
 
-proveedorService.actualizarProveedor = async (req,res) =>{
+proveedorService.actualizarProveedor = async(req, res) => {
     var _id = req.params.id;
     const proveedor = await Proveedor.findByIdAndUpdate({ _id }, {
         nombre: req.body.nombre,

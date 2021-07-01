@@ -1,9 +1,14 @@
-<div>
-
-    <button type="button" class="btn btn-primary btn-add" [routerLink]="['/farmacia/RegistrarEquipoMedico']">
-        Registrar
-      </button>
-    <table class="table table-striped">
+<div class="container cont">
+    <h1>Gestionar Equipos Medicos</h1>
+    <div class="row" style="margin: 30px 0px;">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary boton-registrar"  [routerLink]="['/farmacia/RegistrarEquipoMedico']">
+                Registrar Equipo
+            </button>
+        </div>
+    </div>
+    
+    <table class="table styled-table" style="text-align: center;">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -12,6 +17,7 @@
                 <th>Cantidad</th>
                 <th>Disponibles</th>
                 <th>Ocupados</th>
+                <th>Opciones</th>
             </tr>
 
         </thead>
@@ -27,9 +33,7 @@
                 <td>{{ equiposMedicos.noDisponible }}</td>
                 <td>
                     <button class="btn btn-secondary" (click)="updateEquipoMedico(equiposMedicos)"> <i class="pe-7s-pen"></i></button>
-                </td>
-                <td>
-                    <button class="btn btn-secondary" [routerLink]="['/farmacia/EjemplaresEquipoMedico/',equiposMedicos._id]"> <i class="pe-7s-look"></i></button>
+                    <button class="btn btn-secondary" [routerLink]="['/farmacia/EjemplaresEquipoMedico/',equiposMedicos._id]"> <i class="pe-7s-look"></i></button>         
                 </td>
             </tr>
         </tbody>

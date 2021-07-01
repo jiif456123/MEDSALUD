@@ -5,14 +5,6 @@
     border-color: #5881b2;
     font-family: 'Roboto';
 }
-
-table,
-th {
-    text-align: center;
-    font-family: 'Candara';
-    font-size: small;
-}
-
 .btn-cancel {
     color: white;
     background: #3a3e42;

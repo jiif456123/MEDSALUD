@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const proveedorController = require('../proveedor/proveedor.controller')
 const medicamentoController = require('../Medicamento/controller/medicamento.controller');
+const gestionarOrdenCompraController = require('../gestionarOdenCompra/controller/gestionarOrdenCompra.controller');
 const movimientoMController = require('../Movimiento medicamento/controller/movimientoM.controller');
 const gestionarCategoriasController = require('../gestionarCategorias/controller/gestionarCategorias.controller')
-const gestionarOrdenCompraController = require('../gestionarOdenCompra/controller/gestionarOrdenCompra.controller')
 const gestionarMedicamentoOCController = require('../medicamentoOC/controller/medicamentoOC.controller')
 const equiposMedicosController = require('../../farmacia/equiposMedicos/controller/equiposMedicos.controller')
 const ejemplarEquipoMedicoController = require('../ejemplarEquipoMedico/controller/ejemplarEquipoMedico.controller')

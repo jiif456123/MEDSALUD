@@ -96,7 +96,19 @@ table {
     margin-top: -23px;
 }
 
+.btn-descripcion {
+    color: #3498db;
+    border-color: #3498db;
+}
 
+.btn-actualizar {
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.head-text {
+    color: #3498db;
+}
 
 .head-div {
     margin-bottom: 50px;
@@ -125,6 +137,10 @@ table {
     margin-left: 260px;
 }
 
+.btn-registrarF {
+    max-width: 20px;
+    float: right;
+}
 
 .labelFromR {
     margin-left: 5px;

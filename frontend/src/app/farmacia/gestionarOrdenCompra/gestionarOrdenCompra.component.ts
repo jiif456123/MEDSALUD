@@ -18,7 +18,7 @@ import autoTable from 'jspdf-autotable'
 @Component({
   selector: 'app-ordenCompra',
   templateUrl: './gestionarOrdenCompra.component.html',
-  styleUrls: [ './gestionarOrdenCompra.component.css' ,'../farmacia.css'],
+  styleUrls: [ './gestionarOrdenCompra.component.css'],
   //Se agrego en providers GestionarOrdenCompraComponent por el error  The pipe ' ' could not be found angular2 custom pipe
   providers: [GestionarOrdenCompraService,DatePipe]
 })

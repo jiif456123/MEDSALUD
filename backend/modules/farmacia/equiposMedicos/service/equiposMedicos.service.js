@@ -38,4 +38,8 @@ equiposMedicosService.updateEquiposMedicos = (id, equipoMedico) => {
         });
     });
 };
+equiposMedicosService.getLastInsertedEquipoMedico = async(req, res) => {
+    const equipoMedico = await equiposMedicosModel.find({}).sort({ _id: -1 }).limit(1);
+    res.json(equipoMedico);
+};
 module.exports = equiposMedicosService;

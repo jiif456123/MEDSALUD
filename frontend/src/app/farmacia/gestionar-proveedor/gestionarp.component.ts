@@ -149,13 +149,6 @@ export class GestionarProveedorComponent implements OnInit {
         this.estado2="Disponible";
       }
     }
-    
-
     signupForm : FormGroup
 
-
-
-  
-
-  
 }

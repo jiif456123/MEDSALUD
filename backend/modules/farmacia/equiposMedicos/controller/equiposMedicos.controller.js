@@ -4,6 +4,7 @@ const http = require('../../../../utils/http');
 const code = require('../../../../utils/status');
 
 router.get('/', equiposMedicoService.getEquiposMedicos);
+router.get('/LastDoc', equiposMedicoService.getLastInsertedEquipoMedico);
 router.get('/:id', equiposMedicoService.getEquipoMedicoId);
 router.post('/', equiposMedicoService.createEquiposMedicos);
 router.put('/:id', (req, res) => {

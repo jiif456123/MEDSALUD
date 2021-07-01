@@ -1,100 +1,73 @@
 <!-- TABLE -->
-<div class="col-md-11">
-    <div class="head-div">
-        <h1 class="head-text"> Gestionar Categorias</h1>
-
-    </div>
-
-    <form #categoriasFormBuscar="ngForm" (ngSubmit)="searchByNombre(categoriasFormBuscar)">
-        <!--Obtengo del input de  la paginda el valor-->
-        <div class="col-lg-5">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar por Nombre" name="nombre" #nombreControl="ngModel" [(ngModel)]="gestionarCategoriaService.selectedCategoria3.nombre">
-                <span class="input-group-btn">
-            <button type="button" class="btn btn-primary " (click)="searchByNombre(categoriasFormBuscar)">Buscar</button>
-        </span>
+<div class="container cont">
+    <h1> Gestionar Categorias</h1>
+    <div class="row" style="margin: 40px 0px;">
+        <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">                    
+            <form #categoriasFormBuscar="ngForm" (ngSubmit)="searchByNombre(categoriasFormBuscar)">
+            <!--Obtengo del input de  la paginda el valor-->
+            <div class="col-5" style="padding-left: 0px;">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar por Nombre" name="nombre" #nombreControl="ngModel" [(ngModel)]="gestionarCategoriaService.selectedCategoria3.nombre">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary " (click)="searchByNombre(categoriasFormBuscar)">Buscar</button>
+                    </span>
+                </div>
             </div>
+            </form>
         </div>
-
-    </form>
-
-
-    <button type="button" class="btn btn-primary boton-registrar" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
-        Registrar Categoria
-      </button>
-
-    <table class="table table-striped">
+        <div class="col-md-4" style="padding-left: 0px; padding-top: 5px;">
+            <button type="button" class="btn btn-primary boton-registrar" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
+                Registrar Categoria
+            </button>
+        </div>
+    </div>
+    
+    <table class="table styled-table" style="text-align: center;">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Descripcion</th>
                 <th>Estado</th>
-                <th>Actualizar</th>
+                <th>Opciones</th>
             </tr>
-
         </thead>
-
         <tbody>
-            <!-- -->
-
             <tr *ngFor="let categoria of gestionarCategoriaService.categorias| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;">
 
-
                 <td class="count"></td>
-                <td>{{ categoria.nombre }}</td>
-                <td>
-                    <button type="button" class="btn btn-secondary btn-descripcion" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" (click)="getCategoria(categoria)"> <i class="pe-7s-more btn-descripcion"></i></button>
-                </td>
+                <td style="text-align: center;">{{ categoria.nombre }}</td>
                 <ng-container *ngIf="categoria.estado==1">
                     <td>
-                        <div class="cir1"></div>
+                        <button type="button" class="btn boton-table">
+                            <img src="\assets\img\icons8-xbox-x-30.png" alt="x"/></button>
                     </td>
-
                     <!--<td>{{ categoria.estado }}-->
                 </ng-container>
                 <ng-container *ngIf="categoria.estado==0">
                     <td>
-                        <div class="cir0"></div>
+                        <button type="button" class="btn boton-table">
+                            <img src="\assets\img\icons8-de-acuerdo-30.png" alt="x"/></button>
                     </td>
                     <!--<td>{{ categoria.estado }}-->
                 </ng-container>
                 <td>
-                    <button type="button" class="btn btn-secondary btn-actualizar" data-backdrop="false" data-toggle="modal" data-target="#actualizarModalCenter" (click)="getCategoria(categoria)"> <i class="pe-7s-ticket btn-actualizar"></i></button>
+                    <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" (click)="getCategoria(categoria)">
+                        <img src="\assets\img\icons8-eye-30.png" alt="x"/></button>
+                
+                    <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#actualizarModalCenter" (click)="getCategoria(categoria)">
+                        <img src="\assets\img\icons8-update-left-rotation-30.png" alt="x"/></button>
                 </td>
-
-
-                <!-- <button type="button" class="btn btn-secondary btn-actualizar" (click)="deleteCategoria(categoria._id)"> <i class="pe-7s-trash"></i></button>-->
-
-
-
             </tr>
-
-
-
-
-
-
-
-
         </tbody>
     </table>
-
     <div style="float: right;">
         <ngb-pagination [pageSize]="pageSize" [collectionSize]="gestionarCategoriaService.categorias.length" [(page)]="page">
         </ngb-pagination>
     </div>
-
-
-
-
 </div>
 
 <!--JavaScript-->
-
 <!-- Button trigger modal -->
-
-
 <!-- Modal REGISTRAR-->
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

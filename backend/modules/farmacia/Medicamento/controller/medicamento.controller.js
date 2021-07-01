@@ -31,7 +31,10 @@ router.put('/:id', (req, res) => {
     }).catch((error) => {
         http.err(req, res, code.status.Internal_Server_Error.code, error, error)
     });
-});
+}
+);
+router.get('/:nombre', medicamentoService.getByNombre);
+
 
 
 router.get("/lista/", medicamentoService.listarMedicamento);

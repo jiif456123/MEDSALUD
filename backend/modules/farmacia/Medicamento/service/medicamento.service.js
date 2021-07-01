@@ -15,7 +15,6 @@ var getMedicamento = () => {
         });
     });
 };
-//const es un objeto que ayuda a exporta todo las funciones creadas
 var n = 10;
 var createMedicamento = (medicamento) => {
 
@@ -31,7 +30,6 @@ var createMedicamento = (medicamento) => {
         ubicacion: medicamento.ubicacion,
         stockMin: medicamento.stockMin,
         stockMax: medicamento.stockMax,
-        stockActual: 0,
         detalles: medicamento.detalles
     });
 
@@ -76,6 +74,12 @@ var getMedicamentosByCategorias = async(req, res) => {
     res.json(medicamento);
     /*  }*/
 
+};
+var getByNombre = async(req, res) => {
+    
+    const medicamentos = await Medicamento.find({ nombre: { $regex: req.params.nombre } });
+
+    res.json(medicamentos);
 
 };
 
@@ -95,5 +99,6 @@ module.exports = {
     listarMedicamento,
     listarMedicamentoCategorias,
     getMedicamentosByCategorias,
-    getPrecioAndStockByNombre
+    getPrecioAndStockByNombre,
+    getByNombre
 };

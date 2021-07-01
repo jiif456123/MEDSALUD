@@ -102,7 +102,7 @@ export class RegGestionarRecetaMedicaComponent implements OnInit {
 
     let query = {
       paciente: this.idPaciente,
-      indicacion: this.formRegistrar.value.indicacion,
+      indicacion: '',
       medicina: this.medicamentos
     }
 

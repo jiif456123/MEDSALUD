@@ -33,6 +33,14 @@ export class DetalleGestionarRecetaMedicaComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     var dataPacientes = await this.recMedicaService.listarId(this.id).toPromise();
     this.recetaMedica = dataPacientes.data;
+    this.medicamentos = this.recetaMedica.medicina;
+    this.llenarForm();
+  }
+
+  llenarForm(){
+    this.formRegistrar.controls.dni.setValue(this.recetaMedica.paciente.dni);
+    this.formRegistrar.controls.nombrePaciente.setValue(this.recetaMedica.paciente.nombre + ' ' + this.recetaMedica.paciente.apellidoPaterno);
+    this.formRegistrar.controls.indicacion.setValue(this.recetaMedica.indicacion);
 
   }
 

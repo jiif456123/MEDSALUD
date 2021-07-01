@@ -142,7 +142,7 @@ var recetaMedica = new Schema({
         forma: { type: String },
         duracion: { type: String },
         cantidad: { type: Number },
-        dosis: { type: Number },
+        dosis: { type: String },
         indicacion: { type: String },
     }],
     fecha: { type: Date },
@@ -156,7 +156,7 @@ var detalleRecetaMedica = new Schema({
     forma: { type: String },
     duracion: { type: String },
     cantidad: { type: Number },
-    dosis: { type: Number },
+    dosis: { type: String },
     indicacion: { type: String },
 }, {
     versionKey: false

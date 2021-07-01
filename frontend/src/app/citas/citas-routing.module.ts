@@ -14,6 +14,7 @@ import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.co
 import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
 import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
 import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
+import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
 
 const routes: Routes = [
 
@@ -60,7 +61,7 @@ const routes: Routes = [
     path: "gestionar-receta-medica/registrar", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
   }, 
   {
-    path: "gestionar-receta-medica/:id", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
+    path: "gestionar-receta-medica/:id", component: DetalleGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
   }
 ];
 

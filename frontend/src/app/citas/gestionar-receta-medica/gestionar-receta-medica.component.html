@@ -19,18 +19,14 @@
                     <table class="table table-striped table-hover border border">
                         <thead style="color: black">
                             <tr>
-                                <th class="text-center">Codigo</th>
                                 <th class="text-center">Paciente</th>
                                 <th class="text-center">Fecha</th>
-                                <th class="text-center">Indicaciones</th>
                                 <th class="text-right" colspan="1">Opciones</th>
                             </tr>
                         </thead>
                         <tr *ngFor="let p of recetas | filter: filtro">
-                            <td class="text-center">{{ p._id }}</td>
                             <td class="text-center">{{ p.paciente.nombre }} {{p.paciente.apellidoPaterno}}</td>
                             <td class="text-center">{{ p.fecha | date: "dd/MM/yyyy"}}</td>
-                            <td class="text-center">{{ p.indicacion }}</td>
 
                             <td class="text-center">
                                 <button [routerLink]="['/citas/gestionar-receta-medica', p._id]" class="btn btn-success btn-sm btn-block">

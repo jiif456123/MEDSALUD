@@ -25,8 +25,14 @@
                     <td>{{ ejemplarEquipoMedico.ubicacion }}</td>
                     <td>{{ ejemplarEquipoMedico.estado }}</td>
                     <td>{{ ejemplarEquipoMedico.solicitante }}</td>
-                    <td>{{ ejemplarEquipoMedico.fechaEntrega | date: "dd/MM/yyyy" }}</td>
-                    <td>{{ ejemplarEquipoMedico.fechaDevolucion | date: "dd/MM/yyyy" }}</td>
+                    <td>
+                        <span *ngIf="ejemplarEquipoMedico.fechaEntrega != null">{{ ejemplarEquipoMedico.fechaEntrega | date: "dd/MM/yyyy"}}</span>
+                        <span *ngIf="ejemplarEquipoMedico.fechaEntrega == null">Sin Fecha</span>
+                    </td>
+                    <td>
+                        <span *ngIf="ejemplarEquipoMedico.fechaDevolucion != null">{{ ejemplarEquipoMedico.fechaDevolucion | date: "dd/MM/yyyy" }}</span>
+                        <span *ngIf="ejemplarEquipoMedico.fechaDevolucion == null">Sin Fecha</span>
+                    </td>
                     <td>
                         <button (click)="openModal(ejemplarEquipoMedico)" type="button" class="btn btn-success">
                                 <i class="pe-7s-pen"></i>     
@@ -64,7 +70,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Estado</label>
-                            <select formControlName="estado" class="form-control">
+                            <select formControlName="estado" class="form-control" #mySelect (change)="OptionSelected(mySelect.value)">
                                 <option value="Disponible">Disponible</option>
                                 <option value="Ocupado">Ocupado</option>
                             </select>
@@ -75,7 +81,7 @@
                             <input type="text" formControlName="solicitante" class="form-control text-input" required>
                             <div class="alert alert-info" *ngIf="solicitante.invalid && (solicitante.dirty)">
                                 <div class="container-error-message">
-                                    <div *ngIf="solicitante.errors.required">Se requiere ubicacion!</div>
+                                    <div *ngIf="solicitante.errors.required">Se requiere solicitante</div>
                                 </div>
                             </div>
                         </div>

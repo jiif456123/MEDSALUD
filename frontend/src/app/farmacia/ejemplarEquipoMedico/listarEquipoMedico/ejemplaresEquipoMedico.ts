@@ -5,7 +5,6 @@ import { EjemplarEquipoMedico } from '../../../../models/ejemplarEquipoMedico.mo
 import { FormGroup,Validators, FormBuilder } from '@angular/forms';
 import { EquiposMedicosService } from 'Services/equiposMedicos.service';
 import { EquiposMedicos } from '../../../../models/equiposMedicos.model';
-import { formatDate} from '@angular/common';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-listarEquipoMedico',
@@ -69,10 +68,10 @@ EjemplaEquipoMedicoComponent implements OnInit {
     this.formEjemplarActualizar.controls.solicitante.setValue(row.solicitante);
     this.formEjemplarActualizar.controls.fechaEntrega.setValue(this.datePipe.transform(row.fechaEntrega,"yyyy-MM-dd")); 
     this.formEjemplarActualizar.controls.fechaDevolucion.setValue(this.datePipe.transform(row.fechaDevolucion,"yyyy-MM-dd"));   
-    this.getEquipoMedico(this.id);          
+    this.evalEstado();             
   }  
   update(){
-  
+    if(this.formEjemplarActualizar.valid){
     let datos = this.formEjemplarActualizar.value
     let query = {
 
@@ -88,10 +87,13 @@ EjemplaEquipoMedicoComponent implements OnInit {
       },error => console.error(error)); 
       this.updateEquipoMedico(); 
       this.updateCantidad();
+    } else{
+      console.log("Not valid!");
+    } 
   }
   updateEquipoMedico()
   {      
-    if(this.formEjemplarActualizar.valid){
+ 
       this.updateCantidad();
       let query = {
           disponible: this.equipoMedico.disponible,
@@ -102,7 +104,7 @@ EjemplaEquipoMedicoComponent implements OnInit {
         console.log(data);
         return this.equiposMedicosService.getEquiposMedicos();         
       }, error => console.log(error));
-    }  
+ 
 
   }  
   updateCantidad(){
@@ -115,6 +117,27 @@ EjemplaEquipoMedicoComponent implements OnInit {
       this.equipoMedico.disponible-= 1;    
     }
     console.log(est);
+  }
+  evalEstado(){
+    if(this.formEjemplarActualizar.controls.estado.value == 'Disponible') {
+      this.formEjemplarActualizar.controls.ubicacion.setValue('Almacen'); 
+      this.formEjemplarActualizar.controls.solicitante.setValue('Ninguno');
+      this.formEjemplarActualizar.controls.fechaEntrega.setValue(null); 
+      this.formEjemplarActualizar.controls.fechaDevolucion.setValue(null);   
+      this.formEjemplarActualizar.controls.fechaEntrega.disable();
+      this.formEjemplarActualizar.controls.ubicacion.disable();
+      this.formEjemplarActualizar.controls.solicitante.disable();
+      this.formEjemplarActualizar.controls.fechaDevolucion.disable();
+    }
+    else if(this.formEjemplarActualizar.controls.estado.value == 'Ocupado'){
+      this.formEjemplarActualizar.controls.fechaEntrega.enable();
+      this.formEjemplarActualizar.controls.fechaDevolucion.enable();
+      this.formEjemplarActualizar.controls.ubicacion.enable();
+      this.formEjemplarActualizar.controls.solicitante.enable();
+    }
+  }
+  OptionSelected(value){
+    this.evalEstado();
   }
   get ubicacion(){return this.formEjemplarActualizar.get('ubicacion');}
   get solicitante(){return this.formEjemplarActualizar.get('solicitante');}

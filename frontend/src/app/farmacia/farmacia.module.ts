@@ -14,7 +14,7 @@ import {EquiposMedicosComponent} from './equiposMedicos/ListarEquipoMedico/equip
 import {ActualizarEMComponent} from '../farmacia/equiposMedicos/actualizarEquipoMedico/actualizarEquipoMedico';
 import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoMedico/ejemplaresEquipoMedico';
 import { DatePipe } from '@angular/common';
-
+import { inventarioComponent } from './Inventario/inventario.component';
 
 
 
@@ -30,6 +30,7 @@ import { DatePipe } from '@angular/common';
     EquiposMedicosComponent,
     ActualizarEMComponent,
     EjemplaEquipoMedicoComponent,    
+    inventarioComponent,
   ],
 
   imports: [

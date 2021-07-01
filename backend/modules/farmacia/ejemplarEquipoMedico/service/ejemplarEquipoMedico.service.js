@@ -46,4 +46,5 @@ ejemplarEquipoMedicoService.getMovimientoE = async(req, res) => {
         })
 };
 
+
 module.exports = ejemplarEquipoMedicoService;

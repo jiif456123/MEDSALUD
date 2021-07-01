@@ -1,5 +1,5 @@
 <div class="container cont">
-    <h1>Gestionar Medicamentos</h1>
+    <h1>Gestionar Inventario</h1>
     <div class="row" style="margin: 40px 0px;">
 
         <div class="col-md-8" style="padding-left: 0px;">
@@ -13,11 +13,6 @@
             </div>
         </div>
 
-        <div class="col-md-4" style="padding-right: 0px;">
-            <button type="button" class="btn btn-primary" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
-                Registrar Medicamento
-                  </button>
-        </div>
     </div>
 
     <table class="table styled-table" style="text-align: center;">
@@ -25,12 +20,11 @@
             <tr>
                 <th style="display: none;">id</th>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Dosis</th>
-                <th>Presentación</th>
-                <th>Precio Unitario</th>
-                <th>Ubicación</th>
+                <th>Medicamento</th>
+                <th>Presentacion</th>
+                <th>Stock Minimo</th>
+                <th>Stock Maximo</th>
+                <th>Stock Actual</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -42,19 +36,16 @@
 
                 <td>{{ medicamento.nombre }}</td>
 
-                <td>{{ medicamento.categoria }}</td>
-
-                <td>{{ medicamento.dosis }}</td>
-
                 <td>{{ medicamento.presentacion }}</td>
 
-                <td>{{ medicamento.precioUnitario}}</td>
+                <td>{{ medicamento.stockMin }}</td>
 
-                <td>{{ medicamento.ubicacion}}</td>
+                <td>{{ medicamento.stockMax }}</td>
+
+                <td>{{ medicamento.stockMax-medicamento.stockActual}}</td>
 
                 <td>
-                    <button class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#modalActualizar" (click)="getMedicamento1(medicamento)"><img src="\assets\img\icons8-update-left-rotation-30.png" alt="x"/></button>
-
+                    <button class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#modalActualizar" (click)="getMedicamento1(medicamento)"><img src="\assets\img\add.png" alt="x"/></button>
                     <button class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#modalVer" (click)="getMedicamento1(medicamento)"><img src="\assets\img\icons8-eye-30.png" alt="x"/></button>
                 </td>
             </tr>
@@ -251,7 +242,7 @@
         <div class="modal-dialog vertical-align-center modal-lg" role="document">
             <div class="modal-content popup-content">
                 <div class="modal-header popup-header">
-                    <h3 class="modal-title text-center text-registrar">Actualizar medicamento</h3>
+                    <h3 class="modal-title text-center text-registrar">Agregar Stock de Inventario</h3>
                 </div>
                 <div class="modal-body">
                     <form autocomplete="off" #medicamentosForm="ngForm" id="form-medicamento" name="form-medicamento">
@@ -260,21 +251,9 @@
                         </div>
                         <div class="form-group">
                             <i class="i-font">Nombre</i>
-                            <input type="text" name="nombre" [(ngModel)]="medicamentoService.selectedMedicamento1.nombre" class="form-control text-input">
+                            <input type="text" name="nombre" [(ngModel)]="medicamentoService.selectedMedicamento1.nombre" class="form-control text-input" disabled="disabled">
                         </div>
 
-                        <div class="form-group contenedor-tabla">
-                            <div class="label-radio contenedor-fila">
-                                <div class="contenedor-columna-right">
-                                    <input type="radio" name="disponibilidad" value=true (change)="radioChangeHandler($event)" [(ngModel)]="medicamentoService.selectedMedicamento1.disponibilidad">
-                                    <label class="label-text">Disponible</label>
-                                </div>
-                                <div class="contenedor-columna-left">
-                                    <input type="radio" name="disponibilidad" value=false (change)="radioChangeHandler($event)" [(ngModel)]="medicamentoService.selectedMedicamento1.disponibilidad">
-                                    <label class="label-text">No disponible</label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="contenedor-tabla">
                             <div class="contenedor-fila">
                                 <div class="contenedor-columna-right">
@@ -289,63 +268,13 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="contenedor-tabla">
-                            <div class="contenedor-fila">
-                                <div class="contenedor-columna-right">
-                                    <div class="form-group">
-                                        <i class="i-font">Precio Unitario</i>
-                                        <input type="text" name="precioUnitario" [(ngModel)]="medicamentoService.selectedMedicamento1.precioUnitario" class="form-control text-input">
-                                    </div>
-                                </div>
-                                <div class="contenedor-columna-left">
-                                    <div class="form-group">
-                                        <i class="i-font">Marca</i>
-                                        <div class="content-select select">
-                                            <select name="marca" [(ngModel)]="medicamentoService.selectedMedicamento1.marca">
-                                                <option [value]="item" *ngFor="let item of marcalist">{{item}}</option>
-                                                </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contenedor-tabla">
-                            <div class="contenedor-fila">
-                                <div class="contenedor-columna-right">
-                                    <div class="form-group">
-                                        <i class="i-font">Categoría</i>
-                                        <input type="text" name="categoria" [(ngModel)]="medicamentoService.selectedMedicamento1.categoria" disabled="disabled" class="form-control text-input">
-                                    </div>
-                                </div>
-                                <div class="contenedor-columna-left">
-                                    <div class="form-group">
-                                        <i class="i-font">Ubicación</i>
-                                        <input type="text" name="ubicacion" [(ngModel)]="medicamentoService.selectedMedicamento1.ubicacion" disabled="disabled" class="form-control text-input">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contenedor-tabla">
-                            <div class="contenedor-fila">
-                                <div class="contenedor-columna-right">
-                                    <div class="form-group">
-                                        <i class="i-font">Stock Mínimo</i>
-                                        <input type="text" name="stockMin" [(ngModel)]="medicamentoService.selectedMedicamento1.stockMin" class="form-control text-input">
-                                    </div>
-                                </div>
-                                <div class="contenedor-columna-left">
-                                    <div class="form-group">
-                                        <i class="i-font">Stock Máximo</i>
-                                        <input type="text" name="stockMax" [(ngModel)]="medicamentoService.selectedMedicamento1.stockMax" class="form-control text-input">
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <i class="i-font">Cantidad de Medicamentos</i>
+                            <input type="text" name="stockActual" [(ngModel)]="medicamentoService.selectedMedicamento1.stockActual" class="form-control text-input">
                         </div>
                         <div class="form-group">
                             <i class="i-font">Detalles</i>
-                            <textarea class="form-control descripcion-input" name="detalles" [(ngModel)]="medicamentoService.selectedMedicamento1.detalles"></textarea>
+                            <textarea class="form-control descripcion-input" name="detalles" [(ngModel)]="medicamentoService.selectedMedicamento1.detalles" disabled="disabled"></textarea>
                         </div>
 
                         <div class="modal-footer popup-footer">
@@ -447,7 +376,10 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <i class="i-font">Cantidad de Medicamentos</i>
+                            <input type="text" name="stockActual" disabled="disabled" [(ngModel)]="medicamentoService.selectedMedicamento1.stockActual" class="form-control text-input">
+                        </div>
                         <div class="form-group">
                             <i class="i-font">Detalles</i>
                             <textarea class="form-control descripcion-input" name="detalles" disabled="disabled" [(ngModel)]="medicamentoService.selectedMedicamento1.detalles"></textarea>

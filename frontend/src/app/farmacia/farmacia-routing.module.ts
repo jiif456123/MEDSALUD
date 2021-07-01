@@ -9,7 +9,7 @@ import {RegistrarMedicoComponent} from '../farmacia/equiposMedicos/registrarEqui
 import {EquiposMedicosComponent} from './equiposMedicos/ListarEquipoMedico/equiposMedicos.component';
 import {ActualizarEMComponent} from '../farmacia/equiposMedicos/actualizarEquipoMedico/actualizarEquipoMedico';
 import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoMedico/ejemplaresEquipoMedico';
-
+import { inventarioComponent } from './Inventario/inventario.component';
 
 const routes: Routes = [
   {
@@ -42,7 +42,10 @@ const routes: Routes = [
   },
   {
     path: "gestionar-ordenCompra", component: GestionarOrdenCompraComponent, data: { title: 'Gestionar OrdenCompra' }
-  }
+  },
+  {
+    path: "gestionar-inventario", component: inventarioComponent, data: { title: 'Gestionar Inventario' }
+  },
 ];
 
 @NgModule({

@@ -3,6 +3,6 @@ export interface DetalleRecetaMedica {
     forma: string
     duracion: string
     cantidad: number
-    dosis: number
+    dosis: string
     indicacion: string
 }

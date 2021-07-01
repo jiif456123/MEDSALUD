@@ -16,22 +16,19 @@
         </div>
 
         <div class="col-md-2 d-flex justify-content-end" style="margin-bottom: 10px">
-            <button type="button" (click)="registrar()" class="btn btn-outline-primary" style="margin-bottom: 10px; float: right">
-                <i class="mdi mdi-pencil mdi-18px">Registrar </i>
-            </button>
-        </div>
-
-        <div class="col-md-2 d-flex justify-content-end" style="margin-bottom: 10px">
-            <button data-toggle="modal" data-target="#modalMedicina" #modalMedicina type="button" class="btn btn-outline-primary" style="margin-bottom: 10px; float: right">
+            <button data-toggle="modal" data-target="#modalMedicina" #modalMedicina type="button"
+                class="btn btn-outline-primary" style="margin-bottom: 10px; float: right">
                 <i class="mdi mdi-pencil mdi-18px">Agregar medicina </i>
             </button>
         </div>
 
-        <div class="form-group col-md-12">
-            <label for="indicacion">Indicaciones</label>
-            <textarea formControlName="indicacion" class="form-control" id="indicacion" rows="3"></textarea>
+        <div class="col-md-2 d-flex justify-content-end" style="margin-bottom: 10px">
+            <button type="button" (click)="registrar()" class="btn btn-outline-primary"
+                style="margin-bottom: 10px; float: right">
+                <i class="mdi mdi-pencil mdi-18px">Registrar </i>
+            </button>
         </div>
-        
+
     </form>
     <div class="row">
 
@@ -42,7 +39,7 @@
                         <th class="text-center">Medicamento</th>
                         <th class="text-center">Forma</th>
                         <th class="text-center">Duracion</th>
-                        <th class="text-center">Cantidad</th>                    
+                        <th class="text-center">Cantidad</th>
                         <th class="text-center">Dosis</th>
                         <th class="text-center">Indicacion</th>
                     </tr>
@@ -85,8 +82,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="forma">Forma</label>
-                        <input formControlName="forma" type="text" class="form-control" id="forma"
-                            placeholder="..." />
+                        <input formControlName="forma" type="text" class="form-control" id="forma" placeholder="..." />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="duracion">Duracion</label>
@@ -100,7 +96,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dosis">Dosis</label>
-                        <input formControlName="dosis" type="number" class="form-control" id="dosis"
+                        <input formControlName="dosis" type="text" class="form-control" id="dosis"
                             placeholder="..." />
                     </div>
                     <div class="form-group col-md-12">

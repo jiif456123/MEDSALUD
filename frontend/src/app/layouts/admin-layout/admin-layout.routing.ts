@@ -8,7 +8,8 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { CategoriaComponent } from '../../categoria/categoria.component';
+//import { CategoriaComponent } from '../../categoria/categoria.component';
+//import { GestionarProveedorComponent } from '../../farmacia/gestionar-proveedor/gestionarp.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -20,8 +21,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps', component: MapsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
-    { path: 'categoria', component: CategoriaComponent },
-     
     {
         path: 'citas', loadChildren: () => import('../../citas/citas.module').then(m => m.CitasModule)
     },

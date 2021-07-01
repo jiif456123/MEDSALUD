@@ -1,0 +1,9 @@
+table,
+th {
+    text-align: center;
+}
+
+.alert-info {
+    background: #6b6e70;
+    border-radius: 5px;
+}

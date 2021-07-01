@@ -1,0 +1,22 @@
+
+::ng-deep.sidebar:after, .bootstrap-navbar:after{
+    background: #5782b6f1;
+}
+
+::ng-deep.sidebar .logo-img img, .bootstrap-navbar .logo-img img {
+    width: 180px;
+    height: 60px;
+    top: 0px;
+    position: absolute;
+}
+::ng-deep.sidebar .logo, .bootstrap-navbar .logo {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background: white;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+    border-bottom-width: 0px;
+}
+::ng-deep.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+}

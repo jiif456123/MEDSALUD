@@ -1,42 +1,50 @@
-const usuarioService = require('../service/user.service');
 const http = require('../../../utils/http');
 const code = require('../../../utils/status');
 const router = require('express').Router();
+const userService = require("./user.service");
 
-router.get('/', (req, res) => { //get
-
-    usuarioService.listar()
-        .then(
+router.post('/', (req, res) => {
+    let user = req.body;
+    userService.crear(user).then(
             (data) => http.ok(req, res, code.status.Ok.code, data))
         .catch(
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
-});
+})
 
-router.post('/', (req, res) => { //post
-
-    let usuario = req.body;
-
-    usuarioService.registrar(usuario)
-        .then(
+router.get('/', (req, res) => {
+    userService.listar().then(
             (data) => http.ok(req, res, code.status.Ok.code, data))
         .catch(
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
-});
-
+})
 
 
 router.put('/:id', (req, res) => {
 
     let id = req.params.id;
-    let usuario = req.body;
+    let user = req.body;
 
     console.log(id);
 
-    usuarioService.modificar(id, usuario).then((data) => {
+    userService.modificarhistoria(id, user).then((data) => {
         http.ok(req, res, code.status.Ok.code, data);
     }).catch((error) => {
         http.err(req, res, code.status.Internal_Server_Error.code, error, error)
     });
+});
+
+
+router.delete('/:id', (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+
+    userService.eliminarhistoria(id)
+        .then((data) => {
+            http.ok(req, res, code.status.Ok.code, data);
+        })
+        .catch((error) => {
+            http.err(req, res, code.status.Internal_Server_Error, err);
+        })
 });
 
 module.exports = router;

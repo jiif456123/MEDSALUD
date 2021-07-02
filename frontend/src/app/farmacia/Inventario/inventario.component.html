@@ -12,8 +12,8 @@
                 </div>
             </div>
         </div>
-
     </div>
+
 
     <table class="table styled-table" style="text-align: center;">
         <thead>
@@ -25,6 +25,7 @@
                 <th>Stock Minimo</th>
                 <th>Stock Maximo</th>
                 <th>Stock Actual</th>
+                <th>Fecha</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -44,6 +45,7 @@
 
                 <td>{{ medicamento.stockMax-medicamento.stockActual}}</td>
 
+                <td>{{ medicamento.Fecha | date:'dd/MM/yyyy' }}</td>
                 <td>
                     <button class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#modalActualizar" (click)="getMedicamento1(medicamento)"><img src="\assets\img\add.png" alt="x"/></button>
                     <button class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#modalVer" (click)="getMedicamento1(medicamento)"><img src="\assets\img\icons8-eye-30.png" alt="x"/></button>
@@ -272,6 +274,12 @@
                             <i class="i-font">Cantidad de Medicamentos</i>
                             <input type="text" name="stockActual" [(ngModel)]="medicamentoService.selectedMedicamento1.stockActual" class="form-control text-input">
                         </div>
+
+                        <div class="form-group">
+                            <i class="i-font">Fecha</i>
+                            <input type="date" name="Fecha" [(ngModel)]="medicamentoService.selectedMedicamento1.Fecha" class="form-control text-input" min="2021-07-01" max="2021-12-12">
+                        </div>
+
                         <div class="form-group">
                             <i class="i-font">Detalles</i>
                             <textarea class="form-control descripcion-input" name="detalles" [(ngModel)]="medicamentoService.selectedMedicamento1.detalles" disabled="disabled"></textarea>
@@ -398,3 +406,43 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar Lote</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true"> × </span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formReserva" class="row">
+            <div class="form-group col-md-12">
+                <label for="nombre">Nombre</label>
+                <input formControlName="Nombre" type="text" class="form-control" id="nombre" placeholder="reserva" />
+            </div>
+            <div class="form-group col-md-12">
+                <label for="clx">Cantidad por lote</label>
+                <input formControlName="Clx" type="text" class="form-control" id="clx" placeholder="Cantidad por lote" />
+            </div>
+        </form>
+
+        <p *ngIf="Fecha != null">
+            {{ Fecha.getDate() }}/ {{ Fecha.getMonth() + 1 }} /{{ Fecha.getFullYear() }} - {{ Fecha.getHours() }}:{{ Fecha.getMinutes() }}
+        </p>
+        <div class="form-group col-md-12">
+            <label>Fecha</label>
+            <dl-date-time-picker [startDate]="fechaHoy" [(ngModel)]="Fecha" startView="month" maxView="year" minView="minute">
+            </dl-date-time-picker>
+        </div>
+
+        <div *ngIf="Fecha != null" class="col-md-12 d-flex justify-content-end" style="margin-bottom: 10px">
+            <button type="button" (click)="controlfecha()" class="btn btn-primary">
+        Agregar
+      </button>
+        </div>
+    </div>
+</ng-template>

@@ -15,7 +15,9 @@ var medicamento = new Schema({
     stockMin: { type: Number },
     stockMax: { type: Number },
     stockActual: { type: Number },
-    detalles: { type: String }
+    detalles: { type: String },
+    clx: { type: Number },
+    Fecha: { type: Date },
 }, {
     versionKey: false
 });

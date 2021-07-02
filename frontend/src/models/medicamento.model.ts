@@ -16,7 +16,9 @@ export class Medicamento{
     public stockMin: Number;
     public stockMax: Number;
     public stockActual: Number;
-    public detalles: String
+    public detalles: String;
+    public clx: Number;
+    public Fecha: Date;
   }
 
   

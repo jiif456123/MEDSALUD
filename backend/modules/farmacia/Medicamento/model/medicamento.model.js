@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var medicamento = new Schema({
-    id: { type: String, required: true },
-    codigo: { type: String, required: true },
+    id: { type: String},
+    codigo: { type: String},
     nombre: { type: String, required: true },
     disponibilidad: { type: Boolean },
     dosis: { type: String, required: true },

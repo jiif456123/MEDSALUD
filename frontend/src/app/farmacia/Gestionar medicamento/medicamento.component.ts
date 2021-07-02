@@ -18,7 +18,7 @@ export class medicamentoComponent implements OnInit{
   presentacionlist:string[]=["Tabletas","Inyectables","Jarabes", "Elixir", "Gotas", "Capsulas", "Pastillas", "Cajas", "Tubos"];
   ubicacionlist:string[]=["Pabellon A","Pabellon B","Pabellon C", "Pabellon D", "Pabellon E", "Pabellon F"];
   marcalist:string[]=["FarmaIndustria","johnson & johnson","Pfizer"];
-  categorialist:string[]=["Analgesicos","Antialergicos","Oral","Liquidos","Inyectables"];
+  categorialist:string[]=["Antialergicos","Oral","Liquidos","Inyectables","Analgesicos"];
   unidadlist: string[] = ['mg', 'ml'];
   selectDispo='';
 

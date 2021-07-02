@@ -35,7 +35,21 @@ export class MedicamentoService{
     stockMin:null,
     stockMax:null,
     detalles:''
- };
+ };selectedMedicamento3: Medicamento={
+  _id:'',
+  codigo:'',
+  nombre: '',
+  disponibilidad:null,
+  dosis:'',
+  presentacion:'',
+  precioUnitario:null,
+  marca:'',
+  categoria:'',
+  ubicacion:'',
+  stockMin:null,
+  stockMax:null,
+  detalles:''
+};
  
 
   medicamento: Medicamento[]; //importamos desde el modelo tene objetos tipo medicamento

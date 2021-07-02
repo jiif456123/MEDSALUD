@@ -530,7 +530,7 @@
                                             <span style="color: red;">*Categoria Requerido</span>
                                         </div>
                                         <fieldset class="form-group">
-                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.categoria" (click)="cleanArregloA()" (click)="getMedicamentosByCategoria(medicamentosOCForm)" name="categoria" class="form-control">
+                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.categoria" (click)="cleanArregloA()" (click)="getMedicamentosByCategoria(medicamentosOCForm)" (click)="unidadDesapareceA()" name="categoria" class="form-control">
                                         <option disabled>Categoria.</option>
                                         <ng-container *ngFor="let medicamentoA of gestionarOrdenCompraService.medicamentos" >    
                                             <option [value]="medicamentoA">{{medicamentoA}}</option>
@@ -569,14 +569,16 @@
 
                                     </div>
                                     <input type="hidden" name="unidadList" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.unidad" class="form-control" placeholder="Unidad" ngModel #unidadA="ngModel" pattern="[a-zA-Z0-9- ]+">
-                                    <div style="display: inline-block; padding-right: 20px;">
+                                    <ng-container *ngIf="unidadDesapareceCA==false">
 
-                                        <div *ngIf="unidadA.hasError('pattern')">
-                                            <span style="color: red;">*Unidad Requerida</span>
-                                        </div>
-                                        <!--LISTA MEDICAMENTO-->
-                                        <fieldset class="form-group">
-                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.unidad" name="unidadList" class="form-control">
+                                        <div style="display: inline-block; padding-right: 20px;">
+
+                                            <div *ngIf="unidadA.hasError('pattern')">
+                                                <span style="color: red;">*Unidad Requerida</span>
+                                            </div>
+                                            <!--LISTA MEDICAMENTO-->
+                                            <fieldset class="form-group">
+                                                <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra3A.unidad" name="unidadList" class="form-control">
                                         <option disabled>Unidad.</option>
                                         
                                         
@@ -586,9 +588,9 @@
 
                                         
                                      </select>
-                                        </fieldset>
-                                    </div>
-
+                                            </fieldset>
+                                        </div>
+                                    </ng-container>
 
                                     <div style="display: inline-block; padding-right: 20px; margin-top: 15px;">
 

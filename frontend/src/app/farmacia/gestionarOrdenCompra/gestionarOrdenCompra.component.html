@@ -1,7 +1,7 @@
 <!-- TABLE -->
 <div class="col-md-11">
     <div class="head-div">
-        <h1 class="head-text"> Gestionar Orden De Compra</h1>
+        <h1 class="titulo"> Gestionar Orden De Compra</h1>
 
     </div>
 
@@ -178,7 +178,7 @@
                                             <span style="color: red;">*Categoria Requerido</span>
                                         </div>
                                         <fieldset class="form-group">
-                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.categoria" (click)="cleanArreglo()" (click)="getMedicamentosByCategoria(medicamentoROCForm)" name="categoria" class="form-control">
+                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.categoria" (click)="cleanArreglo()" (click)="getMedicamentosByCategoria(medicamentoROCForm)" (click)="unidadDesaparece()" name="categoria" class="form-control">
                                         <option disabled>Categoria.</option>
                                         <ng-container *ngFor="let medicamentoA of gestionarOrdenCompraService.medicamentos" >    
                                             <option [value]="medicamentoA">{{medicamentoA}}</option>
@@ -217,25 +217,30 @@
 
                                     </div>
                                     <input type="hidden" name="unidadList" [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.unidad" class="form-control" placeholder="Unidad" ngModel #unidad="ngModel" pattern="[a-zA-Z0-9- ]+">
-                                    <div style="display: inline-block; padding-right: 20px;">
+                                    <!--dsadsadsadsadsadsadsadwdqwdwqdwqdwqdsdqqqqq-->
+                                    <ng-container *ngIf="unidadDesapareceC==false">
+                                        <div style="display: inline-block; padding-right: 20px;">
 
-                                        <div *ngIf="unidad.hasError('pattern')">
-                                            <span style="color: red;">*Unidad Requerida</span>
+                                            <div *ngIf="unidad.hasError('pattern')">
+                                                <span style="color: red;">*Unidad Requerida</span>
+                                            </div>
+                                            <!--LISTA MEDICAMENTO-->
+                                            <fieldset class="form-group">
+                                                <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.unidad" name="unidadList" class="form-control">
+                                            <option disabled>Unidad.</option>
+                                            
+                                            
+                                                <option value="25 capsulas">25 capsulas</option>
+                                                <option value="50 capsulas" >50 capsulas</option>
+                                                <option value="100 capsulas">100 capsulas</option>
+    
+                                            
+                                         </select>
+                                            </fieldset>
                                         </div>
-                                        <!--LISTA MEDICAMENTO-->
-                                        <fieldset class="form-group">
-                                            <select [(ngModel)]="gestionarOrdenCompraService.selectedOrdenCompra2.unidad" name="unidadList" class="form-control">
-                                        <option disabled>Unidad.</option>
-                                        
-                                        
-                                            <option value="25 capsulas">25 capsulas</option>
-                                            <option value="50 capsulas" >50 capsulas</option>
-                                            <option value="100 capsulas">100 capsulas</option>
 
-                                        
-                                     </select>
-                                        </fieldset>
-                                    </div>
+                                    </ng-container>
+
 
 
                                     <div style="display: inline-block; padding-right: 20px; margin-top: 15px;">

@@ -46,7 +46,7 @@ public pageSize2=2;
 public prueba=false;
 public isError = false;
 public isError2 = false;
-
+public unidadDesapareceC=false;
 public sumaTotal=0;
 
   ngOnInit(): void{//  NEW 
@@ -76,6 +76,20 @@ public sumaTotal=0;
 
 
   }
+  
+  unidadDesaparece(){
+    if(this.gestionarOrdenCompraService.selectedOrdenCompra2.categoria=="Liquidos"){
+      this.unidadDesapareceC=true;
+      this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad="";
+    }else{
+      this.unidadDesapareceC=false;
+      this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad="Unidad.";
+
+    }
+   
+
+  }
+
 
   downloadPDF() {
 

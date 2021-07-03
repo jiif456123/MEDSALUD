@@ -22,6 +22,7 @@ import { throwError } from 'rxjs';
   // los datos se van guardando en un arreglo, el cual se usa para
   // desplegar la tabla
   medicamentos:any[] = [];
+  pedidos2:Pedido[]=[];
   // los input del formulario se asocian con un modelo
   dato:any = {};
 
@@ -55,14 +56,15 @@ import { throwError } from 'rxjs';
    total:number;
 
    ngOnInit(): void {
-    //const sumatotal = object=>{Object.values(object).reduce((acc, value) => acc + object[value], 0);
-     //Calculamos el TOTAL sS
-      // this.total = this.pedidoService.selectedPedido1.medicamentos.reduce(
-      //   (acc,obj,) => acc + (obj.precio * obj.cantidad),0);
-      //   //console.log(this.pedidoService.selectedPedido1.medicamentos);
-      // console.log("Total: ", this.total);
 
       this.getPedidos();
+      // this.pedidoService.listar().subscribe(
+      //   data=>{
+      //     this.pedidos2=data.data;
+      //     var total = 0;
+      //     total = total+this.
+      //   }
+      // );
     }
     
     getPedidos(){
@@ -169,3 +171,10 @@ import { throwError } from 'rxjs';
   // Multiplicar(){
   // this.importe=this.cantidad*this.precioU;    
   // }
+
+
+  //Calculamos el TOTAL
+      // this.total = this.pedidoService.selectedPedido1.medicamentos.reduce(
+      //   (acc,obj,) => acc + (obj.precio * obj.cantidad),0);
+      //   //console.log(this.pedidoService.selectedPedido1.medicamentos);
+      // console.log("Total: ", this.total);

@@ -45,7 +45,7 @@
 
                 <td>{{ pedido.dni }}</td>
 
-                <td>{{ pedido.fecha }}</td>
+                <td>{{ pedido.fecha | date: "dd/MM/yyyy h:mm:ss a" }}</td>
 
                 <td>{{ pedido.estado }}</td>
 
@@ -122,7 +122,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div style="display: none;border-radius: 15px;margin-top: 20px; margin-left: 80%;width: 20%; border:1.5px solid rgb(211, 211, 211,.4);text-align: right;">
+                            <div style="border-radius: 15px;margin-top: 20px; margin-left: 80%;width: 20%; border:1.5px solid rgb(211, 211, 211,.4);text-align: right;">
                                 <table>
                                     <tbody>
                                         <tr>
@@ -311,16 +311,13 @@
                                             <td>{{dato.concentracion}}</td>
                                             <td>{{dato.presentacion}}</td>
                                             <td>{{dato.cantidad}}</td>
-                                            <td>{{dato.precio | currency}}</td>
-                                            <!-- <td *ngIf="i==0">
-                                                {{ this.multi(dato.cantidad,dato.precio) | currency }}
-                                            </td> -->
-                                            <td>{{dato.precio * dato.cantidad | currency}}</td>
+                                            <td>S/. {{dato.precio}}</td>
+                                            <td>S/. {{dato.precio * dato.cantidad}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div style="display: none;border-radius: 15px;margin-top: 20px; margin-left: 80%;width: 20%; border:1.5px solid rgb(211, 211, 211,.4);text-align: right;">
+                            <div style="border-radius: 15px;margin-top: 20px; margin-left: 80%;width: 20%; border:1.5px solid rgb(211, 211, 211,.4);text-align: right;">
                                 <table>
                                     <tbody>
                                         <tr>

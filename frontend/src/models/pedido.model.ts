@@ -1,4 +1,5 @@
 export class Pedido{
+     constructor(){}
      _id:string;
      codigoPedido:string;
      nombre:string;

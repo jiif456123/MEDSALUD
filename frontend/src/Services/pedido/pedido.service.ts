@@ -6,22 +6,6 @@ import * as Items from '../../app/farmacia/pedido/_files/Items.json';
 @Injectable()
 export class PedidoService{
   
-  // getPedidos1(): Pedido[] {
-  //   let pedidos1 = [
-  //     {codigoPedido: 101,nombre: 'Giancarlo Ruiz',dni: 74866891, pedidos: [{codigo: 12344, producto: 'Paracetamol',laboratorio: '3M Healthcare',concentracion: '500mg',presentacion: 'Tableta',
-  //      cantidad: 5, stockDisponible: 487,precioU: 7,importe: 35}, {codigo: 12345,producto: 'Amoxicilina', concentracion: '500mg',laboratorio: 'Abbott',presentacion: 'Tableta',cantidad: 5,
-  //      stockDisponible: '487',precioU: 7,importe: 35}]
-  //     }
-  //   ];
-  //   return pedidos1;
-  // }
-  //   getPedidoByNombre1(nombre:String): Pedido[]{
-  //     let pedidos = this.getPedidos1();
-  //     let pedido = pedidos.filter(item=>item.nombre==nombre)
-  //     return pedido;
-  //   }
-
-  
   selectedPedido: Pedido={
     _id:'',
     codigoPedido:'',
@@ -84,6 +68,10 @@ export class PedidoService{
         return this.http.get<any>(this.URL_API_Busqueda);
       }
     }
+
+    listar() {
+      return this.http.get<any>(`${this.URL_API_GET}`);
+    };
 
     // getPedidoEachOne(dni:number){
     //   if(dni.toString()!=''){

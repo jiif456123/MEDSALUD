@@ -109,7 +109,6 @@ export class GestionarProveedorComponent implements OnInit {
       }else{
         this.agregarProveedor(form);
         let element: HTMLElement =document.getElementById('ocultof') as HTMLElement;
-
          element.click();
       }
     }

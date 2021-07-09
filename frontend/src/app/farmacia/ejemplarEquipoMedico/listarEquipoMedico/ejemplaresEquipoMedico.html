@@ -60,7 +60,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Ubicacion</label>
-                            <input type="text" formControlName="ubicacion" class="form-control text-input" required>
+                            <input type="text" formControlName="ubicacion" class="form-control text-input" [readonly]="isDisable" required>
                             <div class="alert alert-info" *ngIf="ubicacion.invalid && (ubicacion.dirty)">
                                 <div class="container-error-message">
                                     <div *ngIf="ubicacion.errors.required">Se requiere ubicacion!</div>
@@ -78,7 +78,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Solicitante</label>
-                            <input type="text" formControlName="solicitante" class="form-control text-input" required>
+                            <input type="text" formControlName="solicitante" class="form-control text-input" [readonly]="isDisable" required>
                             <div class="alert alert-info" *ngIf="solicitante.invalid && (solicitante.dirty)">
                                 <div class="container-error-message">
                                     <div *ngIf="solicitante.errors.required">Se requiere solicitante</div>
@@ -87,11 +87,11 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Fecha Entrega</label>
-                            <input type="date" formControlName="fechaEntrega" class="form-control" required>
+                            <input type="date" formControlName="fechaEntrega" class="form-control" [readonly]="isDisable">
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Fecha Devolucion</label>
-                            <input type="date" formControlName="fechaDevolucion" class="form-control" required>
+                            <input type="date" formControlName="fechaDevolucion" class="form-control" [readonly]="isDisable">
                         </div>
                     </form>
                 </div>

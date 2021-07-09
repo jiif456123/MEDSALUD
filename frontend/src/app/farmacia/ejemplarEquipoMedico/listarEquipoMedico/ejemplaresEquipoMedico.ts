@@ -17,6 +17,8 @@ export class
 EjemplaEquipoMedicoComponent implements OnInit {
   @ViewChild('modalActualizar') modalActualizar: ElementRef;
   formEquipoMedico: FormGroup;
+  isDisable:boolean;
+  fechaFlag = false;
   id:string;
   formEjemplarActualizar: FormGroup;  
   ejemplarSeleccionado: EjemplarEquipoMedico;
@@ -68,7 +70,7 @@ EjemplaEquipoMedicoComponent implements OnInit {
     this.formEjemplarActualizar.controls.solicitante.setValue(row.solicitante);
     this.formEjemplarActualizar.controls.fechaEntrega.setValue(this.datePipe.transform(row.fechaEntrega,"yyyy-MM-dd")); 
     this.formEjemplarActualizar.controls.fechaDevolucion.setValue(this.datePipe.transform(row.fechaDevolucion,"yyyy-MM-dd"));   
-    this.evalEstado();             
+    this.evalEstado();          
   }  
   update(){
     if(this.formEjemplarActualizar.valid){
@@ -87,7 +89,8 @@ EjemplaEquipoMedicoComponent implements OnInit {
       },error => console.error(error)); 
       this.updateEquipoMedico(); 
       this.updateCantidad();
-    } else{
+    }    
+    else{
       console.log("Not valid!");
     } 
   }
@@ -120,24 +123,26 @@ EjemplaEquipoMedicoComponent implements OnInit {
   }
   evalEstado(){
     if(this.formEjemplarActualizar.controls.estado.value == 'Disponible') {
-      this.formEjemplarActualizar.controls.ubicacion.setValue('Almacen'); 
-      this.formEjemplarActualizar.controls.solicitante.setValue('Ninguno');
-      this.formEjemplarActualizar.controls.fechaEntrega.setValue(null); 
-      this.formEjemplarActualizar.controls.fechaDevolucion.setValue(null);   
-      this.formEjemplarActualizar.controls.fechaEntrega.disable();
-      this.formEjemplarActualizar.controls.ubicacion.disable();
-      this.formEjemplarActualizar.controls.solicitante.disable();
-      this.formEjemplarActualizar.controls.fechaDevolucion.disable();
-    }
-    else if(this.formEjemplarActualizar.controls.estado.value == 'Ocupado'){
-      this.formEjemplarActualizar.controls.fechaEntrega.enable();
-      this.formEjemplarActualizar.controls.fechaDevolucion.enable();
-      this.formEjemplarActualizar.controls.ubicacion.enable();
-      this.formEjemplarActualizar.controls.solicitante.enable();
-    }
+      this.isDisable = true;
+    } else {this.isDisable = false;}
   }
   OptionSelected(value){
-    this.evalEstado();
+    if(value == 'Disponible'){
+
+    this.formEjemplarActualizar.controls["ubicacion"].setValue("Almacen"); 
+    this.formEjemplarActualizar.controls["solicitante"].setValue("Ninguno");
+    this.formEjemplarActualizar.controls["fechaEntrega"].setValue(null); 
+    this.formEjemplarActualizar.controls["fechaDevolucion"].setValue(null);  
+    this.formEjemplarActualizar.get('fechaEntrega').setValidators([]); 
+    this.formEjemplarActualizar.get('fechaEntrega').updateValueAndValidity();
+    this.formEjemplarActualizar.get('fechaDevolucion').setValidators([]); 
+    this.formEjemplarActualizar.get('fechaDevolucion').updateValueAndValidity();
+    this.isDisable = true;
+    console.log(this.formEjemplarActualizar.controls["fechaDevolucion"].valid);
+    } else {
+      this.isDisable = false;
+    }
+    console.log(this.formEjemplarActualizar.value);
   }
   get ubicacion(){return this.formEjemplarActualizar.get('ubicacion');}
   get solicitante(){return this.formEjemplarActualizar.get('solicitante');}

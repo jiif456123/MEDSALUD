@@ -5,6 +5,10 @@ import { FarmaciaRoutingModule } from './farmacia-routing.module';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import { MovimientosComponent } from './Consultar Movimientos/movimientos.component';
 import { GestionarCategoriaComponent } from '../farmacia/gestionarCategorias/gestionarCategorias.component';
 import { GestionarProveedorComponent } from './gestionar-proveedor/gestionarp.component';
@@ -36,10 +40,13 @@ import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoM
     FarmaciaRoutingModule,
     NgbPaginationModule,
     NgbAlertModule, 
-    FormsModule, 
-    ReactiveFormsModule,
+    FormsModule,
     MatTabsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatSelectModule
 
   ],
 })

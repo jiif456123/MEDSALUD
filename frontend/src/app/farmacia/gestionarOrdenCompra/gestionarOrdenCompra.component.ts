@@ -46,6 +46,8 @@ public pageSize2=2;
 public prueba=false;
 public isError = false;
 public isError2 = false;
+public unidadDesapareceC=false;
+public unidadDesapareceCA=false;
 
 public sumaTotal=0;
 
@@ -76,7 +78,29 @@ public sumaTotal=0;
 
 
   }
+  
+  unidadDesaparece(){
+    if(this.gestionarOrdenCompraService.selectedOrdenCompra2.categoria=="Liquidos" || this.gestionarOrdenCompraService.selectedOrdenCompra2.categoria=="Inyectables" ){
+      this.unidadDesapareceC=true;
+      this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad="";
+    }else{
+      this.unidadDesapareceC=false;
+      this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad="Unidad.";
 
+    }
+  }
+
+  unidadDesapareceA(){
+    if(this.gestionarOrdenCompraService.selectedOrdenCompra3A.categoria=="Liquidos" || this.gestionarOrdenCompraService.selectedOrdenCompra3A.categoria=="Inyectables"){
+      this.unidadDesapareceCA=true;
+      this.gestionarOrdenCompraService.selectedOrdenCompra3A.unidad="";
+    }else{
+      this.unidadDesapareceCA=false;
+      this.gestionarOrdenCompraService.selectedOrdenCompra3A.unidad="Unidad.";
+    }
+   
+
+  }
   downloadPDF() {
 
    

@@ -2,17 +2,17 @@
 <div class="container cont">
     <h1> Gestionar Categorias</h1>
     <div class="row" style="margin: 40px 0px;">
-        <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">                    
+        <div class="col-md-8" style="padding-left: 0px;padding-right: 0px; padding-top: 5px;">
             <form #categoriasFormBuscar="ngForm" (ngSubmit)="searchByNombre(categoriasFormBuscar)">
-            <!--Obtengo del input de  la paginda el valor-->
-            <div class="col-5" style="padding-left: 0px;">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar por Nombre" name="nombre" #nombreControl="ngModel" [(ngModel)]="gestionarCategoriaService.selectedCategoria3.nombre">
-                    <span class="input-group-btn">
+                <!--Obtengo del input de  la paginda el valor-->
+                <div class="col-5" style="padding-left: 0px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar por Nombre" name="nombre" #nombreControl="ngModel" [(ngModel)]="gestionarCategoriaService.selectedCategoria3.nombre">
+                        <span class="input-group-btn">
                         <button type="button" class="btn btn-primary " (click)="searchByNombre(categoriasFormBuscar)">Buscar</button>
                     </span>
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
         <div class="col-md-4" style="padding-left: 0px; padding-top: 5px;">
@@ -21,7 +21,7 @@
             </button>
         </div>
     </div>
-    
+
     <table class="table styled-table" style="text-align: center;">
         <thead>
             <tr>
@@ -39,23 +39,24 @@
                 <ng-container *ngIf="categoria.estado==1">
                     <td>
                         <button type="button" class="btn boton-table">
-                            <img src="\assets\img\icons8-xbox-x-30.png" alt="x"/></button>
+                            <img src="\assets\img\icons8-de-acuerdo-30.png" alt="x"/></button>
                     </td>
                     <!--<td>{{ categoria.estado }}-->
                 </ng-container>
                 <ng-container *ngIf="categoria.estado==0">
                     <td>
                         <button type="button" class="btn boton-table">
-                            <img src="\assets\img\icons8-de-acuerdo-30.png" alt="x"/></button>
+                            <img src="\assets\img\icons8-xbox-x-30.png" alt="x"/></button>
                     </td>
                     <!--<td>{{ categoria.estado }}-->
                 </ng-container>
                 <td>
                     <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#detallesModalCenter" (click)="getCategoria(categoria)">
                         <img src="\assets\img\icons8-eye-30.png" alt="x"/></button>
-                
+
                     <button type="button" class="btn boton-table" data-backdrop="false" data-toggle="modal" data-target="#actualizarModalCenter" (click)="getCategoria(categoria)">
                         <img src="\assets\img\icons8-update-left-rotation-30.png" alt="x"/></button>
+
                 </td>
             </tr>
         </tbody>

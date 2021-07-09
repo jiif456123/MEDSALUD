@@ -1,4 +1,6 @@
 var Proveedor = require("../proveedor/proveedor.model");
+const proveedor = require("../proveedor/proveedor.model");
+
 var Laboratorio = require("../proveedor/laboratorio.model")
 const proveedorService = {};
 

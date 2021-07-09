@@ -6,7 +6,7 @@ import { EquiposMedicos } from '../../../../models/equiposMedicos.model';
 @Component({
   selector: 'app-equiposMedicos',
   templateUrl: './equiposMedicos.component.html',
-  styleUrls: [ './equiposMedicos.component.css'],
+  styleUrls: [ './equiposMedicos.component.css','../../farmacia.css'],
   providers: [EquiposMedicosService]
 })
 

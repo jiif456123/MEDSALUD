@@ -19,5 +19,5 @@ router.post('/', (req,res)=>{
         http.err(req, res, code.status.Internal_Server_Error.code, error, error);
     })
 });
-
+router.get('/Filtro/:Modo/:Tipo/:fechaInicial/:fechaFinal', movimientoMService.Filtro);
 module.exports = router;

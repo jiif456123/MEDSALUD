@@ -35,6 +35,7 @@ router.put('/:id', (req, res) => {
 router.get('/:nombre', medicamentoService.getByNombre);
 
 
+router.get('/busqueda/:nombre', medicamentoService.getByNombre);
 
 router.get("/lista/", medicamentoService.listarMedicamento);
 

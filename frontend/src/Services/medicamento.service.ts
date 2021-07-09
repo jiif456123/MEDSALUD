@@ -35,7 +35,21 @@ export class MedicamentoService{
     stockMin:null,
     stockMax:null,
     detalles:''
- };
+ };selectedMedicamento3: Medicamento={
+  _id:'',
+  codigo:'',
+  nombre: '',
+  disponibilidad:null,
+  dosis:'',
+  presentacion:'',
+  precioUnitario:null,
+  marca:'',
+  categoria:'',
+  ubicacion:'',
+  stockMin:null,
+  stockMax:null,
+  detalles:''
+};
  
 
   medicamento: Medicamento[]; //importamos desde el modelo tene objetos tipo medicamento
@@ -56,7 +70,7 @@ export class MedicamentoService{
 
     getByNombre(nombre: string) {
       if(nombre!=''){
-        return this.http.get<any>(this.URL_API + `/${nombre}`);
+        return this.http.get<any>(this.URL_API + `busqueda/${nombre}`);
       }else{
         return this.http.get<any>(this.URL_API);
       }

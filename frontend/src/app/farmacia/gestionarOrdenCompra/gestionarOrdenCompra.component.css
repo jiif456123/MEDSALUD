@@ -167,3 +167,11 @@ select[readonly] {
     pointer-events: none;
     touch-action: none;
 }
+
+.titulo {
+    border-color: #529ABA;
+    color: #529ABA;
+    font-size: 36px;
+    font-weight: inherit;
+    margin-top: 15px;
+}

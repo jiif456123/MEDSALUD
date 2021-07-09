@@ -3,10 +3,22 @@ import {HttpClient} from '@angular/common/http';
 import { EjemplarEquipoMedico } from '../models/ejemplarEquipoMedico.model';
 import { environment } from '../environments/environment';
 import { Subject } from 'rxjs';
+import { EquiposMedicos } from 'models/equiposMedicos.model';
+
 @Injectable()
+
 export class EjemplarEquipoMedicoService{
     selectedEjemplarEquipoMedico: EjemplarEquipoMedico = {     
-        idEquipoMedico: '',   
+        idEquipoMedico: {
+            _id:'',
+            nombre: '',
+            fabricante:'',
+            especialidad:'',
+            caracteristicas:'',
+            cantidad: 0,
+            disponible:0,
+            noDisponible:0
+        },   
         _id: '',
         ubicacion:'',
         estado:'',
@@ -33,4 +45,7 @@ export class EjemplarEquipoMedicoService{
     getMovimientoE(){
         return this.http.get<any>(this.urlEndPoint);
     }
+    getfiltrar(Modo,Tipo,fechaInicial,fechaFinal){
+        return this.http.get<any>(this.URL_API+'/Filtro'+ `/${Modo}`+`/${Tipo}`+`/${fechaInicial}`+`/${fechaFinal}`);
+      }
 }

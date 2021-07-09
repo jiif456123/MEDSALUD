@@ -19,7 +19,10 @@ export class MedicamentoService{
      ubicacion:'',
      stockMin:null,
      stockMax:null,
-     detalles:''
+     stockActual:null,
+     detalles:'',
+     clx:null,
+     Fecha:null,
   };
   selectedMedicamento1: Medicamento={
     _id:'',
@@ -34,7 +37,10 @@ export class MedicamentoService{
     ubicacion:'',
     stockMin:null,
     stockMax:null,
-    detalles:''
+    stockActual:null,
+    detalles:'',
+    clx:null,
+    Fecha:null,
  };
  
 
@@ -62,6 +68,14 @@ export class MedicamentoService{
       }
    
     }
+    listar() {
+      return this.http.get<any>(this.URL_API);
+    }
+
+    insertar(obj) {
+      return this.http.post<any>(this.URL_API, obj);
+    }
+    
 }
 
 /*

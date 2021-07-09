@@ -21,13 +21,15 @@ var createMedicamento = (medicamento) => {
         disponibilidad: medicamento.disponibilidad,
         dosis: medicamento.dosis,
         presentacion: medicamento.presentacion,
-        precioUnitario:medicamento.precioUnitario,
+        precioUnitario: medicamento.precioUnitario,
         marca: medicamento.marca,
         categoria: medicamento.categoria,
         ubicacion: medicamento.ubicacion,
         stockMin: medicamento.stockMin,
         stockMax: medicamento.stockMax,
-        detalles: medicamento.detalles
+        detalles: medicamento.detalles,
+        clx: medicamento.clx,
+        Fecha: medicamento.Fecha,
     });
 
     return new Promise((resolve, reject) => {
@@ -39,21 +41,21 @@ var createMedicamento = (medicamento) => {
 };
 var updateMedicamento = (id, medicamento) => {
 
-    console.log( medicamento, ' [medicamento]');
+    console.log(medicamento, ' [medicamento]');
 
     return new Promise((resolve, reject) => {
-        Medicamento.findByIdAndUpdate(id,  medicamento, (err,  medicamentos) => {
+        Medicamento.findByIdAndUpdate(id, medicamento, (err, medicamentos) => {
 
             if (err) {
                 reject(err);
             }
-            resolve( medicamentos);
+            resolve(medicamentos);
         });
     });
 };
 
 var getByNombre = async(req, res) => {
-    
+
     const medicamentos = await Medicamento.find({ nombre: { $regex: req.params.nombre } });
 
     res.json(medicamentos);
@@ -66,5 +68,3 @@ module.exports = {
     updateMedicamento,
     getByNombre
 };
-
-

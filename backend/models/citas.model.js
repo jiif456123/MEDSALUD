@@ -110,6 +110,20 @@ var cita = new Schema({
     versionKey: false
 });
 var modelCita = mongoose.model('Cita', cita);
+
+/*
+    Evento Model
+*/
+var evento = new Schema({
+    titulo: { type: String },
+    descripcion: { type: String },
+    fechaInicio: { type: Date },
+    fechaFin: { type: Date },
+}, {
+    versionKey: false
+});
+var modelEvento = mongoose.model('Evento', evento);
+
 //User
 
 var user = new Schema({
@@ -139,5 +153,6 @@ module.exports = {
     modelMovimiento: modelMovimiento,
     modelHistoria: modelHistoria,
     modelCita: modelCita,
+    modelEvento: modelEvento,
     modelUser: modelUser,
 }

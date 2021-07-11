@@ -23,6 +23,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/daygrid';
+import { ReporteGeneralComponent } from './reporte-general/reporte-general.component';
+import { ChartsModule } from 'ng2-charts';
 
 FullCalendarModule.registerPlugins([ 
   dayGridPlugin,
@@ -43,6 +45,7 @@ FullCalendarModule.registerPlugins([
     ChatBotComponent,
     ConsultarHorarioComponent,
     ConsultarAgendaComponent,
+    ReporteGeneralComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +56,8 @@ FullCalendarModule.registerPlugins([
     Ng2SearchPipeModule,
     FilterPipeModule,
     Ng2FilterPipeModule,
-    FullCalendarModule
+    FullCalendarModule,
+    ChartsModule
   ],
   providers: [
     FilterPipe

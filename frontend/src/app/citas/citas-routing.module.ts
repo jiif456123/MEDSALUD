@@ -12,6 +12,7 @@ import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.compo
 import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
 import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
+import { ReporteGeneralComponent } from './reporte-general/reporte-general.component';
 
 const routes: Routes = [
 
@@ -50,6 +51,9 @@ const routes: Routes = [
   },
   {
     path: "consultar-horario", component: ConsultarHorarioComponent, data: { title: 'Consultar horario' }
+  },
+  {
+    path: "reporte-general", component: ReporteGeneralComponent, data: { title: 'Reporte General' }
   },
 ];
 

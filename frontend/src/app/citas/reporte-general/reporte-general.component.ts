@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ChartOptions, ChartType } from 'chart.js';
 // import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
@@ -11,30 +12,40 @@ import { MovimientoCajaService } from '../services/movimiento-caja.service';
   styleUrls: ['./reporte-general.component.css']
 })
 export class ReporteGeneralComponent implements OnInit {
-  // public barChartOptions: ChartOptions = {
-  //   responsive: true,
-  //   // We use these empty structures as placeholders for dynamic theming.
-  //   scales: { xAxes: [{}], yAxes: [{}] },
-  //   plugins: {
-  //     datalabels: {
-  //       anchor: 'end',
-  //       align: 'end',
-  //     }
-  //   }
-  // };
-
+  mesSelect= new FormControl();
   movimientos: MovimientoCaja[] = [];
 
+  meses = [
+    { numeroMes: 0, mes: 'Enero' },
+    { numeroMes: 1, mes: 'Febrero' },
+    { numeroMes: 2, mes: 'Marzo' },
+    { numeroMes: 3, mes: 'Abril' },
+    { numeroMes: 4, mes: 'Mayo' },
+    { numeroMes: 5, mes: 'Junio' },
+    { numeroMes: 6, mes: 'Julio' },
+    { numeroMes: 7, mes: 'Agosto' },
+    { numeroMes: 8, mes: 'Septiembre' },
+    { numeroMes: 9, mes: 'Octubre' },
+    { numeroMes: 10, mes: 'Noviembre' },
+    { numeroMes: 11, mes: 'Diciembre' },
+  ]
+
+  //Grafico de barras
   public barChartLabels: Label[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
     'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   public barChartType: any = 'bar';
   public barChartLegend = true;
-  // public barChartPlugins = [pluginDataLabels];
 
   public barChartData: any[] = [
     { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Citas' },
-    //    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
+
+  //Grafico Circular
+  public barChartLabels_Cir: Label[] = [];
+  public barChartType_Cir: any = 'pie';
+  public barChartLegend_Cir = true;
+
+  public barChartData_Cir: number[] = []
 
   constructor(
     private movCajaService: MovimientoCajaService,
@@ -44,39 +55,53 @@ export class ReporteGeneralComponent implements OnInit {
     var dataMovimientoCaja = await this.movCajaService.listar().toPromise();
     this.movimientos = dataMovimientoCaja.data;
     this.distribuirDatos();
+    this.motivoDistinct()
+    this.mesSelect.setValue((new Date()).getMonth()) 
   }
 
-  //Distribuyendo data
+  //Distribuyendo data grafico Barras
   distribuirDatos() {
     const anioActual = (new Date()).getFullYear();
-
+    let array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     this.movimientos.forEach(item => {
-      const itemAnio = (item.fechaHora).getFullYear()
-      debugger;
+      const itemfecha = new Date(item.fechaHora)
+      const itemAnio = itemfecha.getFullYear()
       if (anioActual == itemAnio) {
-        this.barChartData[0].data[(item.fechaHora).getMonth()] += item.precio;
+        array[(itemfecha).getMonth()] += item.precio;
       }
     })
-  }
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+
+    this.barChartData[0].data = array
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+  //Sacando motivos
+  motivoDistinct() {
+    let motivos = [];
+    this.movimientos.forEach(item => {
+      let motivoValidar = motivos.find(it => it == item.motivo.descripcion)
+      if (!motivoValidar) {
+        motivos.push(item.motivo.descripcion)
+      }
+    })
+    this.barChartLabels_Cir = motivos;
   }
 
-  // public randomize(): void {
-  //   // Only Change 3 values
-  //   this.barChartData[0].data = [
-  //     Math.round(Math.random() * 100),
-  //     59,
-  //     80,
-  //     (Math.random() * 100),
-  //     56,
-  //     (Math.random() * 100),
-  //     40];
-  // }
+  distribuirDatosCircular(mes: number) {
+    const anioActual = (new Date()).getFullYear();
+    let array = Array(this.barChartLabels_Cir.length).fill(0).map((x, i) => i);
 
+    this.movimientos.forEach(item => {
+      const itemfecha = new Date(item.fechaHora)
+      const itemAnio = itemfecha.getFullYear()
+      const itemMes = itemfecha.getMonth();
+      if (anioActual == itemAnio && itemMes == mes) {
+        let indexMotivo = this.barChartLabels_Cir.findIndex(item_Mot => item.motivo.descripcion == item_Mot)
+        if (indexMotivo != -1) {
+          array[indexMotivo] += item.precio
+        }
+      }
+    })
+
+    this.barChartData_Cir = array
+  }
 }

@@ -35,6 +35,8 @@
                         <th scope="col">DNI</th>
                         <th scope="col">Paciente</th>
                         <th scope="col">Total Precio</th>
+                        <th scope="col">Imprimir</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +47,22 @@
                         <td>{{ mov.paciente.nombre }} {{mov.paciente.apellidoPaterno}}</td>
                         <td>
                             {{ mov.precio | number:'1.2-2'}}
+                        </td>
+                        <td class="text-center">
+                            <!-- <button (click)="abrirModalAct(cita)" class="btn btn-success btn-sm btn-block">
+                                <i class="mdi mdi-update mdi-18px">Actualizar</i>
+                            </button>
+                            <input data-toggle="modal" data-target="#modalCitaAct" #modalCitaAct type="hidden"
+                                name="button" /> -->
+
+                            <button (click)="imprimir(mov)" class="btn btn-success btn-sm btn-block">
+                                <i class="mdi mdi-update mdi-18px"></i>Imprimir
+                            </button>
+
+                            <button style="display: none;" #butonImprimir [useExistingCss]="false"
+                                printSectionId="impresion-ticket" ngxPrint class="btn btn-success btn-sm btn-block">
+                                <i class="mdi mdi-update mdi-18px"></i>Imprimir
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -115,5 +133,49 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
+    </div>
+</div>
+<div *ngIf="movCajaImprimir" style="display: none;">
+    <div id="impresion-ticket" class="ticket justify-content-center">
+        <img width="150px" height="150px" src="/assets/img/logo.jpg" alt="Logotipo">
+        <p class="centrado">MedSalud<br>Lima, Peru<br>{{fechaActual | date:'medium'}}<br>
+            DNI: {{movCajaImprimir.paciente.dni}}<br>
+            Paciente: {{movCajaImprimir.paciente.nombre + ' ' + movCajaImprimir.paciente.apellidoPaterno }}</p>
+        <table style="border-top: 1px solid black;
+        border-collapse: collapse;">
+            <thead style="border-top: 1px solid black;
+            border-collapse: collapse;">
+                <tr style="border-top: 1px solid black;
+                border-collapse: collapse;">
+                    <th>Cant.</th>
+                    <th>Motivo</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody style="border-top: 1px solid black;
+            border-collapse: collapse;">
+                <tr>
+                    <td>1</td>
+                    <td>{{this.movCajaImprimir.motivo.descripcion}}</td>
+                    <td>{{this.movCajaImprimir.precio}}</td>
+                </tr>
+                <!-- <tr>
+                    <td>2.00</td>
+                    <td>KINDER DELICE</td>
+                    <td>$10.00</td>
+                </tr>
+                <tr>
+                    <td>1.00</td>
+                    <td>COCA COLA 600 ML</td>
+                    <td>$10.00</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>TOTAL</td>
+                    <td>$28.50</td> -->
+                <!-- </tr> -->
+            </tbody>
+        </table>
+        <p>¡GRACIAS POR SU COMPRA!<br>medsalud.com</p>
     </div>
 </div>

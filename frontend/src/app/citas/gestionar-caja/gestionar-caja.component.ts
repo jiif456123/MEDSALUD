@@ -9,6 +9,8 @@ import { MotivoService } from '../services/motivo.service';
 import { MovimientoCajaService } from '../services/movimiento-caja.service';
 import { PacienteService } from '../services/paciente.service';
 import Swal from 'sweetalert2'
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-gestionar-caja',
   templateUrl: './gestionar-caja.component.html',
@@ -22,11 +24,14 @@ export class GestionarCajaComponent implements OnInit {
   movimientos: MovimientoCaja[] = [];
   pacientes: Paciente[] = [];
   motivos: Motivo[] = [];
+  movCajaImprimir: MovimientoCaja;
   @ViewChild('modalOperacion') modalOperacion: ElementRef;
+  @ViewChild('butonImprimir') butonImprimir: ElementRef;
 
   idPaciente: string = '';
   formMovimiento: FormGroup;
 
+  fechaActual = new Date();
   constructor(
     private pacienteService: PacienteService,
     private motivoService: MotivoService,
@@ -150,5 +155,12 @@ export class GestionarCajaComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  async imprimir(moviemiento: MovimientoCaja) {
+    this.movCajaImprimir = moviemiento;
+    this.fechaActual= new Date();
+    await timer(500).pipe(take(1)).toPromise(); //timer para renderize el componente
+    this.butonImprimir.nativeElement.click();
   }
 }

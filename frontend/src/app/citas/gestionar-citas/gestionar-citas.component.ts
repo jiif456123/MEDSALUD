@@ -161,6 +161,12 @@ export class GestionarCitasComponent implements OnInit {
       return;
     }
 
+    let cita = this.citas.find(item => item.fechaHora == fecha && item.paciente._id == this.idPaciente)
+
+    if (cita) {
+      Swal.fire('Advertencia', 'El paciente ya tiene una cita programamda para la hora y dia indicada.', 'warning')
+      return;
+    }
     let query = {
       nIdPaciente: this.idPaciente,
       nIdMotivo: datos.motivo,

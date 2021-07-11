@@ -24,6 +24,8 @@ import interactionPlugin from '@fullcalendar/daygrid';
 import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
 import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
 import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
+import { TicketCajaComponent } from './gestionar-caja/ticket-caja/ticket-caja.component';
+import { NgxPrintModule } from 'ngx-print';
 
 FullCalendarModule.registerPlugins([ 
   dayGridPlugin,
@@ -47,12 +49,13 @@ FullCalendarModule.registerPlugins([
     RegGestionarRecetaMedicaComponent,
     DetalleGestionarRecetaMedicaComponent,
     RegGestionarRecetaMedicaComponent,
-    DetalleGestionarRecetaMedicaComponent
+    DetalleGestionarRecetaMedicaComponent,
+    TicketCajaComponent
   ],
   imports: [
     CommonModule,
     CitasRoutingModule,
-    
+    NgxPrintModule,
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,

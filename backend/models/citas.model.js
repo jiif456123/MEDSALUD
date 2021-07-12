@@ -117,8 +117,10 @@ var modelCita = mongoose.model('Cita', cita);
 var evento = new Schema({
     titulo: { type: String },
     descripcion: { type: String },
-    fechaInicio: { type: Date },
-    fechaFin: { type: Date },
+    fechaInicio: { type: String },
+    fechaFin: { type: String },
+    horaInicio: { type: String },
+    horaFin: { type: String },
 }, {
     versionKey: false
 });

@@ -2,6 +2,8 @@ export interface Evento {
     _id: string
     titulo: string
     descripcion: string
-    fechaInicio: Date
-    fechaFin: Date
+    fechaInicio: string
+    fechaFin: string
+    horaInicio: string
+    horaFin: string
 }

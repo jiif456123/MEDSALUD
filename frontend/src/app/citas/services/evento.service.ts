@@ -17,4 +17,8 @@ export class EventoService {
   registrar(query: any) {
     return this.http.post<any>(this.urlEndPoint, query);
   }
+
+  eliminar(_id: string) {
+    return this.http.delete<any>(`${this.urlEndPoint}/${_id}`);
+  }
 }

@@ -24,10 +24,12 @@ export class ConsultarAgendaComponent implements OnInit {
 
   formEvento: FormGroup;
   formDetalle: FormGroup;
+  
 
   constructor(
     private eventoService: EventoService,
     private fb: FormBuilder,
+    private datePipe: DatePipe,
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -36,6 +38,7 @@ export class ConsultarAgendaComponent implements OnInit {
     this.calendarOptions = {
       initialView: 'dayGridMonth',
       locale: esLocale,
+      eventDisplay: 'block',
       events: [],
       headerToolbar: {
         start: 'title',
@@ -53,49 +56,47 @@ export class ConsultarAgendaComponent implements OnInit {
         this.formDetalle.patchValue({"descripcion": e.event._def.extendedProps.data.descripcion});
         this.formDetalle.patchValue({"fechaInicio": e.event._def.extendedProps.data.fechaInicio});
         this.formDetalle.patchValue({"fechaFin": e.event._def.extendedProps.data.fechaFin});
+        this.formDetalle.patchValue({"horaInicio": e.event._def.extendedProps.data.horaInicio});
+        this.formDetalle.patchValue({"horaFin": e.event._def.extendedProps.data.horaFin});
         this.modalDetalle.nativeElement.click();
       }
     };
+    
     var dataEvento = await this.eventoService.listar().toPromise();
-
-    this.eventos = dataEvento.data;
-
-    var datos = [];
-    this.eventos.forEach(item => {
-      datos.push({ title: item.titulo, start: item.fechaInicio, end: item.fechaFin, data:item })
-    })
-
-    this.calendarOptions.events = datos;
+    this.integrarEventos(dataEvento);
 
     this.formEvento = this.fb.group({
       titulo: [''],
       descripcion: [''],
       fechaInicio: [''],
       fechaFin: [''],
+      horaInicio: [''],
+      horaFin: [''],
     })
 
     this.formDetalle = this.fb.group({
       titulo: [''],
       descripcion: [''],
-      fechaInicio: [Date],
-      fechaFin: [Date],
+      fechaInicio: [''],
+      fechaFin: [''],
+      horaInicio: [''],
+      horaFin: [''],
     })
   }
-  
-  transformarFecha(fecha: Date) {
-    return `${fecha.getFullYear()}-${fecha.getMonth() + 1}-${fecha.getDate()}`
-  }
+
   async registrar() {
 
     if (this.formEvento.invalid) {
       return;
-    }
+    }    
     let datos = this.formEvento.value
     let query = {
       titulo: datos.titulo,
       descripcion: datos.descripcion,
-      fechaInicio: new Date(datos.fechaInicio),
-      fechaFin: new Date(datos.fechaFin),
+      fechaInicio: datos.fechaInicio,
+      fechaFin: datos.fechaFin,
+      horaInicio: datos.horaInicio,
+      horaFin: datos.horaFin,
     }
     try {
 
@@ -107,8 +108,39 @@ export class ConsultarAgendaComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
+    /**
+  * actualiza el calendario -- fetchevents no es optimo para esta tarea
+  */
+    var dataEvento = await this.eventoService.listar().toPromise();
+    this.integrarEventos(dataEvento);
   }
 
+  integrarEventos(dataEvento){
+
+    this.eventos = dataEvento.data;
+    
+    var datos = [];
+    this.eventos.forEach(item => {
+      /**
+      * EL Calendario lee la fecha final como --/--/-- 00:00:00, por eso no considera el ultimo día
+      */
+      let fechadiv = item.fechaFin.split('-');
+      let fechanum = Number(fechadiv[2])+1;
+      let fecha= fechadiv[0]+'-'+fechadiv[1]+'-'+fechanum;
+      
+      datos.push({ 
+      title: item.titulo, 
+      startRecur: item.fechaInicio, 
+      endRecur: fecha,
+      startTime: item.horaInicio, 
+      endTime: item.horaFin, 
+      data:item })
+    })
+
+    this.calendarOptions.events = datos;
+}   
+  
+  
   ngAfterViewInit(){
     
   }

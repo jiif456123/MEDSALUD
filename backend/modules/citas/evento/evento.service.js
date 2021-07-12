@@ -7,6 +7,8 @@ let crear = (evento) => {
         descripcion: evento.descripcion,
         fechaInicio: evento.fechaInicio,
         fechaFin: evento.fechaFin,
+        horaInicio: evento.horaInicio,
+        horaFin: evento.horaFin,
     })
     return new Promise((resolve, reject) => {
         nuevoEvento.save(nuevoEvento, (err, data) => {
@@ -25,7 +27,17 @@ let listar = () => {
     })
 }
 
+var eliminar = (id) => {
+    return new Promise((resolve, reject) => {
+        eventomodel.remove({ _id: id }, (err, data) => {
+            if (err) { reject(err); }
+            resolve(data);
+        })
+    })
+}
+
 module.exports = {
     crear: crear,
     listar: listar,
+    eliminar:eliminar,
 }

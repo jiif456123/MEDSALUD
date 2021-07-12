@@ -1,7 +1,6 @@
-<full-calendar [options]="calendarOptions"></full-calendar>
+<full-calendar deepChangeDetection="true" [options]="calendarOptions"></full-calendar>
 
 <!--Modal para Registrar Evento-->
-
 <div class="modal fade" id="modalEvento" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false"
     data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalEvento" aria-hidden="true">
 
@@ -34,6 +33,16 @@
                     <div class="form-group col-md-6">
                         <label for="fechaFin">Fecha Fin</label>
                         <input formControlName="fechaFin" type="date" class="form-control" id="fechaFin" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaInicio">Hora Inicio</label>
+                        <input formControlName="horaInicio" type="time" class="form-control" id="horaInicio" placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaFin">Hora Fin</label>
+                        <input formControlName="horaFin" type="time" class="form-control" id="horaFin" placeholder="" />
                     </div>
                 </form>
             </div>
@@ -70,12 +79,22 @@
 
                     <div class="form-group col-md-6">
                         <label for="fechaInicio">Fecha Inicio</label>
-                        <input formControlName="fechaInicio" type="text" class="form-control" id="fechaInicio" disabled placeholder="" />
+                        <input formControlName="fechaInicio" type="date" class="form-control" id="fechaInicio" disabled placeholder="" />
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="fechaFin">Fecha Fin</label>
-                        <input formControlName="fechaFin" type="text" class="form-control" id="fechaFin" disabled placeholder="" />
+                        <input formControlName="fechaFin" type="date" class="form-control" id="fechaFin" disabled placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaInicio">Hora Inicio</label>
+                        <input formControlName="horaInicio" type="time" class="form-control" id="horaInicio" disabled placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaFin">Hora Fin</label>
+                        <input formControlName="horaFin" type="time" class="form-control" id="horaFin" disabled placeholder="" />
                     </div>
                 </form>
             </div>

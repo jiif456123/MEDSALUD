@@ -19,4 +19,17 @@ router.get('/', (req, res) => {
             (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
 })
 
+router.delete('/:id', (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+
+    eventoService.eliminar(id)
+        .then((data) => {
+            http.ok(req, res, code.status.Ok.code, data);
+        })
+        .catch((error) => {
+            http.err(req, res, code.status.Internal_Server_Error, err);
+        })
+})
+
 module.exports = router

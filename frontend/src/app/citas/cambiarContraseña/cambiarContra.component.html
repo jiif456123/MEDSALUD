@@ -89,15 +89,16 @@
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="contraseña">Contraseña</label>
-                        <input formControlName="contraseña" type="text" class="form-control" id="contraseña" placeholder="" />
+                        <label for="contra">Contraseña</label>
+                        <input formControlName="contra" type="text" name="Contra" class="form-control" pattern="[ ]" id="contra" placeholder="" />
+
                     </div>
                     <div class="form-group col-md-12">
                         <label for="user">User</label>
                         <input formControlName="user" type="text" class="form-control" id="user" disabled placeholder="user" />
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="confirmar">Confirmar Contraseña</label>
+                        <label for="confirmar">Confirmar Contraseña del ADMIN</label>
                         <input formControlName="confirmar" [type]="tipo" class="form-control" id="confirmar" placeholder="confirmar" />
                         <div class="col">
                             <button class="btn btn-primary" type="button" (click)="mostrarContrasena()">
@@ -158,8 +159,8 @@
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="contraseña">Contraseña</label>
-                        <input formControlName="contraseña" [type]="tipo" id="contraseña" class="form-control" disabled placeholder="" />
+                        <label for="contra">Contraseña</label>
+                        <input formControlName="contra" [type]="tipo" id="contra" class="form-control" disabled placeholder="" />
                         <div class="col">
                             <button class="btn btn-primary" type="button" (click)="mostrarContrasena()">
                                 <i class="fa fa-eye fa-lg"></i>

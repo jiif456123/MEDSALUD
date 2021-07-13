@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import Swal from 'sweetalert2';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { EspecialidadService } from '../../../../Services/especialidad/especialidad.service';
@@ -101,9 +101,16 @@ export class EspecialidadRegistradoComponent implements OnInit{
               this.especialidadService.especialidadCambio.next(data);
               this.especialidadService.mensajeCambio.next('Nuevo registro exitoso');
           })
-      }
-      this.router.navigate(['/citas/gestionar-especialidad']);
+      } Swal.fire(
+        'Registro exitoso',
+        '',
+        'success',
+        
+      )
+     
   }
+
+  
 
   cargarForm(){
     if(this.editar){

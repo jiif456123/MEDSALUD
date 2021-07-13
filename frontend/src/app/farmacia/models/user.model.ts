@@ -11,6 +11,6 @@ export class User {
     direccion: string
     fechaActual: Date
     especialidad: string
-    contraseña: string
+    contra: string
     user:string
 }

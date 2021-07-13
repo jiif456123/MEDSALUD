@@ -43,7 +43,7 @@
                     <div>
                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                             <label for="fechaHora">Fecha Inicio</label>
-                            <input type="date" id="fechaHora" class="form-control" placeholder="Fecha" formControlName="fechaHora" step="1" min="2021-05-29" max="2022-12-31">
+                            <input type="date" id="fechaHora" class="form-control" formControlName="fechaHora" step="1" min="2021-07-11" max="2021-12-31">
                             <div class="pt-1 text-danger" *ngIf="invalid('fechaHora') || fechaHoraAux">
                                 <span class="form-control-feedback">
                                     <i class="mdi mdi-close-circle"></i> Este campo es <strong>requerido.</strong>
@@ -55,7 +55,7 @@
                     <div>
                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                             <label for="fechaFin">Fecha Fin</label>
-                            <input type="date" id="fechaFin" class="form-control" placeholder="Fecha" formControlName="fechaFin" step="1" min="2021-05-29" max="2022-12-31">
+                            <input type="date" id="fechaFin" class="form-control" formControlName="fechaFin" step="1" min="2021-07-11" max="2021-12-31" required>
                             <div class="pt-1 text-danger" *ngIf="invalid('fechaFin') || fechaFinAux">
                                 <span class="form-control-feedback">
                                     <i class="mdi mdi-close-circle"></i> Este campo es <strong>requerido.</strong>

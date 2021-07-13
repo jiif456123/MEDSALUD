@@ -44,7 +44,7 @@ export class GestionarPerfilComponent implements OnInit {
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       especialidad: ['', [Validators.required]],
-      contraseña: ['', [Validators.required]],
+      contra: ['', [Validators.required]],
       user: ['', [Validators.required]],
     })
 
@@ -59,7 +59,7 @@ export class GestionarPerfilComponent implements OnInit {
         fechaNacimiento: ['', [Validators.required]],
         direccion: ['', [Validators.required]],
         especialidad: ['', [Validators.required]],
-        contraseña: ['', [Validators.required]],
+        contra: ['', [Validators.required]],
         user: ['', [Validators.required]],
     })
 
@@ -74,7 +74,7 @@ export class GestionarPerfilComponent implements OnInit {
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       especialidad: ['', [Validators.required]],
-      contraseña: ['', [Validators.required]],
+      contra: ['', [Validators.required]],
       user: ['', [Validators.required]],
   })
 
@@ -98,7 +98,7 @@ export class GestionarPerfilComponent implements OnInit {
     this.formUserModificar.controls.direccion.setValue(row.direccion);
     this.formUserModificar.controls.especialidad.setValue(row.especialidad);
     this.formUserModificar.controls.user.setValue(row.user);
-    this.formUserModificar.controls.contraseña.setValue(row.contraseña);
+    this.formUserModificar.controls.contra.setValue(row.contra);
 
   }
 
@@ -116,7 +116,7 @@ export class GestionarPerfilComponent implements OnInit {
     this.formUserVer.controls.direccion.setValue(row.direccion);
     this.formUserVer.controls.especialidad.setValue(row.especialidad);
     this.formUserVer.controls.user.setValue(row.user);
-    this.formUserVer.controls.contraseña.setValue(row.contraseña);
+    this.formUserVer.controls.contra.setValue(row.contra);
 
   }
 
@@ -141,7 +141,7 @@ export class GestionarPerfilComponent implements OnInit {
       fechaNacimiento: datos.fechaNacimiento,
       direccion: datos.direccion,
       especialidad: datos.especialidad,
-      contraseña: datos.contraseña,
+      contra: datos.contra,
       user:datos.user
     }
 
@@ -174,7 +174,7 @@ export class GestionarPerfilComponent implements OnInit {
         fechaNacimiento: datos.fechaNacimiento,
         direccion: datos.direccion,
         especialidad: datos.especialidad,
-        contraseña: datos.contraseña,
+        contra: datos.contra,
       user:datos.user
     }
 

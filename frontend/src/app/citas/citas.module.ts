@@ -21,6 +21,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/daygrid';
+import { ConsultarServicioComponent } from './consultar-servicio/consultar-servicio.component';
 
 FullCalendarModule.registerPlugins([ 
   dayGridPlugin,
@@ -40,6 +41,7 @@ FullCalendarModule.registerPlugins([
     ChatBotComponent,
     ConsultarHorarioComponent,
     ConsultarAgendaComponent,
+    ConsultarServicioComponent,
   ],
   imports: [
     CommonModule,

@@ -126,6 +126,20 @@ var evento = new Schema({
 });
 var modelEvento = mongoose.model('Evento', evento);
 
+/*
+    Servicio Model
+*/
+var servicio = new Schema({
+    titulo: { type: String },
+    descripcion: { type: String },
+    imagen: { type: String },
+    horaInicio: { type: String },
+    horaFin: { type: String },
+}, {
+    versionKey: false
+});
+var modelServicio = mongoose.model('Servicio', servicio);
+
 //User
 
 var user = new Schema({
@@ -156,5 +170,6 @@ module.exports = {
     modelHistoria: modelHistoria,
     modelCita: modelCita,
     modelEvento: modelEvento,
+    modelServicio:modelServicio,
     modelUser: modelUser,
 }

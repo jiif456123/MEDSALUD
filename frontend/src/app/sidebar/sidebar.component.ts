@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/citas/chat-bot', title: 'Chat Bot', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/consultar-agenda', title: 'Consultar agenda', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/consultar-horario', title: 'Consultar horario', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/consultar-servicio', title: 'Consultar servicio', icon: 'pe-7s-news-paper', class: '' },
 ];
 
 @Component({

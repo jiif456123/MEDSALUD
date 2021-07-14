@@ -47,7 +47,7 @@ export class PedidoService{
 
 //medicamento: MedicamentoOC[];
  pedido: Pedido[]; //importamos desde el modelo tene objetos tipo 
-  readonly URL_API_GET= "http://localhost:3000/farmacia/pedidos/";
+  readonly URL_API_GET= "http://localhost:3000/farmacia/pedidos";
   readonly URL_API_Busqueda= "http://localhost:3000/farmacia/pedidos/consulta-dni";
   constructor(private http: HttpClient){}
 

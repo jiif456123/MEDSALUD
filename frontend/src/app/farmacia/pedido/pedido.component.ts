@@ -29,24 +29,10 @@ import { throwError } from 'rxjs';
   medicamentos:any[] = [];
   // los input del formulario se asocian con un modelo
   dato:any = {};
-
-//////////////////////////////
-  medicamentos2: any[]=[];
-  dato2:any[]=[];
   
   pedidos2:Pedido[]=[];
   
 
-  // ver(){
-  //   // //this.pedidoService.selectedPedido1 = pedido;
-  //   for (let index = 0; index < this.pedidoService.selectedPedido1.medicamentos.length; index++) {
-  //     this.precioCantidad=this.medicamentos[index].precio*this.medicamentos[index].cantidad;
-  //   }
-  //   this.subTotal+=this.precioCantidad
-
-  //   this.totalSinIGV=this.subTotal*0.18;
-  //   this.total=Math.round(this.subTotal+this.totalSinIGV);
-  // }
   eliminarIndexDelRegistro(i){
     this.medicamentos.splice(i, 1)
     // console.log(this.pedidoService.selectedPedido1.medicamentos[i]);
@@ -137,31 +123,12 @@ import { throwError } from 'rxjs';
       this.medicamentos.length=0;
     }
 
-    disableUpdateButton(){
-      //var xd = document.getElementById('editarButton');
-      //console.log(this.pedidos[0]);
-      // this.pedidos.forEach(e => {
-      //   console.log(this.pedidos[5].estado);
-      // });
-      // console.log(this.pedidos);
-      // var index=0;
-      // console.log(this.pedidos[index].estado);
-    }
-
     eliminarDatofromMedicamentos(){
       for (let index = 0; index < this.medicamentos.length; index++) {
         //console.log(this.medicamentos[index]);
          this.medicamentos.splice(index);
       }
-     // this.medicamentos.indexOf()
-    //   var array = [3, 5, 9];
-    //   var index = array.indexOf(5);
-
-    //   if (index > -1) {
-    //     array.splice(index, 1);
-    //  }
-      //console.log(this.medicamentos[index]);
-    }
+      }
     
     changeEstadoPedido(){
       
@@ -184,10 +151,9 @@ import { throwError } from 'rxjs';
         });
       }
       getPedidos1(pedido:Pedido) {
-        //console.log(pedido);
+        
         this.pedidoService.selectedPedido1 = pedido;
-        // console.log(pedido);
-        // console.log(pedido.medicamentos);
+    
       }
 
       ver(){
@@ -218,7 +184,7 @@ import { throwError } from 'rxjs';
     }
   
     addPedido(form: NgForm){
-      //console.log(form.value.medicamentos);
+      
       form.value.medicamentos=this.medicamentos;
       console.log(this.medicamentos);
       this.pedidoService.createPedido(form.value).subscribe(
@@ -236,12 +202,11 @@ import { throwError } from 'rxjs';
         }
         
         updatePedido(form:NgForm){
-          //console.log(form.value.medicamentos);
-          //console.log(form.value.selectedPedido1.medicamentos);
-          form.value.medicamentos2=this.pedidoService.selectedPedido1.medicamentos;
+        
+          form.value.medicamentos=this.pedidoService.selectedPedido1.medicamentos;
           //form.value.medicamentos2=this.medicamentos2;
           this.pedidoService.updatePedido(form.value).subscribe(
-            res =>{console.log('Agregado a la BD');
+            res =>{console.log('Editado a la BD');
               //form.value.pedidoService.selectedPedido1.medicamentos=this.pedidoService.selectedPedido1.medicamentos;
                 //  this.getPedidos();
             },
@@ -250,8 +215,20 @@ import { throwError } from 'rxjs';
           
           onKey(event) {const inputValue = event.target.value;}
   }
-  // getPedido1(pedido:Pedido) {
-        //   // console.log(pedido._id);
-        //   // console.log(this.pedidoService.selectedPedido1);
-        //   this.pedidoService.selectedPedido1 = pedido;
-        // }
+
+
+
+
+
+
+  
+  // ver(){
+  //   // //this.pedidoService.selectedPedido1 = pedido;
+  //   for (let index = 0; index < this.pedidoService.selectedPedido1.medicamentos.length; index++) {
+  //     this.precioCantidad=this.medicamentos[index].precio*this.medicamentos[index].cantidad;
+  //   }
+  //   this.subTotal+=this.precioCantidad
+
+  //   this.totalSinIGV=this.subTotal*0.18;
+  //   this.total=Math.round(this.subTotal+this.totalSinIGV);
+  // }

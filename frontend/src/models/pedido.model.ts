@@ -3,6 +3,7 @@ export class Pedido{
      _id:string;
      codigoPedido:string;
      nombre:string;
+     medicamentos:Array<any>;
      codigo:string;
      dni: number;
      medicamento:string;

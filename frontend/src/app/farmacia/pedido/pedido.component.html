@@ -16,7 +16,7 @@
 
         <div class="col-md-4">
             <button type="button" class="btn btn-primary boton-registrar" data-backdrop="false" data-toggle="modal" data-target="#exampleModalCenter">
-                Registrar Pedido
+                + Registrar Pedido
                   </button>
         </div>
     </div>
@@ -47,9 +47,20 @@
 
                 <td>{{ pedido.fecha | date: "dd/MM/yyyy h:mm:ss a" }}</td>
 
-                <td>{{ pedido.estado }}</td>
+                <td><button id="botonEstado" (click)="changeEstadoPedido()" style="border-radius: 10px;background-color: rgb(235, 233, 233)">{{ pedido.estado }}</button></td>
 
-                <td><button class="btn btn-primary button-agregar" (click)="getPedidos1(pedido)" data-backdrop="false" data-toggle="modal" data-target="#verModalCenter">Ver</button></td>
+                <ng-container *ngIf="pedido.estado=='Solicitado'">
+                    <td>
+                        <button style="margin-right: 5px;" class="btn btn-primary button-agregar" (click)="limpiarForm()" (click)="getPedidos1(pedido)" (click)="ver()" data-backdrop="false" data-toggle="modal" data-target="#verModalCenter">Ver</button>
+                        <button id="editarButton" class="btn btn-primary button-agregar" (click)="disableUpdateButton()" (click)="limpiarForm()" (click)="getPedidos1(pedido)" (click)="ver()" data-backdrop="false" data-toggle="modal" data-target="#editarModalCenter">Editar</button>
+                    </td>
+                </ng-container>
+                <ng-container *ngIf="pedido.estado!='Solicitado'">
+                    <td>
+                        <button style="margin-right: 5px;" class="btn btn-primary button-agregar" (click)="limpiarForm()" (click)="getPedidos1(pedido)" (click)="ver()" data-backdrop="false" data-toggle="modal" data-target="#verModalCenter">Ver</button>
+                        <button id="editarButton" class="btn btn-primary button-agregar" (click)="disableUpdateButton()" (click)="limpiarForm()" (click)="getPedidos1(pedido)" (click)="ver()" data-backdrop="false" data-toggle="modal" data-target="#editarModalCenter" disabled>Editar</button>
+                    </td>
+                </ng-container>
             </tr>
         </tbody>
     </table>
@@ -72,7 +83,7 @@
                             <hr>
                             <div class="form-group form-inline" style="text-align: center;">
                                 <label class="labelFromR">DNI</label>
-                                <input type="text" style="width: 90px; margin-left: 13px;" name="dni" [(ngModel)]="pedidoService.selectedPedido.dni" class="form-control" placeholder="Dni" required>
+                                <input type="text" style="width: 90px; margin-left: 13px;" name="dni" [(ngModel)]="pedidoService.selectedPedido.dni" class="form-control" placeholder="Dni" required maxlength="8">
                                 <span ng-show="registroForm.dni.$invalid"></span>
 
                                 <label class="labelFromR" style="margin-left: 20px;">Nombre completo</label>
@@ -105,19 +116,22 @@
                                             <th>Cantidad</th>
                                             <th>S/. Precio</th>
                                             <th>S/. Importe</th>
+                                            <th>Opciones</th>
                                             <!-- <th>Sugerencia</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let dato of medicamentos">
+                                        <tr *ngFor="let dato of medicamentos;let i=index">
                                             <td>{{dato.codigo}}</td>
                                             <td>{{dato.medicamento}}</td>
                                             <td>{{dato.laboratorio}}</td>
                                             <td>{{dato.concentracion}}</td>
                                             <td>{{dato.presentacion}}</td>
+                                            <!-- <td><input type="text" value="{{dato.cantidad}}"></td> -->
                                             <td>{{dato.cantidad}}</td>
-                                            <td>{{dato.precio | currency}}</td>
-                                            <td>{{dato.precio * dato.cantidad | currency}}</td>
+                                            <td>S/. {{dato.precio}}</td>
+                                            <td>S/. {{dato.precio * dato.cantidad}}</td>
+                                            <td><button (click)="eliminarIndexDelRegistro(i)"><img src="../../../assets/img/trash.png" alt=""></button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -126,125 +140,34 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td>SubTotal:</td>
+                                            <td>SubTotal: S/.</td>
                                             <td>
-                                                {{ total | currency:'':symbol: '1.0-2' }}
+                                                {{ subTotal}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>IGV:</td>
-                                            <td>
-                                                {{ total | currency:'':symbol: '1.0-2' }}
-                                            </td>
+                                            <td>IGV: 18%</td>
                                         </tr>
                                         <tr>
-                                            <td>Total:</td>
+                                            <td>Total: S/.</td>
                                             <td>
-                                                {{ total | currency:'':symbol: '1.0-2' }}
+                                                {{ total }}
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <!-- <h6>SubTotal: {{ total | currency:'':symbol: '1.0-2' }}</h6>
-                                <td>
-                                    {{ total | currency:'':symbol: '1.0-2' }}
-                                </td>
-                                <h6>IGV 18%:</h6>
-                                <h6>Total:</h6> -->
                             </div>
                         </div>
 
                         <div class="modal-footer popup-footer">
                             <div class="btn-group">
-                                <button class="btn btn-primary button-agregar" [disabled]="registroForm.invalid" (click)="addPedido(registroForm)" (click)="resetForm(registroForm)" (click)="getPedidos()" data-dismiss="modal">Registrar</button>
+                                <button class="btn btn-primary button-agregar" [disabled]="registroForm.invalid" (click)="addPedido(registroForm)" (click)="resetForm(registroForm)" data-dismiss="modal" (click)="getPedidos()">Registrar</button>
                             </div>
                             <div class="btn-left">
-                                <button type="button" style="margin-left: 500px;" class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
+                                <button type="button" style="margin-left: 500px;" class="btn btn-secondary " (click)="limpiarTabla()" data-dismiss="modal">Cancelar</button>
                             </div>
 
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Registar Medicamento -->
-<div class="modal fade" id="AddModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-backdrop display-none">
-        <!-- Para que el modal salga con un background transparente -->
-        <div class="modal-dialog vertical-align-center modal-sm" style="border-radius: 15px;margin-top: 10px;margin-bottom: 30px;" role="document">
-            <div class="modal-content" style="margin-top: 0px;margin-bottom: 30px">
-                <div class="modal-header">
-                    <h3 class="modal-title text-center text-registrar">Agregar Medicamento</h3>
-                </div>
-
-                <div class="modal-body" style="padding-right: 15px;padding-left: 15px; padding-bottom: 145px;margin-bottom: 30px;">
-                    <form #MedicamentoForm="ngForm">
-                        <div class="form-group">
-                            <i class="i-font">Codigo</i>
-                            <input style="width: 30%;" type="number" name="codigo" [(ngModel)]="dato.codigo" class="form-control text-input" required>
-                            <span ng-show="MedicamentoForm.codigo.$invalid"></span>
-                        </div>
-                        <div class="form-group">
-                            <i class="i-font">Medicamento</i>
-                            <div class="content-select select">
-                                <select name="medicamento" [(ngModel)]="dato.medicamento">
-                                <option [value]="item" *ngFor="let item of medicamentosList">{{item}}</option>
-                                <span ng-show="MedicamentoForm.medicamento.$invalid"></span> 
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <i class="i-font">Laboratorio</i>
-                            <div class="content-select select">
-                                <select name="laboratorio" [(ngModel)]="dato.laboratorio">
-                                <option [value]="item" *ngFor="let item of laboratorioList">{{item}}</option>
-                                <span ng-show="MedicamentoForm.laboratorio.$invalid"></span> 
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <i class="i-font">Concentracion</i>
-                            <div class="content-select select">
-                                <select name="concentracion" [(ngModel)]="dato.concentracion">
-                                <option [value]="item" *ngFor="let item of concentracionList">{{item}}</option>
-                                <span ng-show="MedicamentoForm.concentracion.$invalid"></span> 
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <i class="i-font">Presentacion</i>
-                            <div class="content-select select">
-                                <select name="presentacion" [(ngModel)]="dato.presentacion">
-                                <option [value]="item" *ngFor="let item of presentacionList">{{item}}</option>
-                                <span ng-show="MedicamentoForm.presentacion.$invalid"></span>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <i class="i-font">Cantidad</i>
-                            <input style="width: 20%;" type="number" name="cantidad" [(ngModel)]="dato.cantidad" class="form-control text-input" required>
-                            <span ng-show="MedicamentoForm.cantidad.$invalid"></span>
-                        </div>
-                        <div class="form-group">
-                            <i class="i-font">S/. Precio Unitario</i>
-                            <input style="width: 30%;" type="number" name="precioU" [(ngModel)]="dato.precio" class="form-control text-input" required>
-                            <span ng-show="MedicamentoForm.precioU.$invalid"></span>
-                        </div>
-
-                        <div class="modal-footer popup-footer" style="display: flexbox;">
-                            <div class="btn-group">
-                                <button class="btn btn-primary button-agregar" [disabled]="MedicamentoForm.invalid" (click)="guardar(MedicamentoForm)">Agregar</button>
-                            </div>
-                            <div class="btn-left">
-                                <button type="button" style="margin-left: 0px;" class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
-                            </div>
-
-                        </div>
-
-                        <!-- <button type="button" style="margin-left: 500px;" class="btn btn-secondary " data-dismiss="modal">Cancelar</button> -->
                     </form>
                 </div>
             </div>
@@ -321,34 +244,390 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td>SubTotal: </td>
-                                            <!-- <td *ngIf="i==0"> -->
-                                            <!-- {{ this.suma(dato.precio,dato.cantidad) | currency}} -->
-                                            <!-- </td> -->
-                                        </tr>
-                                        <tr>
-                                            <td>IGV:</td>
+                                            <td>SubTotal: S/.</td>
                                             <td>
-                                                {{ total | currency:'':symbol: '1.0-2' }}
+                                                {{ subTotal}}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Total:</td>
+                                            <td>IGV: 18%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total: S/.</td>
                                             <td>
-                                                {{ total | currency:'':symbol: '1.0-2' }}
+                                                {{ total }}
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <!-- <h6>SubTotal: {{ total | currency:'':symbol: '1.0-2' }}</h6>
-                                <h6>IGV 18%:</h6>
-                                <h6>Total: {{(dato.precio * dato.cantidad)| currency}}</h6> -->
                             </div>
                         </div>
 
                         <div class="modal-footer popup-footer">
                             <div class="btn-left">
                                 <button type="button" style="margin-left: 500px;" class="btn btn-secondary " data-dismiss="modal">Salir</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Editar Pedido-->
+<div class="modal fade" id="editarModalCenter" tabindex="-1" role="dialog" aria-labelledby="verModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-lg" style="margin-top: 10px;" role="document">
+            <div class="modal-content" style="margin-top: 0px;">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Editar Pedido</h3>
+                </div>
+
+                <div class="modal-body" style="padding-right: 0px;padding-left: 15px; padding-bottom: 145px;">
+                    <form #UpdateForm="ngForm">
+                        <div class="ordenCompra-div" style="border-radius: 15px;margin-bottom: 20px;border:1.5px solid rgb(211, 211, 211);">
+                            <h3 style="margin-left: 30px;  color: #3498db; ">Datos del Paciente</h3>
+                            <hr>
+                            <div class="form-group form-inline" style="text-align: center;">
+
+                                <div class="form-group">
+                                    <input type="text" name="_id" [(ngModel)]="pedidoService.selectedPedido1._id" class="form-control text-input" style="display: none;">
+                                </div>
+                                <label class="labelFromR">DNI</label>
+                                <input type="text" style="width: 90px; margin-left: 13px;" name="dni" [(ngModel)]="pedidoService.selectedPedido1.dni" class="form-control" placeholder="Dni">
+                                <span ng-show="UpdateForm.dni.$invalid"></span>
+
+                                <label class="labelFromR" style="margin-left: 20px;">Nombre completo</label>
+                                <input type="text" name="nombre" style="width: 200px; margin-left: 13px;" [(ngModel)]="pedidoService.selectedPedido1.nombre" class="form-control" placeholder="Nombre">
+                                <span ng-show="UpdateForm.nombre.$invalid"></span>
+
+                                <label class="labelFromR" style="margin-left: 20px;">Fecha de Emision</label>
+                                <input type="text" name="fecha" style="width: 120px; margin-left: 13px;" [(ngModel)]="pedidoService.selectedPedido1.fecha" class="form-control" placeholder="Fecha de Emision" readonly>
+                                <span ng-show="UpdateForm.fecha.$invalid"></span>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div style="margin-bottom: 20px;border: 0;">
+                            <button style="position: absolute; right: 30px;margin-bottom: 20px;" class="btn btn-success button-agregar float-right" data-backdrop="false" data-toggle="modal" data-target="#AddUpdateModalCenter">+ Agregar</button>
+                        </div>
+                        <br>
+
+                        <div class="modal-footer" style="text-align: unset; border-style: none;">
+                            <div class="lista-medicamaneto" style="margin-top: 20px;  border:1.5px solid rgb(211, 211, 211);">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Medicamento</th>
+                                            <th>Laboratorio</th>
+                                            <th>Concentracion</th>
+                                            <th>Presentacion</th>
+                                            <th>Cantidad</th>
+                                            <th>S/. Precio</th>
+                                            <th>S/. Importe</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let dato of pedidoService.selectedPedido1.medicamentos ; let i=index">
+                                            <td>{{dato.codigo}}</td>
+                                            <td>{{dato.medicamento}}</td>
+                                            <td>{{dato.laboratorio}}</td>
+                                            <td>{{dato.concentracion}}</td>
+                                            <td>{{dato.presentacion}}</td>
+                                            <td>{{dato.cantidad}}</td>
+                                            <td>S/. {{dato.precio}}</td>
+                                            <td>S/. {{dato.precio * dato.cantidad}}</td>
+                                            <td style="margin-right: 20px;"><button class="btn btn-primary" (click)="getDatafromIndexEditar(i)" data-backdrop="false" data-toggle="modal" data-target="#editModalCenter">Editar</button></td>
+                                            <td><button class="btn btn-danger" (click)="eliminarIndexDelEditar(i)"><img src="../../../assets/img/trash.png" alt=""></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="border-radius: 15px;margin-top: 20px; margin-left: 80%;width: 20%; border:1.5px solid rgb(211, 211, 211,.4);text-align: right;">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>SubTotal: S/.</td>
+                                            <td>
+                                                {{ subTotal}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>IGV: 18%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total: S/.</td>
+                                            <td>
+                                                {{ total }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer popup-footer">
+                            <div class="btn-group">
+                                <button class="btn btn-primary button-agregar" [disabled]="UpdateForm.invalid" (click)="updatePedido(UpdateForm)" data-dismiss="modal">Editar</button>
+                            </div>
+                            <div class="btn-left">
+                                <button type="button" style="margin-left: 500px;" class="btn btn-secondary " data-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Registar Medicamento -->
+<div class="modal fade" id="AddModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-sm" style="border-radius: 15px;margin-top: 10px;margin-bottom: 30px;" role="document">
+            <div class="modal-content" style="margin-top: 0px;margin-bottom: 30px">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Agregar Medicamento</h3>
+                </div>
+
+                <div class="modal-body" style="padding-right: 15px;padding-left: 15px; padding-bottom: 145px;margin-bottom: 30px;">
+                    <form #MedicamentoForm="ngForm">
+                        <div class="form-group">
+                            <i class="i-font">Codigo</i>
+                            <input style="width: 30%;" type="number" name="codigo" [(ngModel)]="dato.codigo" class="form-control text-input" required>
+                            <span ng-show="MedicamentoForm.codigo.$invalid"></span>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Medicamento</i>
+                            <div class="content-select select">
+                                <select name="medicamento" [(ngModel)]="dato.medicamento">
+                                <option [value]="item" *ngFor="let item of medicamentosList">{{item}}</option>
+                                <span ng-show="MedicamentoForm.medicamento.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Laboratorio</i>
+                            <div class="content-select select">
+                                <select name="laboratorio" [(ngModel)]="dato.laboratorio">
+                                <option [value]="item" *ngFor="let item of laboratorioList">{{item}}</option>
+                                <span ng-show="MedicamentoForm.laboratorio.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Concentracion</i>
+                            <div class="content-select select">
+                                <select name="concentracion" [(ngModel)]="dato.concentracion">
+                                <option [value]="item" *ngFor="let item of concentracionList">{{item}}</option>
+                                <span ng-show="MedicamentoForm.concentracion.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Presentacion</i>
+                            <div class="content-select select">
+                                <select name="presentacion" [(ngModel)]="dato.presentacion">
+                                <option [value]="item" *ngFor="let item of presentacionList">{{item}}</option>
+                                <span ng-show="MedicamentoForm.presentacion.$invalid"></span>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Cantidad</i>
+                            <input style="width: 20%;" type="number" name="cantidad" [(ngModel)]="dato.cantidad" class="form-control text-input" required min="1" max="2">
+                            <span ng-show="MedicamentoForm.cantidad.$invalid"></span>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">S/. Precio Unitario</i>
+                            <input style="width: 30%;" type="number" name="precioU" [(ngModel)]="dato.precio" class="form-control text-input" required>
+                            <span ng-show="MedicamentoForm.precioU.$invalid"></span>
+                        </div>
+
+                        <div class="modal-footer popup-footer" style="display: flexbox;">
+                            <div class="btn-group">
+                                <button class="btn btn-primary button-agregar" [disabled]="MedicamentoForm.invalid" (click)="guardar(MedicamentoForm)">Guardar</button>
+                            </div>
+                            <div class="btn-left">
+                                <button type="button" style="margin-left: 0px;" class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Registar Medicamento Update -->
+<div class="modal fade" id="AddUpdateModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-sm" style="border-radius: 15px;margin-top: 10px;margin-bottom: 30px;" role="document">
+            <div class="modal-content" style="margin-top: 0px;margin-bottom: 30px">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Agregar Medicamento</h3>
+                </div>
+
+                <div class="modal-body" style="padding-right: 15px;padding-left: 15px; padding-bottom: 145px;margin-bottom: 30px;">
+                    <form #MedicamentoFormUpdate="ngForm">
+                        <div class="form-group">
+                            <i class="i-font">Codigo</i>
+                            <input style="width: 30%;" type="number" name="codigoU" [(ngModel)]="dato.codigo" class="form-control text-input" required>
+                            <span ng-show="MedicamentoFormUpdate.codigo.$invalid"></span>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Medicamento</i>
+                            <div class="content-select select">
+                                <select name="medicamentoU" [(ngModel)]="dato.medicamento">
+                                <option [value]="item" *ngFor="let item of medicamentosList">{{item}}</option>
+                                <span ng-show="MedicamentoFormUpdate.medicamento.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Laboratorio</i>
+                            <div class="content-select select">
+                                <select name="laboratorioU" [(ngModel)]="dato.laboratorio">
+                                <option [value]="item" *ngFor="let item of laboratorioList">{{item}}</option>
+                                <span ng-show="MedicamentoFormUpdate.laboratorio.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Concentracion</i>
+                            <div class="content-select select">
+                                <select name="concentracionU" [(ngModel)]="dato.concentracion">
+                                <option [value]="item" *ngFor="let item of concentracionList">{{item}}</option>
+                                <span ng-show="MedicamentoFormUpdate.concentracion.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Presentacion</i>
+                            <div class="content-select select">
+                                <select name="presentacionU" [(ngModel)]="dato.presentacion">
+                                <option [value]="item" *ngFor="let item of presentacionList">{{item}}</option>
+                                <span ng-show="MedicamentoFormUpdate.presentacion.$invalid"></span>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Cantidad</i>
+                            <input style="width: 20%;" type="number" name="cantidadU" [(ngModel)]="dato.cantidad" class="form-control text-input" required>
+                            <span ng-show="MedicamentoFormUpdate.cantidad.$invalid"></span>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">S/. Precio Unitario</i>
+                            <input style="width: 30%;" type="number" name="precioUA" [(ngModel)]="dato.precio" class="form-control text-input" required>
+                            <span ng-show="MedicamentoFormUpdate.precioU.$invalid"></span>
+                        </div>
+
+                        <div class="modal-footer popup-footer" style="display: flexbox;">
+                            <div class="btn-group">
+                                <button class="btn btn-primary button-agregar" [disabled]="MedicamentoFormUpdate.invalid" (click)="guardarUpdate(MedicamentoFormUpdate)">Guardar</button>
+                            </div>
+                            <div class="btn-left">
+                                <button type="button" style="margin-left: 0px;" class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Medicamento Update -->
+
+
+
+
+
+
+<!-- Modal editar Medicamento  -->
+<div class="modal fade" id="editModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-backdrop display-none">
+        <!-- Para que el modal salga con un background transparente -->
+        <div class="modal-dialog vertical-align-center modal-sm" style="border-radius: 15px;margin-top: 10px;margin-bottom: 30px;" role="document">
+            <div class="modal-content" style="margin-top: 0px;margin-bottom: 30px">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center text-registrar">Editar Medicamento</h3>
+                </div>
+
+                <div class="modal-body" style="padding-right: 15px;padding-left: 15px; padding-bottom: 145px;margin-bottom: 30px;">
+                    <form #MedicamentoFormUpdate="ngForm">
+                        <div class="form-group">
+                            <i class="i-font">Codigo</i>
+                            <input style="width: 30%;" type="number" name="codigo" [(ngModel)]="pedidoService.selectedPedido1.medicamentos.codigo" class="form-control text-input" readonly>
+                            <span ng-show="MedicamentoFormUpdate.codigo.$invalid"></span>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Medicamento</i>
+                            <div class="content-select select">
+                                <select name="medicamentoU" [(ngModel)]="pedidoService.selectedPedido1.medicamentos.medicamento" disabled="disabled">
+                                <option [value]="item" *ngFor="let item of medicamentosList">{{item}}</option>
+                                <span ng-show="MedicamentoFormUpdate.medicamento.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Laboratorio</i>
+                            <div class="content-select select">
+                                <select name="laboratorioU" [(ngModel)]="pedidoService.selectedPedido1.medicamentos.laboratorio" disabled="disabled">
+                                <option [value]="item" *ngFor="let item of laboratorioList">{{item}}</option>
+                                <span ng-show="MedicamentoFormUpdate.laboratorio.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Concentracion</i>
+                            <div class="content-select select">
+                                <select name="concentracionU" [(ngModel)]="pedidoService.selectedPedido1.medicamentos.concentracion" disabled="disabled">
+                                <option [value]="item" *ngFor="let item of concentracionList">{{item}}</option>
+                                <span ng-show="MedicamentoFormUpdate.concentracion.$invalid"></span> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Presentacion</i>
+                            <div class="content-select select">
+                                <select name="presentacionU" [(ngModel)]="pedidoService.selectedPedido1.medicamentos.presentacion" disabled="disabled">
+                                <option [value]="item" *ngFor="let item of presentacionList">{{item}}</option>
+                                <span ng-show="MedicamentoFormUpdate.presentacion.$invalid"></span>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">Cantidad jaja</i>
+                            <input style="width: 20%;" type="number" name="cantidadU" [(ngModel)]="pedidoService.selectedPedido1.medicamentos.cantidad" class="form-control text-input" required>
+                            <span ng-show="MedicamentoFormUpdate.cantidad.$invalid"></span>
+                        </div>
+                        <div class="form-group">
+                            <i class="i-font">S/. Precio Unitario</i>
+                            <input style="width: 30%;" type="number" name="precioUA" [(ngModel)]="pedidoService.selectedPedido1.medicamentos.precio" class="form-control text-input" disabled="disabled" required>
+                            <span ng-show="MedicamentoFormUpdate.precioU.$invalid"></span>
+                        </div>
+
+                        <div class="modal-footer popup-footer" style="display: flexbox;">
+                            <div class="btn-group">
+                                <button class="btn btn-primary button-agregar" [disabled]="MedicamentoFormUpdate.invalid" (click)="guardarUpdate(MedicamentoFormUpdate)">Guardar</button>
+                            </div>
+                            <div class="btn-left">
+                                <button type="button" style="margin-left: 0px;" class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
                             </div>
 
                         </div>

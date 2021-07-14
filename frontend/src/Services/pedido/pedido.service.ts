@@ -12,6 +12,7 @@ export class PedidoService{
     codigo: '',
     nombre:'',
     dni:null,
+    medicamentos:[],
     medicamento:'',
     concentracion:'',
     presentacion:'',
@@ -21,7 +22,7 @@ export class PedidoService{
     importe:null,
     total:null,
     fecha:null,
-    estado:null,
+    estado:'',
     
 };
   selectedPedido1: Pedido={
@@ -30,6 +31,7 @@ export class PedidoService{
     codigo: null,
     nombre:'',
     dni:null,
+    medicamentos:[],
     medicamento:'',
     concentracion:'',
     presentacion:'',
@@ -39,7 +41,7 @@ export class PedidoService{
     total:null,
     importe:null,
     fecha:null,
-    estado:null,
+    estado:'',
 };
 
 

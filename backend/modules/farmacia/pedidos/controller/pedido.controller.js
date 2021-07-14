@@ -23,27 +23,24 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/consulta-dni/:dni', pedidoService.getPedidoByDni
-    // let dni = req.body;
-    // pedidoService.getPedidoByDni(dni).then(
-    //     (data) => {
-    //         http.ok(req, res, code.status.Ok.code, data)
-    //     }).catch(
-    //     (errorMessage) => {
-    //         http.err(req, res, code.status.Internal_Server_Error.code, errorMessage)
-    //     });
-);
+
+router.put('/:id', (req, res) => {
+
+    let id = req.params.id;
+    let pedido = req.body;
+
+    console.log(id);
+
+    pedidoService.updatePedido(id, pedido).then((data) => {
+        http.ok(req, res, code.status.Ok.code, data);
+    }).catch((error) => {
+        http.err(req, res, code.status.Internal_Server_Error.code, error, error)
+    });
+});
+
+router.get('/consulta-dni/:dni', pedidoService.getPedidoByDni);
 
 
-router.delete('/eliminarPedido/:id', pedidoService.deletePedido
-    // let { id } = req.params;
-    // pedidoService.deletePedido(id).then(
-    //     (data) => {
-    //         http.ok(req, res, code.status.Ok.code, data)
-    //     }).catch(
-    //     (errorMessage) => {
-    //         http.err(req, res, code.status.Internal_Server_Error.code, errorMessage)
-    //     });
-);
+router.delete('/eliminarPedido/:id', pedidoService.deletePedido);
 
 module.exports = router;

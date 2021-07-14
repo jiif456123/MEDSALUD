@@ -54,6 +54,22 @@ var deletePedido = async(req, res = response) => {
     }
 }
 
+var updatePedido = (id, pedido) => {
+
+    console.log(pedido, ' [pedido]');
+
+    return new Promise((resolve, reject) => {
+        Pedido.findByIdAndUpdate(id, pedido, (err, pedidos) => {
+
+            if (err) {
+                reject(err);
+            }
+            resolve(pedidos);
+        });
+    });
+};
+
+
 var obtenerTotalPedidos = () => {
     const { limite = 5, desde = 0 } = req.query;
     const query = { estado: true };
@@ -75,6 +91,7 @@ module.exports = {
     obtenerTotalPedidos,
     deletePedido,
     getPedidos,
+    updatePedido
 }
 
 // var getPedidoByDni = (dni) => {

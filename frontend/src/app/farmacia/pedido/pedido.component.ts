@@ -14,6 +14,11 @@ import { throwError } from 'rxjs';
     providers: [PedidoService,DatePipe]
   })
   export class pedidoComponent implements OnInit {
+    public subTotal=0;
+    public precioCantidad=0;
+    public totalSinIGV=0;
+    public total=0;
+    
     public pageSize = 7;
     public page;
 
@@ -22,17 +27,84 @@ import { throwError } from 'rxjs';
   // los datos se van guardando en un arreglo, el cual se usa para
   // desplegar la tabla
   medicamentos:any[] = [];
-  pedidos2:Pedido[]=[];
   // los input del formulario se asocian con un modelo
   dato:any = {};
 
+//////////////////////////////
+  medicamentos2: any[]=[];
+  dato2:any[]=[];
   
+  pedidos2:Pedido[]=[];
+  
+
+  // ver(){
+  //   // //this.pedidoService.selectedPedido1 = pedido;
+  //   for (let index = 0; index < this.pedidoService.selectedPedido1.medicamentos.length; index++) {
+  //     this.precioCantidad=this.medicamentos[index].precio*this.medicamentos[index].cantidad;
+  //   }
+  //   this.subTotal+=this.precioCantidad
+
+  //   this.totalSinIGV=this.subTotal*0.18;
+  //   this.total=Math.round(this.subTotal+this.totalSinIGV);
+  // }
+  eliminarIndexDelRegistro(i){
+    this.medicamentos.splice(i, 1)
+    // console.log(this.pedidoService.selectedPedido1.medicamentos[i]);
+    // console.log(i);
+  }
+
+  eliminarIndexDelEditar(i){
+    this.pedidoService.selectedPedido1.medicamentos.splice(i, 1)
+    // console.log(this.pedidoService.selectedPedido1.medicamentos[i]);
+    // console.log(i);
+  }
+
+  getDatafromIndexEditar(i){
+    console.log(this.pedidoService.selectedPedido1.medicamentos[i].codigo);
+    console.log(this.pedidoService.selectedPedido1.medicamentos[i].medicamento);
+    console.log(this.pedidoService.selectedPedido1.medicamentos[i].laboratorio);
+    console.log(this.pedidoService.selectedPedido1.medicamentos[i].concentracion);
+    console.log(this.pedidoService.selectedPedido1.medicamentos[i].presentacion);
+    console.log(this.pedidoService.selectedPedido1.medicamentos[i].cantidad);
+    console.log(this.pedidoService.selectedPedido1.medicamentos[i].precio);
+  }
+
   guardar(){
-    console.log(this.medicamentos);
+    //console.log(this.medicamentos);
     // se inserta el dato en el arregloss
     this.medicamentos.push(this.dato);
     // se crea un nuevo objeto para almacenar nuevos datos
     this.dato = {};
+
+    //calculo del subtotal y total
+    for (let index = 0; index < this.medicamentos.length; index++) {
+      this.precioCantidad=this.medicamentos[index].precio*this.medicamentos[index].cantidad;
+    }
+    this.subTotal+=this.precioCantidad
+
+    this.totalSinIGV=this.subTotal*0.18;
+    this.total=Math.round(this.subTotal+this.totalSinIGV);
+
+    //console.log(this.medicamentos);
+  }
+  guardarUpdate(){
+    //this.pedidoService.selectedPedido1.medicamentos=this.medicamentos;
+    console.log(this.pedidoService.selectedPedido1.medicamentos);
+    // se inserta el dato en el arregloss
+    this.pedidoService.selectedPedido1.medicamentos.push(this.dato);
+    // se crea un nuevo objeto para almacenar nuevos datos
+    this.dato = {};
+
+    //calculo del subtotal y total
+    for (let index = 0; index < this.pedidoService.selectedPedido1.medicamentos.length; index++) {
+      this.precioCantidad=this.pedidoService.selectedPedido1.medicamentos[index].precio*this.pedidoService.selectedPedido1.medicamentos[index].cantidad;
+    }
+    this.subTotal+=this.precioCantidad
+
+    this.totalSinIGV=this.subTotal*0.18;
+    this.total=Math.round(this.subTotal+this.totalSinIGV);
+
+    //console.log(this.medicamentos);
   }
 
     medicamentosList:string[]=["Paracetamol","Panadol","Amoxicilina","Welton","Limonada Marcos","Ivermentina","Acitromicina"];
@@ -46,25 +118,62 @@ import { throwError } from 'rxjs';
     //creamos instancia gestionarCategoriaService para usar los metodos que usamos en la clase GESTIONARCATEGORIASSERVICE
     myDate = new Date();
     test: string;
-    constructor(public pedidoService: PedidoService,private datePipe: DatePipe) {
+    public pedidoService1=this.pedidoService;
+    constructor( public pedidoService: PedidoService,private datePipe: DatePipe) {
+      
       this.test = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
     }
     public sumaTotal=0;
-   pedidos = []
+    pedidos = []
 
-   name = 'Angular';
-   total:number;
+   
 
    ngOnInit(): void {
-
       this.getPedidos();
-      // this.pedidoService.listar().subscribe(
-      //   data=>{
-      //     this.pedidos2=data.data;
-      //     var total = 0;
-      //     total = total+this.
-      //   }
-      // );
+      //this.disableUpdateButton();
+    }
+
+    limpiarTabla(){
+      this.medicamentos.length=0;
+    }
+
+    disableUpdateButton(){
+      //var xd = document.getElementById('editarButton');
+      //console.log(this.pedidos[0]);
+      // this.pedidos.forEach(e => {
+      //   console.log(this.pedidos[5].estado);
+      // });
+      // console.log(this.pedidos);
+      // var index=0;
+      // console.log(this.pedidos[index].estado);
+    }
+
+    eliminarDatofromMedicamentos(){
+      for (let index = 0; index < this.medicamentos.length; index++) {
+        //console.log(this.medicamentos[index]);
+         this.medicamentos.splice(index);
+      }
+     // this.medicamentos.indexOf()
+    //   var array = [3, 5, 9];
+    //   var index = array.indexOf(5);
+
+    //   if (index > -1) {
+    //     array.splice(index, 1);
+    //  }
+      //console.log(this.medicamentos[index]);
+    }
+    
+    changeEstadoPedido(){
+      
+      var uno = document.getElementById('botonEstado');
+                if (uno.innerText  == 'Solicitado') 
+                     uno.innerText  = 'Pagado',
+                     document.getElementById('botonEstado').style.backgroundColor='rgba(0, 189, 0, 0.5)';
+                     else if(uno.innerText  == 'Pagado')
+                     uno.innerText = 'Entregado',
+                     document.getElementById('botonEstado').style.backgroundColor='skyblue';
+                     else uno.innerText = 'Solicitado',
+                     document.getElementById('botonEstado').style.backgroundColor='rgb(235, 233, 233)';
     }
     
     getPedidos(){
@@ -75,8 +184,25 @@ import { throwError } from 'rxjs';
         });
       }
       getPedidos1(pedido:Pedido) {
-        console.log(pedido);
+        //console.log(pedido);
         this.pedidoService.selectedPedido1 = pedido;
+        // console.log(pedido);
+        // console.log(pedido.medicamentos);
+      }
+
+      ver(){
+        //console.log(this.pedidoService.selectedPedido1.medicamentos);
+        for (let index = 0; index < this.pedidoService.selectedPedido1.medicamentos.length; index++) {
+          this.precioCantidad=this.pedidoService.selectedPedido1.medicamentos[index].precio*this.pedidoService.selectedPedido1.medicamentos[index].cantidad;
+          this.subTotal+=this.precioCantidad;
+        }
+        this.totalSinIGV=this.subTotal*0.18;
+        this.total=Math.round(this.subTotal+this.totalSinIGV);
+      }
+
+      limpiarForm(){
+        this.subTotal=0;
+        this.total=0;
       }
       
       getPedidoByDni(dni:Number){
@@ -90,44 +216,13 @@ import { throwError } from 'rxjs';
         err=>{console.error(err)}
       )}else{this.getPedidos()}
     }
-    getPedidoByDni1(dni:Number){
-      if(dni.toString() !=''){
-      this.pedidoService.getPedidoByDni(dni).subscribe(
-        data=>{this.pedidos=data},
-        err=>{console.error(err)}
-      )}else{this.getPedidos()}
-    }
-
-    changeStatus(){
-      let i:HTMLElement=document.getElementById("boton")
-    }
-    
-   suma(cantidad,precio){
-     
-    return 1 + this.suma(cantidad, precio - 1);       
-      //  num + this.suma(num-1);
-  }
-
-  multi(cantidad,precio){
-    return cantidad*precio;
-  }
-   
-    
-
-    multiplicarPriceAndCantidad(){
-      this.pedidoService.selectedPedido.total=this.dato.precio*this.dato.cantidad;
-    }
-    // sumaSubTotal(){
-    //   const sum =  pista.pistas.reduce((actual, anterior) => return actual + anterior);
-    // }
   
     addPedido(form: NgForm){
+      //console.log(form.value.medicamentos);
       form.value.medicamentos=this.medicamentos;
-      console.log(form.value);
+      console.log(this.medicamentos);
       this.pedidoService.createPedido(form.value).subscribe(
         (res)=> {console.log('Agregado a la BD');
-
-        // this.getPedidos();
       },
         (err) => {
           //console.error(err);
@@ -139,42 +234,24 @@ import { throwError } from 'rxjs';
       resetForm(form:NgForm){
         form.reset();
         }
-
-        getPedido1(pedido:Pedido) {
-          console.log(pedido._id);
-          console.log(this.pedidoService.selectedPedido1);
-          this.pedidoService.selectedPedido1 = pedido;
-        }
         
         updatePedido(form:NgForm){
+          //console.log(form.value.medicamentos);
+          //console.log(form.value.selectedPedido1.medicamentos);
+          form.value.medicamentos2=this.pedidoService.selectedPedido1.medicamentos;
+          //form.value.medicamentos2=this.medicamentos2;
           this.pedidoService.updatePedido(form.value).subscribe(
-            res =>{
-              
-                // this.getPedidos();
+            res =>{console.log('Agregado a la BD');
+              //form.value.pedidoService.selectedPedido1.medicamentos=this.pedidoService.selectedPedido1.medicamentos;
+                //  this.getPedidos();
             },
-            err => console.error(err)
+            err => console.log(err)
           )}
           
           onKey(event) {const inputValue = event.target.value;}
   }
-  
-
-
-  
-  // multiplicarPriceAndCantidad(){
-  //   this.pedidoService.selectedPedido.importe=this.pedidoService.selectedPedido.precioU*this.pedidoService.selectedPedido.cantidad;
-  // }
-
-  // cantidad:number;
-  // precioU:number;
-  // importe:number;
-  // Multiplicar(){
-  // this.importe=this.cantidad*this.precioU;    
-  // }
-
-
-  //Calculamos el TOTAL
-      // this.total = this.pedidoService.selectedPedido1.medicamentos.reduce(
-      //   (acc,obj,) => acc + (obj.precio * obj.cantidad),0);
-      //   //console.log(this.pedidoService.selectedPedido1.medicamentos);
-      // console.log("Total: ", this.total);
+  // getPedido1(pedido:Pedido) {
+        //   // console.log(pedido._id);
+        //   // console.log(this.pedidoService.selectedPedido1);
+        //   this.pedidoService.selectedPedido1 = pedido;
+        // }

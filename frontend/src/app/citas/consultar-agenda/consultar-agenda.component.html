@@ -1,0 +1,121 @@
+<full-calendar deepChangeDetection="true" [options]="calendarOptions"></full-calendar>
+
+<!--Modal para Registrar Evento-->
+<div class="modal fade" id="modalEvento" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false"
+    data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalEvento" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar Evento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="formEvento" class="modal-body">
+                <form [formGroup]="formEvento" class="row">
+
+                    <div class="form-group col-md-12">
+                        <label for="titulo">Titulo</label>
+                        <input formControlName="titulo" type="text" class="form-control" id="titulo" placeholder="..." />
+                    </div>
+                    
+                    <div class="form-group col-md-12">
+                        <label for="descripcion">Descripción</label>
+                        <textarea formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder="..."></textarea>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechaInicio">Fecha Inicio</label>
+                        <input formControlName="fechaInicio" type="date" class="form-control" id="fechaInicio" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechaFin">Fecha Fin</label>
+                        <input formControlName="fechaFin" type="date" class="form-control" id="fechaFin" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaInicio">Hora Inicio</label>
+                        <input formControlName="horaInicio" type="time" class="form-control" id="horaInicio" placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaFin">Hora Fin</label>
+                        <input formControlName="horaFin" type="time" class="form-control" id="horaFin" placeholder="" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="registrar()" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal para ver detalle-->
+<div class="modal fade" style="background-color: rgba(0, 0, 0, 0.5)" append-to-body="true" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalDetalle" aria-hidden="true" id="modalDetalle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="formDetalle" class="modal-body">
+                <form [formGroup]="formDetalle" class="row">
+
+                    <div class="form-group col-md-12">
+                        <label for="titulo">Titulo</label>
+                        <input formControlName="titulo" type="text" class="form-control" id="titulo" disabled placeholder=""/>
+                    </div>    
+
+                    <div class="form-group col-md-12">
+                        <label for="descripcion">Descripción</label>
+                        <textarea formControlName="descripcion" type="text" class="form-control" id="descripcion" disabled placeholder=""></textarea>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechaInicio">Fecha Inicio</label>
+                        <input formControlName="fechaInicio" type="date" class="form-control" id="fechaInicio" disabled placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechaFin">Fecha Fin</label>
+                        <input formControlName="fechaFin" type="date" class="form-control" id="fechaFin" disabled placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaInicio">Hora Inicio</label>
+                        <input formControlName="horaInicio" type="time" class="form-control" id="horaInicio" disabled placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaFin">Hora Fin</label>
+                        <input formControlName="horaFin" type="time" class="form-control" id="horaFin" disabled placeholder="" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="display: none;">
+    <button class="btn btn-success btn-sm btn-block">
+        <i class="mdi mdi-update mdi-18px">Detalle</i>
+    </button>
+    <input data-toggle="modal" data-target="#modalDetalle" #modalDetalle type="hidden" name="button" />
+</div>
+
+<div style="display: none;">
+    <button class="btn btn-success btn-sm btn-block">
+    </button>
+    <input data-toggle="modal" data-target="#modalEvento" #modalEvento type="hidden" name="button" />
+</div>

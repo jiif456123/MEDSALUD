@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CitasRoutingModule } from './citas-routing.module';
 import { GestionarCitasComponent } from './gestionar-citas/gestionar-citas.component';
@@ -15,6 +15,19 @@ import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especial
 import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChatBotComponent } from './chat-bot/chat-bot.component';
+import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/daygrid';
+import { ConsultarServicioComponent } from './consultar-servicio/consultar-servicio.component';
+
+FullCalendarModule.registerPlugins([ 
+  dayGridPlugin,
+  interactionPlugin
+]);
+
 @NgModule({
   declarations: [
     GestionarCitasComponent,
@@ -24,7 +37,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GestionarPerfilComponent,
     EspecialidadComponent,
     EspecialidadRegistradoComponent,
-    EspecialidadActualizadoComponent
+    EspecialidadActualizadoComponent,
+    ChatBotComponent,
+    ConsultarHorarioComponent,
+    ConsultarAgendaComponent,
+    ConsultarServicioComponent,
   ],
   imports: [
     CommonModule,
@@ -33,8 +50,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     Ng2SearchPipeModule,
     FilterPipeModule,
-    Ng2FilterPipeModule
+    Ng2FilterPipeModule,
+    FullCalendarModule
   ],
-  providers: [FilterPipe]
+  providers: [
+    FilterPipe
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CitasModule { }

@@ -8,6 +8,10 @@ import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-pacie
 import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especialidad.component';
 import { EspecialidadRegistradoComponent } from '../../app/citas/GestEspecialidad/reg-especialidad/gest-especialidad.component';
 import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
+import { ChatBotComponent } from './chat-bot/chat-bot.component';
+import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
+import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
+import { ConsultarServicioComponent } from './consultar-servicio/consultar-servicio.component';
 
 const routes: Routes = [
 
@@ -35,7 +39,18 @@ const routes: Routes = [
   {
     path: "gestionar-perfil", component: GestionarPerfilComponent, data: { title: 'Gestionar Historia' }
   },
-
+  {
+    path: "chat-bot", component: ChatBotComponent, data: { title: 'ChatBot' }
+  },
+  {
+    path: "consultar-agenda", component: ConsultarAgendaComponent, data: { title: 'Consultar agenda' }
+  },
+  {
+    path: "consultar-horario", component: ConsultarHorarioComponent, data: { title: 'Consultar horario' }
+  },
+  {
+    path: "consultar-servicio", component: ConsultarServicioComponent, data: { title: 'Consultar servicio' }
+  },
 ];
 
 @NgModule({

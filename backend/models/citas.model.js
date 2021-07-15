@@ -112,6 +112,36 @@ var cita = new Schema({
     versionKey: false
 });
 var modelCita = mongoose.model('Cita', cita);
+
+/*
+    Evento Model
+*/
+var evento = new Schema({
+    titulo: { type: String },
+    descripcion: { type: String },
+    fechaInicio: { type: String },
+    fechaFin: { type: String },
+    horaInicio: { type: String },
+    horaFin: { type: String },
+}, {
+    versionKey: false
+});
+var modelEvento = mongoose.model('Evento', evento);
+
+/*
+    Servicio Model
+*/
+var servicio = new Schema({
+    titulo: { type: String },
+    descripcion: { type: String },
+    imagen: { type: String },
+    horaInicio: { type: String },
+    horaFin: { type: String },
+}, {
+    versionKey: false
+});
+var modelServicio = mongoose.model('Servicio', servicio);
+
 //User
 
 var user = new Schema({
@@ -172,6 +202,8 @@ module.exports = {
     modelMovimiento: modelMovimiento,
     modelHistoria: modelHistoria,
     modelCita: modelCita,
+    modelEvento: modelEvento,
+    modelServicio:modelServicio,
     modelUser: modelUser,
     modelRecetaMedica: modelRecetaMedica,
     modelDetalleRecetaMedica: modelDetalleRecetaMedica

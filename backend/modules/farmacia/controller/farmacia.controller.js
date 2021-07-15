@@ -7,7 +7,7 @@ const gestionarCategoriasController = require('../gestionarCategorias/controller
 const gestionarMedicamentoOCController = require('../medicamentoOC/controller/medicamentoOC.controller')
 const equiposMedicosController = require('../../farmacia/equiposMedicos/controller/equiposMedicos.controller')
 const ejemplarEquipoMedicoController = require('../ejemplarEquipoMedico/controller/ejemplarEquipoMedico.controller')
-
+const loteController = require('../Inventario/controller/lote.controller')
 
 router.use('/medicamento', medicamentoController);
 router.use('/movimientoM', movimientoMController);
@@ -17,6 +17,6 @@ router.use('/gestionarOrdenCompra', gestionarOrdenCompraController);
 router.use('/gestionaroMedicamentoOC', gestionarMedicamentoOCController);
 router.use('/equiposmedicos', equiposMedicosController);
 router.use('/EjemplarEquiposMedicos', ejemplarEquipoMedicoController);
-
+router.use('/lote', loteController);
 
 module.exports = router;

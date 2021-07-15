@@ -18,6 +18,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/farmacia/gestionar-ordenCompra', title: 'Gestionar Orden De Compra',  icon:'pe-7s-notebook', class: '' },
   { path: '/farmacia/consultarMovimientos', title: 'Consultar Movimientos',  icon:'pe-7s-news-paper', class: '' },
   
+  { path: '/farmacia/gestionar-inventario', title: 'Gestionar Inventario',  icon:'pe-7s-news-paper', class: '' },
 ];
 
 @Component({

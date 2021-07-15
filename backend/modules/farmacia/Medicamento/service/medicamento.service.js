@@ -30,7 +30,9 @@ var createMedicamento = (medicamento) => {
         ubicacion: medicamento.ubicacion,
         stockMin: medicamento.stockMin,
         stockMax: medicamento.stockMax,
-        detalles: medicamento.detalles
+        detalles: medicamento.detalles,
+        clx: medicamento.clx,
+        Fecha: medicamento.Fecha,
     });
 
     return new Promise((resolve, reject) => {

@@ -25,7 +25,7 @@
         <div class="form-group">
             <label>Especialidad</label>
             <select id="IdEspecialidad" class="form-control" formControlName="especialidad">  
-                    <option *ngFor="let item of especialidad" value="item">{{item}}</option>              
+                    <option *ngFor="let item of especialidades" value="item">{{item}}</option>              
                 </select>
         </div>
         <div class="alert alert-message" *ngIf="especialidad.invalid && (especialidad.dirty)">
@@ -56,10 +56,10 @@
 
         <div class="col-sm-10">
             <div class="col-sm-5">
-                <button class="btn btn-primary btn-save" type="submit" (click)="update()">Actualizar</button>
+                <button class="btn btn-primary btn-save" type="submit" (click)="update()" routerLink="/farmacia/EquipoMedico">Actualizar</button>
             </div>
             <div class="col-sm-5">
-                <button type="button" class="btn btn-secondary btn-cancel">Cancelar</button>
+                <button type="button" class="btn btn-secondary btn-cancel" routerLink="/farmacia/EquipoMedico">Cancelar</button>
             </div>
         </div>
     </form>

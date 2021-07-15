@@ -136,11 +136,7 @@ export class GestionarCajaComponent implements OnInit {
       this.formMovimiento.controls.nombrePaciente.setValue(paciente.nombre + ' ' + paciente.apellidoPaterno);
     } else {
       this.idPaciente = '';
-
     }
-
-
-
   }
 
   operacionesDia() {
@@ -159,8 +155,15 @@ export class GestionarCajaComponent implements OnInit {
 
   async imprimir(moviemiento: MovimientoCaja) {
     this.movCajaImprimir = moviemiento;
-    this.fechaActual= new Date();
+    this.fechaActual = new Date();
     await timer(500).pipe(take(1)).toPromise(); //timer para renderize el componente
     this.butonImprimir.nativeElement.click();
+  }
+
+  valorPrecio(id: string) {
+    let motivo = this.motivos.find(item => item._id == id)
+    if (motivo) {
+      this.formMovimiento.controls.precio.setValue(motivo.precio ?? 0);
+    }
   }
 }

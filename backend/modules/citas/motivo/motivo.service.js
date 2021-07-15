@@ -3,7 +3,8 @@ const motivoModel = citasModel.modelMotivo;
 
 let crear = (motivo) => {
     let nuevoMotivo = new motivoModel({
-        descripcion: motivo.descripcion
+        descripcion: motivo.descripcion,
+        precio: motivo.precio,
     })
     return new Promise((resolve, reject) => {
         nuevoMotivo.save(nuevoMotivo, (err, data) => {

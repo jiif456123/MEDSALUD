@@ -59,7 +59,7 @@
                                 <i class="mdi mdi-update mdi-18px"></i>Imprimir
                             </button>
 
-                            <button style="display: none;" #butonImprimir [useExistingCss]="false"
+                            <button style="display: none;" #butonImprimir [useExistingCss]="true"
                                 printSectionId="impresion-ticket" ngxPrint class="btn btn-success btn-sm btn-block">
                                 <i class="mdi mdi-update mdi-18px"></i>Imprimir
                             </button>
@@ -102,7 +102,7 @@
 
                     <div class="form-group col-md-12">
                         <label for="motivo1">Motivo</label>
-                        <select formControlName="motivo" class="form-control" id="motivo1">
+                        <select (ngModelChange)="valorPrecio($event)" formControlName="motivo" class="form-control" id="motivo1">
                             <option *ngFor="let mot of motivos" [value]="mot._id">
                                 {{ mot.descripcion }}
                             </option>
@@ -111,7 +111,7 @@
 
                     <div class="form-group col-md-12">
                         <label for="precio1">Precio</label>
-                        <input formControlName="precio" type="number" (input)="generarMontoDevuelto()"
+                        <input readonly formControlName="precio" type="number" (input)="generarMontoDevuelto()"
                             class="form-control" id="precio1" placeholder="00.00" />
                     </div>
 
@@ -135,47 +135,77 @@
         </div>
     </div>
 </div>
-<div *ngIf="movCajaImprimir" style="display: none;">
-    <div id="impresion-ticket" class="ticket justify-content-center">
-        <img width="150px" height="150px" src="/assets/img/logo.jpg" alt="Logotipo">
-        <p class="centrado">MedSalud<br>Lima, Peru<br>{{fechaActual | date:'medium'}}<br>
-            DNI: {{movCajaImprimir.paciente.dni}}<br>
-            Paciente: {{movCajaImprimir.paciente.nombre + ' ' + movCajaImprimir.paciente.apellidoPaterno }}</p>
-        <table style="border-top: 1px solid black;
-        border-collapse: collapse;">
-            <thead style="border-top: 1px solid black;
-            border-collapse: collapse;">
-                <tr style="border-top: 1px solid black;
-                border-collapse: collapse;">
-                    <th>Cant.</th>
-                    <th>Motivo</th>
-                    <th>Precio</th>
-                </tr>
-            </thead>
-            <tbody style="border-top: 1px solid black;
-            border-collapse: collapse;">
-                <tr>
-                    <td>1</td>
-                    <td>{{this.movCajaImprimir.motivo.descripcion}}</td>
-                    <td>{{this.movCajaImprimir.precio}}</td>
-                </tr>
-                <!-- <tr>
-                    <td>2.00</td>
-                    <td>KINDER DELICE</td>
-                    <td>$10.00</td>
-                </tr>
-                <tr>
-                    <td>1.00</td>
-                    <td>COCA COLA 600 ML</td>
-                    <td>$10.00</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>TOTAL</td>
-                    <td>$28.50</td> -->
-                <!-- </tr> -->
-            </tbody>
-        </table>
-        <p>¡GRACIAS POR SU COMPRA!<br>medsalud.com</p>
+
+<!--Zona para imprimir-->
+<div *ngIf="movCajaImprimir" style="display: none;" class="impresion" id="impresion-ticket">
+    <div class="page">
+        <div style="height: 75px; width: auto; overflow: hidden;">
+            <img style="margin-top: -75px;"
+                src="/assets/img/hospital.jpg">
+        </div>
+        <h3 class="text-center font-weight-light"><strong>MedSalud</strong></h3>
+        <h5 class="text-center font-weight-light">Direccion: Avenida Tomás Marsano, 4940
+            Santiago de Surco - Lima</h5>
+        <h5 class="text-center font-weight-light">Ticket de venta electronica</h5>
+        <!-- <h6 class="text-center font-weight-light">Nro. de pedido: <%= pedido._id %>
+        </h6> -->
+        <h6 class="text-center font-weight-light">DNI: {{movCajaImprimir.paciente.dni}}
+        </h6>
+        <h6 class="text-center font-weight-light">Paciente: {{movCajaImprimir.paciente.nombre + ' ' +
+            movCajaImprimir.paciente.apellidoPaterno }}
+        </h6>
+        <!-- <h6 class="text-center font-weight-light">Dirección: <%= pedido.direccion %>
+        </h6> -->
+
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-6 col-sm-6 col-md-6 col-xl-6">
+                <table class=" font-weight-light table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Motivo</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>
+                                {{this.movCajaImprimir.motivo.descripcion}}
+                            </td>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                {{(this.movCajaImprimir.precio * 0.82).toFixed(2)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">.</th>
+                            <td colspan="2">I.G.V.</td>
+                            <td>
+                                {{(this.movCajaImprimir.precio * 0.18).toFixed(2)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">.</th>
+                            <td colspan="2">Total:</td>
+                            <td>
+                                {{(this.movCajaImprimir.precio).toFixed(2)}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <h6 class="text-center font-weight-light">Gracias por su compra🛒</h6>
+        <h6 class="text-center font-weight-light">Cualquier reclamo contactar con: 987654321</h6>
+        <h6 class="text-center font-weight-light">Fecha actual:{{fechaActual | date:'medium'}}
+        </h6>
+
     </div>
 </div>

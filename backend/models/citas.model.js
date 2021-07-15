@@ -45,6 +45,7 @@ var modelEspecialidad = mongoose.model('Especial', especial);
 */
 var motivo = new Schema({
     descripcion: { type: String },
+    precio: { type: Number }
 }, {
     versionKey: false
 });

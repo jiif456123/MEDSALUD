@@ -26,8 +26,10 @@ import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg
 import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
 import { TicketCajaComponent } from './gestionar-caja/ticket-caja/ticket-caja.component';
 import { NgxPrintModule } from 'ngx-print';
+import { ReporteGeneralComponent } from './reporte-general/reporte-general.component';
+import { ChartsModule } from 'ng2-charts';
 
-FullCalendarModule.registerPlugins([ 
+FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin
 ]);
@@ -50,7 +52,8 @@ FullCalendarModule.registerPlugins([
     DetalleGestionarRecetaMedicaComponent,
     RegGestionarRecetaMedicaComponent,
     DetalleGestionarRecetaMedicaComponent,
-    TicketCajaComponent
+    TicketCajaComponent,
+    ReporteGeneralComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +64,8 @@ FullCalendarModule.registerPlugins([
     Ng2SearchPipeModule,
     FilterPipeModule,
     Ng2FilterPipeModule,
-    FullCalendarModule
+    FullCalendarModule,
+    ChartsModule
   ],
   providers: [
     FilterPipe

@@ -14,6 +14,7 @@ import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario
 import { GestionarRecetaMedicaComponent } from './gestionar-receta-medica/gestionar-receta-medica.component';
 import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg-gestionar-receta-medica/reg-gestionar-receta-medica.component';
 import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
+import { ReporteGeneralComponent } from './reporte-general/reporte-general.component';
 
 const routes: Routes = [
 
@@ -55,10 +56,13 @@ const routes: Routes = [
   },
   {
     path: "gestionar-receta-medica/registrar", component: RegGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
-  }, 
+  },
   {
     path: "gestionar-receta-medica/:id", component: DetalleGestionarRecetaMedicaComponent, data: { title: 'Gestionar Receta Medica' }
-  }
+  },
+  {
+    path: "reporte-general", component: ReporteGeneralComponent, data: { title: 'Reporte General' }
+  },
 ];
 
 @NgModule({

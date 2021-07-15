@@ -17,7 +17,8 @@ import {RegistrarMedicoComponent} from '../farmacia/equiposMedicos/registrarEqui
 import {EquiposMedicosComponent} from './equiposMedicos/ListarEquipoMedico/equiposMedicos.component';
 import {ActualizarEMComponent} from '../farmacia/equiposMedicos/actualizarEquipoMedico/actualizarEquipoMedico';
 import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoMedico/ejemplaresEquipoMedico';
-
+import { Dashboard } from '../farmacia/dashboard/dashboard.component';
+//import {Chart} from 'chart.js';
 
 
 
@@ -33,6 +34,7 @@ import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoM
     EquiposMedicosComponent,
     ActualizarEMComponent,
     EjemplaEquipoMedicoComponent,    
+    Dashboard,
   ],
 
   imports: [
@@ -47,6 +49,7 @@ import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoM
     MatFormFieldModule,
     MatNativeDateModule,
     MatSelectModule
+   //Chart
 
   ],
 })

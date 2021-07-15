@@ -5,7 +5,7 @@ var getMovimientoM = () => {
 
     return new Promise((resolve, reject) => {
         movimientoMedicamento.find().populate("Medicamento").exec((err, listaMovimientoMedicamento) => {
-            if (err) reject(err); 
+            if (err) reject(err);
             resolve(listaMovimientoMedicamento);
         });
     });
@@ -31,44 +31,42 @@ var createMovimientoM = (movimientoM) => {
 };
 
 var Filtro = async(req, res, next) => {
-    
+
     const Modo = req.params.Modo;
     const Tipo = req.params.Tipo;
     //const Fecha = req.params.Fecha;
     const fechaInicial = req.params.fechaInicial;
     const fechaFinal = req.params.fechaFinal;
-    
-    if(Modo=='tipo' && fechaInicial=='null' && fechaFinal=='null'){
-        const medicamentos = await movimientoMedicamento.find({tipo:Tipo}).populate('Medicamento');
 
-    res.json(medicamentos);
-    }
-    else if(Modo=='fecha')
-    {
+    if (Modo == 'tipo' && fechaInicial == 'null' && fechaFinal == 'null') {
+        const medicamentos = await movimientoMedicamento.find({ tipo: Tipo }).populate('Medicamento');
+
+        res.json(medicamentos);
+    } else if (Modo == 'fecha') {
         //const medicamentos = await movimientoMedicamento.find({fecha:Fecha});
-       // res.json(medicamentos);
-            try {
-               const reg = await movimientoMedicamento.find({
-                  fecha: {
-                     $gte: fechaInicial,
-                     $lt: fechaFinal
-                  }
-               }).populate('Medicamento');
-         
-               if (!reg) {
-                  res.status(404).send({
-                     message: 'El registro no existe'
-                  });
-               } else {
-                  res.status(200).json(reg);
-               }
-            } catch (e) {
-               res.status(500).send({
-                  message: 'Ocurrio un error'
-               });
-               next(e);
+        // res.json(medicamentos);
+        try {
+            const reg = await movimientoMedicamento.find({
+                fecha: {
+                    $gte: fechaInicial,
+                    $lt: fechaFinal
+                }
+            }).populate('Medicamento');
+
+            if (!reg) {
+                res.status(404).send({
+                    message: 'El registro no existe'
+                });
+            } else {
+                res.status(200).json(reg);
             }
-         
+        } catch (e) {
+            res.status(500).send({
+                message: 'Ocurrio un error'
+            });
+            next(e);
+        }
+
     }
 
 };

@@ -11,13 +11,14 @@ export const ROUTES: RouteInfo[] = [
   
   //{ path: '/citas/gestionar-historia', title: 'Gestionar Historia Clinica',  icon:'pe-7s-news-paper', class: '' },
   { path: '/citas/gestionar-perfil', title: 'Gestionar Perfil',  icon:'pe-7s-news-paper', class: '' },
-  { path: '/farmacia/gestionar-categoriaM', title: 'Gestionar Categorias', icon: 'pe-7s-notebook', class: '' },
+  { path: '/farmacia/gestionar-categoriaM', title: 'Gestionar Categorias', icon: 'pe-7s-news-paper', class: '' },
   { path: '/farmacia/gestionarMedicamentos', title: 'Gestionar Medicamento', icon: 'pe-7s-news-paper', class: '' },
   { path: '/farmacia/EquipoMedico', title: 'Equipos Medicos',  icon:'pe-7s-news-paper', class: '' },
   { path: "/farmacia/gestionar-proveedor", title: 'Gestionar Proveedor', icon: 'pe-7s-news-paper', class: '' },
-  { path: '/farmacia/gestionar-ordenCompra', title: 'Gestionar Orden De Compra',  icon:'pe-7s-notebook', class: '' },
+  { path: '/farmacia/gestionar-ordenCompra', title: 'Gestionar Orden De Compra',  icon:'pe-7s-news-paper', class: '' },
   { path: '/farmacia/consultarMovimientos', title: 'Consultar Movimientos',  icon:'pe-7s-news-paper', class: '' },
-  
+  { path: '/farmacia/dashboard', title: 'Dashboard',  icon:'pe-7s-graph1', class: '' },
+
 ];
 
 @Component({

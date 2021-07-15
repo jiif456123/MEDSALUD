@@ -32,7 +32,7 @@ router.put('/:id', (req, res) => {
         http.err(req, res, code.status.Internal_Server_Error.code, error, error)
     });
 });
-router.get('/:nombre', medicamentoService.getByNombre);
+//router.get('/:nombre', medicamentoService.getByNombre);
 
 
 router.get('/busqueda/:nombre', medicamentoService.getByNombre);
@@ -44,5 +44,7 @@ router.get("/Nombre/", medicamentoService.listarMedicamentoCategorias);
 router.get('/getNombre/:categoria', medicamentoService.getMedicamentosByCategorias);
 
 router.get('/getPrecioAStock/:nombre', medicamentoService.getPrecioAndStockByNombre);
+
+router.get('/getEgIn/:categoria', medicamentoService.getContadorIE);
 
 module.exports = router;

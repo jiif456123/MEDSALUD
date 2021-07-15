@@ -67,7 +67,6 @@ var listarMedicamento = async(req, res) => {
     const medicamento = await gestionarMedicamento.find();
     res.json(medicamento);
 };
-
 var listarMedicamentoCategorias = async(req, res) => {
     const medicamento = await gestionarMedicamento.distinct('categoria');
     res.json(medicamento); //categoria
@@ -100,6 +99,42 @@ var getPrecioAndStockByNombre = async(req, res) => {
 
 };
 
+
+var getContadorIE = async(req, res) => {
+    const medicamentoMov = await gestionarMedicamento.aggregate([
+
+        {
+            $project: {
+                "nombre": 1,
+
+                contadorMed: {
+
+                    $sum: {
+                        $cond: [
+                            { $eq: ["$categoria", req.params.categoria] },
+                            1, 0
+                        ]
+                    }
+                }
+
+            }
+
+        },
+
+        {
+            $group: {
+                _id: "$nombre",
+                countMed: { $sum: "$contadorMed" }
+
+            }
+        }
+    ]);
+
+    res.json(medicamentoMov);
+    /*  }*/
+
+};
+
 module.exports = {
     getMedicamento,
     createMedicamento,
@@ -108,5 +143,6 @@ module.exports = {
     listarMedicamentoCategorias,
     getMedicamentosByCategorias,
     getPrecioAndStockByNombre,
-    getByNombre
+    getByNombre,
+    getContadorIE
 };

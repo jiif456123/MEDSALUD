@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {Medicamento} from '../models/medicamento.model';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 
@@ -59,6 +60,12 @@ export class MedicamentoService{
 
     getMedicamento(){
       return this.http.get<any>(this.URL_API);
+    }
+    getMedicamento2(){
+      return this.http.get<any>(this.URL_API).map(res => res.data);
+    }
+    getMedicamento3(categoria: string){
+      return this.http.get<any>(this.URL_API+'/getEgIn'+ `/${categoria}`);
     }
 
     createMedicamento(Medicamento:Medicamento){

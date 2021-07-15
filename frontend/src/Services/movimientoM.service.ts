@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
-
+import 'rxjs/add/operator/map';
 @Injectable()
 
 export class movimientoMService{
@@ -12,6 +12,10 @@ export class movimientoMService{
 
     getMovimientoM(){
       return this.http.get<any>(this.URL_API);
+    }
+
+    getMovimientoM2(){
+      return this.http.get<any>(this.URL_API).map(res => res.data);
     }
     getfiltrar(Modo,Tipo,fechaInicial,fechaFinal){
       return this.http.get<any>(this.URL_API+'Filtro'+ `/${Modo}`+`/${Tipo}`+`/${fechaInicial}`+`/${fechaFinal}`);

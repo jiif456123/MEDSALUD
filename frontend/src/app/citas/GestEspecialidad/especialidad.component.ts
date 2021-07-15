@@ -103,10 +103,10 @@ Tfecha(fecha: Date){
 }
 
 async registrar() {
-  if(this.formEspecialidadR.invalid){
+  /*if(this.formEspecialidadR.invalid){
     Swal.fire('Advertencia', 'Revise los campos.', 'warning')
     return;
-  }
+  }*/
 
   let datos = this.formEspecialidadR.value;
   let fecha = new Date(datos.fechaHora)

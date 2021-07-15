@@ -134,15 +134,15 @@ export class CambiarContraComponent implements OnInit {
  
   async modificar() {
    
-    if (this.formUser.invalid) {
+    /*if (this.formUser.invalid) {
     
       Swal.fire('Advertencia', 'Contraseña a actualizar vacia.', 'warning')
       return;
     }
-    
+    */
     let datos = this.formUserModificar.value
     if(datos.confirmar != this.contradmin){
-      Swal.fire('Advertencia', 'La contraseña no coincide', 'warning')
+      Swal.fire('Advertencia', 'La contraseña de administrador no coincide', 'warning')
       return;
     }
     let query = {

@@ -29,7 +29,7 @@ let crear = (historia) => {
 
 var listar = () => {
     return new Promise((resolve, reject) => {
-        historiamodel.find({}).exec((err, data) => {
+        historiamodel.find({}).populate('paciente').exec((err, data) => {
             if (err) reject(err);
             resolve(data);
         })

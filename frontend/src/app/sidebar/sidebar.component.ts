@@ -21,6 +21,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/citas/gestionar-paciente', title: 'Gestionar Paciente', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/consultar-servicio', title: 'Consultar servicio', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/reporte-general', title: 'Reporte general', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/consultar-receta-medica', title: 'Consultar receta medica', icon: 'pe-7s-news-paper', class: '' },
 ];
 
 @Component({

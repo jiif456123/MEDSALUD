@@ -16,6 +16,7 @@ import { RegGestionarRecetaMedicaComponent } from './gestionar-receta-medica/reg
 import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica/detalle-gestionar-receta-medica/detalle-gestionar-receta-medica.component';
 import { ReporteGeneralComponent } from './reporte-general/reporte-general.component';
 import { ConsultarServicioComponent } from './consultar-servicio/consultar-servicio.component';
+import { ConsultarRecetaMedicaComponent } from './consultar-receta-medica/consultar-receta-medica.component';
 
 const routes: Routes = [
 
@@ -66,6 +67,9 @@ const routes: Routes = [
   },
   {
     path: "consultar-servicio", component: ConsultarServicioComponent, data: { title: 'Consultar servicio' }
+  },
+  {
+    path: "consultar-receta-medica", component: ConsultarRecetaMedicaComponent, data: { title: 'Consultar Receta Medica' }
   },
 ];
 

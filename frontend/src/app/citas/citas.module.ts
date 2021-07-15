@@ -29,6 +29,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { ReporteGeneralComponent } from './reporte-general/reporte-general.component';
 import { ChartsModule } from 'ng2-charts';
 import { ConsultarServicioComponent } from './consultar-servicio/consultar-servicio.component';
+import { ConsultarRecetaMedicaComponent } from './consultar-receta-medica/consultar-receta-medica.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -56,6 +57,7 @@ FullCalendarModule.registerPlugins([
     TicketCajaComponent,
     ReporteGeneralComponent,
     ConsultarServicioComponent,
+    ConsultarRecetaMedicaComponent,
   ],
   imports: [
     CommonModule,

@@ -19,8 +19,13 @@ import { ActualizarEMComponent } from '../farmacia/equiposMedicos/actualizarEqui
 import { EjemplaEquipoMedicoComponent } from './ejemplarEquipoMedico/listarEquipoMedico/ejemplaresEquipoMedico';
 import { DatePipe } from '@angular/common';
 import { inventarioComponent } from './Inventario/inventario.component';
+import{ pedidoComponent} from './pedido/pedido.component';
 
 
+//import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+//import {MatTabsModule} from '@angular/material/tabs';
+
+//import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 @NgModule({
   declarations: [
@@ -35,9 +40,10 @@ import { inventarioComponent } from './Inventario/inventario.component';
     ActualizarEMComponent,
     EjemplaEquipoMedicoComponent,
     inventarioComponent,
+    pedidoComponent
   ],
-
   imports: [
+    FormsModule,
     CommonModule,
     FarmaciaRoutingModule,
     NgbPaginationModule,

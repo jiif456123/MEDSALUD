@@ -12,7 +12,7 @@ import { MovimientoCajaService } from '../services/movimiento-caja.service';
   styleUrls: ['./reporte-general.component.css']
 })
 export class ReporteGeneralComponent implements OnInit {
-  mesSelect= new FormControl();
+  mesSelect = new FormControl();
   movimientos: MovimientoCaja[] = [];
 
   meses = [
@@ -40,6 +40,40 @@ export class ReporteGeneralComponent implements OnInit {
     { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Citas' },
   ];
 
+  options = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          callback: function (value, index, values) {
+            if (parseInt(value) >= 1000) {
+              return 'S/.' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            } else {
+              return 'S/.' + value;
+            }
+          }
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return  'S/.' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+        }
+      }
+    }
+  }
+
+
+  optionsCir = {
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          return  'S/.' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+        }
+      }
+    }
+  }
   //Grafico Circular
   public barChartLabels_Cir: Label[] = [];
   public barChartType_Cir: any = 'pie';
@@ -56,7 +90,7 @@ export class ReporteGeneralComponent implements OnInit {
     this.movimientos = dataMovimientoCaja.data;
     this.distribuirDatos();
     this.motivoDistinct()
-    this.mesSelect.setValue((new Date()).getMonth()) 
+    this.mesSelect.setValue((new Date()).getMonth())
   }
 
   //Distribuyendo data grafico Barras

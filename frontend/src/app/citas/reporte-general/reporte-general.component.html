@@ -4,7 +4,7 @@
     <div class="col-md-12">
       <div style="display: block">
         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [legend]="barChartLegend"
-          [chartType]="barChartType">
+          [chartType]="barChartType" [options]="options">
         </canvas>
       </div>
     </div>
@@ -20,7 +20,7 @@
     <div *ngIf="barChartData_Cir.length>0" class="col-md-12">
       <div style="display: block">
 
-        <canvas baseChart [data]="barChartData_Cir" [labels]="barChartLabels_Cir" [chartType]="barChartType_Cir">
+        <canvas [options]="optionsCir" baseChart [data]="barChartData_Cir" [labels]="barChartLabels_Cir" [chartType]="barChartType_Cir">
         </canvas>
       </div>
     </div>

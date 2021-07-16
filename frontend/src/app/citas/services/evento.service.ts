@@ -21,4 +21,8 @@ export class EventoService {
   eliminar(_id: string) {
     return this.http.delete<any>(`${this.urlEndPoint}/${_id}`);
   }
+
+  actualizar(id: string, query: any) {
+    return this.http.put<any>(`${this.urlEndPoint}/${id}`, query);
+  }
 }

@@ -27,12 +27,34 @@ let listar = () => {
     })
 }
 
-var eliminar = (id) => {
+let eliminar = (id) => {
     return new Promise((resolve, reject) => {
-        eventomodel.remove({ _id: id }, (err, data) => {
+        eventoModel.remove({ _id: id }, (err, data) => {
             if (err) { reject(err); }
             resolve(data);
         })
+    })
+}
+
+let actualizar = (idEvento, evento) => {
+    let id = idEvento
+    let eventoAct = {
+        titulo: evento.titulo,
+        descripcion: evento.descripcion,
+        fechaInicio: evento.fechaInicio,
+        fechaFin: evento.fechaFin,
+        horaInicio: evento.horaInicio,
+        horaFin: evento.horaFin,
+    }
+
+    return new Promise((resolve, reject) => {
+        eventoModel.findByIdAndUpdate(id, eventoAct)
+            .exec((err, data) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(data)
+            })
     })
 }
 
@@ -40,4 +62,5 @@ module.exports = {
     crear: crear,
     listar: listar,
     eliminar:eliminar,
+    actualizar:actualizar,
 }

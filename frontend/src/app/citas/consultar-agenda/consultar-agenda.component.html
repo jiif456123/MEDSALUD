@@ -99,6 +99,8 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="button" (click)="abrirModalMod()" class="btn btn-primary">Editar</button>
+                <button type="button" (click)="eliminar()" class="btn btn-danger">Eliminar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cerrar
                 </button>
@@ -106,6 +108,61 @@
         </div>
     </div>
 </div>
+
+<!--Modal para actualizar-->
+<div class="modal fade" style="background-color: rgba(0, 0, 0, 0.5)" append-to-body="true" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalModificar" aria-hidden="true" id="modalModificar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="formModificar" class="modal-body">
+                <form [formGroup]="formModificar" class="row">
+
+                    <div class="form-group col-md-12">
+                        <label for="titulo">Titulo</label>
+                        <input formControlName="titulo" type="text" class="form-control" id="titulo" placeholder=""/>
+                    </div>    
+
+                    <div class="form-group col-md-12">
+                        <label for="descripcion">Descripción</label>
+                        <textarea formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder=""></textarea>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechaInicio">Fecha Inicio</label>
+                        <input formControlName="fechaInicio" type="date" class="form-control" id="fechaInicio" placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechaFin">Fecha Fin</label>
+                        <input formControlName="fechaFin" type="date" class="form-control" id="fechaFin" placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaInicio">Hora Inicio</label>
+                        <input formControlName="horaInicio" type="time" class="form-control" id="horaInicio" placeholder="" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="horaFin">Hora Fin</label>
+                        <input formControlName="horaFin" type="time" class="form-control" id="horaFin" placeholder="" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="modificar()" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div style="display: none;">
     <button class="btn btn-success btn-sm btn-block">
@@ -118,4 +175,10 @@
     <button class="btn btn-success btn-sm btn-block">
     </button>
     <input data-toggle="modal" data-target="#modalEvento" #modalEvento type="hidden" name="button" />
+</div>
+
+<div style="display: none;">
+    <button class="btn btn-success btn-sm btn-block">
+    </button>
+    <input data-toggle="modal" data-target="#modalModificar" #modalModificar type="hidden" name="button" />
 </div>

@@ -32,4 +32,13 @@ router.delete('/:id', (req, res) => {
         })
 })
 
+router.put('/:id', (req, res) => {
+    let id = req.params.id;
+    let eventoAct = req.body;
+    eventoService.actualizar(id, eventoAct).then(
+        (data) => http.ok(req, res, code.status.Ok.code, data))
+        .catch(
+            (errorMessage) => http.err(req, res, code.status.Internal_Server_Error.code, errorMessage, errorMessage));
+})
+
 module.exports = router

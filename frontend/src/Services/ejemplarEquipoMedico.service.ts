@@ -23,9 +23,10 @@ export class EjemplarEquipoMedicoService{
         ubicacion:'',
         estado:'',
         solicitante:'',
-        fechaEntrega: '',
-        fechaDevolucion: ''      
+        fechaEntrega: null,
+        fechaDevolucion: null      
     };
+
     urlEndPoint: string = environment.endpoint.concat('/farmacia/EjemplarEquiposMedicos'); //'http://localhost:3000/productos'
     ejemplarEquipoMedico: EjemplarEquipoMedico[]; 
     readonly URL_API= "http://localhost:3000/farmacia/EjemplarEquiposMedicos";

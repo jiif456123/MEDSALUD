@@ -19,6 +19,9 @@ export const ROUTES: RouteInfo[] = [
   { path: '/farmacia/consultarMovimientos', title: 'Consultar Movimientos',  icon:'pe-7s-news-paper', class: '' },
   { path: '/farmacia/dashboard', title: 'Dashboard',  icon:'pe-7s-graph1', class: '' },
 
+  { path: '/farmacia/gestionar-inventario', title: 'Gestionar Inventario',  icon:'pe-7s-news-paper', class: '' },
+  { path: '/farmacia/pedido', title: 'Pedido',  icon:'pe-7s-news-paper', class: '' },
+    
 ];
 
 @Component({

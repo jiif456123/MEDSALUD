@@ -6,6 +6,6 @@ export class EjemplarEquipoMedico{
     ubicacion: string;
     estado :string;
     solicitante: string;
-    fechaEntrega: string;
-    fechaDevolucion: string;
+    fechaEntrega: Date;
+    fechaDevolucion: Date;
 }

@@ -20,7 +20,10 @@ export class MedicamentoService{
      ubicacion:'',
      stockMin:null,
      stockMax:null,
-     detalles:''
+     stockActual:null,
+     detalles:'',
+     clx:null,
+     Fecha:null,
   };
   selectedMedicamento1: Medicamento={
     _id:'',
@@ -35,22 +38,11 @@ export class MedicamentoService{
     ubicacion:'',
     stockMin:null,
     stockMax:null,
-    detalles:''
- };selectedMedicamento3: Medicamento={
-  _id:'',
-  codigo:'',
-  nombre: '',
-  disponibilidad:null,
-  dosis:'',
-  presentacion:'',
-  precioUnitario:null,
-  marca:'',
-  categoria:'',
-  ubicacion:'',
-  stockMin:null,
-  stockMax:null,
-  detalles:''
-};
+    stockActual:null,
+    detalles:'',
+    clx:null,
+    Fecha:null,
+ };
  
 
   medicamento: Medicamento[]; //importamos desde el modelo tene objetos tipo medicamento
@@ -83,6 +75,14 @@ export class MedicamentoService{
       }
    
     }
+    listar() {
+      return this.http.get<any>(this.URL_API);
+    }
+
+    insertar(obj) {
+      return this.http.post<any>(this.URL_API, obj);
+    }
+    
 }
 
 /*

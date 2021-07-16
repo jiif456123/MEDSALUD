@@ -7,8 +7,7 @@ var ejemplarEquipoMedicoSchema = new Schema({
     estado: { type: String },
     solicitante: { type: String },
     fechaEntrega: { type: Date },
-    fechaDevolucion: { type: Date }
-
+    fechaDevolucion: { type: Date }  
 }, {
     versionKey: false
 });

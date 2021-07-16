@@ -2,19 +2,22 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var medicamento = new Schema({
-    id: { type: String},
-    codigo: { type: String},
-    nombre: { type: String, required: true },
+    id: { type: String },
+    codigo: { type: String },
+    nombre: { type: String },
     disponibilidad: { type: Boolean },
-    dosis: { type: String, required: true },
-    presentacion: { type: String, required: true },
-    precioUnitario: { type: String, required: true },
-    marca: { type: String, required: true },
-    categoria: { type: String, required: true }, //Schema.ObjectId, ref: 'categoria'
-    ubicacion: { type: String, required: true },
-    stockMin: { type: Number, required: true },
-    stockMax: { type: Number, required: true },
-    detalles: { type: String, required: true }
+    dosis: { type: String },
+    presentacion: { type: String },
+    precioUnitario: { type: String },
+    marca: { type: String },
+    categoria: { type: String }, //Schema.ObjectId, ref: 'categoria'
+    ubicacion: { type: String },
+    stockMin: { type: Number },
+    stockMax: { type: Number },
+    stockActual: { type: Number },
+    detalles: { type: String },
+    clx: { type: Number },
+    Fecha: { type: Date },
 }, {
     versionKey: false
 });

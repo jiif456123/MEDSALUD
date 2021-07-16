@@ -2,6 +2,7 @@ const ejemplarEquipoMedicoService = require('../service/ejemplarEquipoMedico.ser
 const router = require('express').Router();
 const http = require('../../../../utils/http');
 const code = require('../../../../utils/status');
+const ejemplarservicio = require('../service/ejemplarmio.service');
 
 router.get('/:id', ejemplarEquipoMedicoService.getEjemplarEquipoMedico);
 router.get('/', ejemplarEquipoMedicoService.getMovimientoE);

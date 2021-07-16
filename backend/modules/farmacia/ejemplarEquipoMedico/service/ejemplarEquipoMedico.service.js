@@ -3,7 +3,7 @@ var ejemplarEquipoMedicoModel = require('../model/ejemplarEquipoMedico.model');
 //Objeto
 const ejemplarEquipoMedicoService = {};
 
-ejemplarEquipoMedicoService.getEjemplarEquipoMedico = async(req, res) => {
+ejemplarEquipoMedicoService.getEjemplarEquipoMedico = async (req, res) => {
     let id = req.params.id;
     ejemplarEquipoMedicoModel
         .find({ idEquipoMedico: id })
@@ -12,7 +12,7 @@ ejemplarEquipoMedicoService.getEjemplarEquipoMedico = async(req, res) => {
             res.json(equipoMedico)
         })
 };
-ejemplarEquipoMedicoService.createEjemplarEquipoMedico = async(req, res) => {
+ejemplarEquipoMedicoService.createEjemplarEquipoMedico = async (req, res) => {
     const ejemplarEquipoMedico = new ejemplarEquipoMedicoModel({
         equipoMedico: req.body.idEquipoMedico,
         ubicacion: req.body.ubicacion,
@@ -39,14 +39,14 @@ ejemplarEquipoMedicoService.updateEjemplarEquipoMedico = (id, ejemplar) => {
     });
 
 };
-ejemplarEquipoMedicoService.getMovimientoE = async(req, res) => {
+ejemplarEquipoMedicoService.getMovimientoE = async (req, res) => {
     ejemplarEquipoMedicoModel.find().populate("idEquipoMedico")
-    .then(equipoMedico => {
+        .then(equipoMedico => {
             res.json(equipoMedico)
         })
 };
-ejemplarEquipoMedicoService.Filtro = async(req, res, next) => {
-    
+ejemplarEquipoMedicoService.Filtro = async (req, res, next) => {
+
     const Modo = req.params.Modo;
     const Tipo = req.params.Tipo;
     //const Fecha = req.params.Fecha;
@@ -60,51 +60,53 @@ ejemplarEquipoMedicoService.Filtro = async(req, res, next) => {
         $gte: fechaInicial,
         $lt: fechaFinal
     }
-    
-    if(Modo=='tipo' && fechaInicial=='null' && fechaFinal=='null'){
-        const equipos = await ejemplarEquipoMedicoModel.find({estado:Tipo}).populate("idEquipoMedico");
 
-    res.json(equipos);
+    if (Modo == 'tipo' && fechaInicial == 'null' && fechaFinal == 'null') {
+        const equipos = await ejemplarEquipoMedicoModel.find({ estado: Tipo }).populate("idEquipoMedico");
+
+        res.json(equipos);
     }
-    else if(Modo=='fechaE')
-    {
-            try {
-               const reg = await ejemplarEquipoMedicoModel.find({
-                  fechaEntrega: fechaE}).populate('idEquipoMedico');
-         
-               if (!reg) {
-                  res.status(404).send({
-                     message: 'El registro no existe'
-                  });
-               } else {
-                  res.status(200).json(reg);
-               }
-            } catch (e) {
-               res.status(500).send({
-                  message: 'Ocurrio un error'
-               });
-               next(e);
-            }
-         
-    } else if(Modo=='fechaD'){
+    else if (Modo == 'fechaE') {
         try {
             const reg = await ejemplarEquipoMedicoModel.find({
-               fechaDevolucion: fechaD}).populate('idEquipoMedico');
-      
+                fechaEntrega: fechaE
+            }).populate('idEquipoMedico');
+
             if (!reg) {
-               res.status(404).send({
-                  message: 'El registro no existe'
-               });
+                res.status(404).send({
+                    message: 'El registro no existe'
+                });
             } else {
-               res.status(200).json(reg);
+                res.status(200).json(reg);
             }
-         } catch (e) {
+        } catch (e) {
             res.status(500).send({
-               message: 'Ocurrio un error'
+                message: 'Ocurrio un error'
             });
             next(e);
-         }
+        }
+
+    } else if (Modo == 'fechaD') {
+        try {
+            const reg = await ejemplarEquipoMedicoModel.find({
+                fechaDevolucion: fechaD
+            }).populate('idEquipoMedico');
+
+            if (!reg) {
+                res.status(404).send({
+                    message: 'El registro no existe'
+                });
+            } else {
+                res.status(200).json(reg);
+            }
+        } catch (e) {
+            res.status(500).send({
+                message: 'Ocurrio un error'
+            });
+            next(e);
+        }
     }
 
 };
+
 module.exports = ejemplarEquipoMedicoService;

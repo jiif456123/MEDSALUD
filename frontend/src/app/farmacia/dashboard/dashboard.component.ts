@@ -53,6 +53,7 @@ export class Dashboard implements OnInit {
     
     //this.getMedPriceStockByNombre();
    // this.setGraficoCircular("myChart");
+   this.getEstadoOrdenDeCompra();
     this.monthSelected="Selecciona un Mes";
     this.getCantidadEmpleados();
     //this.mostrarMes();
@@ -1002,6 +1003,27 @@ export class Dashboard implements OnInit {
           err => console.error(err)
         )
     }
+
+
+
+    //Obtener la cantidad de Ordenes de compra En espera Entregado y Cancelado
+    
+    getEstadoOrdenDeCompra(){
+        this.gestionarOrdenCompraService.getOrdenCompras().subscribe(
+            res =>{
+               //  console.log(res);  
+              //this.gestionarOrdenCompraService.ordenCompras= res;
+               /*
+              for (let index = 0; index < res.length; index++) {
+                  // console.log(res[index]);
+                }    */
+                console.log(res);
+              
+            },
+            err => console.error(err)
+          )
+    }
+
     
    
     

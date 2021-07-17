@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+
 
 import { LbdModule } from '../../lbd/lbd.module';
 import { NguiMapModule} from '@ngui/map';
@@ -20,6 +24,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import{CitasModule} from '../../../app/citas/citas.module';
 import { FormGroup, FormControl, Validators  } from '@angular/forms';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
+//import { GestionarProveedorComponent } from '../../farmacia/gestionar-proveedor/gestionarp.component';
+//import { CategoriaComponent } from 'app/categoria/categoria.component';
 
 import { FilterPipeModule } from 'ngx-filter-pipe';
 @NgModule({
@@ -28,12 +34,12 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     LbdModule,Ng2FilterPipeModule,
-    Ng2SearchPipeModule,
-    
+    Ng2SearchPipeModule,    
+    ReactiveFormsModule,         
     ReactiveFormsModule,
-    
-     
-
+    LbdModule,
+    NgbPaginationModule,
+    NgbAlertModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
   declarations: [
@@ -44,8 +50,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent,
-    
+    UpgradeComponent,  
+    //CategoriaComponent,
   ]
 })
 

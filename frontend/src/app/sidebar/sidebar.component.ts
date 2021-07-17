@@ -21,7 +21,18 @@ export const ROUTES: RouteInfo[] = [
   { path: '/citas/gestionar-paciente', title: 'Gestionar Paciente', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/consultar-servicio', title: 'Consultar servicio', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/reporte-general', title: 'Reporte general', icon: 'pe-7s-news-paper', class: '' },
-  { path: '/citas/consultar-receta-medica', title: 'Consultar receta medica', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/citas/consultar-receta-medica', title: 'Consultar receta medica', icon: 'pe-7s-news-paper', class: '' },  
+  { path: '/citas/gestionar-perfil', title: 'Gestionar Perfil',  icon:'pe-7s-news-paper', class: '' },
+
+  { path: '/farmacia/gestionar-categoriaM', title: 'Gestionar Categorias', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/farmacia/gestionarMedicamentos', title: 'Gestionar Medicamento', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/farmacia/EquipoMedico', title: 'Equipos Medicos',  icon:'pe-7s-news-paper', class: '' },
+  { path: "/farmacia/gestionar-proveedor", title: 'Gestionar Proveedor', icon: 'pe-7s-news-paper', class: '' },
+  { path: '/farmacia/gestionar-ordenCompra', title: 'Gestionar Orden De Compra',  icon:'pe-7s-news-paper', class: '' },
+  { path: '/farmacia/consultarMovimientos', title: 'Consultar Movimientos',  icon:'pe-7s-news-paper', class: '' },
+  { path: '/farmacia/dashboard', title: 'Dashboard',  icon:'pe-7s-graph1', class: '' },
+  { path: '/farmacia/gestionar-inventario', title: 'Gestionar Inventario',  icon:'pe-7s-news-paper', class: '' },
+  { path: '/farmacia/pedido', title: 'Pedido',  icon:'pe-7s-news-paper', class: '' },  
 ];
 
 @Component({

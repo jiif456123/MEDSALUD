@@ -1,0 +1,68 @@
+<form class="form" [formGroup]="formEquipoMedico">
+    <h2>Registrar Equipo Medico</h2>
+    <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control">
+    </div>
+    <div class="alert alert-message" *ngIf="nombre.invalid && (nombre.dirty)">
+        <div class="container-error-message">
+            <div *ngIf="nombre.errors.required">Se requiere nombre!</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Fabricante</label>
+        <input type="text" name="fabricante" formControlName="fabricante" class="form-control">
+    </div>
+    <div class="alert alert-info alert-size" *ngIf="fabricante.invalid && (fabricante.dirty)">
+        <div class="container-error-message">
+            <div *ngIf="fabricante.errors.required">Se requiere fabricante!</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Especialidad</label>
+        <select name="especialidad" class="form-control" formControlName="especialidad">
+                            <option value="Dermatologia">Dermatologia</option>
+                            <option value="Oftalmologia" selected>Oftalmologia</option>
+                            <option value="Pediatria">Pediatria</option>
+                            <option value="Medicina General">Medicina General</option>
+                            <option value="Cardiologia">Cardiologia</option>
+                            <option value="Gastroenterologia">Gastroenterologia</option>
+                          </select>
+    </div>
+    <div class="alert alert-info alert-size" *ngIf="especialidad.invalid && (especialidad.dirty)" required>
+        <div class="container-error-message">
+            <div *ngIf="especialidad.errors.required">Se requiere especialidad!</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Caracteristicas</label>
+        <textarea name="caracteristicas" formControlName="caracteristicas" class="form-control descripcion-input" rows="5"></textarea>
+    </div>
+    <div class="alert alert-info alert-size" *ngIf="caracteristicas.invalid && (caracteristicas.dirty)">
+        <div class="container-error-message">
+            <div *ngIf="caracteristicas.errors.required">Se requiere caracteristicas!</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Cantidad</label>
+        <input type="number" name="cantidad" formControlName="cantidad" class="form-control" min="1">
+    </div>
+    <div class="alert alert-info alert-size" *ngIf="cantidad.invalid && (cantidad.dirty)">
+        <div class="container-error-message">
+            <div *ngIf="cantidad.errors.required">Se requiere cantidad!</div>
+        </div>
+    </div>
+
+    <div class="row" style="align-content: center;">
+        <div class="col-sm-3">
+            <button class="btn btn-primary btn-save" (click)="create()" type="submit">Registrar</button>
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-secondary btn-cancel" [routerLink]="['/farmacia/EquipoMedico']">Cancelar</button>
+        </div>
+    </div>
+</form>

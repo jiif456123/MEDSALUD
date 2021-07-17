@@ -1,0 +1,14 @@
+.btn-add {
+    color: white;
+    background: #5881b2;
+    line-height: 1.2;
+    border-color: #5881b2;
+    font-family: 'Roboto';
+}
+.btn-cancel {
+    color: white;
+    background: #3a3e42;
+    line-height: 1.2;
+    border-color: #3a3e42;
+    font-family: 'Roboto';
+}

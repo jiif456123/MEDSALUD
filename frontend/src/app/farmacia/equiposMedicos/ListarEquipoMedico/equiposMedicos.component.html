@@ -1,0 +1,41 @@
+<div class="container cont">
+    <h1>Gestionar Equipos Medicos</h1>
+    <div class="row" style="margin: 30px 0px;">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary boton-registrar"  [routerLink]="['/farmacia/RegistrarEquipoMedico']">
+                Registrar Equipo
+            </button>
+        </div>
+    </div>
+    
+    <table class="table styled-table" style="text-align: center;">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fabricante</th>
+                <th>Especialidad</th>
+                <th>Cantidad</th>
+                <th>Disponibles</th>
+                <th>Ocupados</th>
+                <th>Opciones</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <!-- -->
+            <tr *ngFor="let equiposMedicos of equiposMedicosService.equiposMedicos">
+
+                <td>{{ equiposMedicos.nombre }}</td>
+                <td>{{ equiposMedicos.fabricante }}</td>
+                <td>{{ equiposMedicos.especialidad }}</td>
+                <td>{{ equiposMedicos.cantidad }}</td>
+                <td>{{ equiposMedicos.disponible }}</td>
+                <td>{{ equiposMedicos.noDisponible }}</td>
+                <td>
+                    <button class="btn btn-secondary" (click)="updateEquipoMedico(equiposMedicos)"> <i class="pe-7s-pen"></i></button>
+                    <button class="btn btn-secondary" [routerLink]="['/farmacia/EjemplaresEquipoMedico/',equiposMedicos._id]"> <i class="pe-7s-look"></i></button>         
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

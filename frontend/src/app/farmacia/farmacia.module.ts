@@ -14,7 +14,7 @@ import { GestionarCategoriaComponent } from '../farmacia/gestionarCategorias/ges
 import { GestionarProveedorComponent } from './gestionar-proveedor/gestionarp.component';
 import { GestionarOrdenCompraComponent } from '../farmacia/gestionarOrdenCompra/gestionarOrdencompra.component';
 import { Dashboard } from '../farmacia/dashboard/dashboard.component';
-import {Chart} from 'chart.js';
+//import {Chart} from 'chart.js';
 import { RegistrarMedicoComponent } from '../farmacia/equiposMedicos/registrarEquipoMedico/registrarEquipoMedico';
 import { EquiposMedicosComponent } from './equiposMedicos/ListarEquipoMedico/equiposMedicos.component';
 import { ActualizarEMComponent } from '../farmacia/equiposMedicos/actualizarEquipoMedico/actualizarEquipoMedico';
@@ -58,8 +58,7 @@ import{ pedidoComponent} from './pedido/pedido.component';
     MatFormFieldModule,
     MatNativeDateModule,
     MatSelectModule,
-    ReactiveFormsModule,
-    Chart
+    ReactiveFormsModule
   ],
   providers: [
     DatePipe

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var medicamento = new Schema({
-    id: { type: String },
+    id: { type: String},
     codigo: { type: String },
     nombre: { type: String },
     disponibilidad: { type: Boolean },

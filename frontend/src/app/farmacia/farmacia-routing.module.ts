@@ -54,7 +54,7 @@ const routes: Routes = [
     path: "gestionar-inventario", component: inventarioComponent, data: { title: 'Gestionar Inventario' }
   },
   {
-    path: "pedido", component: pedidoComponent, data: { title: 'Pedidos' }
+    path: "pedido", component: pedidoComponent, data: { title: 'Gestionar Pedidos' }
   },
 ];
 

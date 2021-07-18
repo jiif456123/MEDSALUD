@@ -17,7 +17,7 @@ var getMedicamento = () => {
 };
 var n = 10;
 var createMedicamento = (medicamento) => {
-
+    if(medicamento.stockMin<medicamento.stockMax){}
     let objMedicamento = new Medicamento({
         codigo: "M-0" + n++,
         nombre: medicamento.nombre,

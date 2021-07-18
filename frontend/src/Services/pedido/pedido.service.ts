@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {Pedido} from '../../models/pedido.model';
 import * as Items from '../../app/farmacia/pedido/_files/Items.json';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PedidoService{
@@ -55,6 +56,9 @@ export class PedidoService{
 
     getPedidos(){
       return this.http.get<any>(this.URL_API_GET);
+    }
+    getPedidos2(){
+      return this.http.get<any>(this.URL_API_GET).map(res => res.data);
     }
 
     createPedido(Pedido:Pedido){

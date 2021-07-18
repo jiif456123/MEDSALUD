@@ -49,9 +49,9 @@
     "ngx-filter-pipe": "^2.1.2",
     "ngx-print": "^1.2.1",
     "perfect-scrollbar": "1.5.0",
-    "rxjs": "6.6.3",
-    "rxjs-compat": "6.6.3",
-    "sweetalert2": "^11.0.17",
+    "rxjs": "^6.6.3",
+    "rxjs-compat": "^6.6.3",
+    "sweetalert2": "^11.0.18",
     "xlsx": "^0.17.0",
     "zone.js": "0.11.3"
   },

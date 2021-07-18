@@ -13,6 +13,7 @@ import { EquiposMedicosService } from 'Services/equiposMedicos.service';
 import { EquiposMedicos } from 'models/equiposMedicos.model';
 import { UserService } from '../services/user.service';
 import {GestionarPservice } from 'Services/gestionarp.service';
+import { PedidoService } from 'Services/pedido/pedido.service';
 
 import { ConvertActionBindingResult } from '@angular/compiler/src/compiler_util/expression_converter';
 
@@ -22,14 +23,15 @@ import { ConvertActionBindingResult } from '@angular/compiler/src/compiler_util/
   templateUrl: './dashboard.component.html',
   styleUrls: [ './dashboard.component.css'],
   //Se agrego en providers GestionarOrdenCompraComponent por el error  The pipe ' ' could not be found angular2 custom pipe
-  providers: [GestionarOrdenCompraService,movimientoMService,EjemplarEquipoMedicoService,MedicamentoService,UserService,GestionarPservice]
+  providers: [GestionarOrdenCompraService,movimientoMService,EjemplarEquipoMedicoService,MedicamentoService,UserService,GestionarPservice,PedidoService]
 })
 
 
 export class Dashboard implements OnInit {
 
  constructor(public gestionarOrdenCompraService: GestionarOrdenCompraService, public ejemplarEquipoMedicoService : EjemplarEquipoMedicoService, public movimientoMService: movimientoMService,
-    public equiposMedicosService: EquiposMedicosService,public medicamentoService: MedicamentoService, public userService: UserService,public gestionarpservice:GestionarPservice) { 
+    public equiposMedicosService: EquiposMedicosService,public medicamentoService: MedicamentoService, public userService: UserService,public gestionarpservice:GestionarPservice
+    , public pedidoService: PedidoService ) { 
     Chart.register(...registerables);
 
 
@@ -46,6 +48,7 @@ export class Dashboard implements OnInit {
   public myChart: Chart;
   public myChartCircular: Chart;
   public myChartBarra: Chart;
+  public myChartLinea: Chart;
 
   public myCar = new Object();
 
@@ -53,14 +56,16 @@ export class Dashboard implements OnInit {
     
     //this.getMedPriceStockByNombre();
    // this.setGraficoCircular("myChart");
+   this.getPedidoPagadosPorMes();
+   this.getEstadoOrdenDeCompra();
     this.monthSelected="Selecciona un Mes";
     this.getCantidadEmpleados();
     //this.mostrarMes();
     this.getMovimientoMFecha2();
     console.log(this.monthSelected);
-    this.llenarListAndArrayEquipo();
-    this.nombreEquipoSelected="Selecciona un Equipo";
-    this.llenarArrayNombreEquipo();
+    //this.llenarListAndArrayEquipo();
+    //this.nombreEquipoSelected="Selecciona un Equipo";
+    //this.llenarArrayNombreEquipo();
     //this.setGraficoBarra("myChartOneBar");
     this.llenarArrayCategoriaMedicamento();
     this.nombreCategoriaSelected="Todo";
@@ -82,9 +87,9 @@ export class Dashboard implements OnInit {
     setGraficoCircular(canvas: string,data: any[]){
         if (this.myChartCircular) this.myChartCircular.destroy(); 
         this.myChartCircular = new Chart(canvas,{
-            type: 'pie',
+            type: 'doughnut',
             data: {
-                labels: ["Cantidad", "Disponibles", "Ocupados"]/*labels*/,
+                labels: ["Entregado", "En Espera", "Cancelado"]/*labels*/,
                 datasets: [{
                     label: '# of Votes',
                     data: data,
@@ -173,7 +178,7 @@ export class Dashboard implements OnInit {
                 labels: labels/*labels*/,
                 datasets: [{
                     indexAxis: "y",
-                    label: 'Grafico de Barras Medicamento',
+                    label: 'Cantidad Medicamento Por Categoria',
                     data: data,
                     backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
@@ -199,6 +204,27 @@ export class Dashboard implements OnInit {
         });
     }
     
+    setGraficoLinea(canvas: string,data: any[], labels1: any[]){
+
+        if (this.myChartLinea) this.myChartLinea.destroy(); 
+
+        this.myChartLinea = new Chart(canvas,{
+            type: 'line',
+            data: {
+                labels: labels1,
+                datasets: [{
+                label: 'Pedidos Pagados Por Mes',
+                data: data,
+                fill: false,
+                backgroundColor:'rgb(52, 152, 219)',
+                borderColor: 'rgb(52, 152, 219)',
+                
+                tension: 0.3
+                }]
+        }
+            });
+       
+    }
 
 
     //LLENA LA LISTA DEL HTML EQUIPO
@@ -966,7 +992,8 @@ export class Dashboard implements OnInit {
             err => console.error(err)
       )}
 
-      //Obtener cuantos elmpleados hay registrados
+
+    //Obtener cuantos elmpleados hay registrados
     getCantidadEmpleados() { 
  
         this.userService.listar().subscribe(
@@ -978,30 +1005,159 @@ export class Dashboard implements OnInit {
           err => console.error(err)
         )
     }
+
   //Obtener cuantos proveedores hay con estado disponible
     getCantidadProveedoresDisponible() { 
-     var proveedoresDisp = [];
+     var contadorProveedoresDisp = 0;
         this.gestionarpservice.getProveedor().subscribe(
           res =>{
 
               for (let index = 0; index < res.length; index++) {
                   if(res[index]["estado"]=="Disponible"){
-                            proveedoresDisp[index]=res[index];
+                           contadorProveedoresDisp++;
                   }
-                    //proveedoresDisp[index]=res[index]["disponible"]
+               
               }
-             // console.log(res["diponible"]);
-              //proveedoresDisp=res["estado"]["Disponible"].length;
-            //console.log(proveedoresDisp);
-            this.cantidadProveedores=proveedoresDisp.length;
-              //console.log(proveedoresDisp.length);
-              
-               // this.cantidadEmpleados=res.data.length;
-                    
+        
+            this.cantidadProveedores=contadorProveedoresDisp;
+         
                 },
           err => console.error(err)
         )
     }
+
+
+
+    //Obtener la cantidad de Ordenes de compra En espera Entregado y Cancelado
+    getEstadoOrdenDeCompra(){
+
+        var valores=[];
+        var contadorEntregado=0;
+        var contadorEnEspera=0;
+        var contadorCancelado=0;
+        this.gestionarOrdenCompraService.getOrdenCompras().subscribe(
+            
+            
+            res =>{
+              console.log(res[0]["estado"]=="En Espera");  
+              for (let index = 0; index < res.length; index++) {
+
+                    if(res[index]["estado"]=="Entregado"){
+                           contadorEntregado++;
+                    }
+                    
+                    if(res[index]["estado"]=="En Espera"){
+                           contadorEnEspera++;
+                    }
+                    if(res[index]["estado"]=="Cancelado"){
+                            contadorCancelado++;
+                    }
+                    
+                }   
+                
+                valores[0]=contadorEntregado;
+                valores[1]=contadorEnEspera;
+                valores[2]=contadorCancelado;
+                console.log(valores);
+            
+                this.setGraficoCircular("myChart",valores);
+            },
+            err => console.error(err)
+          )
+    }
+
+
+    //Obtener la cantidad de pedidos pagados por mes
+    getPedidoPagadosPorMes(){
+        var cantidadPorMes=[];
+        var count1=0;
+        var count2=0;
+        var count3=0;
+        var count4=0;
+        var count5=0;
+        var count6=0;
+        var count7=0;
+        var count8=0;
+        var count9=0;
+        var count10=0;
+        var count11=0;
+        var count12=0;
+        this.pedidoService.getPedidos2().subscribe(
+
+            res =>{
+
+               
+                for (let index = 0; index < res.length; index++) {
+
+                    if(res[index]["estado"]=="Pagado"){
+                        var d=new Date(res[index]['fecha']);
+                        var numeroMes=(d.getMonth()+1);
+
+                        if(numeroMes==1){
+                          count1++;
+                        }
+                        if(numeroMes==2){
+                            count2++;
+                        }
+                        if(numeroMes==3){
+                            count3++;                    
+                        }
+                        if(numeroMes==4){
+                            count4++;
+                        }
+                        if(numeroMes==5){
+                            count5++;
+                        }
+                        if(numeroMes==6){
+                            count6++;                            
+                        }
+                        if(numeroMes==7){
+                            count7++;                            
+                        }
+                        if(numeroMes==8){
+                            count8++;                            
+                        }
+                        if(numeroMes==9){
+                            count9++;                            
+                        }
+                        if(numeroMes==10){
+                            count10++;                            
+                        }
+                        if(numeroMes==11){
+                            count11++;                            
+                        }
+                        if(numeroMes==12){
+                            count12++;                            
+                        }
+                    
+                        
+                    }
+                    
+                }
+                
+                cantidadPorMes[0]=count1;
+                cantidadPorMes[1]=count2;
+                cantidadPorMes[2]=count3;
+                cantidadPorMes[3]=count4;
+                cantidadPorMes[4]=count5;
+                cantidadPorMes[5]=count6;
+                cantidadPorMes[6]=count7;
+                cantidadPorMes[7]=count8;
+                cantidadPorMes[8]=count9;
+                cantidadPorMes[9]=count10;
+                cantidadPorMes[10]=count11;
+                cantidadPorMes[11]=count12;
+                this.setGraficoLinea("myChartLinea",cantidadPorMes,this.meses);
+                console.log(cantidadPorMes);
+
+            },
+            err => console.error(err)
+
+        )
+ 
+    }
+
+
     
    
     

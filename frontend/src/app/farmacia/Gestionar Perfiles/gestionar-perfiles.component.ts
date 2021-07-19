@@ -7,7 +7,7 @@ import { FilterPipe } from 'ngx-filter-pipe';
 @Component({
   selector: 'app-gestionar-perfiles',
   templateUrl: './gestionar-perfiles.component.html',
-  styleUrls: ['./gestionar-perfiles.component.css'],
+  styleUrls: ['./gestionar-perfiles.component.css' ,'../farmacia.css'],
   providers: [DatePipe]
 })
 export class GestionarPerfilComponent implements OnInit {
@@ -44,8 +44,6 @@ export class GestionarPerfilComponent implements OnInit {
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       especialidad: ['', [Validators.required]],
-      contraseña: ['', [Validators.required]],
-      user: ['', [Validators.required]],
     })
 
     this.formUserModificar = this.fb.group({
@@ -59,8 +57,6 @@ export class GestionarPerfilComponent implements OnInit {
         fechaNacimiento: ['', [Validators.required]],
         direccion: ['', [Validators.required]],
         especialidad: ['', [Validators.required]],
-        contraseña: ['', [Validators.required]],
-        user: ['', [Validators.required]],
     })
 
     this.formUserVer = this.fb.group({
@@ -74,8 +70,6 @@ export class GestionarPerfilComponent implements OnInit {
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       especialidad: ['', [Validators.required]],
-      contraseña: ['', [Validators.required]],
-      user: ['', [Validators.required]],
   })
 
   }
@@ -97,8 +91,6 @@ export class GestionarPerfilComponent implements OnInit {
     this.formUserModificar.controls.fechaNacimiento.setValue(row.fechaNacimiento);
     this.formUserModificar.controls.direccion.setValue(row.direccion);
     this.formUserModificar.controls.especialidad.setValue(row.especialidad);
-    this.formUserModificar.controls.user.setValue(row.user);
-    this.formUserModificar.controls.contraseña.setValue(row.contraseña);
 
   }
 
@@ -115,8 +107,6 @@ export class GestionarPerfilComponent implements OnInit {
     this.formUserVer.controls.fechaNacimiento.setValue(row.fechaNacimiento);
     this.formUserVer.controls.direccion.setValue(row.direccion);
     this.formUserVer.controls.especialidad.setValue(row.especialidad);
-    this.formUserVer.controls.user.setValue(row.user);
-    this.formUserVer.controls.contraseña.setValue(row.contraseña);
 
   }
 
@@ -140,9 +130,7 @@ export class GestionarPerfilComponent implements OnInit {
       email: datos.email,
       fechaNacimiento: datos.fechaNacimiento,
       direccion: datos.direccion,
-      especialidad: datos.especialidad,
-      contraseña: datos.contraseña,
-      user:datos.user
+      especialidad: datos.especialidad
     }
 
     debugger;
@@ -173,9 +161,7 @@ export class GestionarPerfilComponent implements OnInit {
         email: datos.email,
         fechaNacimiento: datos.fechaNacimiento,
         direccion: datos.direccion,
-        especialidad: datos.especialidad,
-        contraseña: datos.contraseña,
-      user:datos.user
+        especialidad: datos.especialidad
     }
 
     try {

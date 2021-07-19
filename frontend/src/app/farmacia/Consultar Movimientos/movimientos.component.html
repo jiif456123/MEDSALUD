@@ -1,0 +1,153 @@
+<div class="container cont">
+    <h1>Consultar Movimientos</h1>
+    <div class="row" style="margin: 30px 0px;"> 
+        <mat-tab-group>
+            <mat-tab label="Medicamentos"> 
+               <div class="container"> 
+                <div class="row" style="margin:25px 0px 0px 0px;">  
+                    <div class="col-md-8" style="padding-left: 0px;">
+                        <div class="col-md-4" style="padding-left: 0px;">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Tipo de movimiento</mat-label>
+                                <mat-select [(value)]="selected" (selectionChange)="Filtro('tipo',selected,'null','null')">
+                                  <mat-option value="">Todo</mat-option>
+                                  <mat-option value="Ingreso">Ingreso</mat-option>
+                                  <mat-option value="Egreso">Egreso</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-md-6" style="padding-right: 0px;">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Selecciona rango de fecha</mat-label>
+                                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                                  <input matStartDate formControlName="start"  [(ngModel)]="start" placeholder="Start date">
+                                  <input matEndDate formControlName="end"  [(ngModel)]="end" placeholder="End date" (dateChange)="Filtro('fecha','null',start,end)">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                                <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                                <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-4" style="padding-right: 0px;">
+                        <button type="button" class="btn btn-primary boton-registrar" style="padding-bottom: 13.5px; padding-top: 13.5px;"
+                        (click)="excelMedicamentos()">
+                            Descargar Excel
+                              </button>
+                              </div>
+                </div>
+                   <table id="excel-table" class="table styled-table" style="text-align: center;">
+                <thead >
+                    <tr>
+                        <th>Medicamento</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Motivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- -->
+                    <tr *ngFor="let m of medicamentos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                        <td> {{m.Medicamento.nombre}}</td>
+                        <td>{{m.tipo}}</td>
+                        <td>{{m.fecha | date: "dd/MM/yyyy"}}</td>
+                        <td>{{m.motivo}}</td>
+                    </tr>
+                </tbody>
+                   </table>
+                   <div style="float: right;">
+                    <ngb-pagination  [pageSize]="pageSize" [collectionSize]="medicamentos.length" [(page)]="page">
+                    </ngb-pagination>
+                </div>
+               </div>
+
+            </mat-tab>
+            <mat-tab label="Equipos médicos"> 
+                <div class="container"> 
+                    <div class="row" style="margin:25px 0px 0px 0px;">
+                        <div class="col-md-3" style="padding-left: 0px;">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Estado</mat-label>
+                                <mat-select [(value)]="selected" (selectionChange)="FiltroE('tipo',selected,'null','null')">
+                                  <mat-option value="">Todo</mat-option>
+                                  <mat-option value="Disponible">Disponible</mat-option>
+                                  <mat-option value="Ocupado">Ocupado</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>  
+                        <div class="col-md-6" style="padding-left: 0px;">
+                            <div class="row">
+                                <div class="col-md-6" style="padding-left: 0px;">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Fecha de Entrega</mat-label>
+                                        <mat-date-range-input [formGroup]="range1" [rangePicker]="picker1">
+                                          <input matStartDate formControlName="start1"  [(ngModel)]="start1" placeholder="Inicio">
+                                          <input matEndDate formControlName="end1"  [(ngModel)]="end1" placeholder="Fin" (dateChange)="FiltroE('fechaE','null',start1,end1)">
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker1></mat-date-range-picker>
+                                        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                                        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6" style="padding-right: 0px;">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Fecha de Devolucion</mat-label>
+                                        <mat-date-range-input [formGroup]="range2" [rangePicker]="picker2">
+                                          <input matStartDate formControlName="start2"  [(ngModel)]="start2" placeholder="Inicio">
+                                          <input matEndDate formControlName="end2"  [(ngModel)]="end2" placeholder="Fin" (dateChange)="FiltroE('fechaD','null',start2,end2)">
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker2></mat-date-range-picker>
+                                        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                                        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                
+                        <div class="col-md-3" style="padding-right: 0px;">
+                            <button type="button" class="btn btn-primary boton-registrar" style="padding-bottom: 13.5px; padding-top: 13.5px;"
+                            (click)="excelEquipos()">
+                                Descargar Excel
+                                  </button>
+                                  </div>
+                    </div>
+                       <table id="excel-table1" class="table styled-table" style="text-align: center;">
+                    <thead >
+                        <tr>
+                            <th>Equipo Médico</th>
+                            <th>Ubicacion</th>
+                            <th>Estado</th>
+                            <th>Fecha entrega</th>
+                            <th>Fecha devolucion</th>
+                            <th>Solicitante</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- -->
+                        <tr *ngFor="let e of equiposM | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <td>{{e.idEquipoMedico.nombre}}</td>
+                            <td>{{e.ubicacion}}</td>
+                            <td>{{e.estado}}</td>
+                            <td>{{e.fechaEntrega | date: "dd/MM/yyyy"}}</td>
+                            <td>{{e.fechaDevolucion | date: "dd/MM/yyyy"}}</td>
+                            <td>{{e.solicitante}}</td>
+                        </tr>
+                    </tbody>
+                       </table>
+                       <div style="float: right;">
+                        <ngb-pagination  [pageSize]="pageSize" [collectionSize]="medicamentos.length" [(page)]="page">
+                        </ngb-pagination>
+                    </div>
+                   </div>
+            </mat-tab>
+          </mat-tab-group> 
+    </div>
+    
+</div>
+
+

@@ -1,4 +1,3 @@
-import { Paciente } from "./paciente.model";
 export class Historia {
     _id: string
     medico: string
@@ -11,5 +10,4 @@ export class Historia {
     antecedentes: string
     historia: string
     diagnostico: string
-    paciente: Paciente
 }

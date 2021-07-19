@@ -1,0 +1,49 @@
+<p>DASHBOARD</p>
+<fieldset class="form-group">
+    <select [(ngModel)]="monthSelected" (click)="mostrarMes()" name="monthOfYears" class="form-control">
+    <option disabled>Selecciona un Mes</option>
+    <ng-container *ngFor="let monthOfYears of meses" >    
+        <option [value]="monthOfYears">{{monthOfYears}}</option>
+    </ng-container>
+    </select>
+</fieldset>
+
+<div id="divChart2">
+    <canvas id="myChartBar"></canvas>
+</div>
+
+<fieldset class="form-group">
+    <select [(ngModel)]="nombreEquipoSelected" (click)="llenarArrayNombreEquipo()" name="nombreEquipo" class="form-control">
+    <option disabled>Selecciona un Equipo</option>
+    
+    <ng-container *ngFor="let nombreEquipo of nombreEquipos" >    
+        <option [value]="nombreEquipo">{{nombreEquipo}}</option>
+    </ng-container>
+    <option >Todo</option>
+    </select>
+</fieldset>
+<div id="divChart">
+    <canvas id="myChart"></canvas>
+</div>
+
+
+<fieldset class="form-group">
+    <select [(ngModel)]="nombreCategoriaSelected" (click)="getCountCantidadCategoria()" (click)="getCantidadMedbyCategoria()" name="nombreCategoria" class="form-control">
+    <option disabled>Selecciona una Categoria</option>
+    <ng-container *ngFor="let nombreCategoria of nombreCategorias" >    
+        <option [value]="nombreCategoria">{{nombreCategoria}}</option>
+    </ng-container>
+    <option>Todo</option>
+    </select>
+</fieldset>
+<div id="divChart3">
+    <canvas id="myChartOneBar"></canvas>
+</div>
+
+<div class="div-trabajadores">
+    <p>CANTIDAD DE TRABAJADORES: {{cantidadEmpleados}}</p>
+</div>
+<div class="div-proveedores">
+    <p>CANTIDAD DE provedores Disponibles: {{cantidadProveedores}}</p>
+</div>
+<!-- -->

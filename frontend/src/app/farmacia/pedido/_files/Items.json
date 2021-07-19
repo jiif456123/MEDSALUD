@@ -1,0 +1,51 @@
+[{
+    "codigoPedido": 101,
+    "nombre": "Giancarlo Ruiz",
+    "dni": 74866891,
+    "pedidos": [{
+        "codigo": 12344,
+        "producto": "Paracetamol",
+        "laboratorio": "3M Healthcare",
+        "concentracion": "500mg",
+        "presentacion": "Tableta",
+        "cantidad": 5,
+        "stockDisponible": "487",
+        "precioU": 7,
+        "importe": 35
+    }, {
+        "codigo": 12345,
+        "producto": "Amoxicilina",
+        "concentracion": "500mg",
+        "laboratorio": "Abbott",
+        "presentacion": "Tableta",
+        "cantidad": 5,
+        "stockDisponible": "487",
+        "precioU": 7,
+        "importe": 35
+    }]
+}, {
+    "codigoPedido": 102,
+    "nombre": "Adolfo Ruiz",
+    "dni": 18569457,
+    "pedidos": [{
+        "codigo": 12344,
+        "producto": "Paracetamol",
+        "laboratorio": "3M Healthcare",
+        "concentracion": "500mg",
+        "presentacion": "Tableta",
+        "cantidad": 10,
+        "stockDisponible": "487",
+        "precioU": 7,
+        "importe": 70
+    }, {
+        "codigo": 12345,
+        "producto": "Amoxicilina",
+        "concentracion": "500mg",
+        "laboratorio": "Abbott",
+        "presentacion": "Tableta",
+        "cantidad": 5,
+        "stockDisponible": "487",
+        "precioU": 7,
+        "importe": 35
+    }]
+}]

@@ -14,7 +14,6 @@ let crear = (historia) => {
         antecedentes: historia.antecedentes,
         historia: historia.historia,
         diagnostico: historia.diagnostico,
-        paciente: historia.paciente,
     })
 
     console.log(newhistoria);
@@ -29,7 +28,7 @@ let crear = (historia) => {
 
 var listar = () => {
     return new Promise((resolve, reject) => {
-        historiamodel.find({}).populate('paciente').exec((err, data) => {
+        historiamodel.find({}).exec((err, data) => {
             if (err) reject(err);
             resolve(data);
         })

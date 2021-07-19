@@ -6,7 +6,7 @@
             <div class="col-5" style="padding-left: 0px;">
                 <div class="input-group">
                     <input type="text" name="nombre" class="form-control" #nombreControl="ngModel"
-                        [(ngModel)]="medicamentoService.selectedMedicamento1.nombre" [(ngModel)]="nombre">
+                        [(ngModel)]="medicamentoService.selectedMedicamento3.nombre" [(ngModel)]="nombre">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-primary" (click)="searchByNombre(nombre)">Buscar</button>
                     </span>
@@ -342,14 +342,9 @@
                                 <div class="contenedor-columna-right">
                                     <div class="form-group">
                                         <i class="i-font">Precio Unitario</i>
-                                        <<<<<<< HEAD <input type="number" name="precioUnitario"
+                                        <input type="number" name="precioUnitario"
                                             [(ngModel)]="medicamentoService.selectedMedicamento1.precioUnitario"
                                             class="form-control text-input">
-                                            =======
-                                            <input type="text" name="precioUnitario"
-                                                [(ngModel)]="medicamentoService.selectedMedicamento1.precioUnitario"
-                                                class="form-control text-input">
-                                            >>>>>>> 38295e7b7880f5931231b05f92e75198408e1991
                                     </div>
                                 </div>
                                 <div class="contenedor-columna-left">

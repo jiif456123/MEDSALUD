@@ -43,6 +43,24 @@ export class MedicamentoService{
     clx:null,
     Fecha:null,
  };
+ selectedMedicamento3: Medicamento={
+  _id:'',
+  codigo:'',
+  nombre: '',
+  disponibilidad:null,
+  dosis:'',
+  presentacion:'',
+  precioUnitario:null,
+  marca:'',
+  categoria:'',
+  ubicacion:'',
+  stockMin:null,
+  stockMax:null,
+  stockActual:null,
+  detalles:'',
+  clx:null,
+  Fecha:null,
+};
  
 
   medicamento: Medicamento[]; //importamos desde el modelo tene objetos tipo medicamento

@@ -17,7 +17,6 @@ var getMedicamento = () => {
 };
 var n = 10;
 var createMedicamento = (medicamento) => {
-
     let objMedicamento = new Medicamento({
         codigo: "M-0" + n++,
         nombre: medicamento.nombre,

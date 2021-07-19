@@ -20,15 +20,21 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import{CitasModule} from '../../../app/citas/citas.module';
+import { FormGroup, FormControl, Validators  } from '@angular/forms';
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 //import { GestionarProveedorComponent } from '../../farmacia/gestionar-proveedor/gestionarp.component';
 //import { CategoriaComponent } from 'app/categoria/categoria.component';
-
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    LbdModule,Ng2FilterPipeModule,
+    Ng2SearchPipeModule,    
+    ReactiveFormsModule,         
     ReactiveFormsModule,
     LbdModule,
     NgbPaginationModule,
@@ -43,7 +49,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent
+    UpgradeComponent,  
     //CategoriaComponent,
   ]
 })

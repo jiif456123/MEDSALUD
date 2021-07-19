@@ -6,12 +6,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { EjemplarEquipoMedico } from '../../../../models/ejemplarEquipoMedico.model';
 import { EjemplarEquipoMedicoService } from 'Services/ejemplarEquipoMedico.service';
+import { AlertaService } from 'Services/alerta.service';
 
 @Component({
   selector: 'app-registrarEquipoMedico',
   templateUrl: './registrarEquipoMedico.html',
   styleUrls: ['./registrarEquipoMedico.css'],
-  providers: [EjemplarEquipoMedicoService]
+  providers: [EjemplarEquipoMedicoService, AlertaService]
 })
 
 export class RegistrarMedicoComponent implements OnInit {
@@ -24,6 +25,7 @@ export class RegistrarMedicoComponent implements OnInit {
   constructor(
     private equiposMedicosService: EquiposMedicosService,
     public  ejemplarMedicoService: EjemplarEquipoMedicoService,
+    public alertaService:AlertaService,
     private router: Router,
     private activateRoute: ActivatedRoute,
   ) { }
@@ -48,6 +50,13 @@ export class RegistrarMedicoComponent implements OnInit {
       this.id = params['id'];
     })
   }
+  
+  addAlerta(nombre: string){
+    
+    this.alertaService.selectedAlerta.titulo = "Nuevo equipo médico";
+    this.alertaService.selectedAlerta.mensaje = nombre + " ha sido registrado";
+    this.alertaService.createAlerta(this.alertaService.selectedAlerta).subscribe(
+  );}
   create() {   
     if(this.formEquipoMedico.valid){
       this.formEquipoMedico.controls['disponible'].setValue(this.formEquipoMedico.controls["cantidad"].value);

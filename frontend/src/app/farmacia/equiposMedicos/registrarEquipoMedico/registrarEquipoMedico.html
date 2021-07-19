@@ -2,7 +2,7 @@
     <h2>Registrar Equipo Medico</h2>
     <div class="form-group">
         <label>Nombre</label>
-        <input type="text" formControlName="nombre" class="form-control">
+        <input type="text" name="nombreE" formControlName="nombre" class="form-control" [(ngModel)]="nombreE">
     </div>
     <div class="alert alert-message" *ngIf="nombre.invalid && (nombre.dirty)">
         <div class="container-error-message">
@@ -59,7 +59,7 @@
 
     <div class="row" style="align-content: center;">
         <div class="col-sm-3">
-            <button class="btn btn-primary btn-save" (click)="create()" type="submit">Registrar</button>
+            <button class="btn btn-primary btn-save" (click)="create()" (click)="addAlerta(nombreE)" type="submit">Registrar</button>
         </div>
         <div class="col-sm-3">
             <button type="button" class="btn btn-secondary btn-cancel" [routerLink]="['/farmacia/EquipoMedico']">Cancelar</button>

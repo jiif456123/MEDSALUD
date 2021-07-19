@@ -257,12 +257,12 @@
                                 <p>*Campo Requerido</p>
                             </div>
                         </div>
-
+                        
                         <div class="modal-footer popup-footer">
 
                             <div class="btn-group">
                                 <button class="btn btn-primary button-agregar" [disabled]="medicamentoForm.invalid"
-                                    (click)="addMedicamento(medicamentoForm)"
+                                    (click)="addMedicamento(medicamentoForm)" (click)="addAlerta(medicamentoService.selectedMedicamento.nombre)"
                                     (click)="resetForm(medicamentoForm)">Agregar</button>
 
                             </div>

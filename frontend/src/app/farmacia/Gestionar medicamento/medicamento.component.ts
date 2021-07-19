@@ -2,12 +2,13 @@ import { Component, OnInit} from '@angular/core';
 import { MedicamentoService } from 'Services/medicamento.service';
 import { NgForm } from "@angular/forms"; //para add
 import { Medicamento} from 'models/medicamento.model';
+import { AlertaService } from 'Services/alerta.service';
 
 @Component({
   selector: 'app-medicamento',
   templateUrl: './medicamento.component.html',
   styleUrls: [ './medicamento.component.css', '../farmacia.css'],
-  providers: [MedicamentoService]
+  providers: [MedicamentoService, AlertaService]
 })
 
 export class medicamentoComponent implements OnInit{
@@ -22,7 +23,7 @@ export class medicamentoComponent implements OnInit{
   unidadlist: string[] = ['mg', 'ml'];
   selectDispo='';
 
-  constructor(public medicamentoService: MedicamentoService) { }
+  constructor(public medicamentoService: MedicamentoService,public alertaService:AlertaService) { }
   medicamentos = [];
   
  ngOnInit(): void {
@@ -50,11 +51,11 @@ export class medicamentoComponent implements OnInit{
       (err) => console.error(err)
       
   );}
-
-  getMedicamento1(medicamento:Medicamento) {
-        
-        this.medicamentoService.selectedMedicamento1 = medicamento;
-  }
+  addAlerta(nombre: MedicamentoService){
+    this.alertaService.selectedAlerta.titulo = "Nuevo medicamento";
+    this.alertaService.selectedAlerta.mensaje = nombre + " ha sido registrado";
+    this.alertaService.createAlerta(this.alertaService.selectedAlerta).subscribe(
+  );}
       
   updateMedicamento(form:NgForm){
       this.medicamentoService.updateMedicamento(form.value).subscribe(

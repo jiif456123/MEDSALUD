@@ -22,6 +22,7 @@ import { EjemplaEquipoMedicoComponent } from './ejemplarEquipoMedico/listarEquip
 import { DatePipe } from '@angular/common';
 import { inventarioComponent } from './Inventario/inventario.component';
 import{ pedidoComponent} from './pedido/pedido.component';
+import { AlertasComponent } from './alertas/alertas.component';
 
 
 //import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
@@ -43,7 +44,8 @@ import{ pedidoComponent} from './pedido/pedido.component';
     EjemplaEquipoMedicoComponent,    
     Dashboard,
     inventarioComponent,
-    pedidoComponent
+    pedidoComponent,
+    AlertasComponent
   ],
   imports: [
     FormsModule,

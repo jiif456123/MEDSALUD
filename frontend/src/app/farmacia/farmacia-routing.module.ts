@@ -12,7 +12,7 @@ import {ActualizarEMComponent} from '../farmacia/equiposMedicos/actualizarEquipo
 import {EjemplaEquipoMedicoComponent} from './ejemplarEquipoMedico/listarEquipoMedico/ejemplaresEquipoMedico';
 import { Dashboard } from '../farmacia/dashboard/dashboard.component';
 import { inventarioComponent } from './Inventario/inventario.component';
-
+import { AlertasComponent } from './alertas/alertas.component';
 import { pedidoComponent } from './pedido/pedido.component';
 
 const routes: Routes = [
@@ -55,6 +55,9 @@ const routes: Routes = [
   },
   {
     path: "pedido", component: pedidoComponent, data: { title: 'Pedidos' }
+  },
+  {
+    path: "alerta", component: AlertasComponent, data: { title: 'Alertas' }
   },
 ];
 

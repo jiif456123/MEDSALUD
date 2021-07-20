@@ -4,7 +4,6 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component'
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import {LoginGuard} from '../Services/inicarsesion.service'
 const routes: Routes =[
   {
     path: '',
@@ -12,12 +11,11 @@ const routes: Routes =[
   },
   
   {
-
+    
     path: '',
     redirectTo: 'categoria',
     pathMatch: 'full',
   }, {
-    canActivate : [LoginGuard],
     path: '',
     component: AdminLayoutComponent,
     children: [

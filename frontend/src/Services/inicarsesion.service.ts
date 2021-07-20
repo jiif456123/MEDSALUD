@@ -11,16 +11,16 @@ export class LoginGuard implements CanActivate {
 
   }
 
-  canActivate(): boolean {
+  canActivate(): boolean {return true;
 
     
-    if (this.loginService.estaLogueado()) {
-        this.router.navigate(['/farmacia/gestionar-proveedor']);
-      return true;
-    } else {
-        alert ('error al ingresar los datos')
-        this.router.navigate(['/']);
-      return false;
-    }
+    // if (this.loginService.estaLogueado()) {
+    //     this.router.navigate(['/farmacia/gestionar-proveedor']);
+    //   return true;
+    // } else {
+    //     alert ('error al ingresar los datos')
+    //     this.router.navigate(['/']);
+    //   return false;
+    // }
   }
 }

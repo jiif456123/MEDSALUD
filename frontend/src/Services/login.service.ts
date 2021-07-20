@@ -47,10 +47,10 @@ export class LoginService {
         return respuesta
     }
 
-    estaLogueado(){
-        alert('esta logueado')
-        return this.estaLogueado;
-    }
+    // estaLogueado(){
+    //     alert('esta logueado')
+    //     return this.estaLogueado;
+    // }
 
 
    

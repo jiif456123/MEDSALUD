@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit {
     }else{
 
         this.loginservice.loginUsuario(this.usuario,this.contra).subscribe((res:any)=>{
-            if(res=="pass incorrecta"){
+            if(!res.ingreso){
                 this.data_error = 'La contasena es incorrecta'
                 alert(this.data_error)
             }
             else{
-            
+                this.router.navigate(['/farmacia/dashboard']);
                 this.token = res.token;
                 localStorage.setItem('token',this.token)
                 localStorage.setItem('identity',JSON.stringify(res.usuario))

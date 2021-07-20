@@ -3,7 +3,6 @@ const router = require('express').Router()
 const { err } = require('../../../utils/http');
 const http = require('../../../utils/http');
 const code = require('../../../utils/status');
-const eventoService = require("./evento.service");
 
 router.post('/', (req, res) => {
     let evento = req.body;

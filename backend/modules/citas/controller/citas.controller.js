@@ -10,7 +10,6 @@ const servicioController = require('../servicio/servicio.controller')
 const userController = require('../user/user.controller')
 const especialidadController = require('../../citas/Especialidad/gestespecialidad.controller');
 const receMedicaController = require('../../citas/recetaMedica/recetaMedica.controller');
-const eventoController = require('../evento/evento.controller');
 const servicioContoller = require('../servicio/servicio.controller');
 
 router.use('/paciente', pacienteController);

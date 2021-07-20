@@ -144,32 +144,32 @@ var modelCita = mongoose.model('Cita', cita);
 
 /*
     Evento Model
-*/
-var evento = new Schema({
-    titulo: { type: String },
-    descripcion: { type: String },
-    fechaInicio: { type: String },
-    fechaFin: { type: String },
-    horaInicio: { type: String },
-    horaFin: { type: String },
-}, {
-    versionKey: false
-});
-var modelEvento = mongoose.model('Evento', evento);
+ */
+// var evento = new Schema({
+//     titulo: { type: String },
+//     descripcion: { type: String },
+//     fechaInicio: { type: String },
+//     fechaFin: { type: String },
+//     horaInicio: { type: String },
+//     horaFin: { type: String },
+// }, {
+//     versionKey: false
+// });
+// var modelEvento = mongoose.model('Evento', evento);
 
 /*
     Servicio Model
 */
-var servicio = new Schema({
-    titulo: { type: String },
-    descripcion: { type: String },
-    imagen: { type: String },
-    horaInicio: { type: String },
-    horaFin: { type: String },
-}, {
-    versionKey: false
-});
-var modelServicio = mongoose.model('Servicio', servicio);
+// var servicio = new Schema({
+//     titulo: { type: String },
+//     descripcion: { type: String },
+//     imagen: { type: String },
+//     horaInicio: { type: String },
+//     horaFin: { type: String },
+// }, {
+//     versionKey: false
+// });
+// var modelServicio = mongoose.model('Servicio', servicio);
 
 //User
 
@@ -236,6 +236,6 @@ module.exports = {
     modelUser: modelUser,
     modelRecetaMedica: modelRecetaMedica,
     modelDetalleRecetaMedica: modelDetalleRecetaMedica,
-    modelEvento: modelEvento,
-    modelServicio: modelServicio
+    //modelEvento: modelEvento,
+   // modelServicio: modelServicio
 }

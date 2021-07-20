@@ -10,9 +10,9 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from 'ngx-filter-pipe';
 import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-paciente.component';
 import { GestionarCajaComponent } from './gestionar-caja/gestionar-caja.component';
-import { EspecialidadRegistradoComponent } from './GestEspecialidad/reg-especialidad/gest-especialidad.component';
+
 import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
-import { EspecialidadActualizadoComponent } from './GestEspecialidad/actualizar-especialidad/actu-espe.component';
+
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.component';
@@ -26,8 +26,6 @@ import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.compo
     GestionarHistoriaComponent,
     GestionarPerfilComponent,
     EspecialidadComponent,
-    EspecialidadRegistradoComponent,
-    EspecialidadActualizadoComponent,
     CambiarContraComponent
     
   ],

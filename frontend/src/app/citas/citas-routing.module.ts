@@ -6,8 +6,6 @@ import { GestionarPerfilComponent } from '../farmacia/Gestionar Perfiles/gestion
 import { GestionarHistoriaComponent } from './gestionar-Historial Clinica/gestionar-historia.component';
 import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-paciente.component';
 import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
-import { EspecialidadRegistradoComponent } from './GestEspecialidad/reg-especialidad/gest-especialidad.component';
-import { EspecialidadActualizadoComponent } from './GestEspecialidad/actualizar-especialidad/actu-espe.component';
 import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.component';
 
 
@@ -15,12 +13,6 @@ const routes: Routes = [
 
   {
     path: 'gestionar-especialidad', component: EspecialidadComponent, data: { title: 'Gestionar Especialidad' }
-  },
-  {
-    path: 'gestionar-especialidad/registrado', component: EspecialidadRegistradoComponent, data: { title: 'Registrar Especialidad' }
-  },
-  {
-    path: 'gestionar-especialidad/actualizado/:id', component: EspecialidadActualizadoComponent, data: { title: 'Actualizar Especialidad' }
   },
   {
     path: 'gestionar-citas', component: GestionarCitasComponent, data: { title: 'Gestionar Cita' }

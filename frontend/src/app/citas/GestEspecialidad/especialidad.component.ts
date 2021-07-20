@@ -172,6 +172,29 @@ async actualizar(){
   }
 
   let datos = this.formEspecialidadActualizar.value
+  let fechaH = new Date(datos.fechaHora)
+let fechaF = new Date(datos.fechaFin)
+let fechaActual = new Date()
+
+/*if ( fechaActual < fechaH){
+  Swal.fire('Advertencia','1 No puede ser menor al dia actual ', 'warning')
+  return;
+}
+
+if ( fechaActual > fechaF){
+  Swal.fire('Advertencia', '2 No puede ser menor al dia actual', 'warning')
+  return;
+}*/
+
+if ( fechaH == fechaF){
+  Swal.fire('Advertencia','Fecha de inicio no puede ser igual a la final', 'warning')
+  return;
+}
+
+if( fechaH > fechaF){
+  Swal.fire('Advertencia','Fecha de inicio no puede ser menor a la final', 'warning')
+  return;
+}
   let query = {
     fechaHora: new Date(datos.fechaHora),
     fechaFin: new Date(datos.fechaFin),

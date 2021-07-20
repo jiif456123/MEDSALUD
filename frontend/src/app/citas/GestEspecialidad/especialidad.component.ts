@@ -16,7 +16,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   providers: [DatePipe]
 })
 export class EspecialidadComponent implements OnInit {
-  id:string;
   descripcion = [ {
     des:'Dermatología',
     },{
@@ -33,24 +32,32 @@ export class EspecialidadComponent implements OnInit {
     }
   ]
 
-estado=[{
+  estado=[{
       est:'No Disponible',
   },{
       est:'Disponible'
   }]
+
+  @ViewChild('modalRegistrar') modalRegistrar: ElementRef;
+  @ViewChild('modalActualizar') modalActualizar: ElementRef;
+  formEspecialidad: FormGroup;
+  formEspecialidadActualizar:FormGroup;
+
+  filtro = "";
+
+  especialidades: Especialidad[]=[];
+  especialidadSeleccionado: Especialidad;
+
+  id:string;
+
+  
+
   public especialidad:  Especialidad = new Especialidad();
-
   registroEspecialidad: Especialidad[]=[];
-   filtro = "";
-   especialidades: Especialidad[]=[];
-   @ViewChild('modalEspecialidad') modalEspecialidadR: ElementRef;
-   @ViewChild('modalEspecialidadAct') modalEspecialidadAct: ElementRef;
    
-   idEspecialidad: Date;
-   formEspecialidadR: FormGroup;
-   formEspecialidadAct: FormGroup;
-   especialidadSeleccionado: Especialidad;
-
+  idEspecialidad: Date;
+   
+  
   constructor(
     private ActivatedRoute: ActivatedRoute,
     private router: Router,
@@ -61,113 +68,123 @@ estado=[{
 
   ) { }
 
-  async ngOnInit(): Promise<void> {
+  async ngOnInit(): Promise<void>{
+    var data = await this.EspecialidadService.listar().toPromise();
+    this.especialidades = data.data
+    this.formEspecialidad = this.fb.group({
 
-  var dataEspecialidades = await this.EspecialidadService.listar().toPromise();
-  this.especialidades=dataEspecialidades.data
-
-  this.formEspecialidadR=this.fb.group({
     descripcion: ['', [Validators.required]],
     doctor: ['', [Validators.required]],
     estado: ['Disponible', [Validators.required]],
-    fechaHora:  ['', [Validators.required]],
-    fechaFin:  ['', [Validators.required]],
-  })
+    fechaHora: ['', [Validators.required]],
+    fechaFin: ['', [Validators.required]],
 
-  this.formEspecialidadAct = this.fb.group({
+    })
+
+    this.formEspecialidadActualizar = this.fb.group({
     descripcion: ['', [Validators.required]],
     doctor: ['', [Validators.required]],
     estado: ['', [Validators.required]],
-    fechaHora:  ['', [Validators.required]],
-    fechaFin:  ['', [Validators.required]],
-  })
+    fechaHora: ['', [Validators.required]],
+    fechaFin: ['', [Validators.required]],
+    })
+  }
+
+TfechaHora(fechaHora: Date){
+  return `${fechaHora.getFullYear()}-${fechaHora.getMonth() + 1}-${fechaHora.getDate()}`;
 }
 
-abrilModal(){
-  this.modalEspecialidadR.nativeElement.click();
+TfechaFin(fechaFin: Date){
+  return `${fechaFin.getFullYear()}-${fechaFin.getMonth() + 1}-${fechaFin.getDate()}`;
 }
 
-abrirModalAct(row: Especialidad){
-  this.modalEspecialidadAct.nativeElement.click();
+abrirModal(){
+  this.modalRegistrar.nativeElement.click();
+}
+
+abrirModalActualizar(row:Especialidad){
+  this.modalActualizar.nativeElement.click();
   this.especialidadSeleccionado=row;
-  this.formEspecialidadAct.controls.descripcion.setValue(row.descripcion);
-  this.formEspecialidadAct.controls.doctor.setValue(row.doctor);
-  this.formEspecialidadAct.controls.estado.setValue(row.estado);
-  let fechaDate = new Date(row.fechaHora)
-  let FechaDate = new Date(row.fechaFin)
-
+  this.formEspecialidadActualizar.controls.descripcion.setValue(row.descripcion);
+  this.formEspecialidadActualizar.controls.doctor.setValue(row.doctor);
+  this.formEspecialidadActualizar.controls.estado.setValue(row.estado);
+  this.formEspecialidadActualizar.controls.fechaHora.setValue(row.fechaHora);
+  this.formEspecialidadActualizar.controls.fechaFin.setValue(row.fechaFin);
 }
 
-Tfecha(fecha: Date){
-  return `${fecha.getFullYear()}-${fecha.getMonth() + 1}-${fecha.getDate()}`;
+async registrar(){
+if(this.formEspecialidad.invalid){
+  this.formEspecialidad.markAllAsTouched();
+ Swal.fire('Advertencia', 'Agregue un Doctor', 'warning')
+  return;
 }
 
-async registrar() {
-  /*if(this.formEspecialidadR.invalid){
-    Swal.fire('Advertencia', 'Revise los campos.', 'warning')
-    return;
-  }*/
+let datos = this.formEspecialidad.value;
 
-  let datos = this.formEspecialidadR.value;
-  let fecha = new Date(datos.fechaHora)
-  let fechaa = new Date(datos.fechaFin)
-  let fechaActual = new Date()
+let fechaH = new Date(datos.fechaHora)
+let fechaF = new Date(datos.fechaFin)
+let fechaActual = new Date()
 
-  if ( fechaActual > fecha){
-    Swal.fire('Advertencia', 'No puede ser menor al dia actual', 'warning')
-    return;
-  }
+/*if ( fechaActual < fechaH){
+  Swal.fire('Advertencia','1 No puede ser menor al dia actual ', 'warning')
+  return;
+}
 
-  if ( fechaActual > fechaa){
-    Swal.fire('Advertencia', 'No puede ser menor al dia actual', 'warning')
-    return;
-  }
+if ( fechaActual > fechaF){
+  Swal.fire('Advertencia', '2 No puede ser menor al dia actual', 'warning')
+  return;
+}*/
 
-  if ( fecha > fechaa){
-    Swal.fire('Advertencia','la fecha inicio no puede ser mayor que la fecha fin ', 'warning')
-    return;
-  }
- 
-  let query = {
-      descripcion: datos.descripcion,
-      doctor: datos.doctor,
-      estado: datos.estado,
-      fechaHora: new Date(datos.fechaHora),
+if ( fechaH == fechaF){
+  Swal.fire('Advertencia','Fecha de inicio no puede ser igual a la final', 'warning')
+  return;
+}
+
+if( fechaH > fechaF){
+  Swal.fire('Advertencia','Fecha de inicio no puede ser menor a la final', 'warning')
+  return;
+}
+
+let query={
+  descripcion: datos.descripcion,
+  doctor: datos.doctor,
+  estado: datos.estado,
+  fechaHora: new Date(datos.fechaHora),
       fechaFin: new Date(datos.fechaFin)
-  }
-  try{
-    let response  = await this.EspecialidadService.registrar(query).toPromise();
-    this.formEspecialidadR.reset();
-    Swal.fire('Correcto',' Se registró correctamente ', 'success')
-    this.formEspecialidadR.reset();
-    var dataEspecialidad = await this.EspecialidadService.listar().toPromise();
-    this.especialidades = dataEspecialidad.data;
-  } catch (err){
-    console.log(err);
-  }
-
+}
+debugger;
+try{
+  let response = await this.EspecialidadService.registrar(query).toPromise();
+  this.formEspecialidad.reset();
+  Swal.fire('Correcto',' Se registró correctamente ', 'success')
+  var dataEspecialidad = await this.EspecialidadService.listar().toPromise();
+  this.especialidades = dataEspecialidad.data;
+ 
+}catch(err){
+  console.log(err);
+}
 }
 
 async actualizar(){
-  if(this.formEspecialidadAct.invalid){
+  if(this.formEspecialidadActualizar.invalid){
     Swal.fire('Advertencia',' Verifica los campos', 'warning')
     return; 
   }
 
-  let datos = this.formEspecialidadAct.value;
+  let datos = this.formEspecialidadActualizar.value
   let query = {
     fechaHora: new Date(datos.fechaHora),
     fechaFin: new Date(datos.fechaFin),
-    doctor: datos.doctor,
     descripcion: datos.descripcion,
-    estado: datos.estado,
+  doctor: datos.doctor,
+  estado: datos.estado,
   }
    try {
-    let response = await this.EspecialidadService.actualizar(this.especialidadSeleccionado._id, query).toPromise();
+    let response = await this.EspecialidadService.actualizar(this.especialidadSeleccionado._id,query).toPromise();
+    this.formEspecialidad.reset();
+    var dataEspecialidad = await this.EspecialidadService.listar().toPromise();
+    this.especialidades = dataEspecialidad.data;
     Swal.fire('Corecto','Actualizacion Exitosa', 'success')
-
-    var dataESpecialidad = await this.EspecialidadService.listar().toPromise();
-    this.especialidades = dataESpecialidad.data;
   } catch(err){
     console.log(err);
   }

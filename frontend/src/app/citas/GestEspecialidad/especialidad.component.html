@@ -12,12 +12,15 @@
 </div>
 <div>
     <div class="card-body">
+
         <div class="col-md-4 d-flex justify-content-end" style="margin-bottom: 10px">
-            <button type="button" class="btn btn-outline-primary" (click)="abrilModal()" style="margin-bottom: 10px; float: right;">
+            <button (click)="abrirModal()" type="button" class="btn btn-outline-primary" style="margin-bottom: 10px; float: right;">
             <i class="mdi mdi-pencil mdi-18px">REGISTRAR ESPECIALIDAD</i>
+            <input data-toggle="modal" data-target="#modalRegistrar" #modalRegistrar type="hidden" name="button">
         </button>
-            <input data-toggle="modal" data-target="#modalEspecialidadR" #modalEspecialidadR type="hidden" name="button">
+
         </div>
+
         <div class="table-responsive">
             <table class="table table-striped table-hover border border">
                 <div class="table-responsive">
@@ -39,11 +42,11 @@
                             <td class="text-center"> {{e.fechaHora | date:'dd/MM/yyyy'}}</td>
                             <td class="text-center"> {{e.fechaFin | date:'dd/MM/yyyy'}}</td>
                             <td class="text-center">
-                                <button (click)="abrirModalAct(e)" class="btn btn-success btn-sm btn-block">
+                                <button (click)="abrirModalActualizar(e)" class="btn btn-success btn-sm btn-block">
                                     <i class="fa fa-pencil fa-lg"></i>
                                     <i class="mdi mdi-update mdi-18px">Actualizar</i>
                                 </button>
-                                <input data-toggle="modal" data-target="#modalEspecialidadAct" #modalEspecialidadAct type="hidden" name="button" />
+                                <input data-toggle="modal" data-target="#modalActualizar" #modalActualizar type="hidden" name="button" />
                             </td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm btn-block" (click)="eliminarEspecialidad(e._id)"> 
@@ -61,7 +64,7 @@
 </div>
 
 <!--Modal para registar-->
-<div class="modal fade" id="modalEspecialidadR" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalEspecialidadR" aria-hidden="true">
+<div class="modal fade" id="modalRegistrar" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalRegistrar" aria-hidden="true">
 
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -71,13 +74,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div *ngIf="modalEspecialidadR" class="modal-body">
-                <form [formGroup]="modalEspecialidadR" class="row">
+            <div *ngIf="formEspecialidad" class="modal-body">
+                <form [formGroup]="formEspecialidad" class="row">
 
                     <div class="form-group col-md-12">
                         <label for="descripcion">Especialidad</label>
                         <select formControlName="descripcion" class="form-control" id="descripcion">
-                            <option  *ngFor="let des of this.descripcion" [value]="des.des">
+                            <option  *ngFor="let des of descripcion" [value]="des.des">
                                 {{des.des}}
                             </option>
                         </select>
@@ -86,16 +89,17 @@
                     <div class="form-group col-md-12">
                         <label for="doctor">Doctor</label>
                         <input formControlName="doctor" type="text" class="form-control" id="doctor" placeholder="..." />
+
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="fechaInicio">Fecha de Inicio</label>
-                        <input formControlName="fechaInicio" type="date" class="form-control" id="fechaInicio" placeholder="..." />
+                        <label for="fechaHora">Fecha de Inicio</label>
+                        <input formControlName="fechaHora" type="datetime-local" class="form-control" id="fechaHora" min="2021-07-19T00:00" max="2021-12-31T14:00" placeholder="..." />
                     </div>
 
                     <div class="form-group col-md-12">
                         <label for="fechaFin">Fecha de Fin</label>
-                        <input formControlName="fechaFin" type="date" class="form-control" id="fechaFin" placeholder="..." />
+                        <input formControlName="fechaFin" type="datetime-local" class="form-control" id="fechaFin" min="2021-07-19T00:00" max="2021-12-31T14:00" placeholder="..." />
                     </div>
 
                 </form>
@@ -110,7 +114,7 @@
 
 
 <!--Modal para actualizar-->
-<div class="modal fade" id="abrirModalAct" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="abrirModalAct" aria-hidden="true">
+<div class="modal fade" id="modalActualizar" style="background-color: rgba(0, 0, 0, 0.5);" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modalActualizar" aria-hidden="true">
 
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -120,44 +124,38 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div *ngIf="abrirModalAct" class="modal-body">
-                <form [formGroup]="abrirModalAct" class="row">
+            <div *ngIf="formEspecialidadActualizar" class="modal-body">
+                <form [formGroup]="formEspecialidadActualizar" class="row">
 
                     <div class="form-group col-md-12">
-                        <label for="motivo1">Motivo</label>
-                        <input formControlName="motivo" type="text" readonly class="form-control" id="motivo1" placeholder="..." />
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="fechaHora1">Fecha y hora</label>
-                        <input formControlName="fechaHora" type="datetime-local" class="form-control" id="fechaHora1" placeholder="..." />
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="dni1">DNI Paciente</label>
-                        <input formControlName="dni" type="text" readonly class="form-control" id="dni1" placeholder="..." />
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="nombrePaciente1">Paciente</label>
-                        <input readonly formControlName="nombrePaciente" type="text" class="form-control" id="nombrePaciente1" placeholder="..." />
+                        <label for="descripcion">Especialidad</label>
+                        <select formControlName="descripcion" class="form-control" id="descripcion">
+                            <option  *ngFor="let esp of descripcion" [value]="esp.des">
+                                {{esp.des}}
+                            </option>
+                        </select>
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="especialidad1">Especialidad</label>
-                        <input formControlName="especialidad" type="text" readonly class="form-control" id="especialidad1" placeholder="..." />
+                        <label for="doctor">Doctor</label>
+                        <input formControlName="doctor" type="text" class="form-control" id="doctor" placeholder="..." />
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="doctor1">Doctor</label>
-                        <input formControlName="doctor" type="text" class="form-control" id="doctor1" placeholder="..." />
+                        <label for="fechaHora">Fecha de Inicio</label>
+                        <input formControlName="fechaHora" type="datetime-local" class="form-control" id="fechaHora" min="2021-07-19T00:00" max="2021-12-31T14:00" placeholder="..." />
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="fechaFin">Fecha de Fin</label>
+                        <input formControlName="fechaFin" type="datetime-local" class="form-control" id="fechaFin" min="2021-07-19T00:00" max="2021-12-31T14:00" placeholder="..." />
                     </div>
 
                     <div class="form-group col-md-12">
                         <label for="estado">Estado</label>
                         <select formControlName="estado" class="form-control" id="estado">
-                            <option *ngFor="let est of estados" [value]="est.numero">
-                                {{ est.descripcion }}
+                            <option *ngFor="let est of estado" [value]="est.est">
+                                {{ est.est }}
                             </option>
                         </select>
                     </div>

@@ -1,34 +1,48 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-
-import { AppRoutingModule } from './app.routing';
-import { NavbarModule } from './shared/navbar/navbar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { SidebarModule } from './sidebar/sidebar.module';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AppComponent } from './app.component';
-
+import { AppRoutingModule } from './app.routing';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { FooterModule } from './shared/footer/footer.module';
+import { NavbarModule } from './shared/navbar/navbar.module';
+import { SidebarModule } from './sidebar/sidebar.module';
+import { LoginComponent } from './login/login.component';
+import {LoginGuard}from '../Services/inicarsesion.service';
+import {LoginService}from '../Services/login.service';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
     NavbarModule,
+    FooterModule, 
+    Ng2SearchPipeModule,
+    SidebarModule, 
+    ReactiveFormsModule,
+    AppRoutingModule, 
+    Ng2FilterPipeModule,
+    CommonModule,
     FooterModule,
     SidebarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    LoginComponent
   ],
-  providers: [],
+  providers: [LoginService,LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

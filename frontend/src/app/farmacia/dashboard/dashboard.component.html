@@ -1,0 +1,95 @@
+<div class="header-dash">
+
+
+
+    <div class="col-md-3 col-lg-3">
+        <h1 class="titulo">Dashboard</h1>
+
+    </div>
+    <div class="col-md-3 col-lg-3" style="margin-left: 220px;">
+
+        <div class="card bg-c-blue order-card">
+            <div class="card-block">
+                <p style="font-weight: bold;">Cantidad de Trabajadores</p>
+                <h2 class="text-right"><i class="pe-7s-id f-left"></i><span>{{cantidadEmpleados}}</span></h2>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3 col-lg-3">
+        <div class="card bg-c-yellow order-card">
+            <div class="card-block">
+                <p style="font-weight: bold;">Proveedores Disponibles</p>
+                <h2 class="text-right"><i class="fa fa-truck f-left"></i><span>{{cantidadProveedores}}</span></h2>
+
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <div class="div-trabajadores">
+        <p>CANTIDAD DE TRABAJADORES: {{cantidadEmpleados}}</p>
+    </div>
+    <div class="div-proveedores">
+        <p>CANTIDAD DE provedores Disponibles: {{cantidadProveedores}}</p>
+    </div>
+-->
+
+</div>
+
+<div class="linea-circulo">
+    <div id="divChart4">
+        <p style="padding-top: 20px; margin-left: 25px;font-weight: bold;">Pedidos</p>
+        <canvas id="myChartLinea" style="padding: 15px;"></canvas>
+    </div>
+
+    <div id="divChart">
+        <p style="padding-top: 20px; margin-left: 25px;font-weight: bold;">Orden de Compra</p>
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+
+
+<div class="dobleBar-unaBar">
+
+
+    <div id="divChart2">
+        <p style="font-weight: bold; margin-top: 20px; margin-left: 25px;">Movimientos</p>
+        <fieldset class="form-group">
+            <select style=" width: 230px; margin-left: 60px;" [(ngModel)]="monthSelected" (click)="mostrarMes()" name="monthOfYears" class="form-control">
+        <option disabled>Selecciona un Mes</option>
+        <ng-container *ngFor="let monthOfYears of meses" >    
+            <option [value]="monthOfYears">{{monthOfYears}}</option>
+        </ng-container>
+        </select>
+        </fieldset>
+
+
+        <canvas id="myChartBar"></canvas>
+    </div>
+
+    <div id="divChart3">
+        <p style="font-weight: bold; margin-top: 20px; margin-left: 25px;">Medicamentos</p>
+        <fieldset class="form-group">
+            <select style=" width: 230px; margin-left: 60px;" [(ngModel)]="nombreCategoriaSelected" (click)="getCountCantidadCategoria()" (click)="getCantidadMedbyCategoria()" name="nombreCategoria" class="form-control">
+        <option disabled>Selecciona una Categoria</option>
+        <ng-container *ngFor="let nombreCategoria of nombreCategorias" >    
+            <option [value]="nombreCategoria">{{nombreCategoria}}</option>
+        </ng-container>
+        <option>Todo</option>
+        </select>
+        </fieldset>
+
+        <canvas id="myChartOneBar"></canvas>
+    </div>
+
+</div>
+
+
+
+
+
+<!-- -->

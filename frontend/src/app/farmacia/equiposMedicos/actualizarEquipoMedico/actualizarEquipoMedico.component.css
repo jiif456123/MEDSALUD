@@ -1,0 +1,38 @@
+.btn-save {
+    color: white;
+    background: #5881b2;
+    line-height: 1.2;
+    border-color: #5881b2;
+    font-family: 'Roboto';
+}
+
+form {
+    margin: 0 auto;
+    width: 800px;
+}
+
+.btn-cancel {
+    color: white;
+    background: #3a3e42;
+    line-height: 1.2;
+    border-color: #3a3e42;
+    font-family: 'Roboto';
+}
+
+label {
+    color: rgba(14, 13, 13, 0.8);
+    font-family: 'Candara';
+    font-size: 15px;
+}
+
+.alert-message {
+    background: #6b6e70;
+    width: 500px;
+    border-radius: 5px;
+}
+
+input,
+textarea,
+select {
+    width: 500px;
+}

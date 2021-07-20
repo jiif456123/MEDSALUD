@@ -1,66 +1,78 @@
-const citasModel = require('../../../models/citas.model')
-const eventoModel = citasModel.modelEvento;
+const citasmodel = require("../../../models/citas.model");
+const eventomodel = citasmodel.modelEvento
 
 let crear = (evento) => {
-    let nuevoEvento = new eventoModel({
+    let fechaInicio = new Date(evento.fechaInicio)
+    let fechaFin = new Date(evento.fechaFin)
+    let newevento = new eventomodel({
         titulo: evento.titulo,
-        descripcion: evento.descripcion,
-        fechaInicio: evento.fechaInicio,
-        fechaFin: evento.fechaFin,
-        horaInicio: evento.horaInicio,
-        horaFin: evento.horaFin,
+        fechaInicio: fechaInicio,
+        fechaFin: fechaFin,
+        celular: evento.celular,
+        descripcion: evento.descripcion
+
     })
+    console.log(newevento);
     return new Promise((resolve, reject) => {
-        nuevoEvento.save(nuevoEvento, (err, data) => {
+        newevento.save(newevento, (err, data) => {
             if (err) reject(err)
             resolve(data)
         })
     })
 }
 
-let listar = () => {
+var listar = () => {
     return new Promise((resolve, reject) => {
-        eventoModel.find({}).exec((err, data) => {
+        eventomodel.find({}).exec((err, data) => {
             if (err) reject(err);
             resolve(data);
         })
     })
 }
 
-let eliminar = (id) => {
-    return new Promise((resolve, reject) => {
-        eventoModel.remove({ _id: id }, (err, data) => {
-            if (err) { reject(err); }
-            resolve(data);
-        })
-    })
-}
+var listarevento = (id) => {
 
-let actualizar = (idEvento, evento) => {
-    let id = idEvento
-    let eventoAct = {
-        titulo: evento.titulo,
-        descripcion: evento.descripcion,
-        fechaInicio: evento.fechaInicio,
-        fechaFin: evento.fechaFin,
-        horaInicio: evento.horaInicio,
-        horaFin: evento.horaFin,
+    return new Promise((resolve, reject) => {
+
+        eventomodel.findById(id)
+            .exec((err, newevento) => {
+                if (err) reject(err);
+
+                console.log(newevento)
+                resolve(newevento);
+            })
+
+    });
+};
+var modificarEvento = (id, newevento) => {
+
+    if (newevento.fechaInicio) {
+        newevento.fechaInicio = new Date(newevento.fechaInicio);
     }
 
     return new Promise((resolve, reject) => {
-        eventoModel.findByIdAndUpdate(id, eventoAct)
-            .exec((err, data) => {
-                if (err) {
-                    reject(err);
-                }
-                resolve(data)
-            })
+        eventomodel.findByIdAndUpdate(id, newevento, (err, eventos) => {
+
+            if (err) {
+                console.log
+                reject(err);
+            }
+            resolve(eventos);
+        });
+    });
+};
+var eliminarEvento = (id) => {
+    return new Promise((resolve, reject) => {
+        eventomodel.remove({ _id: id }, (err, eventos) => {
+            if (err) { reject(err); }
+            resolve(eventos);
+        })
     })
 }
-
 module.exports = {
     crear: crear,
     listar: listar,
-    eliminar:eliminar,
-    actualizar:actualizar,
+    listarevento: listarevento,
+    modificarEvento: modificarEvento,
+    eliminarEvento: eliminarEvento
 }

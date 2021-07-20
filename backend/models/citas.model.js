@@ -25,6 +25,23 @@ var paciente = new Schema({
 var modelPaciente = mongoose.model('Paciente', paciente);
 
 /*
+    Evento Model
+*/
+var evento = new Schema({
+
+    titulo: { type: String },
+    descripcion: { type: String },
+    fechaInicio: { type: Date },
+    fechaFin: { type: Date },
+    celular: { type: String },
+
+}, {
+    versionKey: false
+});
+
+var modelEvento = mongoose.model('Evento', evento);
+
+/*
     Espcialidad Model
    
 */
@@ -52,6 +69,18 @@ var motivo = new Schema({
 
 var modelMotivo = mongoose.model('Motivo', motivo);
 
+/*
+    Servicio Model
+*/
+var servicio = new Schema({
+    titulo: { type: String },
+    descripcion: { type: String },
+    imagen: { type: String },
+}, {
+    versionKey: false
+});
+
+var modelServicio = mongoose.model('Servicio', servicio);
 /*
     Caja Model
 */
@@ -157,7 +186,7 @@ var user = new Schema({
     fechaNacimiento: { type: Date },
     direccion: { type: String },
     especialidad: { type: String },
-    contraseña: { type: String },
+    contra: { type: String },
     user: { type: String }
 }, {
     versionKey: false
@@ -206,5 +235,7 @@ module.exports = {
     modelServicio:modelServicio,
     modelUser: modelUser,
     modelRecetaMedica: modelRecetaMedica,
-    modelDetalleRecetaMedica: modelDetalleRecetaMedica
+    modelDetalleRecetaMedica: modelDetalleRecetaMedica,
+    modelEvento: modelEvento,
+    modelServicio: modelServicio
 }

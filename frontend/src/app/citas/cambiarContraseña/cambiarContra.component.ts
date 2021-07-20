@@ -5,6 +5,7 @@ import { User } from '../../farmacia/models/user.model';
 import { UserService } from '../../farmacia/services/user.service';
 import { FilterPipe } from 'ngx-filter-pipe';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cambiar-contraseña',
@@ -22,6 +23,8 @@ export class CambiarContraComponent implements OnInit {
   tipo = "password";
   filtro = "";
   contradmin ="admin123";
+  contra : string = '';
+
 
   users: User[] = []
   userSeleccionada: User;
@@ -30,6 +33,7 @@ export class CambiarContraComponent implements OnInit {
     private userService: UserService,
     private pipe: FilterPipe,
     private fb: FormBuilder,
+    private router : Router,
     private datePipe: DatePipe
   ) { }
   
@@ -48,7 +52,7 @@ export class CambiarContraComponent implements OnInit {
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       especialidad: ['', [Validators.required]],
-      contraseña: ['', [Validators.required]],
+      contra: ['', [Validators.required]],
       user: ['', [Validators.required]],
      
     })
@@ -64,7 +68,7 @@ export class CambiarContraComponent implements OnInit {
         fechaNacimiento: ['', [Validators.required]],
         direccion: ['', [Validators.required]],
         especialidad: ['', [Validators.required]],
-        contraseña: ['', [Validators.required]],
+        contra: ['', [Validators.required]],
         user: ['', [Validators.required]],
         confirmar : ['',[Validators.required]]
     })
@@ -80,7 +84,7 @@ export class CambiarContraComponent implements OnInit {
       fechaNacimiento: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       especialidad: ['', [Validators.required]],
-      contraseña: ['', [Validators.required]],
+      contra: ['', [Validators.required]],
       user: ['', [Validators.required]],
   })
   
@@ -101,7 +105,7 @@ export class CambiarContraComponent implements OnInit {
     this.formUserModificar.controls.direccion.setValue(row.direccion);
     this.formUserModificar.controls.especialidad.setValue(row.especialidad);
     this.formUserModificar.controls.user.setValue(row.user);
-    this.formUserModificar.controls.contraseña.setValue(row.contraseña);
+    this.formUserModificar.controls.contra.setValue(row.contra);
 
   }
 
@@ -119,7 +123,7 @@ export class CambiarContraComponent implements OnInit {
     this.formUserVer.controls.direccion.setValue(row.direccion);
     this.formUserVer.controls.especialidad.setValue(row.especialidad);
     this.formUserVer.controls.user.setValue(row.user);
-    this.formUserVer.controls.contraseña.setValue(row.contraseña);
+    this.formUserVer.controls.contra.setValue(row.contra);
 
   }
 
@@ -127,15 +131,18 @@ export class CambiarContraComponent implements OnInit {
   transformarFecha(fechaNacimiento: Date) {
     return `${fechaNacimiento.getFullYear()}-${fechaNacimiento.getMonth() + 1}-${fechaNacimiento.getDate()}`
   }
-
-   async modificar() {
-    if (this.formUserModificar.invalid) {
+ 
+  async modificar() {
+   
+    /*if (this.formUser.invalid) {
+    
+      Swal.fire('Advertencia', 'Contraseña a actualizar vacia.', 'warning')
       return;
     }
-
+    */
     let datos = this.formUserModificar.value
     if(datos.confirmar != this.contradmin){
-      Swal.fire('Advertencia', 'La contraseña no coincide', 'warning')
+      Swal.fire('Advertencia', 'La contraseña de administrador no coincide', 'warning')
       return;
     }
     let query = {
@@ -149,8 +156,8 @@ export class CambiarContraComponent implements OnInit {
         fechaNacimiento: datos.fechaNacimiento,
         direccion: datos.direccion,
         especialidad: datos.especialidad,
-        contraseña: datos.contraseña,
-      user:datos.user
+        contra: datos.contra,
+        user:datos.user
     }
   
     try {
@@ -163,7 +170,13 @@ export class CambiarContraComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
-
+    Swal.fire(
+      'Cambio de Contraseña exitoso',
+      '',
+      'success',
+      
+    )
+  
   }
   mostrarContrasena() {
     
@@ -173,4 +186,5 @@ export class CambiarContraComponent implements OnInit {
         this.tipo = "password";
     }
 }
+ 
 }

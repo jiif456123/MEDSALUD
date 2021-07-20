@@ -14,7 +14,7 @@ let crear = (user) => {
         fechaNacimiento: fechaNacimiento,
         direccion: user.direccion,
         especialidad: user.especialidad,
-        contraseña: user.contraseña,
+        contra: user.contra,
         fechaActual: new Date(),
         user: user.user
     })

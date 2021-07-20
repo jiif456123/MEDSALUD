@@ -5,9 +5,7 @@ import { GestionarCitasComponent } from './gestionar-citas/gestionar-citas.compo
 import { GestionarPerfilComponent } from '../farmacia/Gestionar Perfiles/gestionar-perfiles.component';
 import { GestionarHistoriaComponent } from './gestionar-Historial Clinica/gestionar-historia.component';
 import { GestionarPacienteComponent } from './gestionar-paciente/gestionar-paciente.component';
-import { EspecialidadComponent } from '../../app/citas/GestEspecialidad/especialidad.component';
-import { EspecialidadRegistradoComponent } from '../../app/citas/GestEspecialidad/reg-especialidad/gest-especialidad.component';
-import { EspecialidadActualizadoComponent } from '../../app/citas/GestEspecialidad/actualizar-especialidad/actu-espe.component';
+import { EspecialidadComponent } from './GestEspecialidad/especialidad.component';
 import { CambiarContraComponent } from './cambiarContraseña/cambiarContra.component';
 import { ConsultarAgendaComponent } from './consultar-agenda/consultar-agenda.component';
 import { ConsultarHorarioComponent } from './consultar-horario/consultar-horario.component';
@@ -18,16 +16,11 @@ import { ReporteGeneralComponent } from './reporte-general/reporte-general.compo
 import { ConsultarServicioComponent } from './consultar-servicio/consultar-servicio.component';
 import { ConsultarRecetaMedicaComponent } from './consultar-receta-medica/consultar-receta-medica.component';
 
+
 const routes: Routes = [
 
   {
     path: 'gestionar-especialidad', component: EspecialidadComponent, data: { title: 'Gestionar Especialidad' }
-  },
-  {
-    path: 'gestionar-especialidad/registrado', component: EspecialidadRegistradoComponent, data: { title: 'Gestionar Especialidad Registrado' }
-  },
-  {
-    path: 'gestionar-especialidad/actualizado/:id', component: EspecialidadActualizadoComponent, data: { title: 'Actualizar Especialidad Actualizar' }
   },
   {
     path: 'gestionar-citas', component: GestionarCitasComponent, data: { title: 'Gestionar Cita' }

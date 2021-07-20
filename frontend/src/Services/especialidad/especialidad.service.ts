@@ -20,7 +20,12 @@ import { Especialidad } from '../../models/especialidad.model';
   listar() {
     return this.http.get<any>(`${this.url_API}`);
   };
-
+  registrar(query: any){
+    return this.http.post<any>(this.url_API, query);
+  }
+  actualizar(id: string, query: any){
+    return this.http.put<any>(`${this.url_API}/${id}`,query)
+  }
   getEspecialidad(){
     return this.http.get<Especialidad[]>(this.url_API);
   }

@@ -1,0 +1,90 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  animation: slideBg 30s linear infinite 5s;
+  background-image: url('./images/6728-doctores.jpg');
+}
+
+@keyframes slideBg {
+  0% {
+    background-image: url('./images/6728-doctores.jpg');
+  }
+
+  50% {
+    background-image: url('./images/6731-doctores.jpg');
+  }
+
+  90% {
+    background-image: url('./images/6734-doctores.jpg');
+  }
+
+}
+
+.formulario-login {
+  width:30%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid grey;
+  background-color: white;
+  border-radius: 0.7rem;
+  padding: 4rem 8rem 2rem 8rem;
+}
+
+h1{
+  font-weight: 500;
+}
+
+
+.fila {
+  margin-top: 1rem;
+}
+
+.fila input{
+  border-radius: 1rem;
+  padding:0.6rem;
+  outline: none;
+  transition: 0.3s ease-in-out;
+}
+
+.fila input:active , .fila input:focus{
+  border-color: #4692ec;
+}
+button {
+  background-color: #4692ec;
+  outline:none;
+  border:none;
+  color: white !important;
+}
+
+
+button:hover{
+  background-color:#4692ec;
+}
+.boton {
+  margin-top: 2rem;
+}
+.fila {
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom{
+  padding:1rem;
+}
+
+
+.bottom .facebook svg{
+  width:3rem;
+  height:3rem;
+  cursor: pointer;
+}
+
+

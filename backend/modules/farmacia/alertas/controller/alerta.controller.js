@@ -19,4 +19,11 @@ router.post('/', (req, res) => {
         http.err(req, res, code.status.Internal_Server_Error.code, error, error);
     })
 });
+router.get('/cinco', (req, res) => {
+    alertaSevice.getAlerta1().then((data) => {
+        http.ok(req, res, code.status.Ok.code, data);
+    }).catch((error) => {
+        http.err(req, res, code.status.Internal_Server_Error.code, error, error);
+    })
+});
 module.exports = router;

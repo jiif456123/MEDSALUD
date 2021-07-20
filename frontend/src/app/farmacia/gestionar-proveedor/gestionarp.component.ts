@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import {GestionarPservice } from 'Services/gestionarp.service';
 import {Gestionarp,Estado} from '../../../models/gestionarp.model';
+import { AlertaService } from 'Services/alerta.service';
 
 @Component({
   selector: 'app-gestionar-citas',
   templateUrl: './gestionarp.component.html',
   styleUrls: ['./gestionarp.component.css','../farmacia.css'],
-  providers: [GestionarPservice]
+  providers: [GestionarPservice,AlertaService]
 })
 
 export class GestionarProveedorComponent implements OnInit {
@@ -24,7 +25,7 @@ export class GestionarProveedorComponent implements OnInit {
 
   filter : 'all'|'active'|'donde'='all';
 
-  constructor(public gestionarpservice:GestionarPservice) {
+  constructor(public gestionarpservice:GestionarPservice,public alertaService:AlertaService) {
    }
   selectDispo='';
   public error = false;
@@ -66,6 +67,12 @@ export class GestionarProveedorComponent implements OnInit {
       err => console.error(err)
     )
   }
+  addAlerta(nombre: GestionarPservice){ 
+    console.log(this.gestionarpservice.selectProveedor.nombre);
+    this.alertaService.selectedAlerta.titulo = "Se registró un proveedor";
+    this.alertaService.selectedAlerta.mensaje = nombre + " es nuestro nuevo proveedor";
+    this.alertaService.createAlerta(this.alertaService.selectedAlerta).subscribe(
+  );}
 
   actualizarProveedor(form:NgForm){
     this.gestionarpservice.updateProveedor(form.value).subscribe(

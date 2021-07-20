@@ -6,10 +6,28 @@
 
     <div class="main-panel">
         <navbar-cmp></navbar-cmp>
+        <div class="con" style="display: none;">
+            <section class="custom-social-proof" id="demo" *ngFor="let a of alertas">
+                <div class="custom-notification">
+                  <div class="custom-notification-container">
+                    <div class="custom-notification-image-wrapper">
+                      
+                    </div>
+                    <div class="custom-notification-content-wrapper">
+                      <p class="custom-notification-content">
+                        Mr.Nagarajan - Banglore<br>Purchased <b>4</b> Product Name   
+                        <small>1 hour ago</small>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="custom-close" id="close"></div>
+                </div>
+                
+              </section>
+        </div>
         <router-outlet></router-outlet>
         <div *ngIf="isMap('maps')">
             <footer-cmp></footer-cmp>
         </div>
     </div>
-
 </div>

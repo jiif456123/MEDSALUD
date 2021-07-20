@@ -270,8 +270,8 @@ aria-hidden="true">
               <button class="oculto" data-dismiss="modal" id="ocultof"></button>
               <div class="btn-group agregar">
                 <div *ngIf="error == false">
-                  <button class="btn btn-success button agregar" (click)="validar(proveedorForm) "
-                    (click)="resetForm(proveedorForm)">
+                  <button class="btn btn-success button agregar" (click)="addAlerta(gestionarpservice.selectProveedor.nombre)" (click)="validar(proveedorForm) "
+                    (click)="resetForm(proveedorForm)" >
                     Agregar
                   </button>
                 </div>

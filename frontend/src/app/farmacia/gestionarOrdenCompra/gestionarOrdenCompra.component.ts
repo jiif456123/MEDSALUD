@@ -2,31 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { GestionarOrdenCompraService } from 'Services/gestionarOrdenCompra.service';
 import { NgForm, FormGroup,FormControl, Validators } from '@angular/forms'; //para add
 import { OrdenCompra,OrdenCompra2 } from '../../../models/gestionarOrdenCompra.model';
-
 import {Gestionarp} from '../../../models/gestionarp.model';
-
-import { element } from 'protractor';
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { AlertaService } from 'Services/alerta.service';
 import {DatePipe} from '@angular/common';
-
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
-
-
 
 @Component({
   selector: 'app-ordenCompra',
   templateUrl: './gestionarOrdenCompra.component.html',
   styleUrls: [ './gestionarOrdenCompra.component.css'],
   //Se agrego en providers GestionarOrdenCompraComponent por el error  The pipe ' ' could not be found angular2 custom pipe
-  providers: [GestionarOrdenCompraService,DatePipe]
+  providers: [GestionarOrdenCompraService,DatePipe,AlertaService]
 })
-
-
 export class GestionarOrdenCompraComponent implements OnInit {
-  
-
 public page;
 public pageSize=7;
 
@@ -35,13 +24,11 @@ public pageSize2=2;
   //creamos instancia gestionarCategoriaService para usar los metodos que usamos en la clase GESTIONARCATEGORIASSERVICE
   myDate = new Date();
   test: string;
-  constructor(public gestionarOrdenCompraService: GestionarOrdenCompraService, private datePipe: DatePipe) { 
+  constructor(public gestionarOrdenCompraService: GestionarOrdenCompraService, private datePipe: DatePipe,public alertaService:AlertaService) { 
 
     this.test = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
 
   }
-
-  
 
 public prueba=false;
 public isError = false;
@@ -101,6 +88,12 @@ public sumaTotal=0;
    
 
   }
+  
+  addAlerta(numero:GestionarOrdenCompraService){ 
+    this.alertaService.selectedAlerta.titulo = "Se generó una orden de compra";
+    this.alertaService.selectedAlerta.mensaje = "La orden de compra N° " + numero + " fue generada correctamente";
+    this.alertaService.createAlerta(this.alertaService.selectedAlerta).subscribe(
+  );}
   downloadPDF() {
 
    

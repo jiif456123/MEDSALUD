@@ -37,6 +37,10 @@ export class medicamentoComponent implements OnInit{
         this.page=1;
       }
     )}
+    getMedicamento1(medicamento:Medicamento) {
+        
+      this.medicamentoService.selectedMedicamento1 = medicamento;
+  }
 
   radioChangeHandler(event: any){
     this.selectDispo = event.target.value;

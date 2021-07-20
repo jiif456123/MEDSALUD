@@ -6,12 +6,13 @@ import * as Items from './_files/Items.json';
 import {DatePipe} from '@angular/common';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { AlertaService } from 'Services/alerta.service';
 
 @Component({
     selector: 'app-pedido',
     templateUrl: './pedido.component.html',
     styleUrls: [ './pedido.component.css'],
-    providers: [PedidoService,DatePipe]
+    providers: [PedidoService,DatePipe,AlertaService]
   })
   export class pedidoComponent implements OnInit {
     public subTotal=0;
@@ -32,7 +33,11 @@ import { throwError } from 'rxjs';
   
   pedidos2:Pedido[]=[];
   
-
+  addAlerta(nombre: PedidoService){ 
+    this.alertaService.selectedAlerta.titulo = "Un nuevo pedido se ha realizado";
+    this.alertaService.selectedAlerta.mensaje = nombre + " ha solicitado su pedido bajo receta médica";
+    this.alertaService.createAlerta(this.alertaService.selectedAlerta).subscribe(
+  );}
   eliminarIndexDelRegistro(i){
     this.medicamentos.splice(i, 1)
     // console.log(this.pedidoService.selectedPedido1.medicamentos[i]);
@@ -105,7 +110,7 @@ import { throwError } from 'rxjs';
     myDate = new Date();
     test: string;
     public pedidoService1=this.pedidoService;
-    constructor( public pedidoService: PedidoService,private datePipe: DatePipe) {
+    constructor( public pedidoService: PedidoService,private datePipe: DatePipe,public alertaService:AlertaService) {
       
       this.test = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
     }

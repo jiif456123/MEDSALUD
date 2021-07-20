@@ -393,7 +393,7 @@
 
                             <p style="text-align: right; padding-right: 220px;">Total S/.{{sumaTotal}}</p>
                         </div>
-                        <button type="button" style="margin-left: 500px;" class="btn btn-primary" (click)="addOrdenCompra(categoriasRForm)">Registrar</button>
+                        <button type="button" style="margin-left: 500px;" class="btn btn-primary" (click)="addAlerta(gestionarOrdenCompraService.selectedOrdenCompra2.codigo)" (click)="addOrdenCompra(categoriasRForm)">Registrar</button>
 
                         <button type="button" class="btn btn-secondary " (click)="getCategorias() " (click)="deleteMedicamentoOCT(categoriasRForm) " (click)="onCloseAlert() " data-dismiss="modal">Cancelar</button>
 

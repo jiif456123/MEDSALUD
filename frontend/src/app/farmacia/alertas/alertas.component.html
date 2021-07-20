@@ -1,1 +1,20 @@
-<p>alertas works!</p>
+<div class="container cont">
+<article class="leaderboard">
+    <header>
+  
+  
+      <h1 class="leaderboard__title"><span class="leaderboard__title--top" style="color: #fff;">Alertas</span><span class="leaderboard__title--bottom"style="color: #fff;">MedSalud</span></h1>
+    </header>
+ 
+    <main class="leaderboard__profiles">
+      <article class="leaderboard__profile" *ngFor="let a of alertas | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;">
+        <span class="leaderboard__name">{{a.titulo}}</span>
+        <span class="leaderboard__value">{{a.mensaje}}</span>
+      </article>
+    </main>
+    <div style="float: right;">
+        <ngb-pagination [pageSize]="pageSize" [collectionSize]="alertas.length" [(page)]="page">
+        </ngb-pagination>
+    </div>
+</article>  
+  </div>

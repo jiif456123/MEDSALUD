@@ -161,7 +161,7 @@
 
                         <div class="modal-footer popup-footer">
                             <div class="btn-group">
-                                <button class="btn btn-primary button-agregar" [disabled]="registroForm.invalid" (click)="addPedido(registroForm)" (click)="resetForm(registroForm)" data-dismiss="modal" (click)="getPedidos()">Registrar</button>
+                                <button class="btn btn-primary button-agregar" [disabled]="registroForm.invalid" (click)="addPedido(registroForm)" (click)="addAlerta(pedidoService.selectedPedido.nombre)" (click)="resetForm(registroForm)" data-dismiss="modal" (click)="getPedidos()">Registrar</button>
                             </div>
                             <div class="btn-left">
                                 <button type="button" style="margin-left: 500px;" class="btn btn-secondary " (click)="limpiarTabla()" data-dismiss="modal">Cancelar</button>

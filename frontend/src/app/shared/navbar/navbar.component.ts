@@ -1,11 +1,13 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { AlertaService } from 'Services/alerta.service';
 
 @Component({
     // moduleId: module.id,
     selector: 'navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    providers: [AlertaService]
 })
 
 export class NavbarComponent implements OnInit{
@@ -13,8 +15,9 @@ export class NavbarComponent implements OnInit{
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    alertas = [];
 
-    constructor(location: Location,  private element: ElementRef) {
+    constructor(location: Location,  private element: ElementRef, public alertaService:AlertaService) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -23,6 +26,7 @@ export class NavbarComponent implements OnInit{
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+      this.getAlerta();
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
@@ -63,4 +67,10 @@ export class NavbarComponent implements OnInit{
       }
       return 'Dashboard';
     }
+    getAlerta(){
+        this.alertaService.getAlerta1().subscribe(
+          response =>{
+            this.alertas = response.data;
+          }
+        )}
 }

@@ -4,7 +4,16 @@ var alertaModel = require('../model/alerta.model');
 var getAlerta = () => {
 
     return new Promise((resolve, reject) => {
-        alertaModel.find().exec((err, listarAlerta) => {
+        alertaModel.find().sort({_id:-1}).exec((err, listarAlerta) => {
+            if (err) reject(err);
+            resolve(listarAlerta);
+        });
+    });
+};
+var getAlerta1 = () => {
+
+    return new Promise((resolve, reject) => {
+        alertaModel.find().sort({_id:-1}).limit(3).exec((err, listarAlerta) => {
             if (err) reject(err);
             resolve(listarAlerta);
         });
@@ -30,5 +39,6 @@ var createAlerta = (alerta) => {
 module.exports = {
     getAlerta,
     createAlerta,
+    getAlerta1
     
 };

@@ -13,6 +13,7 @@ export class AlertaService{
 
     alerta: Alerta[]; //importamos desde el modelo tene objetos tipo medicamento
     readonly URL_API= "http://localhost:3000/farmacia/alerta/";
+    readonly URL_API1= "http://localhost:3000/farmacia/alerta/cinco";
     constructor(private http: HttpClient){}
 
 
@@ -22,4 +23,7 @@ export class AlertaService{
     createAlerta(alerta: Alerta){
       return this.http.post(this.URL_API,alerta);
    }
+   getAlerta1(){
+    return this.http.get<any>(this.URL_API1);
+  }
 }

@@ -3,23 +3,22 @@ import { AlertaService } from 'Services/alerta.service';
 @Component({
   selector: 'app-alertas',
   templateUrl: './alertas.component.html',
-  styleUrls: ['./alertas.component.css'],
+  styleUrls: ['./alertas.component.scss', '../farmacia.css'],
   providers: [AlertaService]
 })
 export class AlertasComponent implements OnInit {
   public pageSize = 7;
   public page;
   constructor(public alertaService:AlertaService) { }
-  notificaciones = [];
+  alertas = [];
   ngOnInit(): void {
+    this.getAlerta();
   }
-  getMedicamento(){
-    this.alertaService.selectedAlerta.mensaje
-    this.alertaService.getAlerta().subscribe(
-      response =>{
-        this.notificaciones = response.data;
-        this.page=1;
-      }
-    )}
-
+    getAlerta(){
+      this.alertaService.getAlerta().subscribe(
+        response =>{
+          this.alertas = response.data;
+          this.page=1;
+        }
+      )}
 }

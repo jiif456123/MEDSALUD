@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Servicio } from 'app/citas/models/servicio.model';
+import { ServicioService } from 'app/citas/services/servicio.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -8,7 +10,7 @@ declare interface RouteInfo {
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
- // { path: '/categoria', title: 'Categorias', icon: 'pe-7s-news-paper', class: '' },
+  // { path: '/categoria', title: 'Categorias', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/gestionar-historia', title: 'Gestionar Historia Clinica', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/gestionar-citas', title: 'Gestionar Citas', icon: 'pe-7s-news-paper', class: '' },
   { path: '/citas/gestionar-caja', title: 'Gestionar Caja', icon: 'pe-7s-news-paper', class: '' },
@@ -30,12 +32,16 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  servicios: Servicio[] = [];
+  servicioS: Servicio;
 
-  constructor() { }
+  constructor(private servicioService: ServicioService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.menuItems.push()
+    var dataServicios = await this.servicioService.listar().toPromise();
+    this.servicios = dataServicios.data
   }
   isMobileMenu() {
     if ($(window).width() > 991) {
@@ -43,4 +49,8 @@ export class SidebarComponent implements OnInit {
     }
     return true;
   };
+  Seleccion(valor) {
+    this.servicioS = this.servicios.find(item => item._id?.trim() == valor);
+    this.servicioService.servicioSeleccionado = this.servicioS;
+  }
 }

@@ -17,23 +17,15 @@ export class ConsultarServicioComponent implements OnInit {
   calendarOptions: CalendarOptions
 
   servicios: Servicio[] = [];
-  eventoSeleccionado: Servicio;
 
   constructor(
-    private servicioService: ServicioService,
+    public servicioService: ServicioService,
   ) { }
 
   async ngOnInit(): Promise<void> {
-    var dataServicios = await this.servicioService.listar().toPromise();
-    this.servicios = dataServicios.data
-  }
 
-  Cambio(valor) {  
-      
-    var eventoSeleccionado = this.servicios.find(item => item._id?.trim() == valor);
-    this.eventoSeleccionado=eventoSeleccionado; 
   }
   ngAfterViewInit(){
-  
+
   }
 }

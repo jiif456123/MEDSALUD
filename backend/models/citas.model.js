@@ -27,19 +27,19 @@ var modelPaciente = mongoose.model('Paciente', paciente);
 /*
     Evento Model
 */
-var evento = new Schema({
+// var evento = new Schema({
 
-    titulo: { type: String },
-    descripcion: { type: String },
-    fechaInicio: { type: Date },
-    fechaFin: { type: Date },
-    celular: { type: String },
+//     titulo: { type: String },
+//     descripcion: { type: String },
+//     fechaInicio: { type: Date },
+//     fechaFin: { type: Date },
+//     celular: { type: String },
 
-}, {
-    versionKey: false
-});
+// }, {
+//     versionKey: false
+// });
 
-var modelEvento = mongoose.model('Evento', evento);
+// var modelEvento = mongoose.model('Evento', evento);
 
 /*
     Espcialidad Model
@@ -145,17 +145,17 @@ var modelCita = mongoose.model('Cita', cita);
 /*
     Evento Model
  */
-// var evento = new Schema({
-//     titulo: { type: String },
-//     descripcion: { type: String },
-//     fechaInicio: { type: String },
-//     fechaFin: { type: String },
-//     horaInicio: { type: String },
-//     horaFin: { type: String },
-// }, {
-//     versionKey: false
-// });
-// var modelEvento = mongoose.model('Evento', evento);
+var evento = new Schema({
+    titulo: { type: String },
+    descripcion: { type: String },
+    fechaInicio: { type: String },
+    fechaFin: { type: String },
+    horaInicio: { type: String },
+    horaFin: { type: String },
+}, {
+    versionKey: false
+});
+var modelEvento = mongoose.model('Evento', evento);
 
 /*
     Servicio Model

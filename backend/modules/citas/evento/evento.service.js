@@ -2,17 +2,15 @@ const citasmodel = require("../../../models/citas.model");
 const eventomodel = citasmodel.modelEvento
 
 let crear = (evento) => {
-    let fechaInicio = new Date(evento.fechaInicio)
-    let fechaFin = new Date(evento.fechaFin)
     let newevento = new eventomodel({
         titulo: evento.titulo,
-        fechaInicio: fechaInicio,
-        fechaFin: fechaFin,
-        celular: evento.celular,
-        descripcion: evento.descripcion
-
+        descripcion: evento.descripcion,
+        fechaInicio: evento.fechaInicio,
+        fechaFin: evento.fechaFin,
+        horaInicio: evento.horaInicio,
+        horaFin: evento.horaFin,
     })
-    console.log(newevento);
+    // console.log(newevento);
     return new Promise((resolve, reject) => {
         newevento.save(newevento, (err, data) => {
             if (err) reject(err)

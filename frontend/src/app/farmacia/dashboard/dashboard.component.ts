@@ -37,6 +37,10 @@ export class Dashboard implements OnInit {
 
   }
 
+  public yearSelected;
+  public yearMovSelected;  
+  public yearOrdenCompraSelected;  
+
 
   public monthSelected;
   public nombreEquipoSelected;
@@ -78,9 +82,24 @@ export class Dashboard implements OnInit {
     console.log("CONDICION")
         }
     this.getCantidadProveedoresDisponible();
+
+    this.getYearsOfPedidos();
+
+    this.getYearsOfMov();
+
+    this.getYearsOfOrdenCompra();
+
+    this.yearOrdenCompraSelected="2021";
+    this.yearMovSelected="2021";
+    this.yearSelected="2021";
     }
     public meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto" , "Septiembre", "Octubre", "Noviembre","Diciembre", "Todos"];
+    public yearsPedidos=[];
     
+    public yearsMovimientos=[];
+    public yearsOrdenCompra=[];
+
+
     public nombreEquipos=[];
     public nombreCategorias=[];
 
@@ -381,9 +400,10 @@ export class Dashboard implements OnInit {
             //Medicamentos con tipo "Ingreso"------------------------------------------------
 
             var result = res.filter((x,index) => { 
-
+                var d=new Date(res[index]['fecha']);
+                var numeroYear=(d.getFullYear());
                 console.log(index);
-                return (x.tipo =="Ingreso") ; 
+                return (x.tipo =="Ingreso" && numeroYear==this.yearMovSelected) ; 
             });
             console.log(result)
             var count=[];
@@ -431,8 +451,9 @@ export class Dashboard implements OnInit {
         //Medicamentos con tipo "Egreso"------------------------------------------------
             var result2 = res.filter((x,index) => { 
              
-                
-                return (x.tipo =="Egreso"); 
+                var d=new Date(res[index]['fecha']);
+                        var numeroYear=(d.getFullYear());
+                return (x.tipo =="Egreso" && numeroYear==this.yearMovSelected); 
             });
                 console.log(result2)
                 var count2=[];
@@ -566,13 +587,19 @@ export class Dashboard implements OnInit {
                     }*/
 
                     //Medicamentos con tipo "Ingreso"------------------------------------------------
-
+                        /*
+                         var numeroYear=(d.getFullYear());
+                   // console.log(numeroYear);
+                    return (x.estado =="Pagado" && numeroYear==this.yearSelected) ; 
+                        */
                     var result = res.filter((x,index) => { 
 
                         console.log(index);
                         var d=new Date(res[index]['fecha']);
                         var numeroMes=(d.getMonth()+1);
-                        return (x.tipo =="Ingreso" && numeroMes==this.numeroMesConver) ; 
+                        var numeroYear=(d.getFullYear());
+                        console.log(numeroYear);
+                        return (x.tipo =="Ingreso" && numeroMes==this.numeroMesConver && numeroYear==this.yearMovSelected) ; 
                     });
                     console.log(result)
                     var count=[];
@@ -621,8 +648,9 @@ export class Dashboard implements OnInit {
                     var result2 = res.filter((x,index) => { 
                         var d=new Date(res[index]['fecha']);
                         var numeroMes=(d.getMonth()+1);
-                        
-                        return (x.tipo =="Egreso" && numeroMes==this.numeroMesConver); 
+                        var numeroYear=(d.getFullYear());
+
+                        return (x.tipo =="Egreso" && numeroMes==this.numeroMesConver && numeroYear==this.yearMovSelected); 
                     });
                         console.log(result2)
                         var count2=[];
@@ -689,7 +717,97 @@ export class Dashboard implements OnInit {
         //    }
     }
         
-        
+    //Llena la lista de los años de los pedidos
+    getYearsOfPedidos(){
+        var numeroMes=[];
+        this.pedidoService.getPedidos2().subscribe(
+            res =>{
+            console.log(res);
+            
+            
+            for (let index = 0; index < res.length; index++) {
+                var d=new Date(res[index]['fecha']);
+                numeroMes[index]=(d.getFullYear());
+                //this.yearsPedidos[index]=unicos;
+            }
+            //Elimina los años duplicados y los guardar en una const unicos
+            const unicos = numeroMes.filter((valor, indice) => {
+                return numeroMes.indexOf(valor) === indice;
+            });
+
+            //console.log(unicos);
+            this.yearsPedidos=unicos;
+            console.log(this.yearsPedidos);
+            },
+            err => console.error(err)
+        )
+    }
+    
+    ///------LLENA LA LISTA DE LOS AÑOS DE LOS MOV
+    getYearsOfMov(){
+
+        var numeroYearMov=[];
+        this.movimientoMService.getMovimientoM2().subscribe(
+            res =>{
+            console.log(res);
+            
+            
+            for (let index = 0; index < res.length; index++) {
+                var d=new Date(res[index]['fecha']);
+                numeroYearMov[index]=(d.getFullYear());
+                //this.yearsPedidos[index]=unicos;
+            }
+            //Elimina los años duplicados y los guardar en una const unicos
+            const unicos = numeroYearMov.filter((valor, indice) => {
+                return numeroYearMov.indexOf(valor) === indice;
+            });
+
+            console.log(unicos);
+
+            //TODO: A MODO DE PRUEBA SE PUSO LOS AÑOS 2020 2021
+            this.yearsMovimientos=unicos;
+            /*
+            this.yearsMovimientos[0]="2020";
+            this.yearsMovimientos[1]="2021"*/
+            console.log(this.yearsMovimientos);
+            },
+            err => console.error(err)
+        )
+    
+
+    }
+    //yearsOrdenCompra Array
+    getYearsOfOrdenCompra(){
+
+        var numeroYearMov=[];
+        this.gestionarOrdenCompraService.getOrdenCompras().subscribe(
+            res =>{
+            console.log(res);
+            
+            
+            for (let index = 0; index < res.length; index++) {
+                var d=new Date(res[index]['fecha']);
+                numeroYearMov[index]=(d.getFullYear());
+                //this.yearsPedidos[index]=unicos;
+            }
+            //Elimina los años duplicados y los guardar en una const unicos
+            const unicos = numeroYearMov.filter((valor, indice) => {
+                return numeroYearMov.indexOf(valor) === indice;
+            });
+
+            console.log(unicos);
+
+            
+            this.yearsOrdenCompra=unicos;
+            /*
+            this.yearsMovimientos[0]="2020";
+            this.yearsMovimientos[1]="2021"*/
+            console.log(this.yearsOrdenCompra);
+            },
+            err => console.error(err)
+        )
+    }
+
     //LLENA LA LISTA DEL HTML CategoriaMedicamento
     llenarArrayCategoriaMedicamento(){
      
@@ -1039,6 +1157,44 @@ export class Dashboard implements OnInit {
             
             
             res =>{
+                var result = res.filter((x,index) => { 
+
+                    console.log(index);
+                    var d=new Date(res[index]['fecha']);
+                   
+                    var numeroYear=(d.getFullYear());
+                    console.log(numeroYear);
+                    return (x.estado =="Entregado" && numeroYear==this.yearOrdenCompraSelected) ; 
+                });
+                var result2 = res.filter((x,index) => { 
+
+                    console.log(index);
+                    var d=new Date(res[index]['fecha']);
+                    
+                    var numeroYear=(d.getFullYear());
+                    console.log(numeroYear);
+                    return (x.estado =="En Espera" && numeroYear==this.yearOrdenCompraSelected) ; 
+                });
+                var result3 = res.filter((x,index) => { 
+
+                    console.log(index);
+                    var d=new Date(res[index]['fecha']);
+                    
+                    var numeroYear=(d.getFullYear());
+                    console.log(numeroYear);
+                    return (x.estado =="Cancelado" && numeroYear==this.yearOrdenCompraSelected) ; 
+                });
+                console.log(result.length);
+                console.log(result2.length);
+                console.log(result3.length);
+
+                valores[0]=result.length;
+                valores[1]=result2.length;
+                valores[2]=result3.length;
+
+                this.setGraficoCircular("myChart",valores);
+                /*
+
               console.log(res[0]["estado"]=="En Espera");  
               for (let index = 0; index < res.length; index++) {
 
@@ -1060,7 +1216,7 @@ export class Dashboard implements OnInit {
                 valores[2]=contadorCancelado;
                 console.log(valores);
             
-                this.setGraficoCircular("myChart",valores);
+                this.setGraficoCircular("myChart",valores);*/
             },
             err => console.error(err)
           )
@@ -1085,12 +1241,29 @@ export class Dashboard implements OnInit {
         this.pedidoService.getPedidos2().subscribe(
 
             res =>{
+                console.log(res);
+                console.log(this.yearSelected);
 
-               
-                for (let index = 0; index < res.length; index++) {
+                var result = res.filter((x,index) => { 
 
-                    if(res[index]["estado"]=="Pagado"){
-                        var d=new Date(res[index]['fecha']);
+                   // console.log(index);
+                    var d=new Date(res[index]['fecha']);
+                    var numeroYear=(d.getFullYear());
+                   // console.log(numeroYear);
+                    return (x.estado =="Pagado" && numeroYear==this.yearSelected) ; 
+                });
+
+
+                console.log(result)
+
+
+                
+
+
+                for (let index = 0; index < result.length; index++) {
+
+                    if(result[index]["estado"]=="Pagado" ){
+                        var d=new Date(result[index]['fecha']);
                         var numeroMes=(d.getMonth()+1);
 
                         if(numeroMes==1){

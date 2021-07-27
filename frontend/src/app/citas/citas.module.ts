@@ -30,6 +30,7 @@ import { ReporteGeneralComponent } from './reporte-general/reporte-general.compo
 import { ChartsModule } from 'ng2-charts';
 import { ConsultarServicioComponent } from './consultar-servicio/consultar-servicio.component';
 import { ConsultarRecetaMedicaComponent } from './consultar-receta-medica/consultar-receta-medica.component';
+import { DetalleConsultarRecetaMedComponent } from './consultar-receta-medica/detalle-consultar-receta-med/detalle-consultar-receta-med.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -58,6 +59,7 @@ FullCalendarModule.registerPlugins([
     ReporteGeneralComponent,
     ConsultarServicioComponent,
     ConsultarRecetaMedicaComponent,
+    DetalleConsultarRecetaMedComponent,
   ],
   imports: [
     CommonModule,

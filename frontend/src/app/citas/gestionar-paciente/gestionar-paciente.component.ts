@@ -100,16 +100,24 @@ export class GestionarPacienteComponent implements OnInit {
       Swal.fire('Advertencia', 'Revise los campos.', 'warning')
       return;
     }
+
+
     let datos = this.formPaciente.value
-    
-    let fechaNac= new Date(datos.fechaNacimiento)
+
+    let validar = this.pacientes.find(item => item.dni == datos.dni)
+    if (validar) {
+      Swal.fire('Advertencia', 'Ya existe un paciente con el dni indicado.', 'warning')
+      return;
+    }
+
+    let fechaNac = new Date(datos.fechaNacimiento)
     let fechaHoy = new Date()
 
-    if(fechaNac>fechaHoy){
+    if (fechaNac > fechaHoy) {
       Swal.fire('Advertencia', 'La fecha Nacimiento no puede ser mayor que la fecha actual.', 'warning')
       return;
     }
-    
+
     let query = {
       nombre: datos.nombre,
       apellidoPaterno: datos.apellidoPaterno,
@@ -147,10 +155,16 @@ export class GestionarPacienteComponent implements OnInit {
     }
     let datos = this.formPacienteModificar.value
 
-    let fechaNac= new Date(datos.fechaNacimiento)
+    let validar = this.pacientes.find(item => item.dni == datos.dni && item._id != this.pacienteSeleccionado._id)
+    if (validar) {
+      Swal.fire('Advertencia', 'Ya existe un paciente con el dni indicado.', 'warning')
+      return;
+    }
+    
+    let fechaNac = new Date(datos.fechaNacimiento)
     let fechaHoy = new Date()
 
-    if(fechaNac>fechaHoy){
+    if (fechaNac > fechaHoy) {
       Swal.fire('Advertencia', 'La fecha Nacimiento no puede ser mayor que la fecha actual.', 'warning')
       return;
     }

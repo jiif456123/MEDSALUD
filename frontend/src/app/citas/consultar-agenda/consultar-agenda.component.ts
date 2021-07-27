@@ -1,10 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CalendarOptions } from '@fullcalendar/angular';
 import esLocale from '@fullcalendar/core/locales/es';
 import { Evento } from '../models/evento.model';
-import {EventoService} from '../services/evento.service';
+import { EventoService } from '../services/evento.service';
 import Swal from 'sweetalert2';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -29,7 +29,7 @@ export class ConsultarAgendaComponent implements OnInit {
   formEvento: FormGroup;
   formDetalle: FormGroup;
   formModificar: FormGroup;
-  
+
 
   constructor(
     private eventoService: EventoService,
@@ -40,7 +40,7 @@ export class ConsultarAgendaComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    
+
     this.calendarOptions = {
       initialView: 'dayGridMonth',
       locale: esLocale,
@@ -58,13 +58,13 @@ export class ConsultarAgendaComponent implements OnInit {
         }
       },
       eventClick: (e) => {
-        this.eventoSeleccionado=e.event._def.extendedProps.data;
-        this.formDetalle.patchValue({"titulo": this.eventoSeleccionado.titulo});
-        this.formDetalle.patchValue({"descripcion": this.eventoSeleccionado.descripcion});
-        this.formDetalle.patchValue({"fechaInicio": this.eventoSeleccionado.fechaInicio});
-        this.formDetalle.patchValue({"fechaFin": this.eventoSeleccionado.fechaFin});
-        this.formDetalle.patchValue({"horaInicio": this.eventoSeleccionado.horaInicio});
-        this.formDetalle.patchValue({"horaFin": this.eventoSeleccionado.horaFin});
+        this.eventoSeleccionado = e.event._def.extendedProps.data;
+        this.formDetalle.patchValue({ "titulo": this.eventoSeleccionado.titulo });
+        this.formDetalle.patchValue({ "descripcion": this.eventoSeleccionado.descripcion });
+        this.formDetalle.patchValue({ "fechaInicio": this.eventoSeleccionado.fechaInicio });
+        this.formDetalle.patchValue({ "fechaFin": this.eventoSeleccionado.fechaFin });
+        this.formDetalle.patchValue({ "horaInicio": this.eventoSeleccionado.horaInicio });
+        this.formDetalle.patchValue({ "horaFin": this.eventoSeleccionado.horaFin });
         this.modalDetalle.nativeElement.click();
       }
     };
@@ -105,20 +105,20 @@ export class ConsultarAgendaComponent implements OnInit {
       this.formEvento.markAllAsTouched();
       Swal.fire('Advertencia', 'Revise los campos.', 'warning')
       return;
-    }    
+    }
 
     let datos = this.formEvento.value
 
-    let fechaInicio = new Date(datos.fechaInicio)
-    let fechaFin = new Date(datos.fechaFin)
-    let fecha = new Date()
+    let fechaInicio = new Date(datos.fechaInicio + "T" + datos.horaInicio)
+    let fechaFin = new Date(datos.fechaFin + "T" + datos.horaFin)
+    let fechaS = new Date()
 
     if (fechaInicio > fechaFin) {
       Swal.fire('Advertencia', 'La fecha final no puede ser menor que la fecha de inicio.', 'warning')
       return;
     }
 
-    if (fecha > fechaInicio) {
+    if (fechaS > fechaInicio) {
       Swal.fire('Advertencia', 'La fecha de incio no puede ser menor que la fecha actual.', 'warning')
       return;
     }
@@ -146,7 +146,7 @@ export class ConsultarAgendaComponent implements OnInit {
     /**
   * actualiza el calendario -- fetchevents no es optimo para esta tarea
   */
-    
+
   }
 
   async modificar() {
@@ -158,8 +158,9 @@ export class ConsultarAgendaComponent implements OnInit {
 
     let datos = this.formModificar.value
 
-    let fechaInicio = new Date(datos.fechaInicio)
-    let fechaFin = new Date(datos.fechaFin)
+    let fechaInicio = new Date(datos.fechaInicio + "T" + datos.horaInicio)
+    let fechaFin = new Date(datos.fechaFin + "T" + datos.horaFin)
+    let fechaS = new Date()
 
     if (fechaInicio > fechaFin) {
       Swal.fire('Advertencia', 'La fecha final no puede ser menor que la fecha de inicio.', 'warning')
@@ -187,59 +188,60 @@ export class ConsultarAgendaComponent implements OnInit {
     this.integrarEventos();
   }
 
-  async eliminar( ){
+  async eliminar() {
     Swal.fire({
-     text: '¿Está seguro que desea elimnar el evento?',
-     icon: 'warning',
-     showCancelButton: true,
-     cancelButtonText: 'Cancelar',
-     confirmButtonColor:'Aceptar'
-    }).then((willDelete)=>{
-      if(willDelete.isConfirmed){
-        this.eventoService.eliminar(this.eventoSeleccionado._id).pipe(switchMap(()=>{
+      text: '¿Está seguro que desea elimnar el evento?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: 'Aceptar'
+    }).then((willDelete) => {
+      if (willDelete.isConfirmed) {
+        this.eventoService.eliminar(this.eventoSeleccionado._id).pipe(switchMap(() => {
           return this.eventoService.listar();
         }))
-        .subscribe(data =>{
-          this.eventos=data.data;
-          Swal.fire('Correcto', 'El evento se eliminó correctamente', 'success');
-          this.integrarEventos();       
-        }
-        );
-      } else{
+          .subscribe(data => {
+            this.eventos = data.data;
+            Swal.fire('Correcto', 'El evento se eliminó correctamente', 'success');
+            this.integrarEventos();
+          }
+          );
+      } else {
         Swal.fire('El evento no ha sido eliminado'),
-        {icon: 'info'}
+          { icon: 'info' }
       }
     })
-    
+
   };
 
-  async integrarEventos(){
+  async integrarEventos() {
     var dataEvento = await this.eventoService.listar().toPromise();
 
     this.eventos = dataEvento.data;
-    
+
     var datos = [];
     this.eventos.forEach(item => {
       /**
       * EL Calendario lee la fecha final como --/--/-- 00:00:00, por eso no considera el ultimo día
       */
       let fechadiv = item.fechaFin.split('-');
-      let fechanum = Number(fechadiv[2])+1;
-      let fecha= fechadiv[0]+'-'+fechadiv[1]+'-'+fechanum;
-      
-      datos.push({ 
-      title: item.titulo, 
-      startRecur: item.fechaInicio, 
-      endRecur: fecha,
-      startTime: item.horaInicio, 
-      endTime: item.horaFin, 
-      data:item })
+      let fechanum = Number(fechadiv[2]) + 1;
+      let fecha = fechadiv[0] + '-' + fechadiv[1] + '-' + fechanum;
+
+      datos.push({
+        title: item.titulo,
+        startRecur: item.fechaInicio,
+        endRecur: fecha,
+        startTime: item.horaInicio,
+        endTime: item.horaFin,
+        data: item
+      })
     })
 
     this.calendarOptions.events = datos;
-  } 
+  }
 
-  abrirModalMod(){
+  abrirModalMod() {
     this.formModificar.controls.titulo.setValue(this.eventoSeleccionado.titulo);
     this.formModificar.controls.descripcion.setValue(this.eventoSeleccionado.descripcion);
     this.formModificar.controls.fechaInicio.setValue(this.eventoSeleccionado.fechaInicio);
@@ -248,9 +250,9 @@ export class ConsultarAgendaComponent implements OnInit {
     this.formModificar.controls.horaFin.setValue(this.eventoSeleccionado.horaFin);
     this.modalModificar.nativeElement.click();
   }
-  
-  
-  ngAfterViewInit(){
-    
+
+
+  ngAfterViewInit() {
+
   }
 }

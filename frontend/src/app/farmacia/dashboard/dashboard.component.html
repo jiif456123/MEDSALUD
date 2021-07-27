@@ -42,11 +42,29 @@
 <div class="linea-circulo">
     <div id="divChart4">
         <p style="padding-top: 20px; margin-left: 25px;font-weight: bold;">Pedidos</p>
+        <fieldset class="form-group">
+            <select style=" width: 230px; margin-left: 60px;" [(ngModel)]="yearSelected" (click)="getPedidoPagadosPorMes()" name="yearsOfPedidos" class="form-control">
+        <option disabled>Selecciona un Año</option>
+        <ng-container *ngFor="let yearsOfPedidos of yearsPedidos" >    
+            <option [value]="yearsOfPedidos">{{yearsOfPedidos}}</option>
+        </ng-container>
+        </select>
+        </fieldset>
         <canvas id="myChartLinea" style="padding: 15px;"></canvas>
     </div>
 
     <div id="divChart">
         <p style="padding-top: 20px; margin-left: 25px;font-weight: bold;">Orden de Compra</p>
+
+        <fieldset class="form-group">
+            <select style=" width: 230px; margin-left: 60px;" [(ngModel)]="yearOrdenCompraSelected" (click)="getEstadoOrdenDeCompra()" name="yearsOfOrdenC" class="form-control">
+        <option disabled>Selecciona un Año</option>
+        <ng-container *ngFor="let yearsOfOrdenC of yearsOrdenCompra" >    
+            <option [value]="yearsOfOrdenC">{{yearsOfOrdenC}}</option>
+        </ng-container>
+        </select>
+        </fieldset>
+
         <canvas id="myChart"></canvas>
     </div>
 </div>
@@ -59,6 +77,13 @@
     <div id="divChart2">
         <p style="font-weight: bold; margin-top: 20px; margin-left: 25px;">Movimientos</p>
         <fieldset class="form-group">
+            <select style=" width: 230px; margin-left: 60px;" [(ngModel)]="yearMovSelected" name="yearsOfMov" class="form-control">
+            <option disabled>Selecciona un Año</option>
+            <ng-container *ngFor="let yearsOfMov of yearsMovimientos" >    
+                    <option [value]="yearsOfMov">{{yearsOfMov}}</option>
+            </ng-container>
+        </select>
+
             <select style=" width: 230px; margin-left: 60px;" [(ngModel)]="monthSelected" (click)="mostrarMes()" name="monthOfYears" class="form-control">
         <option disabled>Selecciona un Mes</option>
         <ng-container *ngFor="let monthOfYears of meses" >    

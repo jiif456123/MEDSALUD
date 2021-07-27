@@ -38,18 +38,10 @@ public unidadDesapareceCA=false;
 
 public sumaTotal=0;
 
-  ngOnInit(): void{//  NEW 
-   /* if(this.gestionarOrdenCompraService.medicamentoOCs==null){
-      this.gestionarOrdenCompraService.medicamentoOCs.length=1;
-    }*/
+  ngOnInit(): void{
     this.getCategorias();
     this.getProveedores();
     this.getMedicamentos();
-    console.log("xd");
-    
-   //this.verificarArregloMedOC();
-    //console.log(this.gestionarOrdenCompraService.medicamentoOCs);
-   // console.log("xd"+this.gestionarOrdenCompraService.medicamentoOCs.length);
     this.gestionarOrdenCompraService.selectedOrdenCompra2.categoria="Categoria.";
     this.gestionarOrdenCompraService.selectedOrdenCompra2.medicamento="Medicamento.";
     this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad="Unidad.";
@@ -62,8 +54,6 @@ public sumaTotal=0;
     this.gestionarOrdenCompraService.selectedOrdenCompra3A.categoria="Categoria.";
     this.gestionarOrdenCompraService.selectedOrdenCompra3A.medicamento="Medicamento.";
     this.gestionarOrdenCompraService.selectedOrdenCompra3A.unidad="Unidad.";
-
-
   }
   
   unidadDesaparece(){
@@ -74,8 +64,7 @@ public sumaTotal=0;
       this.unidadDesapareceC=false;
       this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad="Unidad.";
 
-    }
-  }
+    } }
 
   unidadDesapareceA(){
     if(this.gestionarOrdenCompraService.selectedOrdenCompra3A.categoria=="Liquidos" || this.gestionarOrdenCompraService.selectedOrdenCompra3A.categoria=="Inyectables"){
@@ -84,10 +73,7 @@ public sumaTotal=0;
     }else{
       this.unidadDesapareceCA=false;
       this.gestionarOrdenCompraService.selectedOrdenCompra3A.unidad="Unidad.";
-    }
-   
-
-  }
+    } }
   
   addAlerta(numero:GestionarOrdenCompraService){ 
     this.alertaService.selectedAlerta.titulo = "Se generó una orden de compra";
@@ -127,12 +113,7 @@ public sumaTotal=0;
          
          element.click(); 
           console.log("Añadido");
-         }
-         
-         
-      }
-  
-  }
+         }}}
     
   formExcepcionesA(form: NgForm){
     if(form.invalid){
@@ -148,8 +129,6 @@ public sumaTotal=0;
     this.isError = false;
     this.isError2 = false;
   }
-
-  //Veficiar si el arreglo esta vacio
   verificarArregloMedOC(){
     if(this.gestionarOrdenCompraService.medicamentoOCs==undefined){
       console.log("Arreglo VACIO");
@@ -158,13 +137,7 @@ public sumaTotal=0;
       this.prueba==true;
     }
   }
-
-  getCategorias() { //vamos a llenar el arreglo del service
-    /*
-    Eso significa que se suscribirá al observable de interés (que es getTasks () en su caso) y 
-    esperará hasta que tenga éxito y luego ejecutará la primera función de devolución de llamada pasada, que en su caso es:
-    */
-   
+  getCategorias() {
     this.gestionarOrdenCompraService.getOrdenCompras().subscribe(
       res =>{
      
@@ -172,8 +145,8 @@ public sumaTotal=0;
         this.page=1;
       },
       err => console.error(err)
-    )
-  }
+    )}
+
   getProveedores() { //vamos a llenar el arreglo del service
  
     this.gestionarOrdenCompraService.getProveedores().subscribe(
@@ -246,20 +219,14 @@ public sumaTotal=0;
   multiplicarPriceAndCantidad(){
 
     this.gestionarOrdenCompraService.selectedMedicamentoOC.total=Math.round(this.gestionarOrdenCompraService.selectedMedicamentoOC.precio*this.gestionarOrdenCompraService.selectedMedicamentoOC.cantidad);
-    
-  }
+    }
 
   multiplicarPriceAndCantidadA(){
 
     this.gestionarOrdenCompraService.selectedMedicamentoOCA.total=Math.round(this.gestionarOrdenCompraService.selectedMedicamentoOCA.precio*this.gestionarOrdenCompraService.selectedMedicamentoOCA.cantidad);
-    
-  }
-
-  
+    }
 
   //TODO: agregar un medicamento segun el codigo del proveedor
-
-
   tipoUnidadText(){
     this.gestionarOrdenCompraService.selectedMedicamentoOC.tipoUnidad=this.gestionarOrdenCompraService.selectedMedicamentoOC.tipo +" x "+this.gestionarOrdenCompraService.selectedOrdenCompra2.unidad;
 
@@ -283,9 +250,7 @@ public sumaTotal=0;
       (err) => console.error(err)
 
     );
-  }
-  
-    }
+  }}
 
     addMedicamentoOCA(form: NgForm){
       if(this.isError==false && this.isError2==false){
@@ -301,9 +266,7 @@ public sumaTotal=0;
           (err) => console.error(err)
     
         );
-      }
-       
-        }
+      }}
     
   // Obtiene los medicamentos segun el codigo del proveedor 
   getMedicamentosOCByCodigo(form:NgForm) { 
@@ -321,14 +284,7 @@ public sumaTotal=0;
           this.sumaTotal+=x.total
           )
         this.gestionarOrdenCompraService.selectedOrdenCompra2.totalD=this.sumaTotal;
-        //this.gestionarOrdenCompraService.selectedOrdenCompraA.total=this.sumaTotal;
-
        }
-          
-         
-          //Para que una vez mostrada la lista se selecione en indice dela lista
-         // this.page2=1;
-        
       },
       err => console.error(err)
     )
@@ -351,11 +307,6 @@ public sumaTotal=0;
             this.gestionarOrdenCompraService.selectedOrdenCompraA.totalD=this.sumaTotal;
   
          }
-            
-           
-            //Para que una vez mostrada la lista se selecione en indice dela lista
-           // this.page2=1;
-          
         },
         err => console.error(err)
       )
@@ -378,24 +329,16 @@ public sumaTotal=0;
               this.gestionarOrdenCompraService.selectedOrdenCompraA.totalD=this.sumaTotal;
     
            }
-              
-             
-              //Para que una vez mostrada la lista se selecione en indice dela lista
-             // this.page2=1;
-            
           },
           err => console.error(err)
         )
       }
-
-      
 
   cleanArreglo() { //vamos a llenar el arreglo del service
  
       this.gestionarOrdenCompraService.medicamentos2.length=0;
       this.gestionarOrdenCompraService.selectedOrdenCompra2.medicamento="";
       this.gestionarOrdenCompraService.selectedOrdenCompra2.medicamento="Medicamento.";
-
   }
 
   cleanArregloP() { //vamos a llenar el arreglo del service
@@ -414,17 +357,12 @@ cleanArregloPA() { //vamos a llenar el arreglo del service
     this.gestionarOrdenCompraService.medicamentos2.length=0;
     this.gestionarOrdenCompraService.selectedOrdenCompra3A.medicamento="";
     this.gestionarOrdenCompraService.selectedOrdenCompra3A.medicamento="Medicamento.";
-
 }
   getProveedor(proveedor: Gestionarp ){
     this.gestionarOrdenCompraService.selectedProveedor=proveedor;
-
-
   }
   getProveedorLab(lab: string ){
     this.gestionarOrdenCompraService.selectedProveedor3.laboratorio=lab;
-
-
   }
 
   getLabByProveedor(form:NgForm){
@@ -432,41 +370,21 @@ cleanArregloPA() { //vamos a llenar el arreglo del service
       res =>{
       //  this.gestionarOrdenCompraService.proveedores=res;
         console.log('LAB')
-        this.gestionarOrdenCompraService.proveedorLabs= res;/*
-        this.gestionarOrdenCompraService.selectedProveedor3.laboratorio = this.gestionarOrdenCompraService.proveedorLabs[0].laboratorio;
-        this.gestionarOrdenCompraService.selectedOrdenCompra2.laboratorio = this.gestionarOrdenCompraService.proveedorLabs[0].laboratorio;
-
-        console.log(this.gestionarOrdenCompraService.proveedorLabs[0].laboratorio);
-  console.log(this.gestionarOrdenCompraService.selectedProveedor3.laboratorio);*/
-       // this.gestionarOrdenCompraService.selectedProveedor3.laboratorio=form.value.laboratorio;
+        this.gestionarOrdenCompraService.proveedorLabs= res;
       },
       err => console.error(err)
 
-    )
-
-
-  }
-
-  
+    )}
+    
 getLabByProveedorA(proveedor: string){
     this.gestionarOrdenCompraService.getLabByNombreP(proveedor).subscribe(
       res =>{
-      //  this.gestionarOrdenCompraService.proveedores=res;
         console.log('LAB')
-        this.gestionarOrdenCompraService.proveedorLabs= res;/*
-        this.gestionarOrdenCompraService.selectedProveedor3.laboratorio = this.gestionarOrdenCompraService.proveedorLabs[0].laboratorio;
-        this.gestionarOrdenCompraService.selectedOrdenCompra2.laboratorio = this.gestionarOrdenCompraService.proveedorLabs[0].laboratorio;
-
-        console.log(this.gestionarOrdenCompraService.proveedorLabs[0].laboratorio);
-  console.log(this.gestionarOrdenCompraService.selectedProveedor3.laboratorio);*/
-       // this.gestionarOrdenCompraService.selectedProveedor3.laboratorio=form.value.laboratorio;
+        this.gestionarOrdenCompraService.proveedorLabs= res;
       },
       err => console.error(err)
 
-    )
-
-
-  }
+    )}
 
   getLabPrueba(){
     this.gestionarOrdenCompraService.getLabByNombreP('EmpresaSA2').subscribe(
@@ -475,21 +393,15 @@ getLabByProveedorA(proveedor: string){
   
       },
       err => console.error(err)
+    )}
 
-    )
-
-
-  }
   getOrdenCompra(ordenCompra2: OrdenCompra2 ){
     this.gestionarOrdenCompraService.selectedOrdenCompra2=ordenCompra2;
-
-
   }
 
   getOrdenCompraDetail(ordenCompra2: OrdenCompra2 ){
     this.gestionarOrdenCompraService.selectedOrdenCompraDetail=ordenCompra2;
     this.getDetalles();
-
   }
   
   clickMostrar(){
@@ -503,14 +415,9 @@ getLabByProveedorA(proveedor: string){
     let element: HTMLElement =document.getElementById('mostrarBoton') as HTMLElement;
          
     element.click();  
-
   }
 
   clickCleanActualizar(){
-   
-
-     
-
     this.gestionarOrdenCompraService.selectedOrdenCompra3A.laboratorio="Laboratorio.";
     this.gestionarOrdenCompraService.selectedOrdenCompra3A.categoria="Categoria.";
     this.gestionarOrdenCompraService.selectedOrdenCompra3A.medicamento="Medicamento.";
@@ -574,12 +481,7 @@ getLabByProveedorA(proveedor: string){
           
         },
         err => console.error(err)
-      )
-      
-    
-    }
-    }
-
+      )}}
     updateOrdenCompra(form: NgForm){
       if(form.invalid){
         this.isError=true;
@@ -615,16 +517,7 @@ getLabByProveedorA(proveedor: string){
            
          },
          err => console.error(err)
-       )
-       
-     
-     }
-
-    
-      
-      //console.log(form.value);
-    }
-
+       )}}
 
     cleanFormActualizar(){
       this.gestionarOrdenCompraService.selectedOrdenCompra3A.laboratorio="Laboratorio.";
@@ -648,51 +541,6 @@ getLabByProveedorA(proveedor: string){
 
 
     }
-/*
-
-  addCategoriaM(form: NgForm){
-    if(form.value._id){
-    this.gestionarCategoriaService.putCategoria(form.value).subscribe(
-      res  => console.log(res),
-      err => console.error(err)
-    );
-    }else{
-    
-    this.gestionarCategoriaService.createCategoria(form.value).subscribe(
-      (res)=> {
-      this.getCategorias();
-      },
-      (err) => console.error(err)
-
-    );
-    }
-  }
-
-  updateCategoriaM(form: NgForm){
-
-    if(form.value._id){
-    this.gestionarCategoriaService.putCategoria(form.value).subscribe(
-      res  => console.log(res),
-      err => console.error(err)
-    );
-    }
-  }
-   
-  getCategoria(categoria: Categoria ){
-    this.gestionarCategoriaService.selectedCategoria2=categoria;
-    const nombre23=categoria.nombre;
-    console.log(nombre23);
-    this.gestionarCategoriaService.selectedCategoria4.nombre=nombre23;
-
-  }
-
-  resetForm(form:NgForm){
-    form.reset();
-  }
-
-*/
-  //Buscar Por nombre de la categoria actualizando el arreglo categoria
-  
   searchByNombreProveedor(form: NgForm){
     this.gestionarOrdenCompraService.getOrdenCompraByProveedor(form.value.proveedor).subscribe(
       res =>{
@@ -717,11 +565,7 @@ getLabByProveedorA(proveedor: string){
   }
   
   deleteOneMedicamentoOC(id: string){
-      
-    /* let element: HTMLElement =document.getElementById('mostrarBotonA') as HTMLElement;
-             
-             element.click();  
-     */
+
     this.gestionarOrdenCompraService.deleteMedicamentosOC(id).subscribe(
       (res) =>{
         let element: HTMLElement =document.getElementById('mostrarBoton') as HTMLElement;
@@ -735,11 +579,7 @@ getLabByProveedorA(proveedor: string){
   }
 
   deleteOneMedicamentoOCA(id: string){
-      
-    /* let element: HTMLElement =document.getElementById('mostrarBotonA') as HTMLElement;
-             
-             element.click();  
-     */
+
     this.gestionarOrdenCompraService.deleteMedicamentosOC(id).subscribe(
       (res) =>{
         let element: HTMLElement =document.getElementById('mostrarBotonA') as HTMLElement;
@@ -751,124 +591,6 @@ getLabByProveedorA(proveedor: string){
     );
     
   }
-
-/*
-  searchByNombreA(form: NgForm){
-    if(form.invalid){
-      this.isError = true;
-    }else{
-    this.gestionarCategoriaService.getCategoriaByNombreA(form.value.nombre).subscribe(
-      res =>{
-        this.gestionarCategoriaService.categorias= res;
-        
-         if(res.length>0){
-            this.isError2 = true;
-
-         }
-         
-
-         if(this.isError==false && this.isError2==false){
-
-           this.isConfirmation=true;
-
-         let element: HTMLElement =document.getElementById('agregarBoton') as HTMLElement;
-         
-         element.click();  
-          console.log("Añadido");
-         }
-         
-         
-      },
-      err => console.error(err)
-    )
-  }
-      
-  };
-
- 
-  searchByNombreU(form: NgForm){
-    if(form.invalid){
-      this.isError = true;
-    }else{
-    this.gestionarCategoriaService.getCategoriaByNombreA(form.value.nombre).subscribe(
-      res =>{
-        this.gestionarCategoriaService.categorias= res;
-
-         if(res.length>0){
-            this.isError2 = true;
-         }
-         /////--------------------------
-         console.log(this.isError2);
-         if(form.value.nombreE==form.value.nombre){
-              this.isError2=false;
-         }
-
-         if(this.isError==false && this.isError2==false){
-
-           this.isConfirmation=true;
-
-         let element: HTMLElement =document.getElementById('actualizarBoton') as HTMLElement;
-         
-         element.click();  
-         this.getCategorias();
-          console.log("Añadido");
-         }
-         
-         
-      },
-      err => console.error(err)
-    )
-  }
-      
-  };
-  
-  
-  onCloseAlert() {
-    this.isError = false;
-    this.isError2 = false;
-  }
-
-    //Validaciones
-    onSave(form: NgForm): void {
-  
-      if (form.invalid ) {
-        this.isError = true;
-      } else {
-
-          this.addCategoriaM(form);
-        }
-    }
-
-    onCloseAlert2() {
-      this.rdBR = 0;
-      this.rdBV = 1;
-    }
-
-    deleteCategoria(id: string)id: string{
-      
-      this.gestionarCategoriaService.deleteCategoriasM(id).subscribe(
-        (res) => console.log(res),
-        (err) => console.log(err)
-      );
-      
-    }
-
-    cambiarEstado(form:NgForm){
-    if(this.gestionarCategoriaService.selectedCategoria2.estado==0){
-        this.gestionarCategoriaService.selectedCategoria2.estado=1;
-        
-        console.log(this.gestionarCategoriaService.selectedCategoria2.estado);
-    }
-    }
-    cambiarEstado2(form:NgForm){
-      
-      if(this.gestionarCategoriaService.selectedCategoria2.estado==1){
-        this.gestionarCategoriaService.selectedCategoria2.estado=0;
-        console.log(this.gestionarCategoriaService.selectedCategoria2.estado);
-    }
-      }
-
-     */
       resetForm(form:NgForm){
         form.reset();
       }

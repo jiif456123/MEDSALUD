@@ -1,6 +1,6 @@
 #divChart {
     width: 450px;
-    height: 410px;
+    height: 450px;
     float: right;
     margin-top: 30px;
     margin-bottom: 20px;
@@ -16,7 +16,7 @@
     clear: both;
     margin-left: 20px;
     width: 700px;
-    height: 460px;
+    height: 500px;
     display: block;
     border-radius: 20px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -48,7 +48,7 @@
 
 #divChart4 {
     width: 700px;
-    height: 410px;
+    height: 450px;
     margin-top: 30px;
     margin-bottom: 20px;
     margin-left: 20px;

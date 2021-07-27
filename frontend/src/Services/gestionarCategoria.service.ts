@@ -47,6 +47,10 @@ selectedCategoria4: Categoria={
       
         return this.http.get<Categoria[]>(this.URL_API);
     }
+    getCategoriasM(){
+      
+      return this.http.get<Categoria[]>(this.URL_API);
+  }
 
     createCategoria(categoria:Categoria){
     return this.http.post(this.URL_API,categoria);

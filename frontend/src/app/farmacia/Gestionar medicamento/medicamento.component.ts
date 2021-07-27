@@ -3,12 +3,13 @@ import { MedicamentoService } from 'Services/medicamento.service';
 import { NgForm } from "@angular/forms"; //para add
 import { Medicamento} from 'models/medicamento.model';
 import { AlertaService } from 'Services/alerta.service';
+import { GestionarCategoriaService } from 'Services/gestionarCategoria.service';
 
 @Component({
   selector: 'app-medicamento',
   templateUrl: './medicamento.component.html',
   styleUrls: [ './medicamento.component.css', '../farmacia.css'],
-  providers: [MedicamentoService, AlertaService]
+  providers: [MedicamentoService, AlertaService, GestionarCategoriaService]
 })
 
 export class medicamentoComponent implements OnInit{
@@ -23,11 +24,12 @@ export class medicamentoComponent implements OnInit{
   unidadlist: string[] = ['mg', 'ml'];
   selectDispo='';
 
-  constructor(public medicamentoService: MedicamentoService,public alertaService:AlertaService) { }
+  constructor(public medicamentoService: MedicamentoService,public alertaService:AlertaService, public categoriaService:GestionarCategoriaService) { }
   medicamentos = [];
   
  ngOnInit(): void {
     this.getMedicamento();
+    this.getCategoria();
     
     }
   getMedicamento(){
@@ -35,8 +37,20 @@ export class medicamentoComponent implements OnInit{
       response =>{
         this.medicamentos = response.data;
         this.page=1;
+        console.log(this.medicamentos);
       }
     )}
+    getCategoria(){
+      this.categoriaService.getCategoriasM().subscribe(
+        res =>{
+       
+          this.categoriaService.categorias= res;
+          console.log(res);
+        },
+        err => console.error(err)
+
+        
+      )}
     getMedicamento1(medicamento:Medicamento) {
         
       this.medicamentoService.selectedMedicamento1 = medicamento;

@@ -196,7 +196,7 @@
                                         <div class="content-select select">
                                             <select name="categoria" #Categoria="ngModel"
                                                 [(ngModel)]="medicamentoService.selectedMedicamento.categoria" required>
-                                                <option [value]="item" *ngFor="let item of categorialist">{{item}}
+                                                <option [value]="categoria.nombre" *ngFor="let categoria of categoriaService.categorias">{{categoria.nombre}}
                                                 </option>
                                             </select>
                                         </div>

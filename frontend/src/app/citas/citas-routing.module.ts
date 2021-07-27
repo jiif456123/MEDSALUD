@@ -15,6 +15,7 @@ import { DetalleGestionarRecetaMedicaComponent } from './gestionar-receta-medica
 import { ReporteGeneralComponent } from './reporte-general/reporte-general.component';
 import { ConsultarServicioComponent } from './consultar-servicio/consultar-servicio.component';
 import { ConsultarRecetaMedicaComponent } from './consultar-receta-medica/consultar-receta-medica.component';
+import { DetalleConsultarRecetaMedComponent } from './consultar-receta-medica/detalle-consultar-receta-med/detalle-consultar-receta-med.component';
 
 
 const routes: Routes = [
@@ -64,6 +65,9 @@ const routes: Routes = [
   {
     path: "consultar-receta-medica", component: ConsultarRecetaMedicaComponent, data: { title: 'Consultar Receta Medica' }
   },
+  {
+    path: "consultar-receta-medica/:id", component: DetalleConsultarRecetaMedComponent, data: { title: 'Consultar Receta Medica' }
+  }
 ];
 
 @NgModule({

@@ -29,7 +29,7 @@ export class GestionarHistoriaComponent implements OnInit {
   }, {
     des: 'Gastroenterología',
   }
-  ]
+  ];
 
   @ViewChild('modalRegistrar') modalRegistrar: ElementRef;
   @ViewChild('modalModificar') modalModificar: ElementRef;

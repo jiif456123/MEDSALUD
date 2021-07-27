@@ -58,7 +58,7 @@ export class ReporteGeneralComponent implements OnInit {
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
-          return  'S/.' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return 'S/.' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
         }
       }
     }
@@ -69,7 +69,7 @@ export class ReporteGeneralComponent implements OnInit {
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
-          return  'S/.' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + ' citas';
         }
       }
     }
@@ -131,7 +131,7 @@ export class ReporteGeneralComponent implements OnInit {
       if (anioActual == itemAnio && itemMes == mes) {
         let indexMotivo = this.barChartLabels_Cir.findIndex(item_Mot => item.motivo.descripcion == item_Mot)
         if (indexMotivo != -1) {
-          array[indexMotivo] += item.precio
+          array[indexMotivo]++;
         }
       }
     })
